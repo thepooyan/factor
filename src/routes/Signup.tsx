@@ -1,8 +1,7 @@
 import { useNavigate } from "@solidjs/router";
 import { createEffect, createSignal } from "solid-js";
-import Avatar from "~/components/chat/Avatar";
-import A from "~/components/mine/A";
-import Spinner from "~/components/mine/Spinner";
+import A from "~/components/general/A";
+import Spinner from "~/components/general/Spinner";
 import { Alert, AlertDescription } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import {
@@ -10,8 +9,6 @@ import {
   TextFieldInput,
   TextFieldLabel,
 } from "~/components/ui/text-field";
-import { createNewUser, usernameExists } from "~/utility/logic";
-import { user } from "~/utility/signal";
 import { debounce } from "~/utility/utility";
 
 const Signup = () => {
@@ -19,8 +16,9 @@ const Signup = () => {
   const [error, setError] = createSignal<string | null>(null);
   const [avatar, setAvatar] = createSignal<string>("");
   const navigate = useNavigate()
+
   createEffect(() => {
-    if (user.signal() !== null) navigate("/Chat")
+    // if (user.signal() !== null) navigate("/Chat")
   })
 
 
@@ -30,22 +28,22 @@ const Signup = () => {
     e.preventDefault()
     const username = nameRef.value
     setIsLoading(true);
-    if (await usernameExists(username)) {
-      setError("Username already exists");
-      setIsLoading(false);
-      return;
-    }
-    await createNewUser(username)
+    // if (usernameExists(username)) {
+    //   setError("Username already exists");
+    //   setIsLoading(false);
+    //   return;
+    // }
+    // await createNewUser(username)
     setIsLoading(false);
     navigate("/Chat")
   };
 
   const checkUsername = async () => {
-    if (await usernameExists(nameRef.value))
-      setError("Username already exists");
-    else {
-        setError(null)
-      };
+    // if (await usernameExists(nameRef.value))
+    //   setError("Username already exists");
+    // else {
+    //     setError(null)
+    //   };
       setIsLoading(false)
   };
   const d_checkUsername = debounce(checkUsername, 300)
@@ -62,7 +60,6 @@ const Signup = () => {
       <h1 class=" text-center text-3xl font-bold mb-3">Sign-up</h1>
       <div class="flex justify-center items-center flex-col gap-2 ">
         <span class="text-sm">Avatar based on "{avatar()}"</span>
-        <Avatar reactive={avatar}/>
       </div>
       <TextField>
         <TextFieldLabel>Username:</TextFieldLabel>
