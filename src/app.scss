@@ -1,1 +1,5 @@
-@use "./styles/scrollBar.scss"
+@use "./styles/scrollBar.scss";
+
+body {
+  direction: rtl;
+}

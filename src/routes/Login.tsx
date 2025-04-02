@@ -1,14 +1,10 @@
 import { useNavigate } from "@solidjs/router"
 import { createSignal } from "solid-js"
-import A from "~/components/mine/A"
-import Spinner from "~/components/mine/Spinner"
+import A from "~/components/general/A"
+import Spinner from "~/components/general/Spinner"
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert"
 import { Button } from "~/components/ui/button"
 import { TextField, TextFieldInput, TextFieldLabel } from "~/components/ui/text-field"
-import { api } from "~/utility/backend"
-import { checkKeysMatch, importCryptoKey } from "~/utility/crypto"
-import { addContactsFromApi } from "~/utility/logic"
-import { user } from "~/utility/signal"
 
 const Login = () => {
 
@@ -24,17 +20,7 @@ const Login = () => {
     let prs = privateRef.value
     
     try {
-      let pbk = await importCryptoKey(pbs)
-      let prk = await importCryptoKey(prs)
-
-      let match = await checkKeysMatch(pbk, prk)
-      if (!match) throw new Error("Keys don't match")
-
-      let res = await api.users.findByPK(pbs)
-      let n = {username: res.username, public_key: res.public_key as JsonWebKey, private_key: prs as JsonWebKey, id: res.id}
-      user.login(n)
-      addContactsFromApi(n)
-      navigate("/Chat")
+      //logic
 
     } catch(e) {
       return alert(e)
