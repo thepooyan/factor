@@ -168,3 +168,21 @@ export class Stack<T> {
     return str;
   }
 }
+
+
+export function getAuthUrl() {
+
+  let oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+  let params = {
+    'client_id': import.meta.env.VITE_GOOGLE_CLIENTID || "",
+    'redirect_uri': import.meta.env.VITE_APPLICATION + '/googleRedirect',
+    'response_type': 'token',
+    'prompt': 'consent',
+    'scope': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+  };
+
+  const url = new URL(oauth2Endpoint);
+  Object.entries(params).forEach(k => url.searchParams.append(k[0], k[1]));
+  return url;
+}

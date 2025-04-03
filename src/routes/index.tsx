@@ -1,11 +1,12 @@
 import { A } from "@solidjs/router";
 import { Button } from "~/components/ui/button";
 import { APP_NAME } from "~/utility/settings";
+import { getAuthUrl } from "~/utility/utility";
 
 export default function Home() {
 
   const google = () => {
-    window.location.href = "http://localhost:8000/auth/google";
+    window.location.href = getAuthUrl().toString()
   }
 
   return (
