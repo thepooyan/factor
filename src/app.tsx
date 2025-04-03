@@ -6,7 +6,6 @@ import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
-import { ColorModeProvider, ColorModeScript } from "@kobalte/core";
 import Modal from "./components/modal/Modal";
 
 export let qc = new QueryClient();
@@ -17,8 +16,6 @@ export default function App() {
     <>
     <Modal/>
     <QueryClientProvider client={qc}>
-      <ColorModeScript/>
-      <ColorModeProvider initialColorMode="dark">
         <Router
           root={(props) => (
             <>
@@ -28,7 +25,6 @@ export default function App() {
         >
           <FileRoutes />
         </Router>
-    </ColorModeProvider>
     </QueryClientProvider>
     </>
   );
