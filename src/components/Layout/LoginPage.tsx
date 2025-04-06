@@ -17,18 +17,18 @@ export default function LoginPage() {
 
   return (
     <div
-      class="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 p-4"
+      class="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-600 via-zinc-300 to-zinc-400 p-4"
       dir="rtl"
     >
       <div class="w-full max-w-md">
         <div class="mb-6 text-center">
-          <div class="inline-block p-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 mb-2">
+          <div class="inline-block p-3 rounded-full bg-black mb-2">
             <AiOutlineUser class="h-8 w-8 text-white" />
           </div>
           <h1 class="text-2xl font-bold text-gray-800">سامانه کاربری</h1>
         </div>
         <Tabs defaultValue="login" class="w-full">
-          <TabsList class="grid w-full grid-cols-2 bg-purple-100 p-1">
+          <TabsList class="grid w-full grid-cols-2 p-1">
             <TabsTrigger
               value="login"
               class="data-[state=active]:bg-white data-[state=active]:text-purple-700 data-[state=active]:shadow-md"
@@ -46,7 +46,7 @@ export default function LoginPage() {
           <TabsContent value="login">
             <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle class="text-2xl text-purple-700">ورود به حساب کاربری</CardTitle>
+                <CardTitle class="text-2xl">ورود به حساب کاربری</CardTitle>
                 <CardDescription>برای ورود به حساب کاربری خود، ایمیل و رمز عبور خود را وارد کنید.</CardDescription>
               </CardHeader>
               <CardContent class="space-y-4">
@@ -57,7 +57,7 @@ export default function LoginPage() {
                       id="email-login"
                       type="email"
                       placeholder="example@email.com"
-                      class="pr-10 bg-purple-50 border-purple-100 focus:border-purple-300"
+                      class="pr-10 border-purple-100 focus:border-purple-300"
                     />
                     <FiMail class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
@@ -73,7 +73,7 @@ export default function LoginPage() {
                     <Input
                       id="password-login"
                       type={showPassword() ? "text" : "password"}
-                      class="pr-10 bg-purple-50 border-purple-100 focus:border-purple-300"
+                      class="pr-10 border-purple-100 focus:border-purple-300"
                     />
                     <Button
                       type="button"
@@ -90,7 +90,7 @@ export default function LoginPage() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button class="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white">
+                <Button class="w-full text-white">
                   ورود
                 </Button>
               </CardFooter>
@@ -100,7 +100,7 @@ export default function LoginPage() {
           <TabsContent value="signup">
             <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle class="text-2xl text-purple-700">ایجاد حساب کاربری</CardTitle>
+                <CardTitle class="text-2xl ">ایجاد حساب کاربری</CardTitle>
                 <CardDescription>برای ایجاد حساب کاربری جدید، اطلاعات زیر را وارد کنید.</CardDescription>
               </CardHeader>
               <CardContent class="space-y-4">
@@ -110,7 +110,7 @@ export default function LoginPage() {
                     <Input
                       id="name"
                       placeholder="نام و نام خانوادگی"
-                      class="pr-10 bg-purple-50 border-purple-100 focus:border-purple-300"
+                      class="pr-10"
                     />
                     <FiUser class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
@@ -122,7 +122,7 @@ export default function LoginPage() {
                       id="email-signup"
                       type="email"
                       placeholder="example@email.com"
-                      class="pr-10 bg-purple-50 border-purple-100 focus:border-purple-300"
+                      class="pr-10"
                     />
                     <FiMail class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
@@ -133,7 +133,7 @@ export default function LoginPage() {
                     <Input
                       id="password-signup"
                       type={showPassword() ? "text" : "password"}
-                      class="pr-10 bg-purple-50 border-purple-100 focus:border-purple-300"
+                      class="pr-10 "
                     />
                     <Button
                       type="button"
@@ -143,7 +143,7 @@ export default function LoginPage() {
                       onClick={togglePasswordVisibility}
                     >
                       {showPassword() ? <FiEyeOff class="h-4 w-4" /> : <FiEye class="h-4 w-4" />}
-                      <span class="sr-only">{showPassword() ? "پنهان کردن رمز عبور" : "نمایش رمز عبور"}</span>
+                      <span class="sr-only">{showPassword() ? "پنهان کردن••••••• رمز عبور" : "نمایش رمز عبور"}</span>
                     </Button>
                     <FiLock class="absolute left-10 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
@@ -155,14 +155,14 @@ export default function LoginPage() {
                     <Input
                       id="confirm-password"
                       type={showPassword() ? "text" : "password"}
-                      class="pr-10 bg-purple-50 border-purple-100 focus:border-purple-300"
+                      class="pr-10"
                     />
                     <FiLock class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
                 </div>
               </CardContent>
               <CardFooter>
-                <Button class="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white">
+                <Button class="w-full text-white">
                   ثبت نام
                 </Button>
               </CardFooter>
