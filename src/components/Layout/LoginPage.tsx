@@ -57,7 +57,7 @@ export default function LoginPage() {
                       id="email-login"
                       type="email"
                       placeholder="example@email.com"
-                      class="pr-10 border-purple-100 focus:border-purple-300"
+                      class="pl-10 border-purple-100 focus:border-purple-300 "
                     />
                     <FiMail class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
@@ -73,7 +73,7 @@ export default function LoginPage() {
                     <Input
                       id="password-login"
                       type={showPassword() ? "text" : "password"}
-                      class="pr-10 border-purple-100 focus:border-purple-300"
+                      class="pl-20 border-purple-100 focus:border-purple-300"
                     />
                     <Button
                       type="button"
@@ -110,7 +110,7 @@ export default function LoginPage() {
                     <Input
                       id="name"
                       placeholder="نام و نام خانوادگی"
-                      class="pr-10"
+                      class="pl-10"
                     />
                     <FiUser class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
@@ -122,7 +122,7 @@ export default function LoginPage() {
                       id="email-signup"
                       type="email"
                       placeholder="example@email.com"
-                      class="pr-10"
+                      class="pl-10"
                     />
                     <FiMail class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
@@ -133,7 +133,7 @@ export default function LoginPage() {
                     <Input
                       id="password-signup"
                       type={showPassword() ? "text" : "password"}
-                      class="pr-10 "
+                      class="pl-10 "
                     />
                     <Button
                       type="button"
@@ -155,7 +155,7 @@ export default function LoginPage() {
                     <Input
                       id="confirm-password"
                       type={showPassword() ? "text" : "password"}
-                      class="pr-10"
+                      class="pl-10"
                     />
                     <FiLock class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
