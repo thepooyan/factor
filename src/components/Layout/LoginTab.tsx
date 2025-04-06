@@ -1,4 +1,5 @@
 import { Button } from "~/components/ui/button";
+import { initValidator } from "lite-validate"
 import Input from "../general/Input";
 import { Label } from "~/components/ui/label";
 import { TabsContent } from "~/components/ui/tabs";
@@ -20,6 +21,10 @@ const LoginTab = () => {
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
+
+  onMount(() => {
+    initValidator()
+  })
 
   return (
     <TabsContent value="login">
