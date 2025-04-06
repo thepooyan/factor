@@ -1,7 +1,15 @@
 @use "./styles/scrollBar.scss";
 
+@mixin vazir($w: 200) {
+  font-family: "Vazirmatn", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: $w;
+  font-style: normal;
+}
+
 body {
   direction: rtl;
+  @include vazir(300);
 }
 
 .ltr {

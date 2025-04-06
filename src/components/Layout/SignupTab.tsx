@@ -23,7 +23,7 @@ const SignupTab = () => {
     <TabsContent value="signup">
       <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm">
         <CardHeader>
-          <CardTitle class="text-2xl ">ایجاد حساب کاربری</CardTitle>
+          <CardTitle class="text-2xl">ایجاد حساب کاربری</CardTitle>
           <CardDescription>
             برای ایجاد حساب کاربری جدید، اطلاعات زیر را وارد کنید.
           </CardDescription>
