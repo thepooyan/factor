@@ -10,7 +10,6 @@ import { createSignal } from "solid-js"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = createSignal(false)
-  const [_, setActiveTab] = createSignal("login")
 
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev)
@@ -28,7 +27,7 @@ export default function LoginPage() {
           </div>
           <h1 class="text-2xl font-bold text-gray-800">سامانه کاربری</h1>
         </div>
-        <Tabs defaultValue="login" class="w-full" onvolumechange={setActiveTab}>
+        <Tabs defaultValue="login" class="w-full">
           <TabsList class="grid w-full grid-cols-2 bg-purple-100 p-1">
             <TabsTrigger
               value="login"
