@@ -12,7 +12,7 @@ import {
 } from "~/components/ui/card";
 import { AiOutlineLock } from "solid-icons/ai";
 import { FiEye, FiEyeOff, FiMail } from "solid-icons/fi";
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 
 const LoginTab = () => {
   const [showPassword, setShowPassword] = createSignal(false);
@@ -20,6 +20,7 @@ const LoginTab = () => {
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
+
   return (
     <TabsContent value="login">
       <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm">
@@ -37,9 +38,11 @@ const LoginTab = () => {
                 id="email-login"
                 type="email"
                 placeholder="example@email.com"
-                class="pl-10 border-purple-100 focus:border-purple-300 "
+                class="pl-10"
+                data-validate="email"
               />
-              <FiMail class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Ve/>
+              <FiMail class="absolute left-3 top-5.4 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>
           </div>
           <div class="space-y-2">
@@ -53,17 +56,19 @@ const LoginTab = () => {
               <Input
                 id="password-login"
                 type={showPassword() ? "text" : "password"}
-                class="pl-20 border-purple-100 focus:border-purple-300"
+                class="pl-20 "
+                data-validate="required minLength-7 !alphanumeric "
               />
+              <Ve/>
               <Button
                 type="button"
                 variant="ghost"
                 size="icon"
-                class="absolute left-0 top-0 h-full px-3 py-1 text-muted-foreground"
+                class="absolute left-0 top-0 h-10 px-3 py-1 m-[1px] text-muted-foreground bg-transparent"
                 onClick={togglePasswordVisibility}
               >
                 {showPassword() ? (
-                  <FiEyeOff class="h-4 w-4" />
+                  <FiEyeOff class="h-4 w-4 " />
                 ) : (
                   <FiEye class="h-4 w-4" />
                 )}
@@ -71,7 +76,7 @@ const LoginTab = () => {
                   {showPassword() ? "پنهان کردن رمز عبور" : "نمایش رمز عبور"}
                 </span>
               </Button>
-              <AiOutlineLock class="absolute left-10 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <AiOutlineLock class="absolute left-10 top-5.4 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>
           </div>
         </CardContent>
@@ -82,5 +87,9 @@ const LoginTab = () => {
     </TabsContent>
   );
 };
+
+const Ve = () => {
+  return <div class="validation-error text-red text-sm pr-2 mt-1"></div>
+}
 
 export default LoginTab;
