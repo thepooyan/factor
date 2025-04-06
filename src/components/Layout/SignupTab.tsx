@@ -12,12 +12,21 @@ import {
 } from "~/components/ui/card";
 import { FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "solid-icons/fi";
 import { createSignal } from "solid-js";
+import Spinner from "../general/Spinner";
+import { callModal } from "../modal/Modal";
 
 const SignupTab = () => {
   const [showPassword, setShowPassword] = createSignal(false)
 
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev)
+  }
+  const [submitting, setSubmitting] = createSignal(false);
+  const submit = async () => {
+    setSubmitting(true)
+    await new Promise(res => setTimeout(res, 2000))
+    setSubmitting(false)
+    callModal.success("ثبت شد!")
   }
   return (
     <TabsContent value="signup">
@@ -93,7 +102,11 @@ const SignupTab = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button class="w-full text-white">ثبت نام</Button>
+          <Button class="w-full text-white" onclick={submit} disabled={submitting()}>
+            {submitting() ? <Spinner reverse/>: <>
+              ثبت نام
+            </>}
+          </Button>
         </CardFooter>
       </Card>
     </TabsContent>
