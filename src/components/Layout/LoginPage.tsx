@@ -11,7 +11,7 @@ export default function LoginPage() {
     >
       <div class="w-full max-w-md">
         <div class="mb-6 text-center">
-          <div class="inline-block p-3 rounded-full bg-black mb-2">
+          <div class="inline-block p-3 rounded-full bg-gradient-to-bl shadow-lg from-zinc-400 via-zinc-500 to-zinc-600  mb-2">
             <AiOutlineUser class="h-8 w-8 text-white" />
           </div>
           <h1 class="text-2xl font-bold text-gray-800">سامانه کاربری</h1>

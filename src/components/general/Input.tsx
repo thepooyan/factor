@@ -1,4 +1,3 @@
-import { ParentProps } from "solid-js";
 import {
   TextField,
   TextFieldInput,
@@ -7,7 +6,7 @@ import {
 const Input = (props:any) => {
   return (
     <TextField>
-      <TextFieldInput {...props} />
+      <TextFieldInput {...props}  class={props.class + " border-zinc-300"}/>
     </TextField>
   );
 };
