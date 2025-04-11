@@ -1,0 +1,686 @@
+import { Button } from "~/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/ui/accordion"
+import { A } from "@solidjs/router"
+import { FaRegularFileLines as FileText } from 'solid-icons/fa'
+import { FaSolidChevronRight as ChevronRight } from 'solid-icons/fa'
+import { FiCreditCard as CreditCard, FiUsers as Users, FiShield as Shield, FiZap as Zap, FiStar as Star, FiCheck as Check} from 'solid-icons/fi'
+import { AiOutlineClockCircle as Clock } from 'solid-icons/ai'
+
+export default function LandingPage() {
+  return (
+    <div dir="rtl">
+      {/* Header */}
+      <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="container flex h-16 items-center justify-between">
+          <div class="flex items-center gap-2">
+            <FileText class="h-6 w-6" />
+            <span class="text-xl font-bold">فاکتور ساز</span>
+          </div>
+          <nav class="hidden md:flex items-center gap-6 text-sm">
+            <A href="#features" class="transition-colors hover:text-foreground/80">
+              ویژگی‌ها
+            </A>
+            <A href="#how-it-works" class="transition-colors hover:text-foreground/80">
+              نحوه کار
+            </A>
+            <A href="#pricing" class="transition-colors hover:text-foreground/80">
+              قیمت‌ها
+            </A>
+            <A href="#faq" class="transition-colors hover:text-foreground/80">
+              سوالات متداول
+            </A>
+          </nav>
+          <div class="flex items-center gap-4">
+            <Button variant="outline" size="sm">
+              <A href="/login">ورود</A>
+            </Button>
+            <Button size="sm">
+              <A href="/register">ثبت نام</A>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section class="container grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
+        <div class="flex flex-col gap-4 lg:gap-8">
+          <h1 class="text-4xl md:text-6xl font-bold">
+            ساده‌ترین راه برای <span class="text-primary">صدور فاکتور</span> حرفه‌ای
+          </h1>
+          <p class="text-xl text-muted-foreground">
+            با فاکتورساز، در کمتر از یک دقیقه فاکتورهای حرفه‌ای و استاندارد ایجاد کنید و کسب و کار خود را متحول سازید.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <Button size="lg" >
+              <A href="/register">
+                شروع رایگان
+                <ChevronRight class="mr-2 h-4 w-4" />
+              </A>
+            </Button>
+            <Button size="lg" variant="outline" >
+              <A href="/demo">نسخه نمایشی</A>
+            </Button>
+          </div>
+        </div>
+        <div class="relative w-full h-[300px] sm:h-[400px] lg:h-[500px]">
+          <img
+            src="/placeholder.svg?height=500&width=600"
+            alt="نمونه فاکتور"
+            class="object-contain"
+          />
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section class="container py-12 border-y">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="flex flex-col gap-2 items-center">
+            <span class="text-3xl md:text-4xl font-bold">+۱۰,۰۰۰</span>
+            <span class="text-muted-foreground">کاربر فعال</span>
+          </div>
+          <div class="flex flex-col gap-2 items-center">
+            <span class="text-3xl md:text-4xl font-bold">+۵۰۰,۰۰۰</span>
+            <span class="text-muted-foreground">فاکتور صادر شده</span>
+          </div>
+          <div class="flex flex-col gap-2 items-center">
+            <span class="text-3xl md:text-4xl font-bold">۹۹٪</span>
+            <span class="text-muted-foreground">رضایت مشتریان</span>
+          </div>
+          <div class="flex flex-col gap-2 items-center">
+            <span class="text-3xl md:text-4xl font-bold">۲۴/۷</span>
+            <span class="text-muted-foreground">پشتیبانی</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" class="container py-20 md:py-32">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">ویژگی‌های برتر فاکتورساز</h2>
+          <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+            با استفاده از امکانات پیشرفته فاکتورساز، مدیریت مالی کسب و کار خود را به سطح بالاتری ببرید.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Card>
+            <CardHeader>
+              <Zap class="h-10 w-10 text-primary mb-2" />
+              <CardTitle>سرعت بالا</CardTitle>
+              <CardDescription>صدور فاکتور در کمتر از یک دقیقه</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>با استفاده از قالب‌های آماده و فرآیند ساده، فاکتورهای خود را در سریع‌ترین زمان ممکن صادر کنید.</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <FileText class="h-10 w-10 text-primary mb-2" />
+              <CardTitle>قالب‌های حرفه‌ای</CardTitle>
+              <CardDescription>بیش از ۵۰ قالب متنوع و استاندارد</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                از میان ده‌ها قالب زیبا و استاندارد، قالب مناسب کسب و کار خود را انتخاب کنید و تصویر حرفه‌ای‌تری ارائه
+                دهید.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CreditCard class="h-10 w-10 text-primary mb-2" />
+              <CardTitle>دریافت آنلاین</CardTitle>
+              <CardDescription>امکان پرداخت آنلاین فاکتورها</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                با ارسال لینک پرداخت به مشتریان، فرآیند دریافت مبالغ فاکتورها را تسریع کنید و گردش مالی خود را بهبود
+                بخشید.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <Clock class="h-10 w-10 text-primary mb-2" />
+              <CardTitle>صرفه‌جویی در زمان</CardTitle>
+              <CardDescription>خودکارسازی فرآیندهای تکراری</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                با ذخیره اطلاعات مشتریان و محصولات، از وارد کردن مجدد اطلاعات خودداری کنید و زمان خود را صرفه‌جویی کنید.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <Shield class="h-10 w-10 text-primary mb-2" />
+              <CardTitle>امنیت بالا</CardTitle>
+              <CardDescription>حفاظت از اطلاعات مالی و مشتریان</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                با استفاده از فناوری‌های پیشرفته رمزنگاری، اطلاعات مالی و مشتریان شما با بالاترین استانداردهای امنیتی
+                محافظت می‌شوند.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <Users class="h-10 w-10 text-primary mb-2" />
+              <CardTitle>مدیریت مشتریان</CardTitle>
+              <CardDescription>سیستم مدیریت ارتباط با مشتری</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                با ثبت و مدیریت اطلاعات مشتریان، سوابق خرید و فاکتورهای آن‌ها را به راحتی پیگیری کنید و روابط تجاری خود
+                را تقویت نمایید.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section id="how-it-works" class="bg-muted py-20 md:py-32">
+        <div class="container">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">نحوه کار با فاکتورساز</h2>
+            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+              در سه مرحله ساده، فاکتورهای حرفه‌ای خود را صادر کنید و کسب و کار خود را متحول سازید.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-10">
+            <div class="flex flex-col items-center text-center">
+              <div class="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mb-6">
+                ۱
+              </div>
+              <h3 class="text-xl font-bold mb-3">ثبت نام و ورود</h3>
+              <p class="text-muted-foreground">
+                در چند ثانیه ثبت نام کنید و به پنل کاربری خود دسترسی پیدا کنید. هیچ نیازی به نصب نرم‌افزار نیست.
+              </p>
+            </div>
+
+            <div class="flex flex-col items-center text-center">
+              <div class="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mb-6">
+                ۲
+              </div>
+              <h3 class="text-xl font-bold mb-3">تکمیل اطلاعات فاکتور</h3>
+              <p class="text-muted-foreground">
+                اطلاعات شرکت، مشتری و محصولات را وارد کنید. محاسبات به صورت خودکار انجام می‌شود.
+              </p>
+            </div>
+
+            <div class="flex flex-col items-center text-center">
+              <div class="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mb-6">
+                ۳
+              </div>
+              <h3 class="text-xl font-bold mb-3">صدور و ارسال فاکتور</h3>
+              <p class="text-muted-foreground">
+                فاکتور را به صورت PDF دانلود کنید یا مستقیماً برای مشتری ایمیل کنید. لینک پرداخت آنلاین نیز ارسال کنید.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-16 text-center">
+            <Button size="lg" >
+              <A href="/register">همین حالا شروع کنید</A>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" class="container py-20 md:py-32">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">قیمت‌های مقرون به صرفه</h2>
+          <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+            پلن مناسب کسب و کار خود را انتخاب کنید و از مزایای فاکتورساز بهره‌مند شوید.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <Card class="flex flex-col">
+            <CardHeader>
+              <CardTitle>پایه</CardTitle>
+              <div class="mt-4 flex items-baseline text-5xl font-bold">رایگان</div>
+              <CardDescription class="mt-4">مناسب برای کسب و کارهای کوچک و تازه‌کار</CardDescription>
+            </CardHeader>
+            <CardContent class="flex-1">
+              <ul class="space-y-2">
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>۱۰ فاکتور در ماه</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>۵ قالب فاکتور</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>خروجی PDF</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>پشتیبانی ایمیلی</span>
+                </li>
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <Button class="w-full" variant="outline" >
+                <A href="/register">شروع رایگان</A>
+              </Button>
+            </CardFooter>
+          </Card>
+
+          <Card class="flex flex-col border-primary relative">
+            <div class="absolute top-0 left-0 right-0 bg-primary text-primary-foreground text-center py-1 text-sm font-medium">
+              محبوب‌ترین
+            </div>
+            <CardHeader>
+              <CardTitle>حرفه‌ای</CardTitle>
+              <div class="mt-4 flex items-baseline text-5xl font-bold">
+                ۹۹,۰۰۰ <span class="text-lg font-normal text-muted-foreground mr-2">تومان / ماهانه</span>
+              </div>
+              <CardDescription class="mt-4">مناسب برای کسب و کارهای متوسط</CardDescription>
+            </CardHeader>
+            <CardContent class="flex-1">
+              <ul class="space-y-2">
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>۱۰۰ فاکتور در ماه</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>تمام قالب‌های فاکتور</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>خروجی PDF و Excel</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>ارسال ایمیل و پیامک</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>لینک پرداخت آنلاین</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>پشتیبانی تلفنی</span>
+                </li>
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <Button class="w-full" >
+                <A href="/register">انتخاب پلن حرفه‌ای</A>
+              </Button>
+            </CardFooter>
+          </Card>
+
+          <Card class="flex flex-col">
+            <CardHeader>
+              <CardTitle>سازمانی</CardTitle>
+              <div class="mt-4 flex items-baseline text-5xl font-bold">
+                ۲۴۹,۰۰۰ <span class="text-lg font-normal text-muted-foreground mr-2">تومان / ماهانه</span>
+              </div>
+              <CardDescription class="mt-4">مناسب برای کسب و کارهای بزرگ و سازمان‌ها</CardDescription>
+            </CardHeader>
+            <CardContent class="flex-1">
+              <ul class="space-y-2">
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>فاکتور نامحدود</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>قالب‌های اختصاصی</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>تمام خروجی‌ها</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>ارسال ایمیل و پیامک</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>لینک پرداخت آنلاین</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>API اختصاصی</span>
+                </li>
+                <li class="flex items-center">
+                  <Check class="h-5 w-5 text-primary ml-2" />
+                  <span>پشتیبانی VIP</span>
+                </li>
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <Button class="w-full" variant="outline" >
+                <A href="/register">انتخاب پلن سازمانی</A>
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section class="bg-muted py-20 md:py-32">
+        <div class="container">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">نظرات مشتریان ما</h2>
+            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+              بیش از ۱۰,۰۰۰ کسب و کار به فاکتورساز اعتماد کرده‌اند.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <Card>
+              <CardContent class="pt-6">
+                <div class="flex items-center gap-2 mb-4">
+                  <div class="flex">
+                    {[...Array(5)].map((_) => (
+                      <Star class="h-5 w-5 fill-primary text-primary" />
+                    ))}
+                  </div>
+                </div>
+                <p class="mb-6">
+                  "استفاده از فاکتورساز باعث شد زمان زیادی در صدور فاکتورها صرفه‌جویی کنم. قالب‌های حرفه‌ای و امکان ارسال
+                  مستقیم به مشتریان واقعاً عالی است."
+                </p>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-secondary" />
+                  <div>
+                    <p class="font-medium">علی محمدی</p>
+                    <p class="text-sm text-muted-foreground">مدیر فروشگاه لوازم خانگی</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent class="pt-6">
+                <div class="flex items-center gap-2 mb-4">
+                  <div class="flex">
+                    {[...Array(5)].map((_) => (
+                      <Star class="h-5 w-5 fill-primary text-primary" />
+                    ))}
+                  </div>
+                </div>
+                <p class="mb-6">
+                  "به عنوان یک فریلنسر، فاکتورساز به من کمک کرد تا تصویر حرفه‌ای‌تری به مشتریانم ارائه دهم. سیستم پرداخت
+                  آنلاین هم باعث شده سریع‌تر به درآمدم برسم."
+                </p>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-secondary" />
+                  <div>
+                    <p class="font-medium">سارا احمدی</p>
+                    <p class="text-sm text-muted-foreground">طراح گرافیک</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent class="pt-6">
+                <div class="flex items-center gap-2 mb-4">
+                  <div class="flex">
+                    {[...Array(5)].map((_) => (
+                      <Star class="h-5 w-5 fill-primary text-primary" />
+                    ))}
+                  </div>
+                </div>
+                <p class="mb-6">
+                  "ما در شرکت خود از پلن سازمانی فاکتورساز استفاده می‌کنیم و از یکپارچگی آن با سیستم‌های مالی‌مان بسیار
+                  راضی هستیم. پشتیبانی عالی و به‌روزرسانی‌های منظم از نقاط قوت این سرویس است."
+                </p>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-secondary" />
+                  <div>
+                    <p class="font-medium">محمد حسینی</p>
+                    <p class="text-sm text-muted-foreground">مدیر مالی شرکت تجهیزات پزشکی</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" class="container py-20 md:py-32">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">سوالات متداول</h2>
+          <p class="text-xl text-muted-foreground max-w-3xl mx-auto">پاسخ سوالات رایج شما درباره سرویس فاکتورساز</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+          <Accordion itemtype="single" collapsible class="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>آیا استفاده از فاکتورساز نیاز به نصب نرم‌افزار دارد؟</AccordionTrigger>
+              <AccordionContent>
+                خیر، فاکتورساز یک سرویس آنلاین است و نیازی به نصب نرم‌افزار ندارد. کافی است در سایت ثبت نام کنید و از
+                طریق مرورگر به تمام امکانات دسترسی داشته باشید.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2">
+              <AccordionTrigger>آیا فاکتورهای صادر شده مطابق با قوانین مالیاتی ایران هستند؟</AccordionTrigger>
+              <AccordionContent>
+                بله، تمام قالب‌های فاکتور ما مطابق با آخرین استانداردهای سازمان امور مالیاتی ایران طراحی شده‌اند و شامل
+                تمام اطلاعات مورد نیاز برای فاکتورهای رسمی هستند.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3">
+              <AccordionTrigger>آیا امکان سفارشی‌سازی قالب‌های فاکتور وجود دارد؟</AccordionTrigger>
+              <AccordionContent>
+                بله، در پلن‌های حرفه‌ای و سازمانی امکان سفارشی‌سازی قالب‌ها وجود دارد. می‌توانید لوگو، رنگ‌ها و چیدمان فاکتور
+                را مطابق با برند خود تغییر دهید.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-4">
+              <AccordionTrigger>آیا می‌توانم فاکتورها را به صورت دسته‌ای صادر کنم؟</AccordionTrigger>
+              <AccordionContent>
+                بله، در پلن‌های حرفه‌ای و سازمانی امکان صدور فاکتور دسته‌ای از طریق آپلود فایل Excel یا استفاده از API وجود
+                دارد.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-5">
+              <AccordionTrigger>آیا می‌توانم از فاکتورساز در موبایل استفاده کنم؟</AccordionTrigger>
+              <AccordionContent>
+                بله، فاکتورساز کاملاً ریسپانسیو است و می‌توانید از طریق مرورگر موبایل به آن دسترسی داشته باشید. همچنین
+                اپلیکیشن موبایل ما برای اندروید و iOS در دسترس است.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-6">
+              <AccordionTrigger>آیا می‌توانم پلن خود را ارتقا دهم؟</AccordionTrigger>
+              <AccordionContent>
+                بله، در هر زمان می‌توانید پلن خود را ارتقا دهید و بلافاصله به امکانات بیشتر دسترسی پیدا کنید. تفاوت قیمت
+                به صورت نسبی محاسبه می‌شود.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section class="bg-primary text-primary-foreground py-20">
+        <div class="container text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">همین امروز کسب و کار خود را متحول کنید</h2>
+          <p class="text-xl max-w-3xl mx-auto mb-8 text-primary-foreground/80">
+            با فاکتورساز، مدیریت مالی کسب و کار خود را ساده‌تر، سریع‌تر و حرفه‌ای‌تر انجام دهید.
+          </p>
+          <Button size="lg" variant="secondary" >
+            <A href="/register">رایگان شروع کنید</A>
+          </Button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer class="border-t py-12 md:py-16">
+        <div class="container">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="col-span-2 md:col-span-1">
+              <div class="flex items-center gap-2 mb-4">
+                <FileText class="h-6 w-6" />
+                <span class="text-xl font-bold">فاکتورساز</span>
+              </div>
+              <p class="text-muted-foreground mb-4">
+                ساده‌ترین راه برای صدور فاکتورهای حرفه‌ای و مدیریت مالی کسب و کار شما
+              </p>
+              <div class="flex gap-4">
+                <A href="#" class="text-muted-foreground hover:text-foreground">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="h-5 w-5"
+                  >
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+                </A>
+                <A href="#" class="text-muted-foreground hover:text-foreground">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="h-5 w-5"
+                  >
+                    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                  </svg>
+                </A>
+                <A href="#" class="text-muted-foreground hover:text-foreground">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-Width="2"
+                    stroke-Linecap="round"
+                    stroke-Linejoin="round"
+                    class="h-5 w-5"
+                  >
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                  </svg>
+                </A>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-medium mb-4">محصولات</h3>
+              <ul class="space-y-2">
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    فاکتورساز
+                  </A>
+                </li>
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    حسابداری آنلاین
+                  </A>
+                </li>
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    مدیریت انبار
+                  </A>
+                </li>
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    گزارش‌گیری پیشرفته
+                  </A>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-medium mb-4">شرکت</h3>
+              <ul class="space-y-2">
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    درباره ما
+                  </A>
+                </li>
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    تماس با ما
+                  </A>
+                </li>
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    وبلاگ
+                  </A>
+                </li>
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    فرصت‌های شغلی
+                  </A>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-medium mb-4">پشتیبانی</h3>
+              <ul class="space-y-2">
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    راهنما
+                  </A>
+                </li>
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    سوالات متداول
+                  </A>
+                </li>
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    تیکت پشتیبانی
+                  </A>
+                </li>
+                <li>
+                  <A href="#" class="text-muted-foreground hover:text-foreground">
+                    ویدیوهای آموزشی
+                  </A>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="border-t mt-12 pt-8 text-center text-muted-foreground">
+            <p>© ۱۴۰۲ فاکتورساز. تمامی حقوق محفوظ است.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
