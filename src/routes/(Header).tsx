@@ -1,4 +1,5 @@
 import { RouteSectionProps } from "@solidjs/router"
+import Footer from "~/components/Layout/Footer"
 import Header from "~/components/Layout/Header"
 
 const HeaderGroup = (props: RouteSectionProps) => {
@@ -6,6 +7,7 @@ const HeaderGroup = (props: RouteSectionProps) => {
     <>
       <Header/>
       {props.children}
+      <Footer/>
     </>
   )
 }
