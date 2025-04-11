@@ -6,13 +6,10 @@ import { FaRegularFileLines as FileText } from 'solid-icons/fa'
 import { FaSolidChevronRight as ChevronRight } from 'solid-icons/fa'
 import { FiCreditCard as CreditCard, FiUsers as Users, FiShield as Shield, FiZap as Zap, FiStar as Star, FiCheck as Check} from 'solid-icons/fi'
 import { AiOutlineClockCircle as Clock } from 'solid-icons/ai'
-import Header from "../Layout/Header"
 
 export default function LandingPage() {
   return (
     <>
-
-      <Header/>
       <section class="container grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
         <div class="flex flex-col gap-4 lg:gap-8">
           <h1 class="text-4xl md:text-6xl font-bold">
