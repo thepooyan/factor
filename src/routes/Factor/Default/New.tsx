@@ -1,4 +1,4 @@
-import InvoicePage from "~/components/Layout/InvoicePage"
+import InvoicePage from "~/components/Pages/InvoicePage"
 
 const New = () => {
   return (

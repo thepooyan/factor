@@ -1,4 +1,4 @@
-import LoginPage from "~/components/Layout/LoginPage"
+import LoginPage from "~/components/Pages/LoginPage"
 
 const Folan = () => {
   return (
