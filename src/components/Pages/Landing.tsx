@@ -6,43 +6,13 @@ import { FaRegularFileLines as FileText } from 'solid-icons/fa'
 import { FaSolidChevronRight as ChevronRight } from 'solid-icons/fa'
 import { FiCreditCard as CreditCard, FiUsers as Users, FiShield as Shield, FiZap as Zap, FiStar as Star, FiCheck as Check} from 'solid-icons/fi'
 import { AiOutlineClockCircle as Clock } from 'solid-icons/ai'
+import Header from "../Layout/Header"
 
 export default function LandingPage() {
   return (
-    <div dir="rtl">
-      {/* Header */}
-      <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div class="container flex h-16 items-center justify-between">
-          <div class="flex items-center gap-2">
-            <FileText class="h-6 w-6" />
-            <span class="text-xl font-bold">فاکتور ساز</span>
-          </div>
-          <nav class="hidden md:flex items-center gap-6 text-sm">
-            <A href="#features" class="transition-colors hover:text-foreground/80">
-              ویژگی‌ها
-            </A>
-            <A href="#how-it-works" class="transition-colors hover:text-foreground/80">
-              نحوه کار
-            </A>
-            <A href="#pricing" class="transition-colors hover:text-foreground/80">
-              قیمت‌ها
-            </A>
-            <A href="#faq" class="transition-colors hover:text-foreground/80">
-              سوالات متداول
-            </A>
-          </nav>
-          <div class="flex items-center gap-4">
-            <Button variant="outline" size="sm">
-              <A href="/login">ورود</A>
-            </Button>
-            <Button size="sm">
-              <A href="/register">ثبت نام</A>
-            </Button>
-          </div>
-        </div>
-      </header>
+    <>
 
-      {/* Hero Section */}
+      <Header/>
       <section class="container grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
         <div class="flex flex-col gap-4 lg:gap-8">
           <h1 class="text-4xl md:text-6xl font-bold">
@@ -680,7 +650,7 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   )
 }
 
