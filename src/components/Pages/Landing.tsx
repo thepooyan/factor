@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/
 import { A } from "@solidjs/router"
 import { FaRegularFileLines as FileText } from 'solid-icons/fa'
 import { FaSolidChevronRight as ChevronRight } from 'solid-icons/fa'
-import { FiCreditCard as CreditCard, FiUsers as Users, FiShield as Shield, FiZap as Zap, FiStar as Star, FiCheck as Check} from 'solid-icons/fi'
+import { FiCreditCard as CreditCard, FiUsers as Users, FiShield as Shield, FiZap as Zap, FiStar as Star, FiCheck as Check, FiChevronLeft} from 'solid-icons/fi'
 import { AiOutlineClockCircle as Clock } from 'solid-icons/ai'
 
 export default function LandingPage() {
@@ -22,7 +22,7 @@ export default function LandingPage() {
             <Button size="lg" >
               <A href="/register">
                 شروع رایگان
-                <ChevronRight class="mr-2 h-4 w-4" />
+                <FiChevronLeft class="mr-2 h-4 w-4 inline" />
               </A>
             </Button>
             <Button size="lg" variant="outline" >
