@@ -12,7 +12,7 @@ export default function LandingPage() {
     <>
       <section class="container m-auto grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
         <div class="flex flex-col gap-4 lg:gap-8">
-          <h1 class="text-4xl md:text-6xl font-bold">
+          <h1 class="text-4xl md:text-6xl/17 font-bold">
             ساده‌ترین راه برای <span class="text-primary">صدور فاکتور</span> حرفه‌ای
           </h1>
           <p class="text-xl text-muted-foreground">
