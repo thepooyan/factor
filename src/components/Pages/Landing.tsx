@@ -30,9 +30,9 @@ export default function LandingPage() {
             </Button>
           </div>
         </div>
-        <div class="relative w-full h-[300px] sm:h-[400px] lg:h-[500px]">
+        <div class="relative w-full h-[300px] sm:h-[400px] lg:h-[500px] shadow-lg">
           <img
-            src="/placeholder.svg?height=500&width=600"
+            src="/sample_invoice.png"
             alt="نمونه فاکتور"
             class="object-contain"
           />
