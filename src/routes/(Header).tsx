@@ -6,7 +6,9 @@ const HeaderGroup = (props: RouteSectionProps) => {
   return (
     <>
       <Header/>
-      {props.children}
+      <div class="bg-zinc-100">
+        {props.children}
+      </div>
       <Footer/>
     </>
   )

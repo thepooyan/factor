@@ -25,16 +25,16 @@ export default function LandingPage() {
                 <FiChevronLeft class="mr-2 h-4 w-4 inline" />
               </A>
             </Button>
-            <Button size="lg" variant="outline" >
+            <Button size="lg" variant="secondary" >
               <A href="/demo">نسخه نمایشی</A>
             </Button>
           </div>
         </div>
-        <div class="relative w-full h-[300px] sm:h-[400px] lg:h-[500px] shadow-lg">
+        <div class="relative w-full shadow-lg">
           <img
             src="/sample_invoice.png"
             alt="نمونه فاکتور"
-            class="object-contain"
+            class="object-fit rounded-lg h-85"
           />
         </div>
       </section>
