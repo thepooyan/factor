@@ -32,10 +32,10 @@ const Header = () => {
         </nav>
         <div class="flex items-center gap-4">
           <Button variant="outline" size="sm">
-            <A href="/login">ورود</A>
+            <A href="/Login">ورود</A>
           </Button>
           <Button size="sm">
-            <A href="/register">ثبت نام</A>
+            <A href="/Login#register">ثبت نام</A>
           </Button>
         </div>
       </div>
