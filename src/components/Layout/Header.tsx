@@ -5,7 +5,7 @@ import { FaRegularFileLines as FileText } from 'solid-icons/fa'
 const Header = () => {
   return (
     <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div class="container flex h-16 items-center justify-between">
+      <div class="container m-auto flex h-16 items-center justify-between">
         <div class="flex items-center gap-2">
           <FileText class="h-6 w-6" />
           <span class="text-xl font-bold">فاکتور ساز</span>

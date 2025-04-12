@@ -10,7 +10,7 @@ import { AiOutlineClockCircle as Clock } from 'solid-icons/ai'
 export default function LandingPage() {
   return (
     <>
-      <section class="container grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
+      <section class="container m-auto grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
         <div class="flex flex-col gap-4 lg:gap-8">
           <h1 class="text-4xl md:text-6xl font-bold">
             ساده‌ترین راه برای <span class="text-primary">صدور فاکتور</span> حرفه‌ای
@@ -40,7 +40,7 @@ export default function LandingPage() {
       </section>
 
       {/* Stats Section */}
-      <section class="container py-12 border-y">
+      <section class="container m-auto py-12 border-y">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div class="flex flex-col gap-2 items-center">
             <span class="text-3xl md:text-4xl font-bold">+۱۰,۰۰۰</span>
@@ -62,7 +62,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" class="container py-20 md:py-32">
+      <section id="features" class="container m-auto py-20 md:py-32">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold mb-4">ویژگی‌های برتر فاکتورساز</h2>
           <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -155,7 +155,7 @@ export default function LandingPage() {
 
       {/* How It Works Section */}
       <section id="how-it-works" class="bg-muted py-20 md:py-32">
-        <div class="container">
+        <div class="container m-auto">
           <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">نحوه کار با فاکتورساز</h2>
             <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -204,7 +204,7 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" class="container py-20 md:py-32">
+      <section id="pricing" class="container m-auto py-20 md:py-32">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold mb-4">قیمت‌های مقرون به صرفه</h2>
           <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -343,7 +343,7 @@ export default function LandingPage() {
 
       {/* Testimonials Section */}
       <section class="bg-muted py-20 md:py-32">
-        <div class="container">
+        <div class="container m-auto">
           <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">نظرات مشتریان ما</h2>
             <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -425,7 +425,7 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" class="container py-20 md:py-32">
+      <section id="faq" class="container m-auto py-20 md:py-32">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold mb-4">سوالات متداول</h2>
           <p class="text-xl text-muted-foreground max-w-3xl mx-auto">پاسخ سوالات رایج شما درباره سرویس فاکتورساز</p>
@@ -486,7 +486,7 @@ export default function LandingPage() {
 
       {/* CTA Section */}
       <section class="bg-primary text-primary-foreground py-20">
-        <div class="container text-center">
+        <div class="container m-auto text-center">
           <h2 class="text-3xl md:text-4xl font-bold mb-4">همین امروز کسب و کار خود را متحول کنید</h2>
           <p class="text-xl max-w-3xl mx-auto mb-8 text-primary-foreground/80">
             با فاکتورساز، مدیریت مالی کسب و کار خود را ساده‌تر، سریع‌تر و حرفه‌ای‌تر انجام دهید.
