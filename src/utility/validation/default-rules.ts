@@ -13,7 +13,7 @@ type ValidationRules = {
 const Rules: ValidationRules = {
   "required": {
     validator: (value) => value.trim() !== "",
-    errorMessage: "این مقدار نباید خالی رها شود. لطفا یک مقدار وارد کنید",
+    errorMessage: "این بخش نمیتواند خالی باشد، لطفا یک مقدار وارد کنید",
     negateErrorMessage: "این فیلد ضروری نیست. اگر لازم نیست، لطفا آن را خالی بگذارید",
     priority: 1,
   },
