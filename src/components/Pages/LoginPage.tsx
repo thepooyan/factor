@@ -2,7 +2,6 @@ import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { AiOutlineUser } from "solid-icons/ai";
 import LoginTab from "./LoginTab";
 import SignupTab from "./SignupTab";
-import { A } from "@solidjs/router";
 
 export default function LoginPage({activatedTab}:{activatedTab: "login" | "signup"}) {
   return (
