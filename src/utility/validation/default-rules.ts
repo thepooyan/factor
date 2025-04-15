@@ -13,7 +13,7 @@ type ValidationRules = {
 const Rules: ValidationRules = {
   "required": {
     validator: (value) => value.trim() !== "",
-    errorMessage: "این فیلد نباید خالی رها شود. لطفا یک مقدار وارد کنید",
+    errorMessage: "این مقدار نباید خالی رها شود. لطفا یک مقدار وارد کنید",
     negateErrorMessage: "این فیلد ضروری نیست. اگر لازم نیست، لطفا آن را خالی بگذارید",
     priority: 1,
   },
@@ -49,13 +49,25 @@ const Rules: ValidationRules = {
   },
   "alphanumeric": {
     validator: (value) => /^[a-zA-Z0-9]+$/.test(value),
-    errorMessage: "این فیلد فقط باید شامل حروف و اعداد باشد",
+    errorMessage: "این فیلد فقط میتواند شامل حروف و اعداد باشد",
     negateErrorMessage: "کاراکترهای خاص یا غیر الفبایی در این فیلد مجاز هستند",
     priority: 3,
   },
   "phoneNumber": {
     validator: (value) => config.PHONE_NUMBER_REGEX.test(value),
     errorMessage: "این فیلد باید یک شماره تلفن معتبر باشد",
+    negateErrorMessage: "این فیلد نیازی به شماره تلفن بودن ندارد",
+    priority: 3,
+  },
+  "specialChar": {
+    validator: (value) => config.PASSWORD_SPECIAL_CHAR.test(value),
+    errorMessage: "این ورودی باید شامل حداقل یکی از حروف خاص (!@#$%^.?) باشد",
+    negateErrorMessage: "این فیلد نیازی به شماره تلفن بودن ندارد",
+    priority: 3,
+  },
+  "capital": {
+    validator: (value) => /[A-Z]/.test(value),
+    errorMessage: "این مقدار باید شامل حروف انگلیسی بزرگ باشد",
     negateErrorMessage: "این فیلد نیازی به شماره تلفن بودن ندارد",
     priority: 3,
   },

@@ -62,7 +62,7 @@ const LoginTab = () => {
                 id="password-login"
                 type={showPassword() ? "text" : "password"}
                 class="pl-20 "
-                data-validate="required minLength-7 !alphanumeric "
+                data-validate="required minLength-7 specialChar capital"
               />
               <Ve/>
               <Button
