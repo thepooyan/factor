@@ -31,11 +31,11 @@ const Header = () => {
           </A>
         </nav>
         <div class="flex items-center gap-4">
-          <Button variant="outline" size="sm">
-            <A href="/Login">ورود</A>
+          <Button variant="outline" size="sm" as="A" href="/Login">
+            ورود
           </Button>
-          <Button size="sm">
-            <A href="/Login#register">ثبت نام</A>
+          <Button size="sm" as="A" href="/Signup">
+            ثبت نام
           </Button>
         </div>
       </div>
