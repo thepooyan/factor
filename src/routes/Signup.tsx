@@ -2,7 +2,7 @@ import LoginPage from "~/components/Pages/LoginPage"
 
 const Folan = () => {
   return (
-    <LoginPage activatedTab="login"/>
+    <LoginPage activatedTab="signup"/>
   )
 }
 
