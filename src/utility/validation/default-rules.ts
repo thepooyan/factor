@@ -1,62 +1,62 @@
-import config from "./lite-config.js"
+import config from "./lite-config.js";
 
 type validatorFunction = (value: string, $?: string) => boolean;
 type ValidationRules = {
   [key: string]: {
-    validator: validatorFunction,
-    errorMessage: string,
-    negateErrorMessage?: string,
-    priority: number
-  }
+    validator: validatorFunction;
+    errorMessage: string;
+    negateErrorMessage?: string;
+    priority: number;
+  };
 };
 
 const Rules: ValidationRules = {
   "required": {
     validator: (value) => value.trim() !== "",
-    errorMessage: "This field cannot be left empty. Please provide a value",
-    negateErrorMessage: "This field is not required. Please leave it empty if unnecessary",
+    errorMessage: "این فیلد نباید خالی رها شود. لطفا یک مقدار وارد کنید",
+    negateErrorMessage: "این فیلد ضروری نیست. اگر لازم نیست، لطفا آن را خالی بگذارید",
     priority: 1,
   },
   "email": {
     validator: (value) => config.EMAIL_REGEX.test(value),
-    errorMessage: "Please provide a valid email address",
-    negateErrorMessage: "This field is not supposed to be an email address",
+    errorMessage: "لطفا یک آدرس ایمیل معتبر وارد کنید",
+    negateErrorMessage: "این فیلد نباید یک آدرس ایمیل باشد",
     priority: 2,
   },
   "pattern": {
     validator: (value, $) => $ ? new RegExp($).test(value) : false,
-    errorMessage: "The value does not match the required format",
-    negateErrorMessage: "This field does not need to follow the provided format",
+    errorMessage: "مقدار وارد شده با فرمت مورد نیاز مطابقت ندارد",
+    negateErrorMessage: "این فیلد نیازی به پیروی از فرمت ارائه شده ندارد",
     priority: 2,
   },
   "number": {
     validator: (value) => /^[0-9]+$/.test(value),
-    errorMessage: "Only numeric values are allowed in this field",
-    negateErrorMessage: "Non-numeric values are allowed in this field",
+    errorMessage: "فقط مقادیر عددی در این فیلد مجاز هستند",
+    negateErrorMessage: "مقادیر غیر عددی در این فیلد مجاز هستند",
     priority: 3,
   },
   "decimal": {
     validator: (value) => /^[0-9]+(.[0-9]+)?$/.test(value),
-    errorMessage: "Only numeric values (with up to one decimal point) are allowed in this field",
-    negateErrorMessage: "Decimal values are not allowed in this field",
+    errorMessage: "فقط مقادیر عددی (با حداکثر یک نقطه اعشار) در این فیلد مجاز هستند",
+    negateErrorMessage: "مقادیر اعشاری در این فیلد مجاز نیستند",
     priority: 3,
   },
   "letter": {
     validator: (value) => /^[a-zA-Z]+$/.test(value),
-    errorMessage: "Only alphabetic characters (A-Z, a-z) are allowed in this field",
-    negateErrorMessage: "Non-alphabetic characters are allowed in this field",
+    errorMessage: "فقط حروف الفبا (A-Z, a-z) در این فیلد مجاز هستند",
+    negateErrorMessage: "کاراکترهای غیر الفبایی در این فیلد مجاز هستند",
     priority: 3,
   },
   "alphanumeric": {
     validator: (value) => /^[a-zA-Z0-9]+$/.test(value),
-    errorMessage: "This field must contain only letters and numbers",
-    negateErrorMessage: "Special or non-alphanumeric characters are allowed in this field",
+    errorMessage: "این فیلد فقط باید شامل حروف و اعداد باشد",
+    negateErrorMessage: "کاراکترهای خاص یا غیر الفبایی در این فیلد مجاز هستند",
     priority: 3,
   },
   "phoneNumber": {
     validator: (value) => config.PHONE_NUMBER_REGEX.test(value),
-    errorMessage: "This field must be a valid phone number",
-    negateErrorMessage: "This field does not need to be a phone number",
+    errorMessage: "این فیلد باید یک شماره تلفن معتبر باشد",
+    negateErrorMessage: "این فیلد نیازی به شماره تلفن بودن ندارد",
     priority: 3,
   },
   "passwordStrength": {
@@ -65,38 +65,38 @@ const Rules: ValidationRules = {
       const specialCharCheck = config.PASSWORD_SPECIAL_CHAR.test(value);
       return lengthCheck && specialCharCheck;
     },
-    errorMessage: `This password must be at least ${config.PASSWORD_MIN_LENGTH} characters long and contain at least one special character.`,
-    negateErrorMessage: `This field does not require a strong password`,
+    errorMessage: `این رمز عبور باید حداقل ${config.PASSWORD_MIN_LENGTH} کاراکتر باشد و حداقل شامل یک کاراکتر خاص باشد.`,
+    negateErrorMessage: `این فیلد نیازی به رمز عبور قوی ندارد`,
     priority: 3,
   },
   "length": {
     validator: (value, $) => $ ? value.length === parseInt($) : false,
-    errorMessage: "This field must be exactly $ characters long",
-    negateErrorMessage: "This field does not need to have exactly $ characters",
+    errorMessage: "این فیلد باید دقیقا $ کاراکتر باشد",
+    negateErrorMessage: "این فیلد نیازی به داشتن دقیقا $ کاراکتر ندارد",
     priority: 4,
   },
   "minLength": {
     validator: (value, $) => $ ? value.length >= parseInt($) : false,
-    errorMessage: "This field must be at least $ characters long",
-    negateErrorMessage: "This field can have fewer than $ characters",
+    errorMessage: "این فیلد باید حداقل $ کاراکتر باشد",
+    negateErrorMessage: "این فیلد می تواند کمتر از $ کاراکتر داشته باشد",
     priority: 4,
   },
   "maxLength": {
     validator: (value, $) => $ ? value.length <= parseInt($) : false,
-    errorMessage: "This field must not exceed $ characters in length",
-    negateErrorMessage: "This field can have more than $ characters",
+    errorMessage: "طول این فیلد نباید از $ کاراکتر بیشتر شود",
+    negateErrorMessage: "این فیلد می تواند بیشتر از $ کاراکتر داشته باشد",
     priority: 4,
   },
   "minRange": {
     validator: (value, $) => $ ? parseFloat(value) >= parseFloat($) : false,
-    errorMessage: "This field must be at least $",
-    negateErrorMessage: "This field does not require a minimum value of $",
+    errorMessage: "این فیلد باید حداقل $ باشد",
+    negateErrorMessage: "این فیلد نیازی به حداقل مقدار $ ندارد",
     priority: 4,
   },
   "maxRange": {
     validator: (value, $) => $ ? parseFloat(value) <= parseFloat($) : false,
-    errorMessage: "This field must not exceed $",
-    negateErrorMessage: "This field does not require a maximum value of $",
+    errorMessage: "این فیلد نباید بیشتر از $ باشد",
+    negateErrorMessage: "این فیلد نیازی به حداکثر مقدار $ ندارد",
     priority: 4,
   },
   "url": {
@@ -108,8 +108,8 @@ const Rules: ValidationRules = {
         return false;
       }
     },
-    errorMessage: "This field must be a valid URL",
-    negateErrorMessage: "This field does not need to be a URL",
+    errorMessage: "این فیلد باید یک آدرس اینترنتی معتبر باشد",
+    negateErrorMessage: "این فیلد نیازی به آدرس اینترنتی بودن ندارد",
     priority: 4,
   },
   "creditCardExpiration": {
@@ -123,14 +123,14 @@ const Rules: ValidationRules = {
 
       return expirationDate > today;
     },
-    errorMessage: "This credit card has expired",
-    negateErrorMessage: "This credit card does not need to be checked for expiration",
+    errorMessage: "تاریخ انقضای این کارت اعتباری گذشته است",
+    negateErrorMessage: "تاریخ انقضای این کارت اعتباری نیازی به بررسی ندارد",
     priority: 4,
   },
   "date": {
     validator: (value) => !isNaN(Date.parse(value)),
-    errorMessage: "This field must be a valid date",
-    negateErrorMessage: "This field does not need to be a date",
+    errorMessage: "این فیلد باید یک تاریخ معتبر باشد",
+    negateErrorMessage: "این فیلد نیازی به تاریخ بودن ندارد",
     priority: 4,
   },
   "creditCard": {
@@ -153,14 +153,14 @@ const Rules: ValidationRules = {
 
       return sum % 10 === 0;
     },
-    errorMessage: "This field must be a valid credit card number",
-    negateErrorMessage: "This field does not need to be a valid credit card number",
+    errorMessage: "این فیلد باید یک شماره کارت اعتباری معتبر باشد",
+    negateErrorMessage: "این فیلد نیازی به شماره کارت اعتباری معتبر بودن ندارد",
     priority: 4,
   },
   "illegal": {
     validator: (value, $) => $ ? !new RegExp(`[${$}]`).test(value) : false,
-    errorMessage: "The following characters are not allowed: $",
-    negateErrorMessage: "The following characters are allowed: $",
+    errorMessage: "کاراکترهای زیر مجاز نیستند: $",
+    negateErrorMessage: "کاراکترهای زیر مجاز هستند: $",
     priority: 5,
   },
 };
