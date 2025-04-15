@@ -1,5 +1,4 @@
 import { Button } from "~/components/ui/button";
-import { initValidator } from "lite-validate"
 import Input from "../general/Input";
 import { Label } from "~/components/ui/label";
 import { TabsContent } from "~/components/ui/tabs";
@@ -14,6 +13,7 @@ import {
 import { AiOutlineLock } from "solid-icons/ai";
 import { FiEye, FiEyeOff, FiMail } from "solid-icons/fi";
 import { createSignal, onMount } from "solid-js";
+import { initValidator } from "~/utility/validation/validator";
 
 const LoginTab = () => {
   const [showPassword, setShowPassword] = createSignal(false);
@@ -44,7 +44,7 @@ const LoginTab = () => {
                 type="email"
                 placeholder="example@email.com"
                 class="pl-10"
-                data-validate="email"
+                data-validate="email required"
               />
               <Ve/>
               <FiMail class="absolute left-3 top-5.4 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -94,7 +94,7 @@ const LoginTab = () => {
 };
 
 const Ve = () => {
-  return <div class="validation-error text-red text-sm pr-2 mt-1"></div>
+  return <div class="validation-error text-red-500 text-sm pr-2 mt-1"></div>
 }
 
 export default LoginTab;

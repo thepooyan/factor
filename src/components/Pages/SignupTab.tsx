@@ -11,9 +11,10 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "solid-icons/fi";
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import Spinner from "../general/Spinner";
 import { callModal } from "../modal/Modal";
+import { initValidator } from "~/utility/validation/validator";
 
 const SignupTab = () => {
   const [showPassword, setShowPassword] = createSignal(false)
@@ -28,6 +29,9 @@ const SignupTab = () => {
     setSubmitting(false)
     callModal.success("ثبت شد!")
   }
+  onMount(() => {
+    initValidator()
+  })
   return (
     <TabsContent value="signup">
       <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm">
@@ -53,7 +57,9 @@ const SignupTab = () => {
                 type="email"
                 placeholder="example@email.com"
                 class="pl-10"
+                data-validate="email"
               />
+              <span class="validation-error text-red"></span>
               <FiMail class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>
           </div>
