@@ -18,6 +18,7 @@ import { passwordValidate } from "~/utility/validation/Abbr";
 import { api } from "~/utility/api";
 import { callModal } from "../modal/Modal";
 import Spinner from "../general/Spinner";
+import SignupSuggestion from "../SignupSuggestion";
 
 const LoginTab = () => {
   const [showPassword, setShowPassword] = createSignal(false);
@@ -42,7 +43,7 @@ const LoginTab = () => {
     .catch(({ msg, error }) => {
         console.log(error)
         if (error.status === 422)
-        callModal.fail("اکانتی با مشخصات وارد شده یافت نشد")
+        callModal(<SignupSuggestion/>)
         else
         callModal.fail(msg)
       })
