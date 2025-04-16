@@ -14,7 +14,7 @@ import { FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "solid-icons/fi";
 import { createSignal, onMount } from "solid-js";
 import Spinner from "../general/Spinner";
 import { callModal } from "../modal/Modal";
-import { initValidator, validateSection } from "~/utility/validation/validator";
+import { setValidationEvents, validateSection } from "~/utility/validation/validator";
 import { api } from "~/utility/api";
 import { passwordValidate } from "~/utility/validation/Abbr";
 
@@ -24,7 +24,7 @@ const SignupTab = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev)
   }
-  let email!:HTMLInputElement, pass!:HTMLInputElement, passR!:HTMLInputElement, name!: HTMLInputElement, form!:HTMLInputElement;
+  let email!:HTMLInputElement, pass!:HTMLInputElement, passR!:HTMLInputElement, name!: HTMLInputElement, form!:HTMLDivElement;
   const [submitting, setSubmitting] = createSignal(false);
 
   const submit = async () => {
@@ -45,7 +45,7 @@ const SignupTab = () => {
       })
   }
   onMount(() => {
-    initValidator()
+    setValidationEvents(form)
   })
   return (
     <TabsContent value="signup">

@@ -3,16 +3,14 @@ import config from "./lite-config"
 
 type supportedTypes = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
-export function initValidator() {
-  let items = document.querySelectorAll(
+type events = "blur" | "keyup" | "keydown"
+export function setValidationEvents(section?: Element, event?: events) {
+  let target = section ? section : document;
+  let items = target.querySelectorAll(
     selectTargetElements(),
   ) as NodeListOf<supportedTypes>;
-  SetValidationEvents(items);
-}
-
-export function SetValidationEvents(items: NodeListOf<supportedTypes>) {
   items.forEach((i) => {
-    setValidationEvent(i);
+    setValidationEvent(i, event);
   });
 }
 
@@ -35,8 +33,9 @@ function selectTargetElements() {
   return selection.substring(0, selection.length - 1);
 }
 
-function setValidationEvent(item: supportedTypes) {
-  item.addEventListener("blur", () => {
+function setValidationEvent(item: supportedTypes, event: events = "blur") {
+  //make sure event is never set twice 
+  item.addEventListener(event , () => {
     validateItem(item);
   });
 }

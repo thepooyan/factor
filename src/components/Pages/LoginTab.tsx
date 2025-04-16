@@ -13,7 +13,7 @@ import {
 import { AiOutlineLock } from "solid-icons/ai";
 import { FiEye, FiEyeOff, FiMail } from "solid-icons/fi";
 import { createSignal, onMount } from "solid-js";
-import { initValidator } from "~/utility/validation/validator";
+import { setValidationEvents } from "~/utility/validation/validator";
 import { passwordValidate } from "~/utility/validation/Abbr";
 
 const LoginTab = () => {
@@ -24,7 +24,7 @@ const LoginTab = () => {
   };
 
   onMount(() => {
-    initValidator()
+    setValidationEvents()
   })
 
   return (
