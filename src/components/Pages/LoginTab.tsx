@@ -14,6 +14,7 @@ import { AiOutlineLock } from "solid-icons/ai";
 import { FiEye, FiEyeOff, FiMail } from "solid-icons/fi";
 import { createSignal, onMount } from "solid-js";
 import { initValidator } from "~/utility/validation/validator";
+import { passwordValidate } from "~/utility/validation/Abbr";
 
 const LoginTab = () => {
   const [showPassword, setShowPassword] = createSignal(false);
@@ -58,10 +59,11 @@ const LoginTab = () => {
             </div>
             <div class="relative">
               <Input
+                placeholder="********"
                 id="password-login"
                 type={showPassword() ? "text" : "password"}
                 class="pl-20 "
-                data-validate="required minLength-7 specialChar capital"
+                data-validate={passwordValidate}
               />
               <Button
                 type="button"

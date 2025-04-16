@@ -84,6 +84,7 @@ const SignupTab = () => {
             <div class="relative">
               <Input
                 id="password-signup"
+                placeholder="********"
                 type={showPassword() ? "text" : "password"}
                 class="pl-10 "
                 data-validate={passwordValidate}
@@ -115,6 +116,7 @@ const SignupTab = () => {
             <div class="relative">
               <Input
                 id="confirm-password"
+                placeholder="********"
                 type={showPassword() ? "text" : "password"}
                 class="pl-10"
                 ref={passR}
