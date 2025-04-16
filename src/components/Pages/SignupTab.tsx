@@ -37,8 +37,8 @@ const SignupTab = () => {
         //login logic
         callModal.success("ثبت شد!")
       })
-    .catch(err => {
-        callModal.fail(err)
+    .catch(({msg}) => {
+        callModal.fail(msg)
       })
     .finally(() => {
       setSubmitting(false)

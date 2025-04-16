@@ -13,17 +13,43 @@ import {
 import { AiOutlineLock } from "solid-icons/ai";
 import { FiEye, FiEyeOff, FiMail } from "solid-icons/fi";
 import { createSignal, onMount } from "solid-js";
-import { setValidationEvents } from "~/utility/validation/validator";
+import { setValidationEvents, validateSection } from "~/utility/validation/validator";
 import { passwordValidate } from "~/utility/validation/Abbr";
+import { api } from "~/utility/api";
+import { callModal } from "../modal/Modal";
+import Spinner from "../general/Spinner";
 
 const LoginTab = () => {
   const [showPassword, setShowPassword] = createSignal(false);
+  const [submitting, setSubmitting] = createSignal(false)
 
-  let form!:HTMLDivElement
+  let form!:HTMLDivElement, email!: HTMLInputElement, pass!: HTMLInputElement
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
+
+  const submit = () => {
+    let result = validateSection(form)
+    if (result === false) return
+
+    setSubmitting(true)
+    api.post("/login", {username: email.value, password: pass.value})
+    .then(res => {
+        //login logic
+        callModal.success("ثبت شد!")
+      })
+    .catch(({ msg, error }) => {
+        console.log(error)
+        if (error.status === 422)
+        callModal.fail("اکانتی با مشخصات وارد شده یافت نشد")
+        else
+        callModal.fail(msg)
+      })
+    .finally(() => {
+      setSubmitting(false)
+      })
+  }
 
   onMount(() => {
     setValidationEvents(form, "keyup")
@@ -48,6 +74,7 @@ const LoginTab = () => {
                 placeholder="example@email.com"
                 class="pl-10"
                 data-validate="email required"
+                ref={email}
               />
               <FiMail class="absolute left-3 top-5.4 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>
@@ -66,6 +93,7 @@ const LoginTab = () => {
                 type={showPassword() ? "text" : "password"}
                 class="pl-20 "
                 data-validate={passwordValidate}
+                ref={pass}
               />
               <Button
                 type="button"
@@ -88,7 +116,11 @@ const LoginTab = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button class="w-full text-white">ورود</Button>
+          <Button class="w-full text-white" onclick={submit} disabled={submitting()}>
+            {submitting() ? <Spinner reverse/>: <>
+            ورود
+            </>}
+          </Button>
         </CardFooter>
       </Card>
     </TabsContent>

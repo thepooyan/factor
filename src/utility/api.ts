@@ -10,7 +10,8 @@ api.interceptors.response.use(
   },
   error => {
     let msg = error.response.data.detail
-    return Promise.reject(msg ? msg : error.message)
+    if (typeof msg !== "string") msg = error.message
+    return Promise.reject({msg, error})
   }
 )
 
