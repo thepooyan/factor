@@ -17,8 +17,14 @@ export function SetValidationEvents(items: NodeListOf<supportedTypes>) {
 }
 
 export function validateSection(section: Element) {
-  (section.querySelectorAll(selectTargetElements()) as NodeListOf<supportedTypes>)
-    .forEach((i) => validateItem(i));
+  let pass = true;
+  let targets = (section.querySelectorAll(selectTargetElements()) as NodeListOf<supportedTypes>)
+  for (let target of targets) {
+    let result = validateItem(target)
+    if (result === false)
+      pass = false
+  }
+  return pass
 }
 
 function selectTargetElements() {
