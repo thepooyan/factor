@@ -26,13 +26,12 @@ const SignupTab = () => {
   const [submitting, setSubmitting] = createSignal(false);
   const submit = () => {
     setSubmitting(true)
-    api.post("/users/newuser", {email: "thepooyan@gmail.com", password: "1234"})
+    api.post("/users/newuser", {email: "thepooyan@gmail.com", password: "12345aA"})
     .then(() => {
       callModal.success("ثبت شد!")
       })
     .catch(err => {
-        console.log(err)
-      callModal.fail(err.message)
+        callModal.fail(err)
       })
     .finally(() => {
       setSubmitting(false)

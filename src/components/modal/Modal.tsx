@@ -60,7 +60,7 @@ callModal.prompt = (msg: string = "Are you sure?") => {
   }
 }
 
-let titleStyle = "flex items-center gap-2 mr-10"
+let titleStyle = "flex items-center justify-end gap-2 mr-10"
 const title = () => {
   switch (state()) {
     case "fail":
