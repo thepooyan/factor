@@ -19,17 +19,19 @@ import { passwordValidate } from "~/utility/validation/Abbr";
 const LoginTab = () => {
   const [showPassword, setShowPassword] = createSignal(false);
 
+  let form!:HTMLDivElement
+
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
   onMount(() => {
-    setValidationEvents()
+    setValidationEvents(form, "keyup")
   })
 
   return (
     <TabsContent value="login">
-      <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm">
+      <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm" ref={form}>
         <CardHeader>
           <CardTitle class="text-2xl">ورود به حساب کاربری</CardTitle>
           <CardDescription>

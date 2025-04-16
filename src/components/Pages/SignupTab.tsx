@@ -45,7 +45,7 @@ const SignupTab = () => {
       })
   }
   onMount(() => {
-    setValidationEvents(form)
+    setValidationEvents(form, "keyup")
   })
   return (
     <TabsContent value="signup">
