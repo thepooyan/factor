@@ -15,6 +15,7 @@ import { createSignal, onMount } from "solid-js";
 import Spinner from "../general/Spinner";
 import { callModal } from "../modal/Modal";
 import { initValidator } from "~/utility/validation/validator";
+import { api } from "~/utility/api";
 
 const SignupTab = () => {
   const [showPassword, setShowPassword] = createSignal(false)
@@ -23,11 +24,19 @@ const SignupTab = () => {
     setShowPassword(prev => !prev)
   }
   const [submitting, setSubmitting] = createSignal(false);
-  const submit = async () => {
+  const submit = () => {
     setSubmitting(true)
-    await new Promise(res => setTimeout(res, 2000))
-    setSubmitting(false)
-    callModal.success("ثبت شد!")
+    api.post("/users/newuser", {email: "thepooyan@gmail.com", password: "1234"})
+    .then(() => {
+      callModal.success("ثبت شد!")
+      })
+    .catch(err => {
+        console.log(err)
+      callModal.fail(err.message)
+      })
+    .finally(() => {
+      setSubmitting(false)
+      })
   }
   onMount(() => {
     initValidator()
