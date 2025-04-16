@@ -24,16 +24,17 @@ const SignupTab = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev)
   }
-  let email!:HTMLInputElement, pass!:HTMLInputElement, name!: HTMLInputElement, form!:HTMLInputElement;
+  let email!:HTMLInputElement, pass!:HTMLInputElement, passR!:HTMLInputElement, name!: HTMLInputElement, form!:HTMLInputElement;
   const [submitting, setSubmitting] = createSignal(false);
+
   const submit = async () => {
-    let a = validateSection(form)
-    console.log(a)
-    return
+    let result = validateSection(form)
+    if (result === false) return
+    if (passR.value !== pass.value) return callModal.fail("تکرار رمز عبور مطابقت ندارد")
     setSubmitting(true)
     api.post("/users/newuser", {email: email.value, password: pass.value, name: name.value})
     .then(res => {
-        debugger
+        //login logic
         callModal.success("ثبت شد!")
       })
     .catch(err => {
@@ -108,9 +109,6 @@ const SignupTab = () => {
               </Button>
               <FiLock class="absolute left-10 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>
-            <p class="text-xs text-muted-foreground">
-              رمز عبور باید حداقل ۸ کاراکتر باشد.
-            </p>
           </div>
           <div class="space-y-2">
             <Label for="confirm-password">تکرار رمز عبور</Label>
@@ -119,6 +117,7 @@ const SignupTab = () => {
                 id="confirm-password"
                 type={showPassword() ? "text" : "password"}
                 class="pl-10"
+                ref={passR}
                 data-validate={passwordValidate}
               />
               <FiLock class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
