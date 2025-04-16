@@ -65,9 +65,15 @@ const Rules: ValidationRules = {
     negateErrorMessage: "این فیلد نیازی به شماره تلفن بودن ندارد",
     priority: 3,
   },
-  "capital": {
+  "containCapital": {
     validator: (value) => /[A-Z]/.test(value),
     errorMessage: "این مقدار باید شامل حروف انگلیسی بزرگ باشد",
+    negateErrorMessage: "این فیلد نیازی به شماره تلفن بودن ندارد",
+    priority: 3,
+  },
+  "containNonCapital": {
+    validator: (value) => /[a-z]/.test(value),
+    errorMessage: "این مقدار باید شامل حروف انگلیسی کوچک باشد",
     negateErrorMessage: "این فیلد نیازی به شماره تلفن بودن ندارد",
     priority: 3,
   },

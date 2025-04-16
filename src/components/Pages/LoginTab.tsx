@@ -46,7 +46,6 @@ const LoginTab = () => {
                 class="pl-10"
                 data-validate="email required"
               />
-              <Ve/>
               <FiMail class="absolute left-3 top-5.4 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>
           </div>
@@ -64,7 +63,6 @@ const LoginTab = () => {
                 class="pl-20 "
                 data-validate="required minLength-7 specialChar capital"
               />
-              <Ve/>
               <Button
                 type="button"
                 variant="ghost"
@@ -92,9 +90,5 @@ const LoginTab = () => {
     </TabsContent>
   );
 };
-
-const Ve = () => {
-  return <div class="validation-error text-red-500 text-sm pr-2 mt-1"></div>
-}
 
 export default LoginTab;

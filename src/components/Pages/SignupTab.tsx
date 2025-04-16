@@ -14,8 +14,9 @@ import { FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "solid-icons/fi";
 import { createSignal, onMount } from "solid-js";
 import Spinner from "../general/Spinner";
 import { callModal } from "../modal/Modal";
-import { initValidator } from "~/utility/validation/validator";
+import { initValidator, validateSection } from "~/utility/validation/validator";
 import { api } from "~/utility/api";
+import { passwordValidate } from "~/utility/validation/Abbr";
 
 const SignupTab = () => {
   const [showPassword, setShowPassword] = createSignal(false)
@@ -23,12 +24,17 @@ const SignupTab = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev)
   }
+  let email!:HTMLInputElement, pass!:HTMLInputElement, name!: HTMLInputElement, form!:HTMLInputElement;
   const [submitting, setSubmitting] = createSignal(false);
-  const submit = () => {
+  const submit = async () => {
+    let a = validateSection(form)
+    console.log(a)
+    return
     setSubmitting(true)
-    api.post("/users/newuser", {email: "thepooyan@gmail.com", password: "12345aA"})
-    .then(() => {
-      callModal.success("ثبت شد!")
+    api.post("/users/newuser", {email: email.value, password: pass.value, name: name.value})
+    .then(res => {
+        debugger
+        callModal.success("ثبت شد!")
       })
     .catch(err => {
         callModal.fail(err)
@@ -42,7 +48,7 @@ const SignupTab = () => {
   })
   return (
     <TabsContent value="signup">
-      <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm">
+      <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm" ref={form}>
         <CardHeader>
           <CardTitle class="text-2xl">ایجاد حساب کاربری</CardTitle>
           <CardDescription>
@@ -53,7 +59,7 @@ const SignupTab = () => {
           <div class="space-y-2">
             <Label for="name">نام و نام خانوادگی</Label>
             <div class="relative">
-              <Input id="name" placeholder="نام و نام خانوادگی" class="pl-10" />
+              <Input id="name" placeholder="نام و نام خانوادگی" class="pl-10" ref={name} data-validate="required" />
               <FiUser class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>
           </div>
@@ -65,7 +71,8 @@ const SignupTab = () => {
                 type="email"
                 placeholder="example@email.com"
                 class="pl-10"
-                data-validate="email"
+                data-validate="email required"
+                ref={email}
               />
               <span class="validation-error text-red"></span>
               <FiMail class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -78,6 +85,8 @@ const SignupTab = () => {
                 id="password-signup"
                 type={showPassword() ? "text" : "password"}
                 class="pl-10 "
+                data-validate={passwordValidate}
+                ref={pass}
               />
               <Button
                 type="button"
@@ -110,6 +119,7 @@ const SignupTab = () => {
                 id="confirm-password"
                 type={showPassword() ? "text" : "password"}
                 class="pl-10"
+                data-validate={passwordValidate}
               />
               <FiLock class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>
