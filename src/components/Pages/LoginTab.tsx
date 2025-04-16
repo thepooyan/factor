@@ -41,7 +41,6 @@ const LoginTab = () => {
         callModal.success("ثبت شد!")
       })
     .catch(({ msg, error }) => {
-        console.log(error)
         if (error.status === 422)
         callModal(<SignupSuggestion/>)
         else
