@@ -1,6 +1,9 @@
 import { Button } from "~/components/ui/button"
 import { A } from "@solidjs/router"
 import { FaRegularFileLines as FileText } from 'solid-icons/fa'
+import { userMg } from "~/utility/signals";
+import { Show } from "solid-js";
+import UserMenu from "../UserMenu";
 
 const Header = () => {
   return (
@@ -30,14 +33,19 @@ const Header = () => {
             سوالات متداول
           </A>
         </nav>
-        <div class="flex items-center gap-4">
-          <Button variant="outline" size="sm" as="A" href="/Login">
-            ورود
-          </Button>
-          <Button size="sm" as="A" href="/Signup">
-            ثبت نام
-          </Button>
-        </div>
+        <Show when={userMg.get()}>
+          {u => <UserMenu user={u()}/>}
+        </Show>
+        <Show when={!userMg.get()}>
+          <div class="flex items-center gap-4">
+            <Button variant="outline" size="sm" as="A" href="/Login">
+              ورود
+            </Button>
+            <Button size="sm" as="A" href="/Signup">
+              ثبت نام
+            </Button>
+          </div>
+        </Show>
       </div>
     </header>
   );

@@ -17,9 +17,13 @@ import { callModal } from "../modal/Modal";
 import { setValidationEvents, validateSection } from "~/utility/validation/validator";
 import { api } from "~/utility/api";
 import { passwordValidate } from "~/utility/validation/Abbr";
+import { Iuser } from "~/utility/interface";
+import { userMg } from "~/utility/signals";
+import { useNavigate } from "@solidjs/router";
 
 const SignupTab = () => {
   const [showPassword, setShowPassword] = createSignal(false)
+  const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev)
@@ -32,10 +36,11 @@ const SignupTab = () => {
     if (result === false) return
     if (passR.value !== pass.value) return callModal.fail("تکرار رمز عبور مطابقت ندارد")
     setSubmitting(true)
-    api.post("/users/newuser", {email: email.value, password: pass.value, name: name.value})
+    api.post<Iuser>("/users/newuser", {email: email.value, password: pass.value, name: name.value})
     .then(res => {
-        //login logic
+        userMg.login(res.data)
         callModal.success("ثبت شد!")
+        navigate("/")
       })
     .catch(({msg}) => {
         callModal.fail(msg)
