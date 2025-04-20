@@ -1,32 +1,20 @@
-"use client"
-
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
 import { Button } from "~/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
-import { FiLogOut as LogOut, FiSettings as Settings } from "solid-icons/fi"
+import { FiUser, FiLogOut as LogOut, FiSettings as Settings } from "solid-icons/fi"
 import { Iuser } from "~/utility/interface"
+import { userMg } from "~/utility/signals"
 
 export default function UserMenu({user}:{user:Iuser}) {
-  // This would typically come from your auth context or state
 
   const handleLogout = () => {
-    // Implement your logout logic here
-    console.log("Logging out...")
-  }
-
-  const handlePanelAccess = () => {
-    // Implement your panel access logic here
-    console.log("Accessing panel...")
+    userMg.logout()
   }
 
   return (
     <Popover>
       <PopoverTrigger  >
-        <Button variant="ghost" class="relative h-10 w-10 rounded-full">
-          <Avatar class="h-10 w-10">
-            <AvatarImage src="/placeholder.svg?height=40&width=40" alt="User" />
-            <AvatarFallback>{user.user.email.charAt(0).toUpperCase()}</AvatarFallback>
-          </Avatar>
+        <Button variant="ghost" class="relative h-10 w-10 rounded-full bg-zinc-200 ">
+          <FiUser/>
         </Button>
       </PopoverTrigger>
       <PopoverContent class="w-56">
@@ -36,7 +24,7 @@ export default function UserMenu({user}:{user:Iuser}) {
             <p class="text-xs text-muted-foreground truncate">{user.user.email}</p>
           </div>
           <div class="flex flex-col space-y-1">
-            <Button variant="ghost" class="justify-start h-9 px-2" onClick={handlePanelAccess}>
+            <Button variant="ghost" class="justify-start h-9 px-2" as="A" href="/Panel" >
               <Settings class="mr-2 h-4 w-4" />
               <span>پنل کاربری</span>
             </Button>
