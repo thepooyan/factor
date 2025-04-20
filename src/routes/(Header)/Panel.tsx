@@ -1,8 +1,8 @@
+import { PanelPage } from "~/components/Pages/PanelPage"
+
 const Panel = () => {
   return (
-    <div>
-      hello this is panel
-    </div>
+    <PanelPage/>
   )
 }
 
