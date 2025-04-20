@@ -1,25 +1,17 @@
 import { createSignal } from "solid-js";
 import { Iuser } from "./interface";
-// import { deleteCookie, getCookie, setCookie } from "vinxi/http";
+import Cookie from "js-cookie"
 
-const getInitialUser = () => {
-  // let userCookie = getCookie("auth")
-  // if (userCookie) {
-  //   return JSON.parse(userCookie) as Iuser
-  // }
-  return null
-}
-
-const [userSignal, setUserSignal] = createSignal<Iuser | null>(getInitialUser());
+const [userSignal, setUserSignal] = createSignal<Iuser | null>(null);
 
 export const userMg = {
   login: (user: Iuser) => {
     setUserSignal(user)
-    // setCookie("auth", JSON.stringify(user))
+    Cookie.set("auth", JSON.stringify(user))
   },
   logout: () => {
     setUserSignal(null)
-    // deleteCookie("auth")
+    Cookie.remove("auth")
   },
   get: () => {
     return userSignal()
