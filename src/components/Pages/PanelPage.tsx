@@ -2,6 +2,7 @@ import { FiCreditCard, FiHelpCircle, FiHome, FiInfo, FiMessageSquare, FiSettings
 import { createSignal } from "solid-js"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
 import { IconTypes } from "solid-icons"
+import Profile from "./Profile"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("dashboard")
@@ -40,9 +41,9 @@ export function PanelPage() {
           </Tabs>
         </div>
 
-        <div class="order-1 md:order-2">
+        <div class="order-1 md:order-2 bg-white rounded p-4 shadow-md">
           {activeTab() === "dashboard" && <>dash</>}
-          {activeTab() === "profile" && <>pro</>}
+          {activeTab() === "profile" && <Profile/>}
           {activeTab() === "settings" && <>set</>}
           {activeTab() === "customers" && <></>}
           {activeTab() === "factor" && <>me</>}
