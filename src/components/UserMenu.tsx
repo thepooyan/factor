@@ -13,7 +13,7 @@ export default function UserMenu({user}:{user:Iuser}) {
   return (
     <Popover>
       <PopoverTrigger  >
-        <Button variant="ghost" class="relative h-10 w-10 rounded-full bg-zinc-200 ">
+        <Button variant="ghost" class="relative h-10 w-10 rounded-full bg-zinc-100 hover:bg-zinc-200 ">
           <FiUser/>
         </Button>
       </PopoverTrigger>
