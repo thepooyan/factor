@@ -39,7 +39,7 @@ const SignupTab = () => {
     api.post<Iuser>("/users/newuser", {email: email.value, password: pass.value, name: name.value})
     .then(res => {
         userMg.login(res.data)
-        callModal.success("ثبت شد!")
+        callModal.success("خوش آمدید!")
         navigate("/")
       })
     .catch(({msg}) => {

@@ -19,10 +19,14 @@ import { api } from "~/utility/api";
 import { callModal } from "../modal/Modal";
 import Spinner from "../general/Spinner";
 import SignupSuggestion from "../SignupSuggestion";
+import { userMg } from "~/utility/signals";
+import { Iuser } from "~/utility/interface";
+import { useNavigate } from "@solidjs/router";
 
 const LoginTab = () => {
   const [showPassword, setShowPassword] = createSignal(false);
   const [submitting, setSubmitting] = createSignal(false)
+  const navigate = useNavigate()
 
   let form!:HTMLDivElement, email!: HTMLInputElement, pass!: HTMLInputElement
 
@@ -35,10 +39,10 @@ const LoginTab = () => {
     if (result === false) return
 
     setSubmitting(true)
-    api.post("/login", {username: email.value, password: pass.value})
+    api.post<Iuser>("/login", {username: email.value, password: pass.value})
     .then(res => {
-        //login logic
-        callModal.success("ثبت شد!")
+        userMg.login(res.data)
+        navigate("/")
       })
     .catch(({ msg, error }) => {
         if (error.status === 422)
