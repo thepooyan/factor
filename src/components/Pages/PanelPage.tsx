@@ -3,6 +3,7 @@ import { createSignal } from "solid-js"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
 import { IconTypes } from "solid-icons"
 import Company from "./Company"
+import Profile from "./Profile"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("dashboard")
@@ -19,7 +20,7 @@ export function PanelPage() {
   ]
 
   return (
-    <div class="mx-auto max-w-7xl p-5" dir="rtl">
+    <div class="mx-auto max-w-7xl p-5" >
       <div class="grid grid-cols-1 gap-6 md:grid-cols-[250px_1fr]">
         <div class="order-2 md:order-1">
           <Tabs orientation="vertical" class="w-full">
@@ -43,7 +44,7 @@ export function PanelPage() {
 
         <div class="order-1 md:order-2 ">
           {activeTab() === "dashboard" && <>dash</>}
-          {activeTab() === "profile" && <>prof</>}
+          {activeTab() === "profile" && <Profile/>}
           {activeTab() === "company" && <Company/>}
           {activeTab() === "customers" && <></>}
           {activeTab() === "factor" && <>me</>}
