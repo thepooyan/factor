@@ -2,16 +2,16 @@ import { FiCreditCard, FiHelpCircle, FiHome, FiInfo, FiMessageSquare, FiSettings
 import { createSignal } from "solid-js"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
 import { IconTypes } from "solid-icons"
-import Profile from "./Profile"
+import Company from "./Company"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("dashboard")
 
-  type tabsType = "dashboard" | "profile" | "settings" | "customers" | "factor" | "payments" | "support"
+  type tabsType = "dashboard" | "profile" | "company" | "customers" | "factor" | "payments" | "support"
   const tabs: {id: tabsType, label: string, icon: IconTypes}[] = [
     { id: "dashboard", label: "داشبورد", icon: FiHome },
     { id: "profile", label: "پروفایل", icon: FiUser },
-    { id: "settings", label: "تنظیمات", icon: FiSettings },
+    { id: "company", label: "اطلاعات شرکت", icon: FiSettings },
     { id: "customers", label: "مشتریان", icon: FiMessageSquare },
     { id: "factor", label: "فاکتور", icon: FiInfo },
     { id: "payments", label: "پرداخت‌ها", icon: FiCreditCard },
@@ -43,8 +43,8 @@ export function PanelPage() {
 
         <div class="order-1 md:order-2 bg-white rounded p-4 shadow-md">
           {activeTab() === "dashboard" && <>dash</>}
-          {activeTab() === "profile" && <Profile/>}
-          {activeTab() === "settings" && <>set</>}
+          {activeTab() === "profile" && <>prof</>}
+          {activeTab() === "company" && <Company/>}
           {activeTab() === "customers" && <></>}
           {activeTab() === "factor" && <>me</>}
           {activeTab() === "payments" && <></>}
