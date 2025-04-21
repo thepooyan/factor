@@ -41,7 +41,7 @@ export function PanelPage() {
           </Tabs>
         </div>
 
-        <div class="order-1 md:order-2 bg-white rounded p-4 shadow-md">
+        <div class="order-1 md:order-2 ">
           {activeTab() === "dashboard" && <>dash</>}
           {activeTab() === "profile" && <>prof</>}
           {activeTab() === "company" && <Company/>}
