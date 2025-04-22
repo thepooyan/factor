@@ -34,7 +34,8 @@ const LoginTab = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const submit = () => {
+  const submit = (e:SubmitEvent) => {
+    e.preventDefault()
     let result = validateSection(form)
     if (result === false) return
 
@@ -60,7 +61,7 @@ const LoginTab = () => {
   })
 
   return (
-    <TabsContent value="login">
+    <TabsContent value="login" as="form" onsubmit={submit}>
       <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm" ref={form}>
         <CardHeader>
           <CardTitle class="text-2xl">ورود به حساب کاربری</CardTitle>
@@ -120,7 +121,7 @@ const LoginTab = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button class="w-full text-white" onclick={submit} disabled={submitting()}>
+          <Button class="w-full text-white" type="submit" disabled={submitting()}>
             {submitting() ? <Spinner reverse/>: <>
             ورود
             </>}
