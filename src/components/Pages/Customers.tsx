@@ -29,6 +29,7 @@ const Profile = () => {
             <CustomersTable customers={c as Icustomer[]}/>
 
           <CardContent class="space-y-6">
+              <h1 class="text-xl font-bold my-4 mb-7">ثبت مشتری جدید</h1>
             <div class="space-y-2">
               <Label for="name" class="block text-right">
                   نام
@@ -56,28 +57,10 @@ const Profile = () => {
                 <FiPhone class="w-5 h-5 text-gray-400 -mr-8" />
               </div>
             </div>
-
-            <div class="space-y-2">
-              <Label for="address" class="block text-right">
-                  جنسیت
-              </Label>
-              <Select
-                  value={value()}
-                  onChange={setValue}
-                  options={["مرد", "زن", "دیگر"]}
-                  placeholder="انتخاب جنسیت"
-                  itemComponent={(props) => <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>}
-              >
-                  <SelectTrigger aria-label="Sex">
-                      <SelectValue<string>>{(state) => state.selectedOption()}</SelectValue>
-                  </SelectTrigger>
-                  <SelectContent />
-              </Select>
-            </div>
           </CardContent>
           <CardFooter>
             <Button type="submit" class="w-full">
-              ثبت اطلاعات
+                افزودن
             </Button>
           </CardFooter>
         </form>
