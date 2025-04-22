@@ -31,7 +31,8 @@ const SignupTab = () => {
   let email!:HTMLInputElement, pass!:HTMLInputElement, passR!:HTMLInputElement, name!: HTMLInputElement, form!:HTMLDivElement;
   const [submitting, setSubmitting] = createSignal(false);
 
-  const submit = async () => {
+  const submit = async (e:SubmitEvent) => {
+    e.preventDefault()
     let result = validateSection(form)
     if (result === false) return
     if (passR.value !== pass.value) return callModal.fail("تکرار رمز عبور مطابقت ندارد")
@@ -53,7 +54,7 @@ const SignupTab = () => {
     setValidationEvents(form, "keyup")
   })
   return (
-    <TabsContent value="signup">
+    <TabsContent value="signup" as="form" onsubmit={submit}>
       <Card class="border-none shadow-lg bg-white/90 backdrop-blur-sm" ref={form}>
         <CardHeader>
           <CardTitle class="text-2xl">ایجاد حساب کاربری</CardTitle>
@@ -132,7 +133,7 @@ const SignupTab = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button class="w-full text-white" onclick={submit} disabled={submitting()}>
+          <Button class="w-full text-white" type="submit" disabled={submitting()}>
             {submitting() ? <Spinner reverse/>: <>
               ثبت نام
             </>}
