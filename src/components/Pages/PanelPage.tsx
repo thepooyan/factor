@@ -4,6 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
 import { IconTypes } from "solid-icons"
 import Company from "./Company"
 import Profile from "./Profile"
+import Customers from "./Customers"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("profile")
@@ -42,7 +43,7 @@ export function PanelPage() {
         <div class="order-1 md:order-2 ">
           {activeTab() === "profile" && <Profile/>}
           {activeTab() === "company" && <Company/>}
-          {activeTab() === "customers" && <></>}
+          {activeTab() === "customers" && <Customers/>}
           {activeTab() === "factor" && <>me</>}
         </div>
       </div>
