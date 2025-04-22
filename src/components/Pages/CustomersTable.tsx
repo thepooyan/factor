@@ -15,7 +15,7 @@ interface props {
 }
 const CustomersTable = ({ customers }: props) => {
   return (
-    <div class="p-5 text-right">
+    <div class="p-5">
       <Table>
         <TableCaption>لیست مشتریان ثبت شده</TableCaption>
         <TableHeader>
@@ -36,7 +36,7 @@ const CustomersTable = ({ customers }: props) => {
                 <TableCell>{c.phone_number}</TableCell>
                 <TableCell>{c.fax_number}</TableCell>
                 <TableCell>{c.city}</TableCell>
-                <TableCell>{c.post_code}</TableCell>
+                <TableCell>{c.post_code || "-"}</TableCell>
                 <TableCell class="max-w-30">{c.address}</TableCell>
               </TableRow>
             }
