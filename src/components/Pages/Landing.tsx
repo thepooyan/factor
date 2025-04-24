@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/ui/accordion"
 import { A } from "@solidjs/router"
 import { FaRegularFileLines as FileText } from 'solid-icons/fa'
-import { FaSolidChevronRight as ChevronRight } from 'solid-icons/fa'
 import { FiCreditCard as CreditCard, FiUsers as Users, FiShield as Shield, FiZap as Zap, FiStar as Star, FiCheck as Check, FiChevronLeft} from 'solid-icons/fi'
 import { AiOutlineClockCircle as Clock } from 'solid-icons/ai'
 
@@ -26,7 +25,7 @@ export default function LandingPage() {
               </A>
             </Button>
             <Button size="lg" variant="secondary" >
-              <A href="/demo">نسخه نمایشی</A>
+              <A href="/Invoice/Default/Demo">نسخه نمایشی</A>
             </Button>
           </div>
         </div>
