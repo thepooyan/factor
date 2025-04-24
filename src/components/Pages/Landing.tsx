@@ -19,7 +19,7 @@ export default function LandingPage() {
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <Button size="lg" >
-              <A href="/register">
+              <A href="/Signup">
                 شروع رایگان
                 <FiChevronLeft class="mr-2 h-4 w-4 inline" />
               </A>
