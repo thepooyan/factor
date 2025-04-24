@@ -5,6 +5,7 @@ import { IconTypes } from "solid-icons"
 import Company from "./Company"
 import Profile from "./Profile"
 import Customers from "./Customers"
+import FactorManagment from "./Factor"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("profile")
@@ -44,7 +45,7 @@ export function PanelPage() {
           {activeTab() === "profile" && <Profile/>}
           {activeTab() === "company" && <Company/>}
           {activeTab() === "customers" && <Customers/>}
-          {activeTab() === "factor" && <>me</>}
+          {activeTab() === "factor" && <FactorManagment/>}
         </div>
       </div>
     </div>
