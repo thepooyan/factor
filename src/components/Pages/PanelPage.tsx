@@ -9,7 +9,6 @@ import Company from "./Company"
 import Profile from "./Profile"
 import Customers from "./Customers"
 import FactorList from "./FactorList"
-import NewFactor from "./NewFactor"
 import InvoicePage from "./InvoicePage"
 
 export function PanelPage() {
