@@ -26,7 +26,7 @@ export function PanelPage() {
   return (
     <div class="mx-auto max-w-7xl p-5" >
       <div class="grid grid-cols-1 gap-6 md:grid-cols-[250px_1fr]">
-        <div class="order-2 md:order-1">
+        <div>
           <Tabs orientation="vertical" class="w-full">
             <TabsList class="flex h-auto w-full flex-col justify-start bg-white p-0 shadow-md">
               {tabs.map((tab) => {
@@ -46,7 +46,7 @@ export function PanelPage() {
           </Tabs>
         </div>
 
-        <div class="order-1 md:order-2 ">
+        <div>
           {activeTab() === "profile" && <Profile/>}
           {activeTab() === "company" && <Company/>}
           {activeTab() === "customers" && <Customers/>}
