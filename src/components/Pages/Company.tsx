@@ -25,7 +25,7 @@ const Company = () => {
 
   return (
     <>
-    <div class="flex justify-center p-4">
+    <div class="flex justify-center">
       <Card class="w-full max-w-2xl">
         <CardHeader class="text-right">
           <CardTitle class="text-2xl font-bold">فرم اطلاعات شرکت</CardTitle>

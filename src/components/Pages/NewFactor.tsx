@@ -1,5 +1,5 @@
 import { Button } from "~/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
 import Input from "../general/Input"
 
@@ -11,8 +11,8 @@ const NewFactor = () => {
 
   return (
     <>
-    <div class="flex justify-center p-4">
-      <Card class="w-full max-w-2xl">
+    <div class="flex justify-center">
+      <Card class="w-full">
         <CardHeader class="text-right">
           <CardTitle class="text-2xl font-bold">ثبت فاکتور جدید</CardTitle>
         </CardHeader>

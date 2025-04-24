@@ -12,7 +12,7 @@ const FactorList = () => {
 
   return (
     <>
-      <div class="flex justify-center p-4">
+      <div class="flex justify-center">
         <Card class="w-full">
           <CardHeader class="text-right">
             <CardTitle class="text-2xl font-bold">

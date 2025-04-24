@@ -2,9 +2,8 @@ import { Button } from "~/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
 import { createSignal } from "solid-js"
-import { FiPhone, FiPrinter } from "solid-icons/fi"
+import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
-import { FaSolidBuilding } from "solid-icons/fa"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 
 const Profile = () => {
@@ -17,7 +16,7 @@ const Profile = () => {
 
   return (
     <>
-    <div class="flex justify-center p-4">
+    <div class="flex justify-center">
       <Card class="w-full max-w-2xl">
         <CardHeader class="text-right">
           <CardTitle class="text-2xl font-bold">فرم اطلاعات شخصی</CardTitle>

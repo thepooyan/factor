@@ -2,15 +2,12 @@ import { Button } from "~/components/ui/button"
 import c from "./customers.json"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
-import { createSignal } from "solid-js"
 import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import CustomersTable from "./CustomersTable"
 import { Icustomer } from "~/utility/interface"
 
 const Profile = () => {
-  const [value, setValue] = createSignal("")
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -19,8 +16,8 @@ const Profile = () => {
 
   return (
     <>
-    <div class="flex justify-center p-4">
-      <Card class="w-full max-w-2xl">
+    <div class="flex justify-center">
+      <Card class="w-full">
         <CardHeader class="text-right">
           <CardTitle class="text-2xl font-bold">فرم اطلاعات مشتریان</CardTitle>
           <CardDescription>اطلاعات مشتریان ثابت شما</CardDescription>
