@@ -7,7 +7,7 @@ import Input from "../general/Input"
 import CustomersTable from "./CustomersTable"
 import { Icustomer } from "~/utility/interface"
 
-const Profile = () => {
+const Goods = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -19,14 +19,14 @@ const Profile = () => {
     <div class="flex justify-center">
       <Card class="w-full">
         <CardHeader class="text-right">
-          <CardTitle class="text-2xl font-bold">فرم اطلاعات مشتریان</CardTitle>
-          <CardDescription>اطلاعات مشتریان ثابت شما</CardDescription>
+          <CardTitle class="text-2xl font-bold">فرم اطلاعات کالاها</CardTitle>
+          <CardDescription>اطلاعات کالاهای پرمصرف شما</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
             <CustomersTable customers={c as Icustomer[]}/>
 
           <CardContent class="space-y-6">
-              <h1 class="text-xl font-bold my-4 mb-7">ثبت مشتری جدید</h1>
+              <h1 class="text-xl font-bold my-4 mb-7">ثبت کالا جدید</h1>
             <div class="space-y-2">
               <Label for="name" class="block text-right">
                   نام
@@ -67,4 +67,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Goods
