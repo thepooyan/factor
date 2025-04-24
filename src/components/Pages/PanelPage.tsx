@@ -10,8 +10,8 @@ import Company from "./Company"
 import Profile from "./Profile"
 import Customers from "./Customers"
 import FactorList from "./FactorList"
-import InvoicePage from "./InvoicePage"
 import Goods from "./Customers"
+import InvocieSelect from "./InvocieSelect"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("profile")
@@ -55,7 +55,7 @@ export function PanelPage() {
           {activeTab() === "customers" && <Customers/>}
           {activeTab() === "factorList" && <FactorList/>}
           {activeTab() === "goods" && <Goods/>}
-          {activeTab() === "newFactor" && <InvoicePage/>}
+          {activeTab() === "newFactor" && <InvocieSelect/>}
         </div>
       </div>
     </div>
