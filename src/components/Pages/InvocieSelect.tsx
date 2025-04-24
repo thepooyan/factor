@@ -17,7 +17,7 @@ const InvocieSelect = () => {
 
   const link = () => {
     let selection = value()
-    if (!selection) return
+    if (!selection) return ""
     let template = Invoice_template_labels.get(selection)
     if (!template) throw new Error("قالب انتخاب شده تعریف نشده")
     return `/Invoice/${template}/New`
@@ -51,7 +51,7 @@ const InvocieSelect = () => {
               </div>
             </CardContent>
             <CardFooter>
-              <Button as="A" href={link()} target="_blank" class="w-full">
+              <Button as="A" href={link() ? link() : null} target="_blank" class={`w-full ${link() === '' && "opacity-40"}`}>
                 فاکتور جدید  
               </Button>
             </CardFooter>
