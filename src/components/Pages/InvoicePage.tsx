@@ -89,7 +89,7 @@ export default function InvoicePage() {
   }
 
   return (
-    <div class="container mx-auto p-4 print:p-0" dir="rtl">
+    <div class="container mx-auto print:p-0" dir="rtl">
       <Card class="w-full max-w-5xl mx-auto">
         <CardContent class="p-6">
           <div class="text-center mb-6">
@@ -303,16 +303,7 @@ export default function InvoicePage() {
 
           <div class="flex flex-wrap gap-2 justify-center print:hidden">
             <Button onClick={handlePrint}>
-              <FiPrinter class="w-4 h-4 ml-2" />
-              پرینت
-            </Button>
-            <Button variant="outline" onClick={handleDownload}>
-              <FiDownloadCloud class="w-4 h-4 ml-2" />
-              دانلود
-            </Button>
-            <Button variant="secondary" onClick={handleSendOnline}>
-              <FiSend class="w-4 h-4 ml-2" />
-              ارسال آنلاین
+              ثبت
             </Button>
           </div>
         </CardContent>
