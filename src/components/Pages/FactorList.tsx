@@ -16,9 +16,11 @@ const FactorList = () => {
         <Card class="w-full">
           <CardHeader class="text-right">
             <CardTitle class="text-2xl font-bold">
-              فرم اطلاعات مشتریان
+               لیست فاکتور
             </CardTitle>
-            <CardDescription>اطلاعات مشتریان ثابت شما</CardDescription>
+            <CardDescription>
+              سابقه فاکتور های صادر شده شما 
+            </CardDescription>
           </CardHeader>
           <CustomersTable customers={c as Icustomer[]} />
         </Card>
