@@ -1,4 +1,5 @@
 import { FiSettings, FiUser } from "solid-icons/fi"
+import { TbMoneybag } from 'solid-icons/tb'
 import { IoPeopleCircleSharp } from 'solid-icons/io'
 import { IoDocumentTextOutline } from 'solid-icons/io'
 import { TbSquarePlus } from 'solid-icons/tb'
@@ -10,15 +11,17 @@ import Profile from "./Profile"
 import Customers from "./Customers"
 import FactorList from "./FactorList"
 import InvoicePage from "./InvoicePage"
+import Goods from "./Customers"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("profile")
 
-  type tabsType =  "profile" | "company" | "customers" | "factorList" | "newFactor";
+  type tabsType =  "profile" | "goods" | "company" | "customers" | "factorList" | "newFactor";
   const tabs: {id: tabsType, label: string, icon: IconTypes}[] = [
     { id: "profile", label: "پروفایل", icon: FiUser },
     { id: "company", label: "اطلاعات شرکت", icon: FiSettings },
     { id: "customers", label: "مشتریان", icon:  IoPeopleCircleSharp},
+    { id: "goods", label: "کالاها", icon:  TbMoneybag},
     { id: "factorList", label: "لیست فاکتور", icon: IoDocumentTextOutline },
     { id: "newFactor", label: "فاکتور جدید", icon: TbSquarePlus },
   ]
@@ -51,6 +54,7 @@ export function PanelPage() {
           {activeTab() === "company" && <Company/>}
           {activeTab() === "customers" && <Customers/>}
           {activeTab() === "factorList" && <FactorList/>}
+          {activeTab() === "goods" && <Goods/>}
           {activeTab() === "newFactor" && <InvoicePage/>}
         </div>
       </div>
