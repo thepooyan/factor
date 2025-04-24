@@ -1,17 +1,9 @@
 import { Button } from "~/components/ui/button"
-import c from "./customers.json"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
-import { createSignal } from "solid-js"
-import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
-import CustomersTable from "./CustomersTable"
-import { Icustomer } from "~/utility/interface"
 
-const FactorManagment = () => {
-  const [value, setValue] = createSignal("")
-
+const NewFactor = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
     console.log("Form submitted")
@@ -22,14 +14,11 @@ const FactorManagment = () => {
     <div class="flex justify-center p-4">
       <Card class="w-full max-w-2xl">
         <CardHeader class="text-right">
-          <CardTitle class="text-2xl font-bold">فرم اطلاعات مشتریان</CardTitle>
-          <CardDescription>اطلاعات مشتریان ثابت شما</CardDescription>
+          <CardTitle class="text-2xl font-bold">ثبت فاکتور جدید</CardTitle>
         </CardHeader>
         <form onSubmit={handleSubmit}>
-            <CustomersTable customers={c as Icustomer[]}/>
 
           <CardContent class="space-y-6">
-              <h1 class="text-xl font-bold my-4 mb-7">ثبت مشتری جدید</h1>
             <div class="space-y-2">
               <Label for="name" class="block text-right">
                   نام
@@ -54,13 +43,12 @@ const FactorManagment = () => {
               </Label>
               <div class="flex items-center">
                 <Input id="phone" placeholder="شماره تلفن را وارد کنید" class="text-right"  />
-                <FiPhone class="w-5 h-5 text-gray-400 -mr-8" />
               </div>
             </div>
           </CardContent>
           <CardFooter>
             <Button type="submit" class="w-full">
-                افزودن
+                ثبت
             </Button>
           </CardFooter>
         </form>
@@ -70,4 +58,4 @@ const FactorManagment = () => {
   )
 }
 
-export default FactorManagment
+export default NewFactor

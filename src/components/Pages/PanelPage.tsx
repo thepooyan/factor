@@ -1,21 +1,26 @@
-import { FiInfo, FiMessageSquare, FiSettings, FiUser } from "solid-icons/fi"
+import { FiSettings, FiUser } from "solid-icons/fi"
+import { IoPeopleCircleSharp } from 'solid-icons/io'
+import { IoDocumentTextOutline } from 'solid-icons/io'
+import { TbSquarePlus } from 'solid-icons/tb'
 import { createSignal } from "solid-js"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
 import { IconTypes } from "solid-icons"
 import Company from "./Company"
 import Profile from "./Profile"
 import Customers from "./Customers"
-import FactorManagment from "./Factor"
+import FactorList from "./FactorList"
+import NewFactor from "./NewFactor"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("profile")
 
-  type tabsType =  "profile" | "company" | "customers" | "factor";
+  type tabsType =  "profile" | "company" | "customers" | "factorList" | "newFactor";
   const tabs: {id: tabsType, label: string, icon: IconTypes}[] = [
     { id: "profile", label: "پروفایل", icon: FiUser },
     { id: "company", label: "اطلاعات شرکت", icon: FiSettings },
-    { id: "customers", label: "مشتریان", icon: FiMessageSquare },
-    { id: "factor", label: "فاکتور", icon: FiInfo },
+    { id: "customers", label: "مشتریان", icon:  IoPeopleCircleSharp},
+    { id: "factorList", label: "لیست فاکتور", icon: IoDocumentTextOutline },
+    { id: "newFactor", label: "فاکتور جدید", icon: TbSquarePlus },
   ]
 
   return (
@@ -45,7 +50,8 @@ export function PanelPage() {
           {activeTab() === "profile" && <Profile/>}
           {activeTab() === "company" && <Company/>}
           {activeTab() === "customers" && <Customers/>}
-          {activeTab() === "factor" && <FactorManagment/>}
+          {activeTab() === "factorList" && <FactorList/>}
+          {activeTab() === "newFactor" && <NewFactor/>}
         </div>
       </div>
     </div>
