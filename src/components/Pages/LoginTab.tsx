@@ -18,7 +18,6 @@ import { passwordValidate } from "~/utility/validation/Abbr";
 import { api } from "~/utility/api";
 import { callModal } from "../modal/Modal";
 import Spinner from "../general/Spinner";
-import SignupSuggestion from "../SignupSuggestion";
 import { userMg } from "~/utility/signals";
 import { Iuser } from "~/utility/interface";
 import { useNavigate } from "@solidjs/router";
@@ -40,15 +39,17 @@ const LoginTab = () => {
     if (result === false) return
 
     setSubmitting(true)
-    api.post<Iuser>("/login", {username: email.value, password: pass.value})
+
+    const formData = new FormData()
+    formData.append("username", email.value)
+    formData.append("password", pass.value)
+
+    api.post<Iuser>("/login",  formData)
     .then(res => {
         userMg.login(res.data)
         navigate("/")
       })
-    .catch(({ msg, error }) => {
-        if (error.status === 422)
-        callModal(<SignupSuggestion/>)
-        else
+    .catch(({ msg }) => {
         callModal.fail(msg)
       })
     .finally(() => {
