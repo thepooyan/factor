@@ -8,7 +8,7 @@ import { AiOutlineClockCircle as Clock } from 'solid-icons/ai'
 
 export default function LandingPage() {
   return (
-    <div class="p-5 md:p-0">
+    <div class="p-5">
       <section class="container m-auto grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
         <div class="flex flex-col gap-4 lg:gap-8">
           <h1 class="text-4xl md:text-6xl/17 font-bold">
@@ -484,7 +484,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section class="bg-primary text-primary-foreground py-20 -mx-5 px-5 md:mx-auto md:px-auto">
+      <section class="bg-primary text-primary-foreground py-20 -mx-5 px-5   ">
         <div class="container m-auto text-center">
           <h2 class="text-3xl md:text-4xl font-bold mb-4">همین امروز کسب و کار خود را متحول کنید</h2>
           <p class="text-xl max-w-3xl mx-auto mb-8 text-primary-foreground/80">
