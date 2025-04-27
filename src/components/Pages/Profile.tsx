@@ -1,13 +1,10 @@
 import { Button } from "~/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
-import { createSignal } from "solid-js"
 import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 
 const Profile = () => {
-  const [value, setValue] = createSignal("")
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
