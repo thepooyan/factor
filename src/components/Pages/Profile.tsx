@@ -3,6 +3,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "~/components/ui/label"
 import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
+import { onMount } from "solid-js"
+import { api } from "~/utility/api"
 
 const Profile = () => {
 
@@ -10,6 +12,11 @@ const Profile = () => {
     e.preventDefault()
     console.log("Form submitted")
   }
+
+  onMount(async () => {
+    let user = await api.get(`/users/infos`)
+    console.log(user)
+  })
 
   return (
     <>
