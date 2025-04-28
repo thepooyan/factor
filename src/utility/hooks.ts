@@ -1,8 +1,8 @@
 import { Accessor } from "solid-js";
 
-export const useForm = (signal: Accessor<any>) => {
+export const useForm = <T extends Record<string, any>>(signal: Accessor<T | undefined | null>) => {
 
-  const submit = <T extends Record<string, any>>(
+  const submit = (
     submitHandler: (data: T) => void,
   ) => {
     return (event: SubmitEvent) => {
