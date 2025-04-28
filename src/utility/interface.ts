@@ -24,3 +24,14 @@ export interface Icustomer{
   "customer_id": number,
   "date_of_submit": string
 }
+
+export interface Iprofile {
+  email: string
+  first_name: string | null
+  is_active: boolean
+  last_name: string | null
+  phone_number: string | null
+  registration_date: string
+  role: string
+  user_id: number
+}
