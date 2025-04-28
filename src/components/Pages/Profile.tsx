@@ -15,6 +15,7 @@ const Profile = () => {
   const {register, submit} = useForm(profile)
 
   const handleSubmit = (data: Iprofile) => {
+    callModal.wait()
     api.put("/users/EditUser", data)
     .then(() => {
         callModal.success("ثبت شد!")

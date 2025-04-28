@@ -5,8 +5,9 @@ import { Button } from "../ui/button"
 import { CallbackStore } from "~/utility/utility"
 import clsx from "clsx"
 import { AiOutlineCheck } from "solid-icons/ai"
+import Spinner from "~/components/general/Spinner"
 
-type Istate = "" | "prompt" | "fail" | "success"
+type Istate = "" | "prompt" | "fail" | "success" | "wait"
 type modalArgs = {content: JSXElement, state?: Istate}
 const [open, setOpen] = createSignal(false)
 const [content, setContet] = createSignal<JSXElement>()
@@ -28,16 +29,17 @@ const closeCleanup = () => {
   first && callModal(first.content, first.state)
 }
 
-export const callModal = (content: JSXElement, state?: Istate) => {
-  if (!readyToOpen) return waitingStack.push({content: content, state: state})
+export const callModal = (content: JSXElement, stateToBe?: Istate) => {
+  if (!readyToOpen && state() !== "wait") return waitingStack.push({content: content, state: stateToBe})
   setOpen(true)
   setContet(content)
-  state && setState(state)
+  stateToBe && setState(stateToBe)
   readyToOpen = false;
 }
 
 callModal.success = (msg: string = "Successfully done!") => callModal(msg, "success")
 callModal.fail = (msg: string = "Something went wrong!") => callModal(msg, "fail")
+callModal.wait = () => callModal(<Spinner/>, "wait")
 callModal.prompt = (msg: string = "Are you sure?") => {
   callModal(msg, "prompt");
   return {
