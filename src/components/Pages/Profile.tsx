@@ -7,6 +7,7 @@ import { createSignal, onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { Iprofile } from "~/utility/interface"
 import { useForm } from "~/utility/hooks"
+import { callModal } from "../modal/Modal"
 
 const Profile = () => {
 
@@ -14,13 +15,18 @@ const Profile = () => {
   const {register, submit} = useForm(profile)
 
   const handleSubmit = (data: Iprofile) => {
-    console.log(data)
+    api.put("/users/EditUser", data)
+    .then(() => {
+        callModal.success("ثبت شد!")
+      })
+    .catch(({msg}) => {
+        callModal.fail(msg)
+      })
   }
 
   onMount(async () => {
     let user = await api.get<Iprofile>(`/users/infos`)
-    console.log(user.data)
-    setProfile({...user.data, first_name:"ali"})
+    setProfile(user.data)
   })
 
   return (
@@ -39,7 +45,7 @@ const Profile = () => {
                   نام
               </Label>
               <div class="flex items-center">
-                <Input  {...register("first_name")} placeholder="نام خود را وارد کنید" class="text-right" />
+                <Input {...register("first_name")} placeholder="نام خود را وارد کنید" class="text-right" />
               </div>
             </div>
 
@@ -48,7 +54,7 @@ const Profile = () => {
                   نام خانوادگی
               </Label>
               <div class="flex items-center">
-                <Input {...register("last_name")} placeholder="نام خانوادگی خود را وارد کنید" class="text-right" value={profile()?.last_name || ""} />
+                <Input {...register("last_name")} placeholder="نام خانوادگی خود را وارد کنید" class="text-right" />
               </div>
             </div>
 
@@ -57,7 +63,7 @@ const Profile = () => {
                 شماره تلفن
               </Label>
               <div class="flex items-center">
-                <Input id="phone" placeholder="شماره تلفن را وارد کنید" class="text-right" value={profile()?.phone_number || ""} />
+                <Input {...register("phone_number")} placeholder="شماره تلفن را وارد کنید" class="text-right" />
                 <FiPhone class="w-5 h-5 text-gray-400 -mr-8" />
               </div>
             </div>

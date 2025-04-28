@@ -1,6 +1,6 @@
 import { Accessor } from "solid-js";
 
-export const useForm = <T extends Record<string, any>>(signal: Accessor<T | undefined | null>) => {
+export const useForm = <T>(signal: Accessor<T | undefined | null>) => {
 
   const submit = (
     submitHandler: (data: T) => void,
@@ -24,13 +24,11 @@ export const useForm = <T extends Record<string, any>>(signal: Accessor<T | unde
     };
   };
 
-  const register = (name: string) => {
-    if (signal !== undefined)
-      return {
-        name: name,
-        value: signal()?.[name] || "",
-      };
-    return { name: name };
+  const register = (name: keyof T) => {
+    return {
+      name: name,
+      value: signal()?.[name] as (string | number) || "",
+    };
   };
   return { register, submit }
 };
