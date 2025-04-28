@@ -5,7 +5,7 @@ import "virtual:uno.css";
 
 import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
-import { onMount, Suspense } from "solid-js";
+import { ErrorBoundary, onMount, Suspense } from "solid-js";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import Modal from "./components/modal/Modal";
 import { userMg } from "./utility/signals";
@@ -33,7 +33,9 @@ export default function App() {
         <Router
           root={(props) => (
             <>
-              <Suspense>{props.children}</Suspense>
+              <ErrorBoundary fallback="Error!">
+                <Suspense fallback="loading...">{props.children}</Suspense>
+              </ErrorBoundary>
             </>
           )}
         >
