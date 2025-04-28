@@ -6,11 +6,12 @@ import Input from "../general/Input"
 import { createSignal, onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { Iprofile } from "~/utility/interface"
-import { former } from "~/utility/utility"
+import { useForm } from "~/utility/hooks"
 
 const Profile = () => {
 
   const [profile, setProfile] = createSignal<Iprofile | undefined>(undefined);
+  const {register, submit} = useForm(profile)
 
   const handleSubmit = (data: Iprofile) => {
     console.log(data)
@@ -19,7 +20,7 @@ const Profile = () => {
   onMount(async () => {
     let user = await api.get<Iprofile>(`/users/infos`)
     console.log(user.data)
-    setProfile(user.data)
+    setProfile({...user.data, first_name:"ali"})
   })
 
   return (
@@ -30,7 +31,7 @@ const Profile = () => {
           <CardTitle class="text-2xl font-bold">فرم اطلاعات شخصی</CardTitle>
           <CardDescription>در صورت تمایل اطلاعات شخصی خود را کامل کنید</CardDescription>
         </CardHeader>
-        <form onSubmit={former<Iprofile>(handleSubmit)}>
+        <form onSubmit={submit(handleSubmit)}>
           <CardContent class="space-y-6">
 
             <div class="space-y-2">
@@ -38,7 +39,7 @@ const Profile = () => {
                   نام
               </Label>
               <div class="flex items-center">
-                <Input id="name" name="first_name" placeholder="نام خود را وارد کنید" class="text-right" value={profile()?.first_name || ""} />
+                <Input  {...register("first_name")} placeholder="نام خود را وارد کنید" class="text-right" />
               </div>
             </div>
 
@@ -47,7 +48,7 @@ const Profile = () => {
                   نام خانوادگی
               </Label>
               <div class="flex items-center">
-                <Input id="fax" placeholder="نام خانوادگی خود را وارد کنید" class="text-right" value={profile()?.last_name || ""} />
+                <Input {...register("last_name")} placeholder="نام خانوادگی خود را وارد کنید" class="text-right" value={profile()?.last_name || ""} />
               </div>
             </div>
 
