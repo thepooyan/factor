@@ -9,6 +9,8 @@ import { Iprofile } from "~/utility/interface"
 import { useForm } from "~/utility/hooks"
 import { callModal } from "../modal/Modal"
 import { queryUserInfo } from "~/utility/queries"
+import { queryClient } from "~/app"
+import { userMg } from "~/utility/signals"
 
 const Profile = () => {
 
@@ -23,6 +25,9 @@ const Profile = () => {
       })
     .catch(({msg}) => {
         callModal.fail(msg)
+      })
+    .finally(() => {
+        queryClient.invalidateQueries({queryKey:["userInfo", userMg.get()?.user.email]})
       })
   }
 

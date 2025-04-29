@@ -11,7 +11,7 @@ import Modal from "./components/modal/Modal";
 import { userMg } from "./utility/signals";
 import { queryConfig } from "./utility/queries";
 
-export let qc = new QueryClient(queryConfig);
+export let queryClient = new QueryClient(queryConfig);
 
 export default function App() {
   
@@ -30,7 +30,7 @@ export default function App() {
   return (
     <>
     <Modal/>
-    <QueryClientProvider client={qc}>
+    <QueryClientProvider client={queryClient}>
         <Router
           root={(props) => (
             <>
