@@ -9,8 +9,9 @@ import { ErrorBoundary, onMount, Suspense } from "solid-js";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import Modal from "./components/modal/Modal";
 import { userMg } from "./utility/signals";
+import { queryConfig } from "./utility/queries";
 
-export let qc = new QueryClient();
+export let qc = new QueryClient(queryConfig);
 
 export default function App() {
   

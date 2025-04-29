@@ -8,6 +8,7 @@ import { api } from "~/utility/api"
 import { Iprofile } from "~/utility/interface"
 import { useForm } from "~/utility/hooks"
 import { callModal } from "../modal/Modal"
+import { queryUserInfo } from "~/utility/queries"
 
 const Profile = () => {
 
@@ -26,8 +27,9 @@ const Profile = () => {
   }
 
   onMount(async () => {
-    let user = await api.get<Iprofile>(`/users/infos`)
-    setProfile(user.data)
+    let user = queryUserInfo()
+    if (user.data?.data)
+      setProfile(user.data.data)
   })
 
   return (
