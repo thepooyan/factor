@@ -3,7 +3,7 @@ import { TbMoneybag } from 'solid-icons/tb'
 import { IoPeopleCircleSharp } from 'solid-icons/io'
 import { IoDocumentTextOutline } from 'solid-icons/io'
 import { TbSquarePlus } from 'solid-icons/tb'
-import { createSignal } from "solid-js"
+import { createSignal, onMount } from "solid-js"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
 import { IconTypes } from "solid-icons"
 import Company from "./Company"
@@ -12,6 +12,7 @@ import Customers from "./Customers"
 import FactorList from "./FactorList"
 import InvocieSelect from "./InvocieSelect"
 import Goods from "./Goods"
+import { queryCompanies } from "~/utility/queries"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("profile")
@@ -25,6 +26,10 @@ export function PanelPage() {
     { id: "factorList", label: "لیست فاکتور", icon: IoDocumentTextOutline },
     { id: "newFactor", label: "فاکتور جدید", icon: TbSquarePlus },
   ]
+
+  onMount(()=> {
+    queryCompanies()
+  })
 
   return (
     <div class="mx-auto max-w-7xl p-5" >

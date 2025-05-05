@@ -19,3 +19,10 @@ export const queryUserInfo = () => {
     queryFn: () => api.get<Iprofile>("/users/infos"),
   }))
 }
+
+export const queryCompanies = () => {
+  return createQuery(() => ({
+    queryKey: ["compaines", userMg.get()?.user.email],
+    queryFn: () => api.get("/company/UserCompanies")
+  }))
+}
