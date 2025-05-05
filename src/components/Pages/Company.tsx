@@ -1,14 +1,19 @@
 import { Button } from "~/components/ui/button"
+import { BsFileText } from 'solid-icons/bs'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
 import { createSignal } from "solid-js"
 import { FiPhone, FiPrinter, FiUpload } from "solid-icons/fi"
 import Input from "../general/Input"
 import { FaSolidBuilding } from "solid-icons/fa"
+import { useForm } from "~/utility/hooks"
+import { ICompany } from "~/utility/interface"
 
 const Company = () => {
   const [logo, setLogo] = createSignal<File | null>(null)
+  const [form, setForm] = createSignal<ICompany>();
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null)
+  const {register, submit} = useForm(form)
 
   const handleLogoChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
@@ -18,9 +23,8 @@ const Company = () => {
     }
   }
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
-    console.log("Form submitted")
+  const handleSubmit = (e: ICompany) => {
+    console.log(e)
   }
 
   return (
@@ -31,7 +35,7 @@ const Company = () => {
           <CardTitle class="text-2xl font-bold">فرم اطلاعات شرکت</CardTitle>
           <CardDescription>لطفا اطلاعات شرکت خود را وارد کنید</CardDescription>
         </CardHeader>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={submit(handleSubmit)}>
           <CardContent class="space-y-6">
             <div class="space-y-2">
               <Label for="logo" class="block text-right">
@@ -82,7 +86,7 @@ const Company = () => {
                 نام شرکت
               </Label>
               <div class="flex items-center">
-                <Input id="name" placeholder="نام شرکت خود را وارد کنید" class="text-right"  />
+                <Input {...register("company_name")} placeholder="نام شرکت خود را وارد کنید" class="text-right"  />
                 <FaSolidBuilding class="w-5 h-5 text-gray-400 -mr-8" />
               </div>
             </div>
@@ -92,7 +96,7 @@ const Company = () => {
                 شماره فکس
               </Label>
               <div class="flex items-center">
-                <Input id="fax" placeholder="شماره فکس را وارد کنید" class="text-right"  />
+                <Input {...register("company_fax")} placeholder="شماره فکس را وارد کنید" class="text-right"  />
                 <FiPrinter class="w-5 h-5 text-gray-400 -mr-8" />
               </div>
             </div>
@@ -102,8 +106,18 @@ const Company = () => {
                 شماره تلفن
               </Label>
               <div class="flex items-center">
-                <Input id="phone" placeholder="شماره تلفن را وارد کنید" class="text-right"  />
+                <Input {...register("company_phone")} placeholder="شماره تلفن را وارد کنید" class="text-right"  />
                 <FiPhone class="w-5 h-5 text-gray-400 -mr-8" />
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <Label for="phone" class="block text-right">
+                  توضیح شرکت
+              </Label>
+              <div class="flex items-center">
+                <Input {...register("description")} placeholder="چند جمله کوتاه در مورد شرکت شما" class="text-right"  />
+                <BsFileText class="w-5 h-5 text-gray-400 -mr-8" />
               </div>
             </div>
 
@@ -112,7 +126,7 @@ const Company = () => {
                 آدرس
               </Label>
               <Input
-                id="address"
+                {...register("company_address")}
                 placeholder="آدرس کامل شرکت را وارد کنید"
                 class="text-right resize-none min-h-[100px]"
               />
