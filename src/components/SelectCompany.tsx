@@ -1,9 +1,10 @@
 import { cn } from "~/lib/utils"
 import { Button } from "~/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/components/ui/dropdown-menu"
-import { createSignal } from "solid-js"
+import { createEffect, createSignal, onMount } from "solid-js"
 import { FiCheck, FiChevronDown } from "solid-icons/fi"
 import AddCompany from "./AddCompany"
+import { queryCompanies } from "~/utility/queries"
 
 const options = [
   { value: "option4", label: "شرکت ۱" },
@@ -11,6 +12,16 @@ const options = [
 ]
 
 export function SelectCompany() {
+  let companies:any
+
+  onMount(() => {
+    companies = queryCompanies()
+  })
+
+  createEffect(() => {
+    if (companies.data)
+      console.log(companies.data.data)
+  })
   const [selectedOption, setSelectedOption] = createSignal(options[0])
   const [open, setOpen] = createSignal(false)
 
