@@ -5,14 +5,16 @@ import { createEffect, createSignal, onMount } from "solid-js"
 import { FiCheck, FiChevronDown } from "solid-icons/fi"
 import AddCompany from "./AddCompany"
 import { queryCompanies } from "~/utility/queries"
-
-const options = [
-  { value: "option4", label: "شرکت ۱" },
-  { value: "option5", label: "شرکت ۲" },
-]
+import { CreateQueryResult } from "@tanstack/solid-query"
+import { AxiosResponse } from "axios"
+import { ICompany } from "~/utility/interface"
 
 export function SelectCompany() {
-  let companies:any
+
+  let companies:CreateQueryResult<AxiosResponse<ICompany[]>>
+  const [options, setOptions] = createSignal<ICompany[]>([]);
+  const [selectedOption, setSelectedOption] = createSignal("شرکتی انتخاب نشده")
+  const [open, setOpen] = createSignal(false)
 
   onMount(() => {
     companies = queryCompanies()
@@ -20,10 +22,8 @@ export function SelectCompany() {
 
   createEffect(() => {
     if (companies.data)
-      console.log(companies.data.data)
+      setOptions(companies.data.data)
   })
-  const [selectedOption, setSelectedOption] = createSignal(options[0])
-  const [open, setOpen] = createSignal(false)
 
   return (
     <div class="flex gap-1 mb-2">
@@ -31,23 +31,23 @@ export function SelectCompany() {
         <DropdownMenuTrigger class="w-full select-none">
           <Button variant="default">
             <FiChevronDown class=" h-4 w-4 shrink-0 opacity-50" />
-            {selectedOption().label}
+            {selectedOption()}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent class="w-[200px]">
-          {options.map((option) => (
+          {options().map((option) => (
             <DropdownMenuItem
               class={cn(
                 "flex cursor-pointer items-center justify-between",
-                selectedOption().value === option.value && "bg-muted",
+                selectedOption() === option.company_name && "bg-muted",
               )}
               onClick={() => {
-                setSelectedOption(option)
+                setSelectedOption(option.company_name)
                 setOpen(false)
               }}
             >
-              {option.label}
-              {selectedOption().value === option.value && <FiCheck class="h-4 w-4" />}
+              {option.company_name}
+              {selectedOption() === option.company_name && <FiCheck class="h-4 w-4" />}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
