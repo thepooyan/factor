@@ -13,6 +13,8 @@ import FactorList from "./FactorList"
 import InvocieSelect from "./InvocieSelect"
 import Goods from "./Goods"
 import { queryCompanies } from "~/utility/queries"
+import { SelectCompany } from "../SelectCompany"
+import AddCompany from "../AddCompany"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("profile")
@@ -35,6 +37,7 @@ export function PanelPage() {
     <div class="mx-auto max-w-7xl p-5" >
       <div class="grid grid-cols-1 gap-6 md:grid-cols-[250px_1fr]">
         <div>
+          <SelectCompany/>
           <Tabs orientation="vertical" class="w-full">
             <TabsList class="flex h-auto w-full flex-col justify-start bg-white p-0 shadow-md">
               {tabs.map((tab) => {
