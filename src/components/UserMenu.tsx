@@ -32,6 +32,10 @@ export default function UserMenu({user}:{user:Iuser}) {
               <Settings class="mr-2 h-4 w-4" />
               <span>پنل کاربری</span>
             </Button>
+            <Button variant="ghost" class="justify-start h-9 px-2" as="A" href="/Profile" onClick={() => setOpen(false)}>
+              <FiUser class="mr-2 h-4 w-4" />
+              <span>اطلاعات شخصی</span>
+            </Button>
             <Button
               variant="ghost"
               class="justify-start text-red-500 hover:text-red-600 hover:bg-red-50 h-9 px-2"

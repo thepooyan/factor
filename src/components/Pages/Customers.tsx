@@ -7,7 +7,7 @@ import Input from "../general/Input"
 import CustomersTable from "./CustomersTable"
 import { Icustomer } from "~/utility/interface"
 
-const Profile = () => {
+const Customers = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -67,4 +67,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Customers
