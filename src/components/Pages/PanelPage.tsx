@@ -1,4 +1,4 @@
-import { FiSettings, FiUser } from "solid-icons/fi"
+import { FiSettings } from "solid-icons/fi"
 import { TbMoneybag } from 'solid-icons/tb'
 import { IoPeopleCircleSharp } from 'solid-icons/io'
 import { IoDocumentTextOutline } from 'solid-icons/io'
@@ -14,14 +14,12 @@ import InvocieSelect from "./InvocieSelect"
 import Goods from "./Goods"
 import { queryCompanies } from "~/utility/queries"
 import { SelectCompany } from "../SelectCompany"
-import AddCompany from "../AddCompany"
 
 export function PanelPage() {
-  const [activeTab, setActiveTab] = createSignal<tabsType>("profile")
+  const [activeTab, setActiveTab] = createSignal<tabsType>("company")
 
-  type tabsType =  "profile" | "goods" | "company" | "customers" | "factorList" | "newFactor";
+  type tabsType =  "goods" | "company" | "customers" | "factorList" | "newFactor";
   const tabs: {id: tabsType, label: string, icon: IconTypes}[] = [
-    { id: "profile", label: "پروفایل", icon: FiUser },
     { id: "company", label: "اطلاعات شرکت", icon: FiSettings },
     { id: "customers", label: "مشتریان", icon:  IoPeopleCircleSharp},
     { id: "goods", label: "کالاها", icon:  TbMoneybag},
@@ -58,7 +56,6 @@ export function PanelPage() {
         </div>
 
         <div>
-          {activeTab() === "profile" && <Profile/>}
           {activeTab() === "company" && <Company/>}
           {activeTab() === "customers" && <Customers/>}
           {activeTab() === "goods" && <Goods/>}
