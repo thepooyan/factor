@@ -8,6 +8,10 @@ import Input from "../general/Input"
 import { FaSolidBuilding } from "solid-icons/fa"
 import { useForm } from "~/utility/hooks"
 import { ICompany } from "~/utility/interface"
+import { api } from "~/utility/api"
+import { callModal } from "../modal/Modal"
+import { queryClient } from "~/app"
+import { userMg } from "~/utility/signals"
 
 const Company = () => {
   const [logo, setLogo] = createSignal<File | null>(null)
@@ -24,7 +28,16 @@ const Company = () => {
   }
 
   const handleSubmit = (e: ICompany) => {
-    console.log(e)
+    api.post("/company/NewCompany", e)
+    .then(() => {
+        callModal.success("ثبت شد!")
+      })
+    .catch(({msg}) => {
+        callModal.fail(msg)
+      })
+    .finally(() => {
+        // queryClient.invalidateQueries({queryKey:["userInfo", us rMg.get()?.user.email]})
+      })
   }
 
   return (
