@@ -20,8 +20,22 @@ api.interceptors.response.use(
   error => {
     let msg = error.response.data.detail
     if (typeof msg !== "string") msg = error.message
+
+    let rt = getCurrentRefreshToken()
+
+    if (msg === "token_expired" && rt) {
+      api.post("/refresh-token", {refresh_token: rt})
+      .then(res => {
+          console.log(res)
+        })
+    }
+
     return Promise.reject({msg, error})
   }
 )
+
+const getCurrentRefreshToken = () => {
+  return userMg.get()?.token.refresh_token
+}
 
 export {api}
