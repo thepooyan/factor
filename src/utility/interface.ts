@@ -1,13 +1,15 @@
+export interface Itoken {
+  refresh_token: string
+  access_token: string
+}
+
 export interface Iuser {
   user: {
     email: string,
     is_active: boolean,
     user_id: number,
   },
-  token: {
-    access_token: string
-    refresh_token: string
-  }
+  token: Itoken
 }
 
 export interface Icustomer{

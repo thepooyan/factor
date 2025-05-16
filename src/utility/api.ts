@@ -1,5 +1,6 @@
 import axios from "axios";
 import { userMg } from "./signals";
+import { Itoken } from "./interface";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API,
@@ -17,17 +18,21 @@ api.interceptors.response.use(
   response => {
     return response
   },
-  error => {
+  async (error) => {
     let msg = error.response.data.detail
     if (typeof msg !== "string") msg = error.message
 
-    let rt = getCurrentRefreshToken()
 
-    if (msg === "token_expired" && rt) {
-      api.post("/refresh-token", {refresh_token: rt})
-      .then(res => {
-          console.log(res)
-        })
+    if (msg === "token_expired") {
+      let rt = getCurrentRefreshToken();
+      if (!rt) return Promise.reject({msg: "لطفا مجددا وارد شوید"})
+
+      let {data: newToken} = await api.post<Itoken>("/refresh-token", {refresh_token: rt})
+      userMg.setNewToken(newToken)
+
+      console.log("new token", newToken)
+      error.config._retry = true
+      return api(error.config)
     }
 
     return Promise.reject({msg, error})

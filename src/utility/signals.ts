@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { Iuser } from "./interface";
+import { Itoken, Iuser } from "./interface";
 import Cookie from "js-cookie"
 
 const [userSignal, setUserSignal] = createSignal<Iuser | null>(null);
@@ -13,7 +13,11 @@ export const userMg = {
     setUserSignal(null)
     Cookie.remove("auth")
   },
-  get: () => {
-    return userSignal()
+  get: () => userSignal(),
+  setNewToken: (t: Itoken) => {
+    let curretUser = userSignal()
+    if (!curretUser) return
+    let updatedUser = {...curretUser, token: t}; 
+    userMg.login(updatedUser);
   }
 }
