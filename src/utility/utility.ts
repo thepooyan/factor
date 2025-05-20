@@ -1,3 +1,6 @@
+import { ICompany } from "./interface";
+import { setSelectedCompany } from "./signals";
+
 export class objectStorage<T extends object> {
   private key: string
   constructor(key: string) {
@@ -188,4 +191,10 @@ export function getAuthUrl() {
 }
  
 
+export const retriveSelectedCompany = () => {
+  let string = localStorage.getItem("selectedCompany")
+  if (!string) return
+  let obj = JSON.parse(string)
 
+  setSelectedCompany(obj as ICompany)
+}

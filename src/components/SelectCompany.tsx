@@ -8,16 +8,18 @@ import { queryCompanies } from "~/utility/queries"
 import { CreateQueryResult } from "@tanstack/solid-query"
 import { AxiosResponse } from "axios"
 import { ICompany } from "~/utility/interface"
+import { retriveSelectedCompany } from "~/utility/utility"
+import { selectedCompany, setSelectedCompany } from "~/utility/signals"
 
 export function SelectCompany() {
 
   let companies:CreateQueryResult<AxiosResponse<ICompany[]>>
   const [options, setOptions] = createSignal<ICompany[]>([]);
-  const [selectedOption, setSelectedOption] = createSignal("شرکتی انتخاب نشده")
   const [open, setOpen] = createSignal(false)
 
   onMount(() => {
     companies = queryCompanies()
+    retriveSelectedCompany()
   })
 
   createEffect(() => {
@@ -25,13 +27,15 @@ export function SelectCompany() {
       setOptions(companies.data.data)
   })
 
+
+
   return (
     <div class="flex gap-1 mb-2">
       <DropdownMenu open={open()} onOpenChange={setOpen}>
         <DropdownMenuTrigger class="w-full select-none">
           <Button variant="default">
             <FiChevronDown class=" h-4 w-4 shrink-0 opacity-50" />
-            {selectedOption()}
+            {selectedCompany()?.company_name ||  "انتخاب شرکت"}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent class="w-[200px]">
@@ -39,15 +43,15 @@ export function SelectCompany() {
             <DropdownMenuItem
               class={cn(
                 "flex cursor-pointer items-center justify-between",
-                selectedOption() === option.company_name && "bg-muted",
+                selectedCompany()?.company_name === option.company_name && "bg-muted",
               )}
               onClick={() => {
-                setSelectedOption(option.company_name)
+                setSelectedCompany(option)
                 setOpen(false)
               }}
             >
               {option.company_name}
-              {selectedOption() === option.company_name && <FiCheck class="h-4 w-4" />}
+              {selectedCompany()?.company_name === option.company_name && <FiCheck class="h-4 w-4" />}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>

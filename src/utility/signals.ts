@@ -1,5 +1,5 @@
-import { createSignal } from "solid-js";
-import { Itoken, Iuser } from "./interface";
+import { createEffect, createSignal } from "solid-js";
+import { ICompany, Itoken, Iuser } from "./interface";
 import Cookie from "js-cookie"
 
 const [userSignal, setUserSignal] = createSignal<Iuser | null>(null);
@@ -21,3 +21,10 @@ export const userMg = {
     userMg.login(updatedUser);
   }
 }
+
+export const [selectedCompany, setSelectedCompany] = createSignal<ICompany | null>(null);
+
+createEffect(() => {
+  if (selectedCompany() !== null)
+    localStorage.setItem("selectedCompany", JSON.stringify(selectedCompany()))
+})
