@@ -1,7 +1,7 @@
 import { cn } from "~/lib/utils"
 import { Button } from "~/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/components/ui/dropdown-menu"
-import { createEffect, createSignal, onMount } from "solid-js"
+import { createEffect, createSignal, onMount, Show } from "solid-js"
 import { FiCheck, FiChevronDown } from "solid-icons/fi"
 import AddCompany from "./AddCompany"
 import { queryCompanies } from "~/utility/queries"
@@ -37,6 +37,9 @@ export function SelectCompany() {
             {selectedCompany()?.company_name ||  "انتخاب شرکت"}
         </DropdownMenuTrigger>
         <DropdownMenuContent class="w-[200px]">
+          <Show when={options().length === 0}>
+            <div class="p-2">موردی یافت نشد</div>
+          </Show>
           {options().map((option) => (
             <DropdownMenuItem
               class={cn(
