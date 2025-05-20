@@ -3,7 +3,7 @@ import { TbMoneybag } from 'solid-icons/tb'
 import { IoPeopleCircleSharp } from 'solid-icons/io'
 import { IoDocumentTextOutline } from 'solid-icons/io'
 import { TbSquarePlus } from 'solid-icons/tb'
-import { createSignal, onMount } from "solid-js"
+import { createSignal, Show } from "solid-js"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
 import { IconTypes } from "solid-icons"
 import Company from "./Company"
@@ -11,8 +11,8 @@ import Customers from "./Customers"
 import FactorList from "./FactorList"
 import InvocieSelect from "./InvocieSelect"
 import Goods from "./Goods"
-import { queryCompanies } from "~/utility/queries"
 import { SelectCompany } from "../SelectCompany"
+import { selectedCompany } from "~/utility/signals"
 
 export function PanelPage() {
   const [activeTab, setActiveTab] = createSignal<tabsType>("company")
@@ -26,15 +26,13 @@ export function PanelPage() {
     { id: "newFactor", label: "فاکتور جدید", icon: TbSquarePlus },
   ]
 
-  onMount(()=> {
-    queryCompanies()
-  })
-
   return (
     <div class="mx-auto max-w-7xl p-5" >
       <div class="grid grid-cols-1 gap-6 md:grid-cols-[250px_1fr]">
         <div>
           <SelectCompany/>
+          <Show when={selectedCompany()}>
+
           <Tabs orientation="vertical" class="w-full">
             <TabsList class="flex h-auto w-full flex-col justify-start bg-white p-0 shadow-md">
               {tabs.map((tab) => {
@@ -52,15 +50,18 @@ export function PanelPage() {
               })}
             </TabsList>
           </Tabs>
+          </Show>
         </div>
 
-        <div>
-          {activeTab() === "company" && <Company/>}
-          {activeTab() === "customers" && <Customers/>}
-          {activeTab() === "goods" && <Goods/>}
-          {activeTab() === "factorList" && <FactorList/>}
-          {activeTab() === "newFactor" && <InvocieSelect/>}
-        </div>
+        <Show when={selectedCompany()}>
+          <div>
+            {activeTab() === "company" && <Company/>}
+            {activeTab() === "customers" && <Customers/>}
+            {activeTab() === "goods" && <Goods/>}
+            {activeTab() === "factorList" && <FactorList/>}
+            {activeTab() === "newFactor" && <InvocieSelect/>}
+          </div>
+        </Show>
       </div>
     </div>
   )
