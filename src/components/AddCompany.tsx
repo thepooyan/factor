@@ -1,6 +1,7 @@
 import { FiPlus } from "solid-icons/fi"
 import { Button } from "./ui/button"
 import { callModal } from "./modal/Modal"
+import Company from "./Pages/Company"
 
 const AddCompany = () => {
   const click = () => {
@@ -15,7 +16,7 @@ const AddCompany = () => {
 
 const NewCompanyForm = () => {
   return <>
-    hi
+    <Company/>
   </>
 }
 

@@ -30,7 +30,6 @@ api.interceptors.response.use(
       let {data: newToken} = await api.post<Itoken>("/refresh-token", {refresh_token: rt})
       userMg.setNewToken(newToken)
 
-      console.log("new token", newToken)
       error.config._retry = true
       return api(error.config)
     }
