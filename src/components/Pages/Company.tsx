@@ -2,7 +2,7 @@ import { Button } from "~/components/ui/button"
 import { BsFileText } from 'solid-icons/bs'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
-import { createSignal } from "solid-js"
+import { createSignal, Show } from "solid-js"
 import { FiPhone, FiPrinter, FiUpload } from "solid-icons/fi"
 import Input from "../general/Input"
 import { FaSolidBuilding } from "solid-icons/fa"
@@ -13,7 +13,10 @@ import { callModal } from "../modal/Modal"
 import { queryClient } from "~/app"
 import { userMg } from "~/utility/signals"
 
-const Company = () => {
+interface props {
+  isNew?: boolean
+}
+const Company = ({isNew}:props) => {
   const [logo, setLogo] = createSignal<File | null>(null)
   const [form, setForm] = createSignal<ICompany>();
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null)
@@ -28,7 +31,9 @@ const Company = () => {
   }
 
   const handleSubmit = (e: ICompany) => {
-    api.post("/company/NewCompany", e)
+    let url = "/company/edit"
+    if (isNew) url = "/company/NewCompany"
+    api.post(url, e)
     .then(() => {
         callModal.success("ثبت شد!")
       })
@@ -36,6 +41,7 @@ const Company = () => {
         callModal.fail(msg)
       })
     .finally(() => {
+        // if (!isNew)
         // queryClient.invalidateQueries({queryKey:["userInfo", us rMg.get()?.user.email]})
       })
   }
@@ -45,7 +51,11 @@ const Company = () => {
     <div class="flex justify-center">
       <Card class="w-full max-w-2xl">
         <CardHeader class="text-right">
-          <CardTitle class="text-2xl font-bold">فرم اطلاعات شرکت</CardTitle>
+          <CardTitle class="text-2xl font-bold">
+            <Show when={isNew} fallback="فرم اطلاعات شرکت">
+                ثبت شرکت جدید
+            </Show>
+          </CardTitle>
           <CardDescription>لطفا اطلاعات شرکت خود را وارد کنید</CardDescription>
         </CardHeader>
         <form onSubmit={submit(handleSubmit)}>
