@@ -32,7 +32,7 @@ export function SelectCompany() {
   return (
     <div class="flex gap-1 mb-2">
       <DropdownMenu open={open()} onOpenChange={setOpen}>
-        <DropdownMenuTrigger class="w-full select-none" as={Button} >
+        <DropdownMenuTrigger class="w-full select-none flex-grow-0 " as={Button} >
             <FiChevronDown class=" h-4 w-4 shrink-0 opacity-50" />
             {selectedCompany()?.company_name ||  "انتخاب شرکت"}
         </DropdownMenuTrigger>
