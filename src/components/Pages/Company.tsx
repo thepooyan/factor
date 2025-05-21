@@ -13,6 +13,7 @@ import { callModal } from "../modal/Modal"
 import { userMg } from "~/utility/signals"
 import { queryCompanies } from "~/utility/queries"
 import { useQueryClient } from "@tanstack/solid-query"
+import { useNavigate } from "@solidjs/router"
 
 interface props {
   isNew?: boolean
@@ -29,6 +30,7 @@ const Company = ({isNew, initialData}:props) => {
 
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null)
   const {register, submit} = useForm(form)
+  const navigate = useNavigate()
 
   const qc = useQueryClient()
 
@@ -53,9 +55,9 @@ const Company = ({isNew, initialData}:props) => {
         callModal.fail(msg)
       })
     .finally(() => {
-        if (initialData) {
-          console.log(["compaines", userMg.get()?.user.email])
-          qc.invalidateQueries({queryKey:["compaines", userMg.get()?.user.email]})
+        qc.invalidateQueries({queryKey:["compaines", userMg.get()?.user.email]})
+        if (!initialData) {
+          navigate("/Panel")
         }
       })
   }
