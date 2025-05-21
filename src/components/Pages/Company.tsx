@@ -15,10 +15,11 @@ import { userMg } from "~/utility/signals"
 
 interface props {
   isNew?: boolean
+  initialData?: ICompany
 }
-const Company = ({isNew}:props) => {
+const Company = ({isNew, initialData}:props) => {
   const [logo, setLogo] = createSignal<File | null>(null)
-  const [form, setForm] = createSignal<ICompany>();
+  const [form, setForm] = createSignal<ICompany | undefined>(initialData ? initialData : undefined);
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null)
   const {register, submit} = useForm(form)
 

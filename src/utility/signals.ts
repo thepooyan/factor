@@ -22,9 +22,9 @@ export const userMg = {
   }
 }
 
-export const [selectedCompany, setSelectedCompany] = createSignal<ICompany | null>(null);
+export const [selectedCompany, setSelectedCompany] = createSignal<ICompany | undefined>();
 
 createEffect(() => {
-  if (selectedCompany() !== null)
+  if (selectedCompany() !== undefined)
     localStorage.setItem("selectedCompany", JSON.stringify(selectedCompany()))
 })

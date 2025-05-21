@@ -55,7 +55,7 @@ export function PanelPage() {
 
         <Show when={selectedCompany()}>
           <div>
-            {activeTab() === "company" && <Company/>}
+            {activeTab() === "company" && <Company initialData={selectedCompany()}/>}
             {activeTab() === "customers" && <Customers/>}
             {activeTab() === "goods" && <Goods/>}
             {activeTab() === "factorList" && <FactorList/>}
