@@ -12,6 +12,7 @@ import { api } from "~/utility/api"
 import { callModal } from "../modal/Modal"
 import { queryClient } from "~/app"
 import { userMg } from "~/utility/signals"
+import { queryCompanies } from "~/utility/queries"
 
 interface props {
   isNew?: boolean
@@ -22,7 +23,7 @@ const Company = ({isNew, initialData}:props) => {
   let form: Accessor<ICompany | undefined>;
 
   if (initialData)
-    form = () => initialData()
+    form = () => queryCompanies().data?.data.find(i => i.company_id === initialData().company_id)
     else 
     [form] = createSignal<ICompany>()
 
