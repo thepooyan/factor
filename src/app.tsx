@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import Modal from "./components/modal/Modal";
 import { userMg } from "./utility/signals";
 import { queryConfig } from "./utility/queries";
+import SpinnerPage from "./components/general/SpinnerPage";
 
 
 export default function App() {
@@ -35,7 +36,7 @@ export default function App() {
           root={(props) => (
             <>
               <ErrorBoundary fallback="Error!">
-                <Suspense fallback="loading...">{props.children}</Suspense>
+                <Suspense fallback={<SpinnerPage/>}>{props.children}</Suspense>
               </ErrorBoundary>
             </>
           )}
