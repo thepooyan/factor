@@ -38,9 +38,10 @@ const Company = ({isNew, initialData}:props) => {
   }
 
   const handleSubmit = (e: ICompany) => {
-    let url = "/company/edit"
-    if (isNew) url = "/company/NewCompany"
-    api.post(url, e)
+    let fetch = () => api.put("/company/EditCompany", e)
+    if (isNew && initialData) fetch = () => api.post("/company/NewCompany",{...e, company_id: initialData().company_id})
+
+    fetch()
     .then(() => {
         callModal.success("ثبت شد!")
       })
