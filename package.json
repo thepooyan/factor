@@ -10,7 +10,7 @@
     "@kobalte/core": "^0.13.9",
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.0.11",
-    "@tanstack/solid-query": "^5.66.4",
+    "@tanstack/solid-query": "^5.76.0",
     "@types/js-cookie": "^3.0.6",
     "@unocss/reset": "^0.65.1",
     "axios": "^1.8.4",

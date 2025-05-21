@@ -10,9 +10,9 @@ import { useForm } from "~/utility/hooks"
 import { ICompany } from "~/utility/interface"
 import { api } from "~/utility/api"
 import { callModal } from "../modal/Modal"
-import { queryClient } from "~/app"
 import { userMg } from "~/utility/signals"
 import { queryCompanies } from "~/utility/queries"
+import { useQueryClient } from "@tanstack/solid-query"
 
 interface props {
   isNew?: boolean
@@ -29,6 +29,8 @@ const Company = ({isNew, initialData}:props) => {
 
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null)
   const {register, submit} = useForm(form)
+
+  const qc = useQueryClient()
 
   const handleLogoChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
@@ -52,7 +54,7 @@ const Company = ({isNew, initialData}:props) => {
     .finally(() => {
         if (initialData) {
           console.log(["compaines", userMg.get()?.user.email])
-          queryClient.invalidateQueries({queryKey:["compaines", userMg.get()?.user.email]})
+          qc.invalidateQueries({queryKey:["compaines", userMg.get()?.user.email]})
         }
       })
   }

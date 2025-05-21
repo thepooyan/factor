@@ -11,7 +11,6 @@ import Modal from "./components/modal/Modal";
 import { userMg } from "./utility/signals";
 import { queryConfig } from "./utility/queries";
 
-export let queryClient = new QueryClient(queryConfig);
 
 export default function App() {
   
@@ -26,6 +25,7 @@ export default function App() {
       }
     }
   })
+  const queryClient = new QueryClient(queryConfig);
 
   return (
     <>

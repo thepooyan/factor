@@ -5,7 +5,7 @@ import { createEffect, createSignal, onMount, Show } from "solid-js"
 import { FiCheck, FiChevronDown } from "solid-icons/fi"
 import AddCompany from "./AddCompany"
 import { queryCompanies } from "~/utility/queries"
-import { CreateQueryResult } from "@tanstack/solid-query"
+import { UseQueryResult } from "@tanstack/solid-query"
 import { AxiosResponse } from "axios"
 import { ICompany } from "~/utility/interface"
 import { retriveSelectedCompany } from "~/utility/utility"
@@ -13,7 +13,7 @@ import { selectedCompany, setSelectedCompany } from "~/utility/signals"
 
 export function SelectCompany() {
 
-  let companies:CreateQueryResult<AxiosResponse<ICompany[]>>
+  let companies:UseQueryResult<AxiosResponse<ICompany[]>>
   const [options, setOptions] = createSignal<ICompany[]>([]);
   const [open, setOpen] = createSignal(false)
 

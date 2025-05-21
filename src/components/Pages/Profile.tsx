@@ -9,15 +9,15 @@ import { Iprofile } from "~/utility/interface"
 import { useForm } from "~/utility/hooks"
 import { callModal } from "../modal/Modal"
 import { queryUserInfo } from "~/utility/queries"
-import { queryClient } from "~/app"
 import { userMg } from "~/utility/signals"
-import { CreateQueryResult } from "@tanstack/solid-query"
+import { useQueryClient, UseQueryResult } from "@tanstack/solid-query"
 import { AxiosResponse } from "axios"
 
 const Profile = () => {
 
   const [profile, setProfile] = createSignal<Iprofile | undefined>(undefined);
   const {register, submit} = useForm(profile)
+  const qc = useQueryClient()
 
   const handleSubmit = (data: Iprofile) => {
     callModal.wait()
@@ -29,11 +29,11 @@ const Profile = () => {
         callModal.fail(msg)
       })
     .finally(() => {
-        queryClient.invalidateQueries({queryKey:["userInfo", userMg.get()?.user.email]})
+        qc.invalidateQueries({queryKey:["userInfo", userMg.get()?.user.email]})
       })
   }
 
-  let user: CreateQueryResult<AxiosResponse<Iprofile>>;
+  let user: UseQueryResult<AxiosResponse<Iprofile>>;
   onMount(() => {
     user = queryUserInfo()
   })

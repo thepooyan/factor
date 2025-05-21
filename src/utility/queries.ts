@@ -1,4 +1,4 @@
-import { createQuery, QueryClientConfig } from "@tanstack/solid-query";
+import { useQuery, QueryClientConfig } from "@tanstack/solid-query";
 import { api } from "./api";
 import { ICompany, Iprofile } from "./interface";
 import { userMg } from "./signals";
@@ -14,14 +14,14 @@ export const queryConfig:QueryClientConfig = {
 }
 
 export const queryUserInfo = () => {
-  return createQuery(() => ({
+  return useQuery(() => ({
     queryKey: ["userInfo", userMg.get()?.user.email],
     queryFn: () => api.get<Iprofile>("/users/infos"),
   }))
 }
 
 export const queryCompanies = () => {
-  return createQuery(() => ({
+  return useQuery(() => ({
     queryKey: ["compaines", userMg.get()?.user.email],
     queryFn: () => api.get<ICompany[]>("company/UserAllCompanies")
   }))
