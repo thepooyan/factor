@@ -54,13 +54,15 @@ export function PanelPage() {
         </div>
 
         <Show when={selectedCompany()}>
-          <div>
-            {activeTab() === "company" && <Company initialData={selectedCompany()}/>}
-            {activeTab() === "customers" && <Customers/>}
-            {activeTab() === "goods" && <Goods/>}
-            {activeTab() === "factorList" && <FactorList/>}
-            {activeTab() === "newFactor" && <InvocieSelect/>}
-          </div>
+          {o => <>
+            <div>
+              {activeTab() === "company" && <Company initialData={o}/>}
+              {activeTab() === "customers" && <Customers/>}
+              {activeTab() === "goods" && <Goods/>}
+              {activeTab() === "factorList" && <FactorList/>}
+              {activeTab() === "newFactor" && <InvocieSelect/>}
+            </div>
+          </>}
         </Show>
       </div>
     </div>

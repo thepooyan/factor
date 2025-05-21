@@ -2,7 +2,7 @@ import { Button } from "~/components/ui/button"
 import { BsFileText } from 'solid-icons/bs'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
-import { createSignal, Show } from "solid-js"
+import { Accessor, createSignal, Show } from "solid-js"
 import { FiPhone, FiPrinter, FiUpload } from "solid-icons/fi"
 import Input from "../general/Input"
 import { FaSolidBuilding } from "solid-icons/fa"
@@ -10,16 +10,22 @@ import { useForm } from "~/utility/hooks"
 import { ICompany } from "~/utility/interface"
 import { api } from "~/utility/api"
 import { callModal } from "../modal/Modal"
-import { queryClient } from "~/app"
-import { userMg } from "~/utility/signals"
+// import { queryClient } from "~/app"
+// import { userMg } from "~/utility/signals"
 
 interface props {
   isNew?: boolean
-  initialData?: ICompany
+  initialData?: Accessor<ICompany>
 }
 const Company = ({isNew, initialData}:props) => {
-  const [logo, setLogo] = createSignal<File | null>(null)
-  const [form, setForm] = createSignal<ICompany | undefined>(initialData ? initialData : undefined);
+  const [_, setLogo] = createSignal<File | null>(null)
+  let form: Accessor<ICompany | undefined>;
+
+  if (initialData)
+    form = () => initialData()
+    else 
+    [form] = createSignal<ICompany>()
+
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null)
   const {register, submit} = useForm(form)
 
