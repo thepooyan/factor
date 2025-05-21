@@ -50,8 +50,10 @@ const Company = ({isNew, initialData}:props) => {
         callModal.fail(msg)
       })
     .finally(() => {
-        if (initialData)
-        queryClient.invalidateQueries({queryKey:["userInfo", userMg.get()?.user.email]})
+        if (initialData) {
+          console.log(["compaines", userMg.get()?.user.email])
+          queryClient.invalidateQueries({queryKey:["compaines", userMg.get()?.user.email]})
+        }
       })
   }
 
