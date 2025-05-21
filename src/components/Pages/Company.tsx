@@ -10,8 +10,8 @@ import { useForm } from "~/utility/hooks"
 import { ICompany } from "~/utility/interface"
 import { api } from "~/utility/api"
 import { callModal } from "../modal/Modal"
-// import { queryClient } from "~/app"
-// import { userMg } from "~/utility/signals"
+import { queryClient } from "~/app"
+import { userMg } from "~/utility/signals"
 
 interface props {
   isNew?: boolean
@@ -38,8 +38,8 @@ const Company = ({isNew, initialData}:props) => {
   }
 
   const handleSubmit = (e: ICompany) => {
-    let fetch = () => api.put("/company/EditCompany", e)
-    if (isNew && initialData) fetch = () => api.post("/company/NewCompany",{...e, company_id: initialData().company_id})
+    let fetch = () => api.post("/company/NewCompany", e)
+    if (initialData) fetch = () => api.put("/company/EditCompany", {...e, company_id: initialData().company_id})
 
     fetch()
     .then(() => {
@@ -49,8 +49,8 @@ const Company = ({isNew, initialData}:props) => {
         callModal.fail(msg)
       })
     .finally(() => {
-        // if (!isNew)
-        // queryClient.invalidateQueries({queryKey:["userInfo", us rMg.get()?.user.email]})
+        if (initialData)
+        queryClient.invalidateQueries({queryKey:["userInfo", userMg.get()?.user.email]})
       })
   }
 
