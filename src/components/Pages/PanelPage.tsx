@@ -21,7 +21,7 @@ export function PanelPage() {
   const tabs: {id: tabsType, label: string, icon: IconTypes}[] = [
     { id: "company", label: "اطلاعات شرکت", icon: FiSettings },
     { id: "customers", label: "مشتریان", icon:  IoPeopleCircleSharp},
-    { id: "goods", label: "کالاها", icon:  TbMoneybag},
+    { id: "goods", label: "کالاها / خدمات", icon:  TbMoneybag},
     { id: "factorList", label: "لیست فاکتور", icon: IoDocumentTextOutline },
     { id: "newFactor", label: "فاکتور جدید", icon: TbSquarePlus },
   ]

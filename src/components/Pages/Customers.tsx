@@ -6,8 +6,14 @@ import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
 import CustomersTable from "./CustomersTable"
 import { Icustomer } from "~/utility/interface"
+import { onMount } from "solid-js"
+// import { queryCustomers } from "~/utility/queries"
 
 const Customers = () => {
+  
+  onMount(() => {
+    // queryCustomers
+  })
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
