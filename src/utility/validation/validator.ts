@@ -99,7 +99,7 @@ function findValidations(item: supportedTypes) {
 function reflectValidation(item: supportedTypes,errors: errorDescription[]) {
   const errorDisplay = findErrorElement(item);
   const errorClass = item.dataset.errorclass;
-  const successClass = item.dataset.successClass;
+  const successClass = item.dataset.successclass;
 
   if (errors.length === 0) {
     if (errorDisplay)
