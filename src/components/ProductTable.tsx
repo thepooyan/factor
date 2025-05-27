@@ -1,55 +1,63 @@
-import { Button } from "~/components/ui/button"
-import { createSignal } from "solid-js"
+import { ColumnDef } from "@tanstack/solid-table"
+import { DataTable } from "./ui/data-table";
+import { createSignal } from "solid-js";
+import { Button } from "./ui/button";
 
 const ProductTable = () => {
 
-  const item = {
-    id: 1,
-    name: "test", 
-    quantity: 2, 
-    unitPrice: 10, 
-    discount: 1, 
+  interface item {
+    id: number,
+    name: string, 
+    quantity: number, 
+    unitPrice: number, 
+    discount: number, 
+    totalPrice: number
   }
 
-  const [items, setItems] = createSignal([item])
+  let [data, setData] = createSignal<item[]>([
+    {
+      id: 1,
+      name: "folan",
+      quantity: 3, 
+      unitPrice: 1, 
+      discount: 1, 
+      totalPrice: 10, 
+    }
+  ]);
 
-  // const addRow = () => {
-  //   setItems(prev => [...prev, {...item, id: prev.at(-1)?.id || 1}])
-  // }
+  const columns: ColumnDef<item>[] = [
+    {
+      accessorKey: "id",
+      header: "ردیف"
+    },
+    {
+      accessorKey: "name",
+      header: "نام کالا"
+    },
+    {
+      accessorKey: "quantity",
+      header: "تعداد"
+    },
+    {
+      accessorKey: "unitPrice",
+      header: "قیمت واحد (ریال)"
+    },
+    {
+      accessorKey: "discount",
+      header: "تخفیف (%)"
+    },
+    {
+      accessorKey: "totalPrice",
+      header: "قیمت کل (ریال)"
+    },
+  ]
 
-  const deleteRow = (id: number) => {
-    setItems(prev => [...prev.filter(p => p.id !== id)])
-  }
 
-  return (
-    <div class="col-span-2 border-collapse">
-      <div>
-        <div class="bg-muted">
-          <div class="border p-2 text-right">ردیف</div>
-          <div class="border p-2 text-right">نام کالا</div>
-          <div class="border p-2 text-right">تعداد</div>
-          <div class="border p-2 text-right">قیمت واحد (ریال)</div>
-          <div class="border p-2 text-right">تخفیف (%)</div>
-          <div class="border p-2 text-right">قیمت کل (ریال)</div>
-          <div class="border p-2 text-right">عملیات</div>
-        </div>
-      </div>
-      <div>
-        {items().map((tr, ind) => (
-          <div>
-            <div>{ind + 1}</div>
-            <div>{tr.name}</div>
-            <div>{tr.quantity}</div>
-            <div>{tr.unitPrice}</div>
-            <div>{tr.discount}</div>
-            <div>{tr.quantity * tr.unitPrice}</div>
-            <div onclick={() => deleteRow(tr.id)}>حذف</div>
-          </div>
-        ))}
-      </div>
-      <Button>افزودن</Button>
-    </div>
-  );
-};
+
+  return (<>
+    <DataTable columns={columns} data={data()}/>
+    <Button class="mt-2">افزودن</Button>
+  </>)
+}
 
 export default ProductTable;

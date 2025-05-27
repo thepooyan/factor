@@ -58,7 +58,9 @@ export default function InvoicePage() {
 
       <h2 class="col-span-2 text-lg font-bold text-center">مشخصات کالا/خدمات</h2>
 
-      <ProductTable/>
+      <div class="col-span-2">
+        <ProductTable/>
+      </div>
 
     </div>
   </main>
