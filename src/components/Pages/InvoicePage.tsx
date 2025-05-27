@@ -1,5 +1,5 @@
 import Input from "../general/Input"
-import ProductTable from "../ProductTable"
+import ProductManage from "../ProductManage"
 
 export default function InvoicePage() {
 
@@ -59,7 +59,7 @@ export default function InvoicePage() {
       <h2 class="col-span-2 text-lg font-bold text-center">مشخصات کالا/خدمات</h2>
 
       <div class="col-span-2">
-        <ProductTable/>
+        <ProductManage/>
       </div>
 
     </div>
