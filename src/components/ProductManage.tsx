@@ -1,9 +1,10 @@
 import clsx from "clsx";
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import Input from "./general/Input";
 import { Button } from "./ui/button";
 import { Dynamic } from "solid-js/web";
 import { useForm } from "~/utility/hooks";
+import { setValidationEvents, validateSection } from "~/utility/validation/validator";
 
 interface item {
   id: number,
@@ -24,21 +25,20 @@ const ProductManage = () => {
     "تخفیف (%)",
     "قیمت کل (ریال)",
   ]
-  let [data, setData] = createSignal<item[]>([
-    {
-      id: 1,
-      name: "folan",
-      quantity: 3, 
-      unitPrice: 1, 
-      discount: 1, 
-      totalPrice: 10, 
-    }
-  ]);
+  let [data, setData] = createSignal<item[]>([]);
   const {register, submit} = useForm<item>()
+  let formRef!: HTMLFormElement;
 
   const submitHandler = (e: item) => {
+    let result = validateSection(formRef)
+    if (!result) return
     setData(prev => [...prev, {...e, id:prev.length+1, totalPrice: calcTotalPrice(e)}])
   }
+
+  onMount(() => {
+    setValidationEvents(formRef)
+  })
+  
 
   return (
     <div class="border-1 rounded">
@@ -53,34 +53,33 @@ const ProductManage = () => {
         <Td>{d.discount}</Td>
         <Td>{calcTotalPrice(d)}</Td>
       </Tr>)}
-      <Tr as="form" onsubmit={submit(submitHandler)}>
+      <Tr as="form" onsubmit={submit(submitHandler)} ref={formRef}>
         <Td>
           {data().length+1}
         </Td>
         <Td >
-          <Input {...register("name")}/>
+          <Input {...register("name")} data-validate="required"/>
         </Td>
         <Td>
-          <Input type="number" {...register("quantity")}/>
+          <Input type="number" {...register("quantity")} data-validate="required"/>
         </Td>
         <Td>
-          <Input type="number" {...register("unitPrice")}/>
+          <Input type="number" {...register("unitPrice")} data-validate="required"/>
         </Td>
         <Td>
-          <Input type="number" {...register("discount")} value={0}/>
+          <Input type="number" {...register("discount")} value={0} data-validate="required"/>
         </Td>
-        <Td className="flex justify-center">
+        <Td>
           <Button type="submit">افزودن</Button>
         </Td>
       </Tr>
-
     </div>
   )
 }
 
 const Td = (props:any) => {
   return <span
-    class={clsx("p-2 first:pr-9", props.className)}
+    class={clsx("p-2 first:pr-9 text-center", props.className)}
     {...props}
   >{props.children}</span>
 }
