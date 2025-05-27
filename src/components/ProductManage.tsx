@@ -40,7 +40,7 @@ const ProductManage = () => {
   })
   
   const Vinput = (props: any) => {
-    return <Input {...register(props.name)} data-validate="required" noErrorEmit data-errorClass="!border-red" {...props}/>
+    return <Input {...register(props.name)} data-validate="required" noErrorEmit errorClass="!border-red" {...props}/>
   }
 
   return (
