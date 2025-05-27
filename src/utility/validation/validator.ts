@@ -98,10 +98,11 @@ function findValidations(item: supportedTypes) {
 
 function reflectValidation(item: supportedTypes,errors: errorDescription[]) {
   const errorDisplay = findErrorElement(item);
-  const errorClass = item.dataset.errorClass;
+  const errorClass = item.dataset.errorclass;
   const successClass = item.dataset.successClass;
 
   if (errors.length === 0) {
+    if (errorDisplay)
     errorDisplay.textContent = "";
     errorClass && item.classList.remove(errorClass)
     successClass && item.classList.add(successClass)
@@ -112,6 +113,7 @@ function reflectValidation(item: supportedTypes,errors: errorDescription[]) {
   let targetErrors = errors.filter(i => i.proirity === highestPriority);
 
   targetErrors.forEach((err, ind) => {
+    if (errorDisplay)
     if (ind === 0)
     errorDisplay.textContent = err.msg
     else
@@ -122,11 +124,12 @@ function reflectValidation(item: supportedTypes,errors: errorDescription[]) {
 }
 
 function findErrorElement(item: supportedTypes) {
+  if (item.hasAttribute("noErrorEmit")) return
   let element = item.nextElementSibling;
   if (element !== null) {
     if (element.classList.contains(config.ERROR_CLASSNAME))
       return element;
   }
   console.log(item);
-  throw new Error(`above logged input has no validation box. please add an element with "${config.ERROR_CLASSNAME}" classname next to it!`)
+  console.error(`above logged input has no validation box. please add an element with "${config.ERROR_CLASSNAME}" classname next to it!`)
 }

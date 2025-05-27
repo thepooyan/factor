@@ -39,9 +39,12 @@ const ProductManage = () => {
     setValidationEvents(formRef)
   })
   
+  const Vinput = (props: any) => {
+    return <Input {...register(props.name)} data-validate="required" noErrorEmit data-errorClass="!border-red" {...props}/>
+  }
 
   return (
-    <div class="border-1 rounded">
+    <div class="border-1 rounded ">
       <Tr className="bg-zinc-200">
         {head.map(h => <Td>{h}</Td>)}
       </Tr>
@@ -58,16 +61,16 @@ const ProductManage = () => {
           {data().length+1}
         </Td>
         <Td >
-          <Input {...register("name")} data-validate="required"/>
+          <Vinput name="name"/>
         </Td>
         <Td>
-          <Input type="number" {...register("quantity")} data-validate="required"/>
+          <Vinput name="quantity" type="number"/>
         </Td>
         <Td>
-          <Input type="number" {...register("unitPrice")} data-validate="required"/>
+          <Vinput name="unitPrice" type="number"/>
         </Td>
         <Td>
-          <Input type="number" {...register("discount")} value={0} data-validate="required"/>
+          <Vinput name="discount" type="number"/>
         </Td>
         <Td>
           <Button type="submit">افزودن</Button>
@@ -76,6 +79,7 @@ const ProductManage = () => {
     </div>
   )
 }
+
 
 const Td = (props:any) => {
   return <span
