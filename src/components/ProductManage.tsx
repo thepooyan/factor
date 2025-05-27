@@ -61,16 +61,16 @@ const ProductManage = () => {
           {data().length+1}
         </Td>
         <Td >
-          <Vinput name="name"/>
+          <Vinput name="name" placeholder="نام کالا"/>
         </Td>
         <Td>
-          <Vinput name="quantity" type="number"/>
+          <Vinput name="quantity" type="number" placeholder="تعداد"/>
         </Td>
         <Td>
-          <Vinput name="unitPrice" type="number"/>
+          <Vinput name="unitPrice" type="number" placeholder="قیمت"/>
         </Td>
         <Td>
-          <Vinput name="discount" type="number"/>
+          <Vinput name="discount" type="number" placeholder="تخفیف"/>
         </Td>
         <Td>
           <Button type="submit">افزودن</Button>
