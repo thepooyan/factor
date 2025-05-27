@@ -51,7 +51,7 @@ const ProductManage = () => {
         <Td>{d.quantity}</Td>
         <Td>{d.unitPrice}</Td>
         <Td>{d.discount}</Td>
-        <Td>{d.unitPrice * d.quantity}</Td>
+        <Td>{calcTotalPrice(d)}</Td>
       </Tr>)}
       <Tr as="form" onsubmit={submit(submitHandler)}>
         <Td>
@@ -95,7 +95,8 @@ const Tr = (props:any) => {
 }
 
 const calcTotalPrice = (e: item) => {
-  return e.unitPrice * e.quantity
+  let p = e.unitPrice * e.quantity
+  return p - p * e.discount / 100
 }
 
 export default ProductManage
