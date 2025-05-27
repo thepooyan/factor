@@ -2,17 +2,20 @@ import clsx from "clsx";
 import { createSignal } from "solid-js";
 import Input from "./general/Input";
 import { Button } from "./ui/button";
+import { Dynamic } from "solid-js/web";
+import { useForm } from "~/utility/hooks";
+
+interface item {
+  id: number,
+  name: string, 
+  quantity: number, 
+  unitPrice: number, 
+  discount: number, 
+  totalPrice: number
+}
 
 const ProductManage = () => {
 
-  interface item {
-    id: number,
-    name: string, 
-    quantity: number, 
-    unitPrice: number, 
-    discount: number, 
-    totalPrice: number
-  }
   const head = [
     "ردیف",
     "نام کالا",
@@ -31,13 +34,10 @@ const ProductManage = () => {
       totalPrice: 10, 
     }
   ]);
+  const {register, submit} = useForm<item>()
 
-  const Td = ({children, className}:any) => {
-    return <span class={clsx("p-2 first:pr-9", className)}>{children}</span>
-  }
-
-  const Tr = ({children, className}:any) => {
-    return <div class={clsx("grid grid-cols-6 items-center", className)}>{children}</div>
+  const submitHandler = (e: item) => {
+    setData(prev => [...prev, {...e, id:prev.length+1, totalPrice: calcTotalPrice(e)}])
   }
 
   return (
@@ -53,29 +53,49 @@ const ProductManage = () => {
         <Td>{d.discount}</Td>
         <Td>{d.unitPrice * d.quantity}</Td>
       </Tr>)}
-      <Tr>
+      <Tr as="form" onsubmit={submit(submitHandler)}>
         <Td>
-          2
+          {data().length+1}
+        </Td>
+        <Td >
+          <Input {...register("name")}/>
         </Td>
         <Td>
-          <Input/>
+          <Input type="number" {...register("quantity")}/>
         </Td>
         <Td>
-          <Input type="number"/>
+          <Input type="number" {...register("unitPrice")}/>
         </Td>
         <Td>
-          <Input type="number"/>
-        </Td>
-        <Td>
-          <Input type="number" value={0}/>
+          <Input type="number" {...register("discount")} value={0}/>
         </Td>
         <Td className="flex justify-center">
-          <Button>افزودن</Button>
+          <Button type="submit">افزودن</Button>
         </Td>
       </Tr>
 
     </div>
   )
+}
+
+const Td = (props:any) => {
+  return <span
+    class={clsx("p-2 first:pr-9", props.className)}
+    {...props}
+  >{props.children}</span>
+}
+
+const Tr = (props:any) => {
+  return <Dynamic
+    component={props.as ? props.as : "div"}
+    class={clsx("grid grid-cols-6 items-center", props.className)}
+    {...props}
+  >{props.children}
+  </Dynamic>
+}
+
+const calcTotalPrice = (e: item) => {
+  return e.unitPrice * e.quantity
 }
 
 export default ProductManage
