@@ -1,314 +1,113 @@
 import { Button } from "~/components/ui/button"
-import { Card, CardContent } from "~/components/ui/card"
-import { Label } from "~/components/ui/label"
 import { createSignal } from "solid-js"
 import Input from "../general/Input"
-import { FiDownloadCloud, FiPrinter, FiSend } from "solid-icons/fi"
 
 export default function InvoicePage() {
-  const [invoiceData, setInvoiceData] = createSignal({
-    date: "",
-    invoiceNumber: "",
-    companyName: "",
-    customerName: "",
-    customerPhone: "",
-    customerAddress: "",
-    companyPhone: "",
-    companyFax: "",
-    companyAddress: "",
-    tax: 9, // Default tax percentage
-  })
 
-  const [items, setItems] = createSignal([{ id: 1, name: "", quantity: 0, unitPrice: 0, discount: 0, total: 0 }])
-
-  const handleInvoiceChange = (e: any) => {
-    const { name, value } = e.target
-    setInvoiceData(prev => ({
-      ...prev,
-      [name]: value,
-    }))
+  const item = {
+    id: 1,
+    name: "test", 
+    quantity: 2, 
+    unitPrice: 10, 
+    discount: 1, 
   }
 
-  const handleItemChange = (id: number, field: string, value: string | number) => {
-    const newItems = items().map((item) => {
-      if (item.id === id) {
-        const updatedItem = { ...item, [field]: value }
+  const [items, setItems] = createSignal([item])
 
-        // Recalculate total if quantity, unitPrice or discount changes
-        if (field === "quantity" || field === "unitPrice" || field === "discount") {
-          const quantity = field === "quantity" ? Number(value) : item.quantity
-          const unitPrice = field === "unitPrice" ? Number(value) : item.unitPrice
-          const discount = field === "discount" ? Number(value) : item.discount
+  // const addRow = () => {
+  //   setItems(prev => [...prev, {...item, id: prev.at(-1)?.id || 1}])
+  // }
 
-          updatedItem.total = quantity * unitPrice * (1 - discount / 100)
-        }
-
-        return updatedItem
-      }
-      return item
-    })
-
-    setItems(newItems)
+  const deleteRow = (id: number) => {
+    setItems(prev => [...prev.filter(p => p.id !== id)])
   }
 
-  const addNewItem = () => {
-    const newId = items().length > 0 ? Math.max(...items().map((item) => item.id)) + 1 : 1
-    setItems([...items(), { id: newId, name: "", quantity: 0, unitPrice: 0, discount: 0, total: 0 }])
-  }
+  return <main class="m-10 border-1 border-zinc-800 rounded p-5">
+    <h1 class="text-xl text-center font-bold mb-5">فاکتور فروش</h1>
 
-  const removeItem = (id: number) => {
-    if (items().length > 1) {
-      setItems(items().filter((item) => item.id !== id))
-    }
-  }
+    <div class="grid grid-cols-2 gap-5">
 
-  const calculateSubtotal = () => {
-    return items().reduce((sum, item) => sum + item.total, 0)
-  }
+      <div class="space-y-2">
+        <label>شماره فاکتور:</label>
+        <Input/>
+      </div>
 
-  const calculateTax = () => {
-    return calculateSubtotal() * (Number(invoiceData().tax) / 100)
-  }
+      <div class="space-y-2">
+        <label>شماره حواله:</label>
+        <Input/>
+      </div>
 
-  const calculateTotal = () => {
-    return calculateSubtotal() + calculateTax()
-  }
+      <div class="space-y-2">
+        <label>تاریخ:</label>
+        <Input/>
+      </div>
 
-  const handlePrint = () => {
-    window.print()
-  }
+      <h2 class="col-span-2 text-lg font-bold text-center">مشخصات خریدار</h2>
 
-  const handleDownload = () => {
-    // In a real application, this would generate a PDF
-    alert("در یک برنامه واقعی، این قابلیت یک فایل PDF ایجاد می‌کند")
-  }
+      <div class="space-y-2">
+        <label>نام شخص حقیقی/حقوقی:</label>
+        <Input/>
+      </div>
 
-  const handleSendOnline = () => {
-    // In a real application, this would send the invoice via email or other methods
-    alert("در یک برنامه واقعی، این قابلیت فاکتور را به صورت آنلاین ارسال می‌کند")
-  }
+      <div class="space-y-2">
+        <label>شماره ملی/شماره ثبت:</label>
+        <Input/>
+      </div>
 
-  return (
-    <div class="container mx-auto print:p-0" dir="rtl">
-      <Card class="w-full max-w-5xl mx-auto">
-        <CardContent class="p-6">
-          <div class="text-center mb-6">
-            <h1 class="text-2xl font-bold">فاکتور فروش</h1>
-          </div>
+      <div class="space-y-2">
+        <label>نشانی:</label>
+        <Input/>
+      </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="space-y-4">
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <Label for="date">تاریخ</Label>
-                  <Input
-                    id="date"
-                    name="date"
-                    value={invoiceData().date}
-                    onChange={handleInvoiceChange}
-                    placeholder="1402/01/01"
-                  />
-                </div>
-                <div class="space-y-2">
-                  <Label for="invoiceNumber">شماره فاکتور</Label>
-                  <Input
-                    id="invoiceNumber"
-                    name="invoiceNumber"
-                    value={invoiceData().invoiceNumber}
-                    onChange={handleInvoiceChange}
-                    placeholder="001-1402"
-                  />
-                </div>
-              </div>
+      <div class="space-y-2">
+        <label>کد پستی:</label>
+        <Input/>
+      </div>
 
-              <div class="space-y-2">
-                <Label for="companyName">نام شرکت</Label>
-                <Input
-                  id="companyName"
-                  name="companyName"
-                  value={invoiceData().companyName}
-                  onChange={handleInvoiceChange}
-                  placeholder="شرکت نمونه"
-                />
-              </div>
+      <div class="space-y-2">
+        <label>تلفن:</label>
+        <Input/>
+      </div>
 
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <Label for="companyPhone">تلفن</Label>
-                  <Input
-                    id="companyPhone"
-                    name="companyPhone"
-                    value={invoiceData().companyPhone}
-                    onChange={handleInvoiceChange}
-                    placeholder="021-12345678"
-                  />
-                </div>
-                <div class="space-y-2">
-                  <Label for="companyFax">فکس</Label>
-                  <Input
-                    id="companyFax"
-                    name="companyFax"
-                    value={invoiceData().companyFax}
-                    onChange={handleInvoiceChange}
-                    placeholder="021-87654321"
-                  />
-                </div>
-              </div>
+      <div class="space-y-2">
+        <label>نمابر:</label>
+        <Input/>
+      </div>
 
-              <div class="space-y-2">
-                <Label for="companyAddress">آدرس شرکت</Label>
-                <Input
-                  id="companyAddress"
-                  name="companyAddress"
-                  value={invoiceData().companyAddress}
-                  onChange={handleInvoiceChange}
-                  placeholder="تهران، خیابان ..."
-                />
-              </div>
-            </div>
+      <h2 class="col-span-2 text-lg font-bold text-center">مشخصات کالا/خدمات</h2>
 
-            <div class="space-y-4">
-              <div class="space-y-2">
-                <Label for="customerName">نام مشتری</Label>
-                <Input
-                  id="customerName"
-                  name="customerName"
-                  value={invoiceData().customerName}
-                  onChange={handleInvoiceChange}
-                  placeholder="نام و نام خانوادگی"
-                />
-              </div>
+          {/*
+      <table class="col-span-2 border-collapse">
+        <thead>
+          <tr class="bg-muted">
+            <th class="border p-2 text-right">ردیف</th>
+            <th class="border p-2 text-right">نام کالا</th>
+            <th class="border p-2 text-right">تعداد</th>
+            <th class="border p-2 text-right">قیمت واحد (ریال)</th>
+            <th class="border p-2 text-right">تخفیف (%)</th>
+            <th class="border p-2 text-right">قیمت کل (ریال)</th>
+            <th class="border p-2 text-right">عملیات</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items().map((tr, ind) => <tr>
+            <td>{ind+1}</td>
+            <td>{tr.name}</td>
+            <td>{tr.quantity}</td>
+            <td>{tr.unitPrice}</td>
+            <td>{tr.discount}</td>
+            <td>{tr.quantity * tr.unitPrice}</td>
+            <td
+              onclick={() => deleteRow(tr.id)}
+            >حذف</td>
+          </tr>)}
+        </tbody>
+        <Button >افزودن</Button>
+      </table>
+          */}
 
-              <div class="space-y-2">
-                <Label for="customerPhone">شماره تماس مشتری</Label>
-                <Input
-                  id="customerPhone"
-                  name="customerPhone"
-                  value={invoiceData().customerPhone}
-                  onChange={handleInvoiceChange}
-                  placeholder="09123456789"
-                />
-              </div>
 
-              <div class="space-y-2">
-                <Label for="customerAddress">آدرس مشتری</Label>
-                <Input
-                  id="customerAddress"
-                  name="customerAddress"
-                  value={invoiceData().customerAddress}
-                  onChange={handleInvoiceChange}
-                  placeholder="آدرس کامل مشتری"
-                />
-              </div>
-
-              <div class="space-y-2">
-                <Label for="tax">مالیات (درصد)</Label>
-                <Input
-                  id="tax"
-                  name="tax"
-                  type="number"
-                  value={invoiceData().tax}
-                  onChange={handleInvoiceChange}
-                  placeholder="9"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="mb-6">
-            <div class="overflow-x-auto">
-              <table class="w-full border-collapse">
-                <thead>
-                  <tr class="bg-muted">
-                    <th class="border p-2 text-right">ردیف</th>
-                    <th class="border p-2 text-right">نام کالا</th>
-                    <th class="border p-2 text-right">تعداد</th>
-                    <th class="border p-2 text-right">قیمت واحد (ریال)</th>
-                    <th class="border p-2 text-right">تخفیف (%)</th>
-                    <th class="border p-2 text-right">قیمت کل (ریال)</th>
-                    <th class="border p-2 text-right">عملیات</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {items().map((item, index) => (
-                    <tr>
-                      <td class="border p-2 text-right">{index + 1}</td>
-                      <td class="border p-2">
-                        <Input
-                          value={item.name}
-                          onChange={(e:any) => handleItemChange(item.id, "name", e.target.value)}
-                          placeholder="نام محصول"
-                        />
-                      </td>
-                      <td class="border p-2">
-                        <Input
-                          type="number"
-                          value={item.quantity === 0 ? "" : item.quantity}
-                          onChange={(e:any) => handleItemChange(item.id, "quantity", Number(e.target.value))}
-                          placeholder="0"
-                        />
-                      </td>
-                      <td class="border p-2">
-                        <Input
-                          type="number"
-                          value={item.unitPrice === 0 ? "" : item.unitPrice}
-                          onChange={(e:any) => handleItemChange(item.id, "unitPrice", Number(e.target.value))}
-                          placeholder="0"
-                        />
-                      </td>
-                      <td class="border p-2">
-                        <Input
-                          type="number"
-                          value={item.discount === 0 ? "" : item.discount}
-                          onChange={(e:any) => handleItemChange(item.id, "discount", Number(e.target.value))}
-                          placeholder="0"
-                        />
-                      </td>
-                      <td class="border p-2 text-left">{item.total.toLocaleString("fa-IR")}</td>
-                      <td class="border p-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => removeItem(item.id)}
-                          disabled={items().length <= 1}
-                        >
-                          حذف
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <Button variant="outline" class="mt-2" onClick={addNewItem}>
-              افزودن کالا
-            </Button>
-          </div>
-
-          <div class="flex flex-col items-end space-y-2 mb-6">
-            <div class="flex justify-between w-full max-w-xs">
-              <span>جمع کل:</span>
-              <span>{calculateSubtotal().toLocaleString("fa-IR")} ریال</span>
-            </div>
-            <div class="flex justify-between w-full max-w-xs">
-              <span>مالیات ({invoiceData().tax}%):</span>
-              <span>{calculateTax().toLocaleString("fa-IR")} ریال</span>
-            </div>
-            <div class="flex justify-between w-full max-w-xs font-bold">
-              <span>مبلغ قابل پرداخت:</span>
-              <span>{calculateTotal().toLocaleString("fa-IR")} ریال</span>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2 justify-center print:hidden">
-            <Button onClick={handlePrint}>
-              ثبت
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
     </div>
-  )
+  </main>
 }
 
