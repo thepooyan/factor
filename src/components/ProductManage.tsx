@@ -43,7 +43,18 @@ const ProductManage = () => {
     return <Input {...register(props.name)} data-validate="required" noErrorEmit errorClass="!border-red" {...props}/>
   }
 
+  const totalPrice = () => {
+    return data().map(d => calcTotalPrice(d)).reduce((c,p) => c+p, 0)
+  }
+
+  const toPay = () => {
+    let t = totalPrice()
+    return t - t / 10
+  }
+
   return (
+    <>
+
     <div class="border-1 rounded ">
       <Tr className="bg-zinc-200">
         {head.map(h => <Td>{h}</Td>)}
@@ -70,13 +81,27 @@ const ProductManage = () => {
           <Vinput name="unitPrice" type="number" placeholder="قیمت"/>
         </Td>
         <Td>
-          <Vinput name="discount" type="number" placeholder="تخفیف"/>
+          <Vinput name="discount" type="number" value={0} />
         </Td>
         <Td>
           <Button type="submit">افزودن</Button>
         </Td>
       </Tr>
     </div>
+      <div class="mt-2">
+        <p>
+          جمع قیمت: 
+          {totalPrice()}
+        </p>
+        <p>
+          مالیات بر ارزش افزوده: %10
+        </p>
+        <p>
+          قابل پرداخت: 
+          {toPay()}
+        </p>
+      </div>
+    </>
   )
 }
 
