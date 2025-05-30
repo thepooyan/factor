@@ -26,6 +26,7 @@ const ProductManage = () => {
     "قیمت واحد (ریال)",
     "تخفیف (%)",
     "قیمت کل (ریال)",
+    "عملیات",
   ]
   let [data, setData] = createSignal<item[]>([]);
   const {register, submit} = useForm<item>()
@@ -54,6 +55,10 @@ const ProductManage = () => {
     return Math.round(t / taxRate())
   }
 
+  const deleteMe = (i: item) => {
+    setData(prev => prev.filter(f => f.id !== i.id))
+  }
+
   return (
     <>
 
@@ -68,6 +73,7 @@ const ProductManage = () => {
         <Td>{formatNumber(d.unitPrice)}</Td>
         <Td>{d.discount}</Td>
         <Td>{formatNumber(calcTotalPrice(d))}</Td>
+        <Td><Button variant="destructive" onclick={() => deleteMe(d)}>حذف</Button></Td>
       </Tr>)}
       <Tr as="form" onsubmit={submit(submitHandler)} ref={formRef}>
         <Td>
@@ -85,7 +91,7 @@ const ProductManage = () => {
         <Td>
           <Vinput name="discount" type="number" value={0} />
         </Td>
-        <Td>
+        <Td className="col-span-2">
           <Button type="submit">افزودن</Button>
         </Td>
       </Tr>
@@ -121,7 +127,7 @@ const Td = (props:any) => {
 const Tr = (props:any) => {
   return <Dynamic
     component={props.as ? props.as : "div"}
-    class={clsx("grid grid-cols-[1fr_5fr_2fr_5fr_2fr_3fr] items-stretch ", props.className)}
+    class={clsx("grid grid-cols-[1fr_5fr_2fr_5fr_2fr_3fr_2fr] items-stretch ", props.className)}
     {...props}
   >{props.children}
   </Dynamic>
