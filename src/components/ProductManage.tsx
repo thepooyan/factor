@@ -6,6 +6,7 @@ import { Dynamic } from "solid-js/web";
 import { useForm } from "~/utility/hooks";
 import { setValidationEvents, validateSection } from "~/utility/validation/validator";
 import { taxRate } from "~/utility/signals";
+import { formatNumber } from "~/utility/utility";
 
 interface item {
   id: number,
@@ -64,9 +65,9 @@ const ProductManage = () => {
         <Td>{d.id}</Td>
         <Td>{d.name}</Td>
         <Td>{d.quantity}</Td>
-        <Td>{d.unitPrice}</Td>
+        <Td>{formatNumber(d.unitPrice)}</Td>
         <Td>{d.discount}</Td>
-        <Td>{calcTotalPrice(d)}</Td>
+        <Td>{formatNumber(calcTotalPrice(d))}</Td>
       </Tr>)}
       <Tr as="form" onsubmit={submit(submitHandler)} ref={formRef}>
         <Td>
@@ -92,15 +93,15 @@ const ProductManage = () => {
       <div class="mt-2">
         <p>
           جمع قیمت: 
-          {totalPrice()}
+          {formatNumber(totalPrice())}
         </p>
         <p>
           مالیات بر ارزش افزوده: 
-          {calcTax()}
+          {formatNumber(calcTax())}
         </p>
         <p>
           قابل پرداخت: 
-          {totalPrice() - calcTax()}
+          {formatNumber(totalPrice() - calcTax())}
         </p>
       </div>
     </>
@@ -118,7 +119,7 @@ const Td = (props:any) => {
 const Tr = (props:any) => {
   return <Dynamic
     component={props.as ? props.as : "div"}
-    class={clsx("grid grid-cols-[1fr_5fr_2fr_5fr_5fr_5fr] items-stretch ", props.className)}
+    class={clsx("grid grid-cols-[1fr_5fr_2fr_5fr_2fr_3fr] items-stretch ", props.className)}
     {...props}
   >{props.children}
   </Dynamic>

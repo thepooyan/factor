@@ -198,3 +198,7 @@ export const retriveSelectedCompany = () => {
 
   setSelectedCompany(obj as ICompany)
 }
+
+export function formatNumber(n:number) {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
