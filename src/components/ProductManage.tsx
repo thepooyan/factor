@@ -9,7 +9,6 @@ import { taxRate } from "~/utility/signals";
 import { formatNumber } from "~/utility/utility";
 
 interface item {
-  id: number,
   name: string, 
   quantity: number, 
   unitPrice: number, 
@@ -55,8 +54,8 @@ const ProductManage = () => {
     return Math.round(t / taxRate())
   }
 
-  const deleteMe = (i: item) => {
-    setData(prev => prev.filter(f => f.id !== i.id))
+  const deleteMe = (i: number) => {
+    setData(prev => prev.filter((_,f) => f !== i))
   }
 
   return (
@@ -66,14 +65,14 @@ const ProductManage = () => {
       <Tr className="bg-zinc-200 font-bold">
         {head.map(h => <Td>{h}</Td>)}
       </Tr>
-      {data().map(d => <Tr>
-        <Td>{d.id}</Td>
+      {data().map((d,i) => <Tr>
+        <Td>{i+1}</Td>
         <Td>{d.name}</Td>
         <Td>{d.quantity}</Td>
         <Td>{formatNumber(d.unitPrice)}</Td>
         <Td>{d.discount}</Td>
         <Td>{formatNumber(calcTotalPrice(d))}</Td>
-        <Td><Button variant="destructive" onclick={() => deleteMe(d)}>حذف</Button></Td>
+        <Td><Button variant="destructive" onclick={() => deleteMe(i)}>حذف</Button></Td>
       </Tr>)}
       <Tr as="form" onsubmit={submit(submitHandler)} ref={formRef}>
         <Td>
