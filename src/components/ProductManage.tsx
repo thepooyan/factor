@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { Dynamic } from "solid-js/web";
 import { useForm } from "~/utility/hooks";
 import { setValidationEvents, validateSection } from "~/utility/validation/validator";
+import { taxRate } from "~/utility/signals";
 
 interface item {
   id: number,
@@ -47,9 +48,9 @@ const ProductManage = () => {
     return data().map(d => calcTotalPrice(d)).reduce((c,p) => c+p, 0)
   }
 
-  const toPay = () => {
+  const calcTax = () => {
     let t = totalPrice()
-    return t - t / 10
+    return Math.round(t / taxRate())
   }
 
   return (
@@ -94,11 +95,12 @@ const ProductManage = () => {
           {totalPrice()}
         </p>
         <p>
-          مالیات بر ارزش افزوده: %10
+          مالیات بر ارزش افزوده: 
+          {calcTax()}
         </p>
         <p>
           قابل پرداخت: 
-          {toPay()}
+          {totalPrice() - calcTax()}
         </p>
       </div>
     </>

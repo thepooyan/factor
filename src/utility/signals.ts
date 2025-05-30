@@ -28,3 +28,5 @@ createEffect(() => {
   if (selectedCompany() !== undefined)
     localStorage.setItem("selectedCompany", JSON.stringify(selectedCompany()))
 })
+
+export const [taxRate, setTaxRate] = createSignal(9)

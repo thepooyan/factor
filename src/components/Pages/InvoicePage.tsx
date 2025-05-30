@@ -1,3 +1,4 @@
+import { setTaxRate, taxRate } from "~/utility/signals"
 import Input from "../general/Input"
 import ProductManage from "../ProductManage"
 
@@ -26,7 +27,7 @@ export default function InvoicePage() {
 
       <div class="space-y-2">
         <label>مالیات (درصد)</label>
-        <Input value={9}/>
+        <Input value={taxRate()} onchange={e => setTaxRate(parseInt(e.target.value))} type="number"/>
       </div>
 
       <h2 class="col-span-2 text-lg font-bold text-center">مشخصات خریدار</h2>
