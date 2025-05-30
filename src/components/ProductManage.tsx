@@ -90,19 +90,21 @@ const ProductManage = () => {
         </Td>
       </Tr>
     </div>
-      <div class="mt-2">
+      <div class="mt-7 grid grid-cols-2 gap-2">
         <p>
-          جمع قیمت: 
-          {formatNumber(totalPrice())}
+          جمع کل: 
         </p>
+        {formatNumber(totalPrice())} ریال
         <p>
-          مالیات بر ارزش افزوده: 
-          {formatNumber(calcTax())}
+          مالیات (%{taxRate()}): 
         </p>
-        <p>
-          قابل پرداخت: 
-          {formatNumber(totalPrice() - calcTax())}
+        {formatNumber(calcTax())} ریال
+        <p class="font-bold">
+          مبلغ قابل پرداخت: 
         </p>
+        <span class="font-bold">
+          {formatNumber(totalPrice() - calcTax())} ریال
+        </span>
       </div>
     </>
   )
