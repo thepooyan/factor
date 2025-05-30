@@ -2,6 +2,7 @@ import { setTaxRate, taxRate } from "~/utility/signals"
 import Input from "../general/Input"
 import ProductManage from "../ProductManage"
 import moment from 'jalali-moment'
+import { Button } from "../ui/button"
 
 
 export default function InvoicePage() {
@@ -25,7 +26,7 @@ export default function InvoicePage() {
 
       <div class="space-y-2">
         <label>شماره حواله:</label>
-        <Input/>
+        <Input placeholder="شماره حواله"/>
       </div>
 
       <div class="space-y-2">
@@ -37,38 +38,42 @@ export default function InvoicePage() {
 
       <div class="space-y-2">
         <label>نام شخص حقیقی/حقوقی:</label>
-        <Input/>
+        <Input placeholder="نام مورد نظر"/>
       </div>
 
       <div class="space-y-2">
         <label>شماره ملی/شماره ثبت:</label>
-        <Input/>
+        <Input placeholder="0441234567"/>
       </div>
 
       <div class="space-y-2">
         <label>نشانی:</label>
-        <Input/>
+        <Input placeholder="تهران خیابان ..."/>
       </div>
 
       <div class="space-y-2">
         <label>کد پستی:</label>
-        <Input/>
+        <Input placeholder="1234567890"/>
       </div>
 
       <div class="space-y-2">
         <label>تلفن:</label>
-        <Input/>
+        <Input placeholder="021-11223344"/>
       </div>
 
       <div class="space-y-2">
         <label>نمابر:</label>
-        <Input/>
+        <Input placeholder="021-11223344"/>
       </div>
 
       <h2 class="col-span-2 text-lg font-bold text-center">مشخصات کالا/خدمات</h2>
 
       <div class="col-span-2">
         <ProductManage/>
+      </div>
+
+      <div class="col-span-2 flex justify-center">
+        <Button>ثبت </Button>
       </div>
 
     </div>
