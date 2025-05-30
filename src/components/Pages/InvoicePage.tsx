@@ -24,6 +24,11 @@ export default function InvoicePage() {
         <Input/>
       </div>
 
+      <div class="space-y-2">
+        <label>مالیات (درصد)</label>
+        <Input value={9}/>
+      </div>
+
       <h2 class="col-span-2 text-lg font-bold text-center">مشخصات خریدار</h2>
 
       <div class="space-y-2">
