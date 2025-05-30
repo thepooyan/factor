@@ -6,9 +6,7 @@ import moment from 'jalali-moment'
 
 export default function InvoicePage() {
 
-  const m = moment()
-  m.locale("fa")
-  const date = m.format("YYYY/M/D")
+  const date = moment().locale("fa").format("YYYY/M/D")
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
     <h1 class="text-xl text-center font-bold mb-5">فاکتور فروش</h1>
