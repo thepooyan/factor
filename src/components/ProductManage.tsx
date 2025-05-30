@@ -57,7 +57,7 @@ const ProductManage = () => {
     <>
 
     <div class="border-1 rounded ">
-      <Tr className="bg-zinc-200">
+      <Tr className="bg-zinc-200 font-bold">
         {head.map(h => <Td>{h}</Td>)}
       </Tr>
       {data().map(d => <Tr>
@@ -110,7 +110,7 @@ const ProductManage = () => {
 
 const Td = (props:any) => {
   return <span
-    class={clsx("p-2 first:pr-9 text-center", props.className)}
+    class={clsx("p-2 flex items-center justify-center border-1", props.className)}
     {...props}
   >{props.children}</span>
 }
@@ -118,7 +118,7 @@ const Td = (props:any) => {
 const Tr = (props:any) => {
   return <Dynamic
     component={props.as ? props.as : "div"}
-    class={clsx("grid grid-cols-6 items-center", props.className)}
+    class={clsx("grid grid-cols-[1fr_5fr_2fr_5fr_5fr_5fr] items-stretch ", props.className)}
     {...props}
   >{props.children}
   </Dynamic>
