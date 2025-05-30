@@ -1,14 +1,24 @@
 import { setTaxRate, taxRate } from "~/utility/signals"
 import Input from "../general/Input"
 import ProductManage from "../ProductManage"
+import moment from 'jalali-moment'
+
 
 export default function InvoicePage() {
 
+  const m = moment()
+  m.locale("fa")
+  const date = m.format("YYYY/M/D")
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
     <h1 class="text-xl text-center font-bold mb-5">فاکتور فروش</h1>
 
     <div class="grid grid-cols-2 gap-5">
+
+      <div class="space-y-2">
+        <label>تاریخ:</label>
+        <Input value={date} />
+      </div>
 
       <div class="space-y-2">
         <label>شماره فاکتور:</label>
@@ -17,11 +27,6 @@ export default function InvoicePage() {
 
       <div class="space-y-2">
         <label>شماره حواله:</label>
-        <Input/>
-      </div>
-
-      <div class="space-y-2">
-        <label>تاریخ:</label>
         <Input/>
       </div>
 
