@@ -21,7 +21,7 @@ export default function InvoicePage() {
 
       <div class="space-y-2">
         <label>شماره فاکتور:</label>
-        <Input value={"1403-001"}/>
+        <Input value={"1001"}/>
       </div>
 
       <div class="space-y-2">
