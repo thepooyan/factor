@@ -29,4 +29,4 @@ createEffect(() => {
     localStorage.setItem("selectedCompany", JSON.stringify(selectedCompany()))
 })
 
-export const [taxRate, setTaxRate] = createSignal(9)
+export const [taxRate, setTaxRate] = createSignal(10)
