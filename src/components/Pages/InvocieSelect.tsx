@@ -1,4 +1,5 @@
 import { Button } from "~/components/ui/button";
+import { RadioGroup, RadioGroupItem, RadioGroupItemLabel } from "~/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import {
   Card,
@@ -8,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { createSignal } from "solid-js";
+import { createSignal, For } from "solid-js";
 import { Invoice_template_labels } from "~/utility/settings";
 import { selectedCompany } from "~/utility/signals";
 
@@ -51,6 +52,15 @@ const InvocieSelect = () => {
                   <SelectContent />
               </Select>
               </div>
+              <RadioGroup defaultValue="فاکتور">
+                <For each={["فاکتور", "پیش فاکتور"]}>
+                  {(fruit) => (
+                    <RadioGroupItem value={fruit} class="cursor-pointer">
+                      <RadioGroupItemLabel>{fruit}</RadioGroupItemLabel>
+                    </RadioGroupItem>
+                  )}
+                </For>
+              </RadioGroup>
             </CardContent>
             <CardFooter>
               <Button as="A" href={link() ? link() : null} target="_blank" class={`w-full ${link() === '' && "opacity-40"}`}>
