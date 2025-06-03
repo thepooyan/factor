@@ -1,3 +1,20 @@
+export interface InewFactor {
+  factorNumber: string;
+  transferNumber: string;
+  taxRate: string;
+  reciever: {
+    name: string;
+    natinalID: string;
+    postalCode: string;
+    address: string;
+    phone: string;
+    fax: string;
+  };
+  products: [
+    { name: string; quantity: number; unitPrice: number; discount: number },
+  ];
+}
+
 export interface InewFactorNumber {
   company_id: number;
   factor_new_number: string;
