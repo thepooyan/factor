@@ -10,6 +10,7 @@ import {
 } from "~/components/ui/card";
 import { createSignal } from "solid-js";
 import { Invoice_template_labels } from "~/utility/settings";
+import { selectedCompany } from "~/utility/signals";
 
 const InvocieSelect = () => {
 
@@ -17,10 +18,11 @@ const InvocieSelect = () => {
 
   const link = () => {
     let selection = value()
-    if (!selection) return ""
+    let company = selectedCompany()
+    if (!selection || !company) return ""
     let template = Invoice_template_labels.get(selection)
     if (!template) throw new Error("قالب انتخاب شده تعریف نشده")
-    return `/Invoice/${template}/New`
+    return `/Invoice/${template}/New/${company.company_id}`
   }
 
   return (

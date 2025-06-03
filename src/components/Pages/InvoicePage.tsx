@@ -1,13 +1,23 @@
-import { setTaxRate, taxRate } from "~/utility/signals"
+import { selectedCompany, setTaxRate, taxRate } from "~/utility/signals"
 import Input from "../general/Input"
 import ProductManage from "../ProductManage"
 import moment from 'jalali-moment'
 import { Button } from "../ui/button"
+import { onMount } from "solid-js"
+import { api } from "~/utility/api"
 
 
-export default function InvoicePage() {
+interface props {
+  companyId: string
+}
+export default function InvoicePage({companyId}:props) {
 
   const date = moment().locale("fa").format("YYYY/M/D")
+
+  onMount(async() => {
+    let a = await api.post("/factor/NewFactorNumber", {company_id: companyId}) 
+    console.log(a)
+  })
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
     <h1 class="text-xl text-center font-bold mb-5">فاکتور فروش</h1>
