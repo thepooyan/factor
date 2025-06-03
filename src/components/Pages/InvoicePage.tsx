@@ -5,7 +5,7 @@ import moment from 'jalali-moment'
 import { Button } from "../ui/button"
 import { onMount } from "solid-js"
 import { api } from "~/utility/api"
-import { InewFactorNumber } from "~/utility/interface"
+import { InewFactor, InewFactorNumber } from "~/utility/interface"
 import { createStore } from "solid-js/store"
 
 
@@ -27,6 +27,7 @@ export default function InvoicePage({companyId}:props) {
     recieverAddress: "",
     recieverPhone: "",
     recieverFax: "",
+
   })
 
   const register = (name: keyof typeof store) => ({
@@ -40,6 +41,11 @@ export default function InvoicePage({companyId}:props) {
     let res = await api.post<InewFactorNumber>("/factor/NewFactorNumber", {company_id: companyId}) 
     setStore("factorNumber", res.data.factor_new_number)
   })
+
+  const done = () => {
+    let a:InewFactor = {...store,taxRate:taxRate().toString(), companyId: companyId, products: [] }
+    console.log(a)
+  }
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
     <h1 class="text-xl text-center font-bold mb-5">فاکتور فروش</h1>
@@ -70,12 +76,12 @@ export default function InvoicePage({companyId}:props) {
 
       <div class="space-y-2">
         <label>نام شخص حقیقی/حقوقی:</label>
-        <Input placeholder="نام مورد نظر"/>
+        <Input placeholder="نام مورد نظر" {...register("recieverName")}/>
       </div>
 
       <div class="space-y-2">
         <label>شماره ملی/شماره ثبت:</label>
-        <Input placeholder="0441234567"/>
+        <Input placeholder="0441234567" {...register("recieverNatinalID")}/>
       </div>
 
       <div class="space-y-2">
@@ -105,7 +111,7 @@ export default function InvoicePage({companyId}:props) {
       </div>
 
       <div class="col-span-2 flex justify-center">
-        <Button>ثبت </Button>
+        <Button onclick={done}>ثبت </Button>
       </div>
 
     </div>

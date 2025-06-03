@@ -1,18 +1,17 @@
 export interface InewFactor {
+  companyId: string;
   factorNumber: string;
   transferNumber: string;
   taxRate: string;
-  reciever: {
-    name: string;
-    natinalID: string;
-    postalCode: string;
-    address: string;
-    phone: string;
-    fax: string;
-  };
-  products: [
-    { name: string; quantity: number; unitPrice: number; discount: number },
-  ];
+
+  recieverName: string,
+  recieverNatinalID: string,
+  recieverPostalCode: string,
+  recieverAddress: string,
+  recieverPhone: string,
+  recieverFax: string,
+
+  products: { name: string; quantity: number; unitPrice: number; discount: number }[]
 }
 
 export interface InewFactorNumber {
