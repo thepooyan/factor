@@ -6,6 +6,7 @@ import { Button } from "../ui/button"
 import { createSignal, onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { InewFactorNumber } from "~/utility/interface"
+import { createStore } from "solid-js/store"
 
 
 interface props {
@@ -14,11 +15,31 @@ interface props {
 export default function InvoicePage({companyId}:props) {
 
   const date = moment().locale("fa").format("YYYY/M/D")
-  const [factorNumber, setFactorNumber] = createSignal<string>();
+
+  const [store, setStore] = createStore({
+    date: date,
+    factorNumber: "",
+    transferNumber: "",
+    taxRate: "",
+
+    recieverName: "",
+    recieverNatinalID: "",
+    recieverPostalCode: "",
+    recieverAddress: "",
+    recieverPhone: "",
+    recieverFax: "",
+  })
+
+  const register = (name: keyof typeof store) => ({
+    onChange: (e:any) => {
+      setStore(name, e.currentTarget.value)
+    },
+    value: store[name]
+  })
 
   onMount(async() => {
     let res = await api.post<InewFactorNumber>("/factor/NewFactorNumber", {company_id: companyId}) 
-    setFactorNumber(res.data.factor_new_number)
+    setStore("factorNumber", res.data.factor_new_number)
   })
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
@@ -28,17 +49,17 @@ export default function InvoicePage({companyId}:props) {
 
       <div class="space-y-2">
         <label>تاریخ:</label>
-        <Input value={date} />
+        <Input {...register("date")}/>
       </div>
 
       <div class="space-y-2">
         <label>شماره فاکتور:</label>
-        <Input value={factorNumber()}/>
+        <Input {...register("factorNumber")} />
       </div>
 
       <div class="space-y-2">
         <label>شماره حواله:</label>
-        <Input placeholder="شماره حواله"/>
+        <Input placeholder="شماره حواله" {...register("transferNumber")}/>
       </div>
 
       <div class="space-y-2">
