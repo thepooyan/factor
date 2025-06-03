@@ -1,10 +1,11 @@
-import { selectedCompany, setTaxRate, taxRate } from "~/utility/signals"
+import { setTaxRate, taxRate } from "~/utility/signals"
 import Input from "../general/Input"
 import ProductManage from "../ProductManage"
 import moment from 'jalali-moment'
 import { Button } from "../ui/button"
-import { onMount } from "solid-js"
+import { createSignal, onMount } from "solid-js"
 import { api } from "~/utility/api"
+import { InewFactorNumber } from "~/utility/interface"
 
 
 interface props {
@@ -13,10 +14,11 @@ interface props {
 export default function InvoicePage({companyId}:props) {
 
   const date = moment().locale("fa").format("YYYY/M/D")
+  const [factorNumber, setFactorNumber] = createSignal<string>();
 
   onMount(async() => {
-    let a = await api.post("/factor/NewFactorNumber", {company_id: companyId}) 
-    console.log(a)
+    let res = await api.post<InewFactorNumber>("/factor/NewFactorNumber", {company_id: companyId}) 
+    setFactorNumber(res.data.factor_new_number)
   })
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
@@ -31,7 +33,7 @@ export default function InvoicePage({companyId}:props) {
 
       <div class="space-y-2">
         <label>شماره فاکتور:</label>
-        <Input value={"1001"}/>
+        <Input value={factorNumber()}/>
       </div>
 
       <div class="space-y-2">
