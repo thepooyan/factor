@@ -3,7 +3,7 @@ import Input from "../general/Input"
 import ProductManage from "../ProductManage"
 import moment from 'jalali-moment'
 import { Button } from "../ui/button"
-import { createSignal, onMount } from "solid-js"
+import { onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { InewFactorNumber } from "~/utility/interface"
 import { createStore } from "solid-js/store"
@@ -20,7 +20,6 @@ export default function InvoicePage({companyId}:props) {
     date: date,
     factorNumber: "",
     transferNumber: "",
-    taxRate: "",
 
     recieverName: "",
     recieverNatinalID: "",
