@@ -48,4 +48,20 @@
 
 
 
-
+factor {
+    date: string
+    factorNumber: string
+    transferNumber: string
+    taxRate: string
+    reciever: {
+        name: string
+        natinalID: string
+        postalCode: string
+        address: string
+        phone: string
+        fax: string
+    }
+    products: [
+        {name: string, quantity: number, unitPrice: number, discount: number}
+    ]
+}
