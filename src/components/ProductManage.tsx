@@ -51,7 +51,7 @@ const ProductManage = () => {
 
   const calcTax = () => {
     let t = totalPrice()
-    return Math.round(t / taxRate())
+    return Math.round(t * taxRate() / 100)
   }
 
   const deleteMe = (i: number) => {
