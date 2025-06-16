@@ -7,6 +7,7 @@ import { onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { InewFactor, InewFactorNumber } from "~/utility/interface"
 import { createStore } from "solid-js/store"
+import { callModal } from "../modal/Modal"
 
 
 interface props {
@@ -45,6 +46,7 @@ export default function InvoicePage({companyId}:props) {
   const done = () => {
     let a:InewFactor = {...store,taxRate:taxRate().toString(), companyId: companyId, products: [] }
     console.log(a)
+    if (a.products.length === 0) return callModal.fail("تعداد کالا نمیتواند صفر باشد")
   }
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
@@ -86,22 +88,22 @@ export default function InvoicePage({companyId}:props) {
 
       <div class="space-y-2">
         <label>نشانی:</label>
-        <Input placeholder="تهران خیابان ..."/>
+        <Input placeholder="تهران خیابان ..." {...register("recieverAddress")}/>
       </div>
 
       <div class="space-y-2">
         <label>کد پستی:</label>
-        <Input placeholder="1234567890"/>
+        <Input placeholder="1234567890" {...register("recieverPostalCode")}/>
       </div>
 
       <div class="space-y-2">
         <label>تلفن:</label>
-        <Input placeholder="021-11223344"/>
+        <Input placeholder="021-11223344" {...register("recieverPhone")}/>
       </div>
 
       <div class="space-y-2">
         <label>نمابر:</label>
-        <Input placeholder="021-11223344"/>
+        <Input placeholder="021-11223344" {...register("recieverFax")}/>
       </div>
 
       <h2 class="col-span-2 text-lg font-bold text-center">مشخصات کالا/خدمات</h2>
