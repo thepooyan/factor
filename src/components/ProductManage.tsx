@@ -16,8 +16,8 @@ interface item {
   totalPrice: number
 }
 
+export let [productItems, setProductItems] = createSignal<item[]>([]);
 const ProductManage = () => {
-
   const head = [
     "ردیف",
     "نام کالا",
@@ -27,14 +27,13 @@ const ProductManage = () => {
     "قیمت کل (ریال)",
     "عملیات",
   ]
-  let [data, setData] = createSignal<item[]>([]);
   const {register, submit} = useForm<item>()
   let formRef!: HTMLFormElement;
 
   const submitHandler = (e: item) => {
     let result = validateSection(formRef)
     if (!result) return
-    setData(prev => [...prev, {...e, id:prev.length+1, totalPrice: calcTotalPrice(e)}])
+    setProductItems(prev => [...prev, {...e, id:prev.length+1, totalPrice: calcTotalPrice(e)}])
   }
 
   onMount(() => {
@@ -46,7 +45,7 @@ const ProductManage = () => {
   }
 
   const totalPrice = () => {
-    return data().map(d => calcTotalPrice(d)).reduce((c,p) => c+p, 0)
+    return productItems().map(d => calcTotalPrice(d)).reduce((c,p) => c+p, 0)
   }
 
   const calcTax = () => {
@@ -55,7 +54,7 @@ const ProductManage = () => {
   }
 
   const deleteMe = (i: number) => {
-    setData(prev => prev.filter((_,f) => f !== i))
+    setProductItems(prev => prev.filter((_,f) => f !== i))
   }
 
   return (
@@ -65,7 +64,7 @@ const ProductManage = () => {
       <Tr className="bg-zinc-200 font-bold">
         {head.map(h => <Td>{h}</Td>)}
       </Tr>
-      {data().map((d,i) => <Tr>
+      {productItems().map((d,i) => <Tr>
         <Td>{i+1}</Td>
         <Td>{d.name}</Td>
         <Td>{d.quantity}</Td>
@@ -76,7 +75,7 @@ const ProductManage = () => {
       </Tr>)}
       <Tr as="form" onsubmit={submit(submitHandler)} ref={formRef}>
         <Td>
-          {data().length+1}
+          {productItems().length+1}
         </Td>
         <Td >
           <Vinput name="name" placeholder="نام کالا"/>

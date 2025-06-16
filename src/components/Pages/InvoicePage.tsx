@@ -1,6 +1,6 @@
 import { setTaxRate, taxRate } from "~/utility/signals"
 import Input from "../general/Input"
-import ProductManage from "../ProductManage"
+import ProductManage, { productItems } from "../ProductManage"
 import moment from 'jalali-moment'
 import { Button } from "../ui/button"
 import { onMount } from "solid-js"
@@ -44,9 +44,10 @@ export default function InvoicePage({companyId}:props) {
   })
 
   const done = () => {
-    let a:InewFactor = {...store,taxRate:taxRate().toString(), companyId: companyId, products: [] }
-    console.log(a)
+    let a:InewFactor = {...store,taxRate:taxRate().toString(), companyId: companyId, products: [...productItems()] }
     if (a.products.length === 0) return callModal.fail("تعداد کالا نمیتواند صفر باشد")
+    console.log(a)
+    //send out
   }
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
