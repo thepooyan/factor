@@ -7,8 +7,17 @@ import {
 } from "~/components/ui/card";
 import CustomersTable from "./CustomersTable";
 import { Icustomer } from "~/utility/interface";
+import { onMount } from "solid-js";
+import { api } from "~/utility/api";
+import { selectedCompany } from "~/utility/signals";
 
 const FactorList = () => {
+
+  onMount(async () => {
+    let id = selectedCompany()?.company_id
+    if (!id) return
+    let a = await api.post("/factor/CompanyAllFactors", {company_id: id})
+  })
 
   return (
     <>
