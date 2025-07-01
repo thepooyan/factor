@@ -8,6 +8,7 @@ import { api } from "~/utility/api"
 import { InewFactor, InewFactorNumber } from "~/utility/interface"
 import { createStore } from "solid-js/store"
 import { callModal } from "../modal/Modal"
+import { convertToDTO } from "~/utility/apiInterface"
 
 
 interface props {
@@ -43,10 +44,13 @@ export default function InvoicePage({companyId}:props) {
     setStore("factorNumber", res.data.factor_new_number)
   })
 
-  const done = () => {
+  const done = async () => {
     let a:InewFactor = {...store,taxRate:taxRate().toString(), companyId: companyId, products: [...productItems()] }
     if (a.products.length === 0) return callModal.fail("تعداد کالا نمیتواند صفر باشد")
-    console.log(a)
+    
+    let res = await api.post("/factor/NewFactor", convertToDTO(a))
+    console.log(convertToDTO(a))
+    console.log(res)
     //send out
   }
 

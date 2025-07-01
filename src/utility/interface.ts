@@ -1,4 +1,5 @@
 export interface InewFactor {
+  date: string
   companyId: string;
   factorNumber: string;
   transferNumber: string;
