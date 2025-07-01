@@ -9,6 +9,7 @@ import { InewFactor, InewFactorNumber } from "~/utility/interface"
 import { createStore } from "solid-js/store"
 import { callModal } from "../modal/Modal"
 import { convertToDTO } from "~/utility/apiInterface"
+import { useNavigate } from "@solidjs/router"
 
 
 interface props {
@@ -17,6 +18,7 @@ interface props {
 export default function InvoicePage({companyId}:props) {
 
   const date = moment().locale("fa").format("YYYY/M/D")
+  const navigate = useNavigate()
 
   const [store, setStore] = createStore({
     date: date,
@@ -48,10 +50,13 @@ export default function InvoicePage({companyId}:props) {
     let a:InewFactor = {...store,taxRate:taxRate().toString(), companyId: companyId, products: [...productItems()] }
     if (a.products.length === 0) return callModal.fail("تعداد کالا نمیتواند صفر باشد")
     
-    let res = await api.post("/factor/NewFactor", convertToDTO(a))
-    console.log(convertToDTO(a))
-    console.log(res)
-    //send out
+    callModal.wait()
+    api.post("/factor/NewFactor", convertToDTO(a))
+    .then(() => {
+        callModal.success()
+        navigate("/Panel")
+      })
+    .catch(() => callModal.fail("متاسفانه ارسال اطلاعات موفقیت آمیز نبود. لطفا دوباره تلاش کنید."))
   }
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
