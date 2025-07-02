@@ -4,21 +4,24 @@ import { Label } from "~/components/ui/label"
 import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
 import CustomersTable from "./CustomersTable"
-import { createSignal, onMount } from "solid-js"
+import { createEffect, createSignal } from "solid-js"
 import { api } from "~/utility/api"
-import { selectedCompany } from "~/utility/signals"
+import { selectedCompany, userMg } from "~/utility/signals"
 import { AI_customer } from "~/utility/apiInterface"
 import { useForm } from "~/utility/hooks"
 import { callModal } from "../modal/Modal"
+import { queryCustomers } from "~/utility/queries"
+import { useQueryClient } from "@tanstack/solid-query"
 
 const Customers = () => {
   
   const [c, setC] = createSignal<AI_customer[]>([])
-  onMount(async() => {
-    let id = selectedCompany()?.company_id
-    if (!id) return
-    let a = await api.post<AI_customer[]>("/customer/AllCustomersOfCompany", {company_id: id})
-    setC(a.data)
+  const query = queryCustomers()
+  const qc = useQueryClient()
+
+  createEffect(() => {
+    if (query.data)
+      setC(query.data?.data || [])
   })
 
   const emptyCustomer: AI_customer = {
@@ -46,7 +49,7 @@ const Customers = () => {
     .then(() => {
         callModal.success()
         formRef.reset()
-        //revalidate
+        qc.invalidateQueries({queryKey: ["customers"]})
       })
     .catch(() => callModal.fail())
   }
