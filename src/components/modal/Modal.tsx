@@ -4,7 +4,7 @@ import { createSignal, JSXElement, Match, Switch } from "solid-js"
 import { Button } from "../ui/button"
 import { CallbackStore } from "~/utility/utility"
 import clsx from "clsx"
-import { AiOutlineCheck } from "solid-icons/ai"
+import { AiOutlineCheck, AiOutlineQuestion } from "solid-icons/ai"
 import Spinner from "~/components/general/Spinner"
 
 type Istate = "" | "prompt" | "fail" | "success" | "wait"
@@ -69,6 +69,8 @@ const title = () => {
       return <div class={clsx(titleStyle,"text-red")}> <ImCross/> </div>
     case "success":
       return <div class={clsx(titleStyle,"text-green")}> <AiOutlineCheck size={40}/> </div>
+    case "prompt":
+      return <div class={clsx(titleStyle,"text-orange")}> <AiOutlineQuestion size={40}/> </div>
   }
   return ""
 }
@@ -87,8 +89,8 @@ const Modal = () => {
             <Switch>
               <Match when={state() === "prompt"}>
                 <div class="flex justify-center gap-2">
-                  <Button size="sm" class="w-20" onclick={() => {callbackStore.callYes(); closeModal()}}>Yes</Button>
-                  <Button size="sm" class="w-20" variant="secondary" onclick={() => {callbackStore.callNo(); closeModal()}}>No</Button>
+                  <Button size="sm" class="w-20" onclick={() => {callbackStore.callYes(); closeModal()}}>بله</Button>
+                  <Button size="sm" class="w-20" variant="secondary" onclick={() => {callbackStore.callNo(); closeModal()}}>خیر</Button>
                 </div>
               </Match>
             </Switch>
