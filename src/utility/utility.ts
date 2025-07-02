@@ -1,3 +1,4 @@
+import moment from "jalali-moment";
 import { ICompany } from "./interface";
 import { setSelectedCompany } from "./signals";
 
@@ -201,4 +202,11 @@ export const retriveSelectedCompany = () => {
 
 export function formatNumber(n:number) {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export function faDateToISO(faDate: string): string {
+  const [year, month, day] = faDate.split('/');
+  const gregorianDate = moment.from(year, month, day);
+  gregorianDate.set({ hour: 14, minute: 15, second: 22, millisecond: 0 });
+  return gregorianDate.toISOString();
 }

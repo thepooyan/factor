@@ -10,6 +10,7 @@ import { createStore } from "solid-js/store"
 import { callModal } from "../modal/Modal"
 import { convertToDTO } from "~/utility/apiInterface"
 import { useNavigate } from "@solidjs/router"
+import { faDateToISO } from "~/utility/utility"
 
 
 interface props {
@@ -47,7 +48,13 @@ export default function InvoicePage({companyId}:props) {
   })
 
   const done = async () => {
-    let a:InewFactor = {...store,taxRate:taxRate().toString(), companyId: companyId, products: [...productItems()] }
+    let a:InewFactor = {
+      ...store,
+      date: faDateToISO(store.date),
+      taxRate:taxRate().toString(),
+      companyId: companyId,
+      products: [...productItems()] 
+    }
     if (a.products.length === 0) return callModal.fail("تعداد کالا نمیتواند صفر باشد")
     
     callModal.wait()
