@@ -2,6 +2,7 @@ import { InewFactor } from "./interface";
 
 export interface AI_customer {
   customer_id?: number,
+  company_id?: number,
   first_name?: string,
   gender?: string,
   phone_number?: string,
