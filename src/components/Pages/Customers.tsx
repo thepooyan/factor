@@ -7,12 +7,17 @@ import Input from "../general/Input"
 import CustomersTable from "./CustomersTable"
 import { Icustomer } from "~/utility/interface"
 import { onMount } from "solid-js"
+import { api } from "~/utility/api"
+import { selectedCompany } from "~/utility/signals"
 // import { queryCustomers } from "~/utility/queries"
 
 const Customers = () => {
   
-  onMount(() => {
-    // queryCustomers
+  onMount(async() => {
+    let id = selectedCompany()?.company_id
+    if (!id) return
+    let a = api.post("/customer/AllCustomersOfCompany", {company_id: id})
+    console.log(a)
   })
 
   const handleSubmit = (e: any) => {
