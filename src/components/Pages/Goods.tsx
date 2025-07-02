@@ -23,7 +23,6 @@ const Goods = () => {
           <CardDescription>اطلاعات کالاهای پرمصرف شما</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
-            <CustomersTable customers={c as Icustomer[]}/>
 
           <CardContent class="space-y-6">
               <h1 class="text-xl font-bold my-4 mb-7">ثبت کالا جدید</h1>

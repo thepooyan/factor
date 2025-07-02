@@ -31,7 +31,6 @@ const FactorList = () => {
               سابقه فاکتور های صادر شده شما 
             </CardDescription>
           </CardHeader>
-          <CustomersTable customers={c as Icustomer[]} />
         </Card>
       </div>
     </>
