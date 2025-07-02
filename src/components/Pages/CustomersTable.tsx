@@ -1,4 +1,3 @@
-import { Icustomer } from "~/utility/interface";
 import {
   Table,
   TableBody,
@@ -8,10 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import { For } from "solid-js";
+import { Accessor, For } from "solid-js";
+import { AI_customer } from "~/utility/apiInterface";
 
 interface props {
-  customers: Icustomer[];
+  customers: Accessor<AI_customer[]>;
 }
 const CustomersTable = ({ customers }: props) => {
   return (
@@ -29,10 +29,10 @@ const CustomersTable = ({ customers }: props) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <For each={customers}>
+          <For each={customers()}>
             {c => 
               <TableRow>
-                <TableCell>{c.first_name} {c.last_name}</TableCell>
+                <TableCell>{c.first_name}</TableCell>
                 <TableCell>{c.phone_number}</TableCell>
                 <TableCell>{c.fax_number}</TableCell>
                 <TableCell>{c.city}</TableCell>

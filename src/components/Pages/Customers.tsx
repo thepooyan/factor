@@ -1,23 +1,22 @@
 import { Button } from "~/components/ui/button"
-import c from "./customers.json"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
 import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
 import CustomersTable from "./CustomersTable"
-import { Icustomer } from "~/utility/interface"
-import { onMount } from "solid-js"
+import { createSignal, onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { selectedCompany } from "~/utility/signals"
-// import { queryCustomers } from "~/utility/queries"
+import { AI_customer } from "~/utility/apiInterface"
 
 const Customers = () => {
   
+  const [c, setC] = createSignal<AI_customer[]>([])
   onMount(async() => {
     let id = selectedCompany()?.company_id
     if (!id) return
-    let a = api.post("/customer/AllCustomersOfCompany", {company_id: id})
-    console.log(a)
+    let a = await api.post<AI_customer[]>("/customer/AllCustomersOfCompany", {company_id: id})
+    setC(a.data)
   })
 
   const handleSubmit = (e: any) => {
@@ -34,7 +33,7 @@ const Customers = () => {
           <CardDescription>اطلاعات مشتریان ثابت شما</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
-            <CustomersTable customers={c as Icustomer[]}/>
+            <CustomersTable customers={c}/>
 
           <CardContent class="space-y-6">
               <h1 class="text-xl font-bold my-4 mb-7">ثبت مشتری جدید</h1>

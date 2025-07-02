@@ -1,5 +1,18 @@
 import { InewFactor } from "./interface";
 
+export interface AI_customer {
+  customer_id?: number,
+  first_name?: string,
+  gender?: string,
+  phone_number?: string,
+  fax_number?: string,
+  address?: string,
+  city?: string,
+  post_code?: string,
+  identification_number?: string,
+  date_of_submit?: string
+}
+
 interface AI_NewFactor {
   customer_info: {
     company_id?: number;
