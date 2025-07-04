@@ -13,12 +13,12 @@ const FactorList = () => {
 
   const [factors, setFactors] = createSignal<AI_Factor[]>([]);
 
-  // let query = queryFactorList()
+  let query = queryFactorList()
 
-  // createEffect(() => {
-  //   if (query.data)
-  //     setFactors(query.data.data)
-  // })
+  createEffect(() => {
+    if (query.data)
+      setFactors(query.data.data)
+  })
 
   return (
     <>
