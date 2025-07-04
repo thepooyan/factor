@@ -62,6 +62,7 @@ export default function InvoicePage({companyId}:props) {
     .then(() => {
         callModal.success()
         navigate("/Panel")
+        //invalidate factor list 
       })
     .catch(() => callModal.fail("متاسفانه ارسال اطلاعات موفقیت آمیز نبود. لطفا دوباره تلاش کنید."))
   }
