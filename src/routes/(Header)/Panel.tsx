@@ -1,8 +1,11 @@
+import { ParentProps } from "solid-js"
 import { PanelPage } from "~/components/Pages/PanelPage"
 
-const Panel = () => {
+const Panel = ({children}:ParentProps) => {
   return (
-    <PanelPage/>
+    <PanelPage>
+      {children}
+    </PanelPage>
   )
 }
 

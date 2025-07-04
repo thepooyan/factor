@@ -1,29 +1,22 @@
 import { FiSettings } from "solid-icons/fi"
-import { TbMoneybag } from 'solid-icons/tb'
+// import { TbMoneybag } from 'solid-icons/tb'
 import { IoPeopleCircleSharp } from 'solid-icons/io'
 import { IoDocumentTextOutline } from 'solid-icons/io'
 import { TbSquarePlus } from 'solid-icons/tb'
-import { createSignal, Show } from "solid-js"
+import { ParentProps, Show } from "solid-js"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
 import { IconTypes } from "solid-icons"
-import Company from "./Company"
-import Customers from "./Customers"
-import FactorList from "./FactorList"
-import InvocieSelect from "./InvocieSelect"
-import Goods from "./Goods"
 import { SelectCompany } from "../SelectCompany"
 import { selectedCompany } from "~/utility/signals"
 
-export function PanelPage() {
-  const [activeTab, setActiveTab] = createSignal<tabsType>("company")
+export function PanelPage({children}:ParentProps) {
 
-  type tabsType =  "goods" | "company" | "customers" | "factorList" | "newFactor";
-  const tabs: {id: tabsType, label: string, icon: IconTypes}[] = [
-    { id: "company", label: "اطلاعات شرکت", icon: FiSettings },
-    { id: "customers", label: "مشتریان", icon:  IoPeopleCircleSharp},
-    { id: "goods", label: "کالاها / خدمات", icon:  TbMoneybag},
-    { id: "factorList", label: "لیست فاکتور", icon: IoDocumentTextOutline },
-    { id: "newFactor", label: "فاکتور جدید", icon: TbSquarePlus },
+  const tabs: {id: string, label: string, icon: IconTypes}[] = [
+    { id: "", label: "اطلاعات شرکت", icon: FiSettings },
+    { id: "Customers", label: "مشتریان", icon:  IoPeopleCircleSharp},
+    // { id: "goods", label: "کالاها / خدمات", icon:  TbMoneybag},
+    { id: "FactorList", label: "لیست فاکتور", icon: IoDocumentTextOutline },
+    { id: "NewFactor", label: "فاکتور جدید", icon: TbSquarePlus },
   ]
 
   return (
@@ -41,7 +34,8 @@ export function PanelPage() {
                   <TabsTrigger
                     value={tab.id}
                     class="flex w-full justify-start gap-2 border-b border-gray-100 px-4 py-3 text-right data-[state=active]:bg-gray-50"
-                    onClick={() => setActiveTab(tab.id)}
+                    as="A"
+                    href={"/Panel/" + tab.id}
                   >
                     <Icon class="h-5 w-5" />
                     <span>{tab.label}</span>
@@ -53,17 +47,7 @@ export function PanelPage() {
           </Show>
         </div>
 
-        <Show when={selectedCompany()}>
-          {o => <>
-            <div>
-              {activeTab() === "company" && <Company initialData={o}/>}
-              {activeTab() === "customers" && <Customers/>}
-              {activeTab() === "goods" && <Goods/>}
-              {activeTab() === "factorList" && <FactorList/>}
-              {activeTab() === "newFactor" && <InvocieSelect/>}
-            </div>
-          </>}
-        </Show>
+        {children}
       </div>
     </div>
   )
