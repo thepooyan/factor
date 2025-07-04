@@ -1,5 +1,28 @@
 import { InewFactor } from "./interface";
 
+export interface AI_Factor {
+  "company_id": number | null,
+  "customer_id": number | null,
+  "factor_number": number | null,
+  "factor_final_price": number | null,
+  "factor_is_paid": boolean | null,
+  "factor_items":
+      {
+          "name": string | null,
+          "quantity": number | null,
+          "unitPrice": number | null,
+          "discount": number | null
+      }[],
+  "tax": string | null,
+  "tax_is_percent": boolean | null,
+  "discount": string | null,
+  "discount_is_percent": boolean | null,
+  "factor_date": string | null,
+  "user_id": number | null,
+  "factor_id": number | null,
+  "factor_customer_name": string | null
+}
+
 export interface AI_customer {
   customer_id?: number,
   company_id?: number,

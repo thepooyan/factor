@@ -1,22 +1,23 @@
-import c from "./customers.json";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import CustomersTable from "./CustomersTable";
-import { Icustomer } from "~/utility/interface";
-import { onMount } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import { api } from "~/utility/api";
 import { selectedCompany } from "~/utility/signals";
+import { AI_Factor } from "~/utility/apiInterface";
 
 const FactorList = () => {
+
+  const [factors, setFactors] = createSignal<AI_Factor[]>([]);
 
   onMount(async () => {
     let id = selectedCompany()?.company_id
     if (!id) return
-    let a = await api.post("/factor/CompanyAllFactors", {company_id: id})
+    let a = await api.post<AI_Factor[]>("/factor/CompanyAllFactors", {company_id: id})
+    setFactors(a.data)
   })
 
   return (
