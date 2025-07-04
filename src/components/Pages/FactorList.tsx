@@ -4,21 +4,20 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { createSignal, onMount } from "solid-js";
-import { api } from "~/utility/api";
-import { selectedCompany } from "~/utility/signals";
+import { createEffect, createSignal } from "solid-js";
 import { AI_Factor } from "~/utility/apiInterface";
 import FactorsTable from "./FactorsTable";
+import { queryFactorList } from "~/utility/queries";
 
 const FactorList = () => {
 
   const [factors, setFactors] = createSignal<AI_Factor[]>([]);
 
-  onMount(async () => {
-    let id = selectedCompany()?.company_id
-    if (!id) return
-    let a = await api.post<AI_Factor[]>("/factor/CompanyAllFactors", {company_id: id})
-    setFactors(a.data)
+  let query = queryFactorList()
+
+  createEffect(() => {
+    if (query.data)
+      setFactors(query.data.data)
   })
 
   return (

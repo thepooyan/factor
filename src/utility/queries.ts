@@ -2,7 +2,7 @@ import { useQuery, QueryClientConfig } from "@tanstack/solid-query";
 import { api } from "./api";
 import { ICompany, Iprofile } from "./interface";
 import { selectedCompany, userMg } from "./signals";
-import { AI_customer } from "./apiInterface";
+import { AI_customer, AI_Factor } from "./apiInterface";
 
 export const queryConfig:QueryClientConfig = {
   defaultOptions: {
@@ -35,6 +35,16 @@ export const queryCustomers = () => {
     queryFn: () => {
       let id = selectedCompany()?.company_id
       return api.post<AI_customer[]>("/customer/AllCustomersOfCompany", {company_id: id})
+    }
+  }))
+}
+
+export const queryFactorList = () => {
+  return useQuery(() => ({
+    queryKey: ["factors", userMg.get()?.user.email, selectedCompany()?.company_id],
+    queryFn: () => {
+      let id = selectedCompany()?.company_id
+      return api.post<AI_Factor[]>("/factor/CompanyAllFactors", {company_id: id})
     }
   }))
 }
