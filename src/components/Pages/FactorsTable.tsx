@@ -14,6 +14,7 @@ import { api } from "~/utility/api";
 import { selectedCompany } from "~/utility/signals";
 import { callModal } from "../modal/Modal";
 import { useQueryClient } from "@tanstack/solid-query";
+import { ISODateToFa } from "~/utility/utility";
 
 interface props {
   factors: Accessor<AI_Factor[]>;
@@ -52,7 +53,7 @@ const FactorsTable = ({ factors }: props) => {
               <TableRow>
                 <TableCell class="text-red-600 cursor-pointer"><FiTrash onclick={() => deleteMe(c.factor_id)}/></TableCell>
                 <TableCell>{c.factor_customer_name}</TableCell>
-                <TableCell>{c.factor_date}</TableCell>
+                <TableCell>{ISODateToFa(c.factor_date || "")}</TableCell>
                 <TableCell>{c.factor_items.length}</TableCell>
                 <TableCell><FiShare2 class="text-blue-600 cursor-pointer"/></TableCell>
                 <TableCell><FiEye class="text-blue-600 cursor-pointer"/></TableCell>

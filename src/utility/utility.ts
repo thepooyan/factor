@@ -210,3 +210,7 @@ export function faDateToISO(faDate: string): string {
   gregorianDate.set({ hour: 14, minute: 15, second: 22, millisecond: 0 });
   return gregorianDate.toISOString();
 }
+
+export function ISODateToFa(isoDate: string) {
+  return moment(isoDate).locale("fa").format("YYYY/MM/DD")
+}
