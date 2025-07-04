@@ -11,6 +11,7 @@ import { callModal } from "../modal/Modal"
 import { convertToDTO } from "~/utility/apiInterface"
 import { useNavigate } from "@solidjs/router"
 import { faDateToISO } from "~/utility/utility"
+import { useQueryClient } from "@tanstack/solid-query"
 
 
 interface props {
@@ -20,6 +21,7 @@ export default function InvoicePage({companyId}:props) {
 
   const date = moment().locale("fa").format("YYYY/M/D")
   const navigate = useNavigate()
+  const qc = useQueryClient()
 
   const [store, setStore] = createStore({
     date: date,
@@ -61,8 +63,8 @@ export default function InvoicePage({companyId}:props) {
     api.post("/factor/NewFactor", convertToDTO(a))
     .then(() => {
         callModal.success()
-        navigate("/Panel")
-        //invalidate factor list 
+        navigate("/Panel/FactorList")
+        qc.invalidateQueries({queryKey: ["factors"]})
       })
     .catch(() => callModal.fail("متاسفانه ارسال اطلاعات موفقیت آمیز نبود. لطفا دوباره تلاش کنید."))
   }
