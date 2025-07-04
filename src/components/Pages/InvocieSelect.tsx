@@ -63,7 +63,7 @@ const InvocieSelect = () => {
               </RadioGroup>
             </CardContent>
             <CardFooter>
-              <Button as="A" href={link() ? link() : null} class={`w-full ${link() === '' && "opacity-40"}`}>
+              <Button as="A" href={link() ? link() : null} target="_blank" class={`w-full ${link() === '' && "opacity-40"}`}>
                 فاکتور جدید  
               </Button>
             </CardFooter>

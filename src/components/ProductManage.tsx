@@ -61,7 +61,7 @@ const ProductManage = () => {
     <>
 
     <div class="border-1 rounded ">
-      <Tr className="bg-zinc-200 font-bold">
+      <Tr className=" bg-zinc-200 font-bold" >
         {head.map(h => <Td>{h}</Td>)}
       </Tr>
       {productItems().map((d,i) => <Tr>
