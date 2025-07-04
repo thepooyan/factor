@@ -4,7 +4,7 @@ import { Label } from "~/components/ui/label"
 import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
 import CustomersTable from "./CustomersTable"
-import { createEffect, createSignal } from "solid-js"
+import { createEffect, createSignal, onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { selectedCompany } from "~/utility/signals"
 import { AI_customer } from "~/utility/apiInterface"
@@ -16,8 +16,12 @@ import { useQueryClient } from "@tanstack/solid-query"
 const Customers = () => {
   
   const [c, setC] = createSignal<AI_customer[]>([])
-  const query = queryCustomers()
   const qc = useQueryClient()
+
+  let query: any;
+  onMount(() => {
+     query = queryCustomers()
+  })
 
   createEffect(() => {
     if (query.data)

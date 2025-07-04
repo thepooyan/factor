@@ -4,7 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { createEffect, createSignal } from "solid-js";
+import { createEffect, createSignal, onMount } from "solid-js";
 import { AI_Factor } from "~/utility/apiInterface";
 import FactorsTable from "./FactorsTable";
 import { queryFactorList } from "~/utility/queries";
@@ -13,7 +13,10 @@ const FactorList = () => {
 
   const [factors, setFactors] = createSignal<AI_Factor[]>([]);
 
-  let query = queryFactorList()
+  let query: any
+  onMount(() => {
+   query = queryFactorList()
+  })
 
   createEffect(() => {
     if (query.data)
