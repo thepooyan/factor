@@ -8,13 +8,14 @@ import {
   TableRow,
 } from "~/components/ui/table";
 import { Accessor, For } from "solid-js";
-import { AI_Factor } from "~/utility/apiInterface";
+import { AI_Factor, AI_ShareToken } from "~/utility/apiInterface";
 import { FiEye, FiShare, FiShare2, FiTrash } from "solid-icons/fi";
 import { api } from "~/utility/api";
 import { selectedCompany } from "~/utility/signals";
 import { callModal } from "../modal/Modal";
 import { useQueryClient } from "@tanstack/solid-query";
 import { ISODateToFa } from "~/utility/utility";
+import ShareModal from "../ShareModal";
 
 interface props {
   factors: Accessor<AI_Factor[]>;
@@ -32,6 +33,16 @@ const FactorsTable = ({ factors }: props) => {
       // await api.delete("/customer/DeleteCustomer", {data}).catch(() => callModal.fail())
       // qc.invalidateQueries({queryKey:["customers"]})
     })
+  }
+
+  const share = async (item: AI_Factor) => {
+    callModal.wait()
+    let res = await api.post<AI_ShareToken>("/factor/CreateShareFactor", {
+      "factor_id": item.factor_id,
+      "company_id": item.company_id,
+      "expire_datetime": null
+    })
+    callModal(<ShareModal token={res.data.unique_token}/>)
   }
 
   return (
@@ -55,7 +66,7 @@ const FactorsTable = ({ factors }: props) => {
                 <TableCell>{c.factor_customer_name}</TableCell>
                 <TableCell>{ISODateToFa(c.factor_date || "")}</TableCell>
                 <TableCell>{c.factor_items.length}</TableCell>
-                <TableCell><FiShare2 class="text-blue-600 cursor-pointer"/></TableCell>
+                <TableCell><FiShare2 onclick={() => share(c)} class="text-blue-600 cursor-pointer"/></TableCell>
                 <TableCell><FiEye class="text-blue-600 cursor-pointer"/></TableCell>
               </TableRow>
             }

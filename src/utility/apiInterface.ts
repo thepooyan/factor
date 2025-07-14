@@ -1,5 +1,16 @@
 import { InewFactor } from "./interface";
 
+export interface AI_ShareToken {
+  "share_id": 2,
+  "factor_id": 13,
+  "company_id": 2,
+  "unique_token": "vlZV2R1VMpKcDChgpwdKIqM0YC_Q2DXz0kFVKMkC8f4",
+  "shareable_link": "https://phoneex.ir/f/ShareFactor/vlZV2R1VMpKcDChgpwdKIqM0YC_Q2DXz0kFVKMkC8f4",
+  "has_password": false,
+  "expires_at": null,
+  "is_active": true,
+  "created_at": "2025-07-14T15:42:49.547106+03:30"
+}
 export interface AI_Factor {
   "company_id": number,
   "customer_id": number,

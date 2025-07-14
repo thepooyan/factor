@@ -214,3 +214,5 @@ export function faDateToISO(faDate: string): string {
 export function ISODateToFa(isoDate: string) {
   return moment(isoDate).locale("fa").format("YYYY/MM/DD")
 }
+
+export const generateShareLink = (token: string) => `/ViewInvoice/${token}`

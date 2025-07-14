@@ -1,4 +1,5 @@
 import { onMount } from "solid-js"
+import ShareModal from "~/components/ShareModal"
 import { api } from "~/utility/api"
 
 const test = () => {
@@ -18,7 +19,7 @@ const test = () => {
 
   return (
     <>
-      test
+      <ShareModal token="hfhfhfhfh"/>
     </>
   )
 }
