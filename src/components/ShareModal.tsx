@@ -6,7 +6,6 @@ import { Suspense } from "solid-js"
 import Spinner from "./general/Spinner"
 import { FiClipboard } from "solid-icons/fi"
 import { Button } from "./ui/button"
-import { A } from "@solidjs/router"
 
 interface props {
   item: AI_Factor
