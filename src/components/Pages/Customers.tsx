@@ -96,7 +96,7 @@ const Customers = () => {
                   نمابر
               </Label>
               <div class="flex items-center">
-                <Input id="fax" placeholder="نام خانوادگی خود را وارد کنید" class="text-right"  {...register("fax_number")}/>
+                <Input id="fax" placeholder="نمابر را وارد کنید" class="text-right"  {...register("fax_number")}/>
               </div>
             </div>
 
@@ -105,7 +105,7 @@ const Customers = () => {
                  شهر
               </Label>
               <div class="flex items-center">
-                <Input id="fax" placeholder="نام خانوادگی خود را وارد کنید" class="text-right"  {...register("city")}/>
+                <Input id="fax" placeholder="نام شهر را وارد کنید" class="text-right"  {...register("city")}/>
               </div>
             </div>
 
@@ -115,7 +115,7 @@ const Customers = () => {
                   آدرس
               </Label>
               <div class="flex items-center">
-                <Input id="fax" placeholder="نام خانوادگی خود را وارد کنید" class="text-right"  {...register("address")}/>
+                <Input id="fax" placeholder="آدرس را وارد کنید" class="text-right"  {...register("address")}/>
               </div>
             </div>
 
@@ -124,7 +124,7 @@ const Customers = () => {
                   کد پستی
               </Label>
               <div class="flex items-center">
-                <Input id="fax" placeholder="نام خانوادگی خود را وارد کنید" class="text-right"  {...register("post_code")}/>
+                <Input id="fax" placeholder="کد پستی را وارد کنید" class="text-right"  {...register("post_code")}/>
               </div>
             </div>
 
@@ -133,7 +133,7 @@ const Customers = () => {
                   کد ملی
               </Label>
               <div class="flex items-center">
-                <Input id="fax" placeholder="نام خانوادگی خود را وارد کنید" class="text-right"  {...register("identification_number")}/>
+                <Input id="fax" placeholder="کد ملی را وارد کنید" class="text-right"  {...register("identification_number")}/>
               </div>
             </div>
 
