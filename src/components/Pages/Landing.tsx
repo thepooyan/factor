@@ -1,12 +1,17 @@
 import { Button } from "~/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/ui/accordion"
-import { A } from "@solidjs/router"
+import { A, usePreloadRoute } from "@solidjs/router"
 import { FaRegularFileLines as FileText } from 'solid-icons/fa'
 import { FiCreditCard as CreditCard, FiUsers as Users, FiShield as Shield, FiZap as Zap, FiChevronLeft} from 'solid-icons/fi'
 import { AiOutlineClockCircle as Clock } from 'solid-icons/ai'
 
 export default function LandingPage() {
+
+  const preload = usePreloadRoute()
+  preload("/signup", {preloadData: true})
+  preload("/login", {preloadData: true})
+
   return (
     <div class="p-5">
       <section class="container m-auto grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
@@ -196,7 +201,7 @@ export default function LandingPage() {
 
           <div class="mt-16 text-center">
             <Button size="lg" >
-              <A href="/register">همین حالا شروع کنید</A>
+              <A href="/signup">همین حالا شروع کنید</A>
             </Button>
           </div>
         </div>
@@ -270,7 +275,7 @@ export default function LandingPage() {
             با فاکتورساز، مدیریت مالی کسب و کار خود را ساده‌تر، سریع‌تر و حرفه‌ای‌تر انجام دهید.
           </p>
           <Button size="lg" variant="secondary" >
-            <A href="/register">رایگان شروع کنید</A>
+            <A href="/signup">رایگان شروع کنید</A>
           </Button>
         </div>
       </section>
