@@ -30,8 +30,8 @@ export default function App() {
 
   return (
     <>
-    <Modal/>
     <QueryClientProvider client={queryClient}>
+    <Modal/>
         <Router
           root={(props) => (
             <>

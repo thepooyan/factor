@@ -1,19 +1,28 @@
 import { generateShareLink } from "~/utility/utility"
 import Copyable from "./general/Copyable"
+import { AI_Factor } from "~/utility/apiInterface"
+import { queryFactorShareLink } from "~/utility/queries"
+import { Suspense } from "solid-js"
+import Spinner from "./general/Spinner"
 
 interface props {
-  token: string
+  item: AI_Factor
 }
-const ShareModal = ({token}:props) => {
-  let link = generateShareLink(token)
+const ShareModal = ({item}:props) => {
+
+  let res = queryFactorShareLink(item.factor_id, item.company_id)
+  let link = () => generateShareLink(res.data?.data.unique_token || "")
+
   return (
     <div class="space-y-1">
       <p>میتوانید از لینک زیر برای اشتراک گذاری این فاکتور استفاده کنید. </p>
-      <Copyable toCopy={link}>
-        <div class="bg-zinc-100 rounded px-2 text-blue ltr">
-          {link}
-        </div>
-      </Copyable>
+      <Suspense fallback={<Spinner/>}>
+        <Copyable toCopy={link()}>
+          <div class="bg-zinc-100 rounded px-2 text-blue ltr">
+            {link()}
+          </div>
+        </Copyable>
+      </Suspense>
     </div>
   )
 }

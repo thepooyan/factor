@@ -16,6 +16,7 @@ import { callModal } from "../modal/Modal";
 import { useQueryClient } from "@tanstack/solid-query";
 import { ISODateToFa } from "~/utility/utility";
 import ShareModal from "../ShareModal";
+import { queryFactorShareLink } from "~/utility/queries";
 
 interface props {
   factors: Accessor<AI_Factor[]>;
@@ -36,13 +37,7 @@ const FactorsTable = ({ factors }: props) => {
   }
 
   const share = async (item: AI_Factor) => {
-    callModal.wait()
-    let res = await api.post<AI_ShareToken>("/factor/CreateShareFactor", {
-      "factor_id": item.factor_id,
-      "company_id": item.company_id,
-      "expire_datetime": null
-    })
-    callModal(<ShareModal token={res.data.unique_token}/>)
+    callModal(() => <ShareModal item={item}/>)
   }
 
   return (

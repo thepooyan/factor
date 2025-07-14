@@ -15,7 +15,7 @@ const FactorList = () => {
 
   let query: any
   onMount(() => {
-   query = queryFactorList()
+    query = queryFactorList()
   })
 
   createEffect(() => {
