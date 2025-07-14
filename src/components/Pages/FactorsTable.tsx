@@ -15,6 +15,7 @@ import { callModal } from "../modal/Modal";
 import { useQueryClient } from "@tanstack/solid-query";
 import { ISODateToFa } from "~/utility/utility";
 import ShareModal from "../ShareModal";
+import { A } from "@solidjs/router";
 
 interface props {
   factors: Accessor<AI_Factor[]>;
@@ -60,7 +61,7 @@ const FactorsTable = ({ factors }: props) => {
                 <TableCell>{ISODateToFa(c.factor_date || "")}</TableCell>
                 <TableCell>{c.factor_items.length}</TableCell>
                 <TableCell><FiShare2 onclick={() => share(c)} class="text-blue-600 cursor-pointer"/></TableCell>
-                <TableCell><FiEye class="text-blue-600 cursor-pointer"/></TableCell>
+                <TableCell><A href={`/Panel/ViewFactor/${c.factor_id}`}><FiEye class="text-blue-600 cursor-pointer"/></A></TableCell>
               </TableRow>
             }
           </For>
