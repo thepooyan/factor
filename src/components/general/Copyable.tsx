@@ -1,11 +1,6 @@
 import { createSignal, ParentProps } from "solid-js";
 import { copyToClipboard } from "~/utility/utility";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover";
-import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -38,9 +33,9 @@ const Copyable = ({ children, toCopy }: props) => {
         </div>
       </TooltipTrigger>
       <TooltipContent class={clsx(copied() && "bg-green-500 font-bold ")}>
-        {!copied() ? "Click to copy" : <>
+        {!copied() ? "برای کپی کلیک کنید" : <>
+          کپی شد!
           <AiFillCheckCircle class="inline mr-2 !w-max" />
-          Copied!
         </>}
       </TooltipContent>
     </Tooltip>
