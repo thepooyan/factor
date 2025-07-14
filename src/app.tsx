@@ -31,7 +31,6 @@ export default function App() {
   return (
     <>
     <QueryClientProvider client={queryClient}>
-    <Modal/>
         <Router
           root={(props) => (
             <>
@@ -42,6 +41,7 @@ export default function App() {
           )}
         >
           <FileRoutes />
+          <Modal/>
         </Router>
     </QueryClientProvider>
     </>
