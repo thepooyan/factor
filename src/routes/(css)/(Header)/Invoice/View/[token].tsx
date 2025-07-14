@@ -20,7 +20,6 @@ const token = () => {
       <Match when={data() === null}>لطفا صبر کنید...</Match>
       <Match when={data()}>{a => <ViewFactor data={a()}/>}</Match>
     </Switch>
-    
   )
 }
 
