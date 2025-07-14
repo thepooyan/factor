@@ -5,7 +5,9 @@ interface p {
 }
 const ViewFactor = ({data}:p) => {
   return (
-    <div class="border-1 bg-white p-5">ViewFactor</div>
+    <div class="border-1 bg-white p-5">
+
+    </div>
   )
 }
 
