@@ -78,12 +78,14 @@ const ViewFactor = ({invoiceData}:p) => {
             </div>
           </CardHeader>
 
+          <Separator class="w-9/10 mb-5"/>
+
           <CardContent>
             {/* Company and Customer Info */}
-            <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="grid md:grid-cols-[1fr_1px_1fr] gap-3 mb-6 content-center justify-center  ">
               <div>
-                <h3 class="font-semibold mb-2 text-lg">اطلاعات شرکت:</h3>
-                <div class="space-y-1 text-sm">
+                <h3 class="font-semibold mb-2 text-lg text-center mb-5">اطلاعات شرکت</h3>
+                <div class="space-y-1 text-sm grid grid-cols-2 text-center">
                   <p>
                     <span class="font-medium">آدرس:</span> {invoiceData.company_infos.company_infos.company_address}
                   </p>
@@ -99,9 +101,11 @@ const ViewFactor = ({invoiceData}:p) => {
                 </div>
               </div>
 
+              <Separator vertical/>
+
               <div>
-                <h3 class="font-semibold mb-2 text-lg">اطلاعات مشتری:</h3>
-                <div class="space-y-1 text-sm">
+                <h3 class="font-semibold mb-2 text-lg text-center mb-5">اطلاعات مشتری</h3>
+                <div class="space-y-1 text-sm grid grid-cols-2 text-center">
                   <p>
                     <span class="font-medium">نام:</span> {invoiceData.customer_infos.first_name}
                   </p>
@@ -122,26 +126,6 @@ const ViewFactor = ({invoiceData}:p) => {
                   </p>
                   <p>
                     <span class="font-medium">کد ملی:</span> {invoiceData.customer_infos.identification_number}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <Separator class="my-6" />
-
-            {/* Invoice Details */}
-            <div class="grid md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <h3 class="font-semibold mb-2 text-lg">جزئیات فاکتور:</h3>
-                <div class="space-y-1 text-sm">
-                  <p>
-                    <span class="font-medium">شماره فاکتور:</span> {invoiceData.factor_infos.factor_number}
-                  </p>
-                  <p>
-                    <span class="font-medium">تاریخ:</span> {invoiceData.factor_infos.factor_date}
-                  </p>
-                  <p>
-                    <span class="font-medium">نرخ مالیات:</span> {invoiceData.factor_infos.tax}%
                   </p>
                 </div>
               </div>
