@@ -1,7 +1,6 @@
 import { AI_FactorView } from "~/utility/apiInterface"
 import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table"
-import { Badge } from "~/components/ui/badge"
 import {
   Dialog,
   DialogContent,
@@ -11,7 +10,7 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog"
 import { PrinterIcon as Print, Check, X } from "lucide-solid"
-import { createSignal } from "solid-js"
+import { createSignal, Show } from "solid-js"
 import { Button } from "./ui/button"
 import Separator from "./ui/Separator"
 
@@ -64,20 +63,17 @@ const ViewFactor = ({invoiceData}:p) => {
           <CardHeader class="pb-4">
             <div class="flex justify-between items-start">
               <div class="flex items-center gap-4">
-                <img
-                  src={invoiceData.company_infos.company_infos.company_logo_path || "/placeholder.svg"}
-                  alt="لوگو شرکت"
-                  class="w-20 h-12 object-contain"
-                />
+                <Show when={invoiceData.company_infos.company_infos.company_logo_path}>
+                  {l => <img
+                    src={l()}
+                    alt="لوگو شرکت"
+                    class="w-20 h-12 object-contain"
+                  />}
+                </Show>
                 <div>
                   <h2 class="text-2xl font-bold">{invoiceData.company_infos.company_infos.company_name}</h2>
                   <p class="text-gray-600">{invoiceData.company_infos.company_infos.description}</p>
                 </div>
-              </div>
-              <div class="text-left" dir="ltr">
-                <Badge variant={invoiceData.factor_infos.factor_is_paid ? "default" : "error"}>
-                  {invoiceData.factor_infos.factor_is_paid ? "پرداخت شده" : "پرداخت نشده"}
-                </Badge>
               </div>
             </div>
           </CardHeader>
@@ -99,10 +95,6 @@ const ViewFactor = ({invoiceData}:p) => {
                   </p>
                   <p>
                     <span class="font-medium">کد پستی:</span> {invoiceData.company_infos.company_infos.post_code}
-                  </p>
-                  <p>
-                    <span class="font-medium">شناسه ملی:</span>{" "}
-                    {invoiceData.company_infos.company_infos.National_Company_ID}
                   </p>
                 </div>
               </div>
