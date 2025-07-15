@@ -18,7 +18,7 @@ const token = () => {
   return (
     <Switch>
       <Match when={data() === null}>لطفا صبر کنید...</Match>
-      <Match when={data()}>{a => <ViewFactor data={a()}/>}</Match>
+      <Match when={data()}>{a => <ViewFactor invoiceData={a()}/>}</Match>
     </Switch>
   )
 }

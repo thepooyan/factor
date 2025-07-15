@@ -24,7 +24,7 @@ const id = () => {
     <>
       <Switch>
         <Match when={data() === null}><Spinner/></Match>
-        <Match when={data()}>{a => <ViewFactor data={a()}/>}</Match>
+        <Match when={data()}>{a => <ViewFactor invoiceData={a()}/>}</Match>
       </Switch>
     </>
   )
