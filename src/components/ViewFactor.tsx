@@ -1,4 +1,5 @@
 import { AI_FactorView } from "~/utility/apiInterface"
+import html2pdf from "html2pdf.js"
 import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table"
 import {
@@ -21,9 +22,10 @@ interface p {
 const ViewFactor = ({invoiceData}:p) => {
   const [showAcceptDialog, setShowAcceptDialog] = createSignal(false)
   const [isAccepted, setIsAccepted] = createSignal<boolean | null>(null)
+  let printRef!: HTMLDivElement
 
   const handlePrint = () => {
-    window.print()
+    html2pdf(printRef)
   }
 
   const handleAccept = () => {
@@ -60,7 +62,7 @@ const ViewFactor = ({invoiceData}:p) => {
   return (
     <div class="min-h-screen bg-gray-50 p-4" dir="rtl">
       <div class="max-w-4xl mx-auto">
-        <Card class="mb-6">
+        <Card class="mb-6" ref={printRef}>
           <CardHeader class="pb-4">
             <div class="flex justify-between items-start">
               <div class="flex items-center gap-4">
