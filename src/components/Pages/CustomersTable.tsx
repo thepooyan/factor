@@ -52,7 +52,7 @@ const CustomersTable = ({ customers }: props) => {
           <For each={customers()}>
             {c => 
               <TableRow>
-                <TableCell class="text-red-600 cursor-pointer"><FiTrash onclick={() => deleteMe(c.customer_id)}/></TableCell>
+                <TableCell class="text-red-600 cursor-pointer"><FiTrash onclick={() => deleteMe(c.customer_id || 0)}/></TableCell>
                 <TableCell>{c.first_name}</TableCell>
                 <TableCell>{c.phone_number}</TableCell>
                 <TableCell>{c.fax_number}</TableCell>
