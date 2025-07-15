@@ -13,7 +13,7 @@ import { PrinterIcon as Print, Check, X } from "lucide-solid"
 import { createSignal, Show } from "solid-js"
 import { Button } from "./ui/button"
 import Separator from "./ui/Separator"
-import { formatToPersianDate } from "~/utility/utility"
+import { formatToPersianShortDate } from "~/utility/utility"
 
 interface p {
   invoiceData: AI_FactorView
@@ -76,12 +76,12 @@ const ViewFactor = ({invoiceData}:p) => {
                   <p class="text-gray-600">{invoiceData.company_infos.company_infos.description}</p>
                 </div>
               </div>
-              <div>
+              <div class="text-left space-y-1">
                 <p>
-                  <span>تاریخ:</span> {formatToPersianDate(invoiceData.factor_infos.factor_date)}
+                  <span>تاریخ:</span> {formatToPersianShortDate(invoiceData.factor_infos.factor_date)}
                 </p>
                 <p>
-                  <span>شماره فاکتور:</span>
+                  <span>شماره فاکتور:</span> {invoiceData.factor_infos.factor_number}
                 </p>
               </div>
             </div>
