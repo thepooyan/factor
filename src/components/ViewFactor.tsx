@@ -56,10 +56,8 @@ const ViewFactor = ({invoiceData}:p) => {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("fa-IR").format(amount) + " ریال"
   }
+
   return (
-
-
-
     <div class="min-h-screen bg-gray-50 p-4" dir="rtl">
       <div class="max-w-4xl mx-auto">
         <Card class="mb-6">
@@ -253,8 +251,6 @@ const ViewFactor = ({invoiceData}:p) => {
         </DialogContent>
       </Dialog>
     </div>
-
-
   )
 }
 
