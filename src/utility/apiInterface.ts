@@ -4,21 +4,16 @@ export interface AI_FactorView {
   factor_infos: {
     company_id: number;
     customer_id: number;
-    factor_number: string;
-    factor_final_price: number;
-    factor_is_paid: boolean;
+    factor_number: string | null;
     factor_items: [
       {
         name: string;
         quantity: number;
         unitPrice: number;
-        discount: number;
+        discount: number | null;
       },
     ];
     tax: string;
-    tax_is_percent: boolean;
-    discount: string;
-    discount_is_percent: boolean;
     factor_date: string;
     user_id: number;
     factor_id: number;
@@ -29,50 +24,40 @@ export interface AI_FactorView {
     company_id: number;
     customer_id: number;
     first_name: string;
-    last_name: string;
-    phone_number: string;
-    fax_number: string;
-    address: string;
-    city: string;
-    post_code: string;
-    identification_number: string;
-    individual_or_legalentity: string;
-    National_Company_ID: string;
-    Company_Registration_Number: string;
-    Economic_Code: string;
+    phone_number: string | null;
+    fax_number: string | null;
+    address: string | null;
+    city: string | null;
+    post_code: string | null;
+    identification_number: string | null;
   };
   company_infos: {
     company_infos: {
       company_id: number;
       company_name: string;
-      company_address: string;
-      company_phone: string;
-      company_fax: string;
-      company_logo_path: string;
-      description: string;
+      company_address: string | null;
+      company_phone: string | null;
+      company_fax: string | null;
+      company_logo_path: string  | null;
+      description: string | null;
       user_id: number;
-      post_code: string;
-      National_Company_ID: string;
-      Company_Registration_Number: string;
-      Economic_Code: string;
+      post_code: string | null;
       tax_percentage: number;
-      shipment_price: number;
-      individual_or_legalentity: string;
-      date_of_submit: string;
+      shipment_price: number | null;
     };
-    company_shipment: [
-      {
-        company_id: number;
-        shipping_provider_id: number;
-        is_active: true;
-        custom_name: string;
-        default_price: number;
-        additional_info: {};
-        service_area: string;
-        delivery_time: string;
-        date_of_add: string;
-      },
-    ];
+    // company_shipment: [
+    //   {
+    //     company_id: number;
+    //     shipping_provider_id: number;
+    //     is_active: true;
+    //     custom_name: string;
+    //     default_price: number;
+    //     additional_info: {};
+    //     service_area: string;
+    //     delivery_time: string;
+    //     date_of_add: string;
+    //   },
+    // ];
   };
 }
 
