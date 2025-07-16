@@ -2,7 +2,7 @@ import { useQuery, QueryClientConfig } from "@tanstack/solid-query";
 import { api } from "./api";
 import { ICompany, Iprofile } from "./interface";
 import { selectedCompany, userMg } from "./signals";
-import { AI_customer, AI_Factor, AI_ShareToken } from "./apiInterface";
+import { AI_customer, AI_Factor, AI_FactorView, AI_ShareToken } from "./apiInterface";
 
 export const queryConfig:QueryClientConfig = {
   defaultOptions: {
@@ -52,13 +52,22 @@ export const queryFactorList = () => {
 
 export const queryFactorShareLink = (factor_id: number, company_id: number) => {
   return useQuery(() => ({
-    queryKey: ["factors", userMg.get()?.user.email, factor_id, company_id],
+    queryKey: ["factorLink", userMg.get()?.user.email, factor_id, company_id],
     queryFn: () => {
       return api.post<AI_ShareToken>("/factor/CreateShareFactor", {
         "factor_id": factor_id,
         "company_id": company_id,
         "expire_datetime": null
     })
+    }
+  }))
+}
+
+export const queryFactorView = (factor_id: string, company_id: number) => {
+  return useQuery(() => ({
+    queryKey: ["factorView", userMg.get()?.user.email, factor_id, company_id],
+    queryFn: () => {
+      return api.post<AI_FactorView>("/factor/infos", {factor_id: factor_id, company_id: company_id})
     }
   }))
 }

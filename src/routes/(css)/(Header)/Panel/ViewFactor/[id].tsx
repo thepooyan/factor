@@ -1,9 +1,11 @@
 import { useParams } from "@solidjs/router"
-import { createSignal, Match, onMount, Switch } from "solid-js"
+import { UseQueryResult } from "@tanstack/solid-query"
+import { AxiosResponse } from "axios"
+import { createEffect, createSignal, Match, onMount, Switch } from "solid-js"
 import Spinner from "~/components/general/Spinner"
 import ViewFactor from "~/components/ViewFactor"
-import { api } from "~/utility/api"
 import { AI_FactorView } from "~/utility/apiInterface"
+import { queryFactorView } from "~/utility/queries"
 import { selectedCompany } from "~/utility/signals"
 
 const id = () => {
@@ -11,13 +13,18 @@ const id = () => {
   const id = params.id
 
   const [data, setData] = createSignal<AI_FactorView | null>(null)
+  let query: UseQueryResult<AxiosResponse<AI_FactorView>>
 
   onMount(async() => {
     const company = selectedCompany()
     if (!company) throw new Error("شرکت انتخاب شده یافت نشد")
 
-    let response = await api.post<AI_FactorView>("/factor/infos", {factor_id: id, company_id: company.company_id})
-    setData(response.data)
+    query = queryFactorView(id, company.company_id)
+  })
+
+  createEffect(() => {
+    if (query.data?.data)
+      setData(query.data.data)
   })
 
   return (
