@@ -62,10 +62,24 @@ const Company = ({isNew, initialData}:props) => {
       })
   }
 
+  const deleteMe = async (id: number) => {
+    callModal.prompt("حذف شود؟")
+    .yes(async () => {
+      callModal.wait()
+      api.delete("https://phoneex.ir/f/company/DeleteCompany", {data: {company_id: id }})
+        .catch(e => callModal.fail(e))
+        .then(() => {
+          callModal.success();
+          qc.invalidateQueries({queryKey: ["compaines", userMg.get()?.user.email]})
+          })
+      })
+
+  }
+
   return (
     <>
     <div class="flex justify-center">
-      <Card class="w-full max-w-2xl">
+      <Card class="w-full max-w-2xl relative">
         <CardHeader class="text-right">
           <CardTitle class="text-2xl font-bold">
             <Show when={isNew} fallback="فرم اطلاعات شرکت">
@@ -74,6 +88,10 @@ const Company = ({isNew, initialData}:props) => {
           </CardTitle>
           <CardDescription>لطفا اطلاعات شرکت خود را وارد کنید</CardDescription>
         </CardHeader>
+          <Show when={initialData}>{i => 
+            <Button variant="destructive" class="absolute left-5 top-5"
+            onclick={() => deleteMe(i()().company_id)}>حذف شرکت</Button>
+          }</Show>
         <form onSubmit={submit(handleSubmit)}>
           <CardContent class="space-y-6">
             <div class="space-y-2">
