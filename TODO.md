@@ -3,10 +3,10 @@
 - add pageination for all factors
 
 
-add logo upload
-handle factor missing fields
 add customer suggestion
 fix print
+handle factor missing fields
+add logo upload
 add payment plan
 
 
