@@ -4,28 +4,33 @@ import { Label } from "~/components/ui/label"
 import { FiPhone } from "solid-icons/fi"
 import Input from "../general/Input"
 import CustomersTable from "./CustomersTable"
-import { createEffect, createSignal, onMount } from "solid-js"
+import { createEffect, createSignal, onMount, Show } from "solid-js"
 import { api } from "~/utility/api"
 import { selectedCompany } from "~/utility/signals"
 import { AI_customer } from "~/utility/apiInterface"
 import { useForm } from "~/utility/hooks"
 import { callModal } from "../modal/Modal"
 import { queryCustomers } from "~/utility/queries"
-import { useQueryClient } from "@tanstack/solid-query"
+import { useQueryClient, UseQueryResult } from "@tanstack/solid-query"
+import Spinner from "../general/Spinner"
+import { AxiosResponse } from "axios"
 
 const Customers = () => {
   
   const [c, setC] = createSignal<AI_customer[]>([])
+  const [pending, setPending] = createSignal(false)
   const qc = useQueryClient()
 
-  let query: any;
+  let query: UseQueryResult<AxiosResponse<AI_customer[]>>;
   onMount(() => {
      query = queryCustomers()
   })
 
   createEffect(() => {
-    if (query.data)
+    if (query !== undefined) {
       setC(query.data?.data || [])
+      setPending(query.isPending)
+    }
   })
 
   const emptyCustomer: AI_customer = {
@@ -68,6 +73,7 @@ const Customers = () => {
         </CardHeader>
         <form onSubmit={submit(handleSubmit)} ref={formRef}>
             <CustomersTable customers={c}/>
+            <Show when={pending()}><Spinner/></Show>
 
           <CardContent class="space-y-6">
             <h1 class="text-xl font-bold my-4 mb-7">ثبت مشتری جدید</h1>
