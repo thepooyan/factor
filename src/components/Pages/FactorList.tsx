@@ -4,24 +4,31 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { createEffect, createSignal, onMount } from "solid-js";
+import { createEffect, createSignal, onMount, Show } from "solid-js";
 import { AI_Factor } from "~/utility/apiInterface";
 import FactorsTable from "./FactorsTable";
 import { queryFactorList } from "~/utility/queries";
+import Spinner from "../general/Spinner";
+import { UseQueryResult } from "@tanstack/solid-query";
+import { AxiosResponse } from "axios";
 
 const FactorList = () => {
 
   const [factors, setFactors] = createSignal<AI_Factor[]>([]);
+  const [pending, setPending] = createSignal(false)
 
-  let query: any
+  let query: UseQueryResult<AxiosResponse<AI_Factor[]>>
   onMount(() => {
     query = queryFactorList()
   })
 
   createEffect(() => {
-    if (query.data)
-      setFactors(query.data.data)
+    if (query !== undefined) {
+      setFactors(query?.data?.data || [])
+      setPending(query.isPending)
+    }
   })
+
 
   return (
     <>
@@ -36,6 +43,7 @@ const FactorList = () => {
             </CardDescription>
           </CardHeader>
           <FactorsTable factors={factors}/>
+          <Show when={pending()}><Spinner/></Show>
         </Card>
       </div>
     </>
