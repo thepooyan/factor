@@ -20,6 +20,7 @@ const token = () => {
   createEffect(() => {
     if (query.data?.data)
       setData(query.data.data)
+    console.log(query.status)
   })
 
   return (

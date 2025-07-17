@@ -1,5 +1,4 @@
 import { AI_FactorView } from "~/utility/apiInterface"
-import html2pdf from "html2pdf.js"
 import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table"
 import {
@@ -25,7 +24,6 @@ const ViewFactor = ({invoiceData}:p) => {
   let printRef!: HTMLDivElement
 
   const handlePrint = () => {
-    html2pdf(printRef)
   }
 
   const handleAccept = () => {
