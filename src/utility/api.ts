@@ -27,11 +27,14 @@ api.interceptors.response.use(
       let rt = getCurrentRefreshToken();
       if (!rt) return Promise.reject({msg: "لطفا مجددا وارد شوید"})
 
-      let {data: newToken} = await api.post<Itoken>("/refresh-token", {refresh_token: rt})
-      userMg.setNewToken(newToken)
-
-      error.config._retry = true
-      return api(error.config)
+      try {
+        let {data: newToken} = await api.post<Itoken>("/refresh-token", {refresh_token: rt})
+        userMg.setNewToken(newToken)
+        error.config._retry = true
+        return api(error.config)
+      } catch(_) {
+        return Promise.reject({msg: "لطفا مجددا وارد شوید"})
+      }
     }
 
     return Promise.reject({msg, error})
