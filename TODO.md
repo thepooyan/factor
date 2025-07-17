@@ -5,7 +5,6 @@
 
 add logo upload
 handle factor missing fields
-add remove company
 add customer suggestion
 fix print
 
