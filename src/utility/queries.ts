@@ -74,7 +74,7 @@ export const queryFactorView = (factor_id: string, company_id: number) => {
 
 export const queryFactorViewPublic = (token: string) => {
   return useQuery(() => ({
-    queryKey: ["factorViewPublic", userMg.get()?.user.email, token],
+    queryKey: ["factorViewPublic", token],
     queryFn: () => {
       return api.get<AI_FactorView>(`/factor/AccessShareFactor/${token}`)
     }

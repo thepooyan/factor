@@ -13,7 +13,7 @@ const token = () => {
   const token = params.token
   let query: UseQueryResult<AxiosResponse<AI_FactorView>>
 
-  onMount(async() => {
+  onMount(() => {
     query = queryFactorViewPublic(token)
   })
 
