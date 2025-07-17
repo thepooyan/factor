@@ -7,6 +7,7 @@ add logo upload
 handle factor missing fields
 add customer suggestion
 fix print
+add payment plan
 
 
 # invoice
