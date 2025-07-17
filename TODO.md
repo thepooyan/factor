@@ -1,8 +1,11 @@
 # mmd
 - add username to signup?
 - add pageination for all factors
+
+
 add logo upload
 handle factor missing fields
+add remove company
 add customer suggestion
 
 
