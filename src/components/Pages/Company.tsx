@@ -110,7 +110,7 @@ const Company = ({isNew, initialData}:props) => {
                       type="button"
                       variant="outline"
                       size="sm"
-                      class="absolute -top-2 -right-2"
+                      class="absolute -top-2 -right-2 bg-red-400 hover:bg-red-500 w-5 h-5 flex justify-center items-center p-0 !text-white font-bold"
                       onClick={() => {
                         setLogo(null)
                         setLogoPreview(null)
