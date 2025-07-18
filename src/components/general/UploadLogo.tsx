@@ -14,7 +14,7 @@ interface props {
 }
 const UploadLogo = ({companyId, initial}:props) => {
 
-  const [logoPreview, setLogoPreview] = createSignal<string | null>(initial || null);
+  const [logoPreview, setLogoPreview] = createSignal<string | null>(initial ? `/logos/${companyId}/${initial}` : null);
   const qc = useQueryClient()
 
   const handleLogoChange = (e: any) => {
@@ -49,7 +49,7 @@ const uploadFile = async (file: File) => {
       {logoPreview() ? (
         <div class="relative w-32 h-32">
           <img
-            src={ import.meta.env.VITE_API + logoPreview() || "/placeholder.png"}
+            src={ logoPreview() || "/placeholder.png"}
             alt="پیش نمایش لوگو"
             class="w-full h-full object-contain"
           />

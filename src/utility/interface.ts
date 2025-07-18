@@ -69,6 +69,6 @@ export interface ICompany {
   company_address: string;
   company_phone: string;
   company_fax: string;
-  company_logo_path: string;
+  company_logo_name: string;
   description: string;
 }
