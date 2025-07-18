@@ -40,7 +40,7 @@ const uploadFile = async (file: File) => {
   })
   .catch(e => {
     callModal.fail(e.msg)
-    setLogoPreview(null)
+    setLogoPreview(initial || null)
   })
 }
 
