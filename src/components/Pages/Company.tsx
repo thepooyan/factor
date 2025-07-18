@@ -44,8 +44,8 @@ const Company = ({isNew, initialData}:props) => {
 
   const handleSubmit = (e: ICompany) => {
     callModal.wait()
-    let fetch = () => api.post("/company/NewCompany", e)
-    if (initialData) fetch = () => api.put("/company/EditCompany", {...e, company_id: initialData().company_id})
+    let fetch = () => api.post("/company/NewCompany", {company_infos: e})
+    if (initialData) fetch = () => api.put("/company/EditCompany", {company_infos: {...e, company_id: initialData().company_id}})
 
     fetch()
     .then(() => {
