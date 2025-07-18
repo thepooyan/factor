@@ -92,7 +92,7 @@ const Company = ({isNew, initialData}:props) => {
                   <Label for="logo" class="block text-right">
                     لوگوی شرکت
                   </Label>
-                  <UploadLogo companyId={i()().company_id} initial={i()().company_logo_name}/>
+                  <UploadLogo company={i()}/>
                 </div>
               </>}
             </Show>

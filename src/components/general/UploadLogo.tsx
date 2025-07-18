@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { Accessor, createEffect, createSignal } from "solid-js";
 import { Button } from "../ui/button";
 import { FiUpload } from "solid-icons/fi";
 import Input from "./Input";
@@ -7,15 +7,24 @@ import { api } from "~/utility/api";
 import { callModal } from "../modal/Modal";
 import { useQueryClient } from "@tanstack/solid-query";
 import { userMg } from "~/utility/signals";
+import { ICompany } from "~/utility/interface";
 
 interface props {
-  companyId: number
-  initial?: string
+  company: Accessor<ICompany>
 }
-const UploadLogo = ({companyId, initial}:props) => {
+const UploadLogo = ({company}:props) => {
 
-  const [logoPreview, setLogoPreview] = createSignal<string | null>(initial ? `/logos/${companyId}/${initial}` : null);
+  const [logoPreview, setLogoPreview] = createSignal<string | null>(null);
   const qc = useQueryClient()
+
+  const resetPreview = () => {
+    if (company().company_logo_name === null) return setLogoPreview(null)
+    setLogoPreview(`${import.meta.env.VITE_API}/logos/${company().company_id}/${company().company_logo_name}`)
+  }
+
+  createEffect(() => {
+    resetPreview()
+  })
 
   const handleLogoChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
@@ -29,7 +38,7 @@ const uploadFile = async (file: File) => {
   const formData = new FormData()
   formData.append('file', file)
 
-  api.post(`/company/UploadCompanyLogo/${companyId}`, formData, {
+  api.post(`/company/UploadCompanyLogo/${company().company_id}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
@@ -40,7 +49,7 @@ const uploadFile = async (file: File) => {
   })
   .catch(e => {
     callModal.fail(e.msg)
-    setLogoPreview(initial || null)
+    resetPreview()
   })
 }
 
