@@ -20,7 +20,6 @@ interface props {
   initialData?: Accessor<ICompany>
 }
 const Company = ({isNew, initialData}:props) => {
-  const [_, setLogo] = createSignal<File | null>(null)
   let form: Accessor<ICompany | undefined>;
 
   if (initialData)
@@ -28,6 +27,7 @@ const Company = ({isNew, initialData}:props) => {
     else 
     [form] = createSignal<ICompany>()
 
+  const [_, setLogo] = createSignal<File | null>(null)
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null)
   const {register, submit} = useForm(form)
   const navigate = useNavigate()
