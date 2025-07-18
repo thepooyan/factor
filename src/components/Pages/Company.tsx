@@ -3,7 +3,7 @@ import { BsFileText } from 'solid-icons/bs'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
 import { Accessor, createSignal, Show } from "solid-js"
-import { FiPhone, FiPrinter, FiUpload } from "solid-icons/fi"
+import { FiPhone, FiPrinter } from "solid-icons/fi"
 import Input from "../general/Input"
 import { FaSolidBuilding } from "solid-icons/fa"
 import { useForm } from "~/utility/hooks"
@@ -14,6 +14,7 @@ import { userMg } from "~/utility/signals"
 import { queryCompanies } from "~/utility/queries"
 import { useQueryClient } from "@tanstack/solid-query"
 import { useNavigate } from "@solidjs/router"
+import UploadLogo from "../general/UploadLogo"
 
 interface props {
   isNew?: boolean
@@ -27,20 +28,11 @@ const Company = ({isNew, initialData}:props) => {
     else 
     [form] = createSignal<ICompany>()
 
-  const [_, setLogo] = createSignal<File | null>(null)
-  const [logoPreview, setLogoPreview] = createSignal<string | null>(null)
   const {register, submit} = useForm(form)
   const navigate = useNavigate()
 
   const qc = useQueryClient()
 
-  const handleLogoChange = (e: any) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0]
-      setLogo(file)
-      setLogoPreview(URL.createObjectURL(file))
-    }
-  }
 
   const handleSubmit = (e: ICompany) => {
     callModal.wait()
@@ -94,49 +86,16 @@ const Company = ({isNew, initialData}:props) => {
           }</Show>
         <form onSubmit={submit(handleSubmit)}>
           <CardContent class="space-y-6">
-            <div class="space-y-2">
-              <Label for="logo" class="block text-right">
-                لوگوی شرکت
-              </Label>
-              <div class="flex flex-col items-center gap-4">
-                {logoPreview() ? (
-                  <div class="relative w-32 h-32">
-                    <img
-                      src={logoPreview() || "/placeholder.png"}
-                      alt="پیش نمایش لوگو"
-                      class="w-full h-full object-contain"
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      class="absolute -top-2 -right-2 bg-red-400 hover:bg-red-500 w-5 h-5 flex justify-center items-center p-0 !text-white font-bold"
-                      onClick={() => {
-                        setLogo(null)
-                        setLogoPreview(null)
-                      }}
-                    >
-                      ×
-                    </Button>
-                  </div>
-                ) : (
-                  <div class="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed rounded-md border-gray-300">
-                    <FiUpload class="w-8 h-8 text-gray-400" />
-                    <span class="mt-2 text-sm text-gray-500">آپلود لوگو</span>
-                  </div>
-                )}
-                <div class="w-full">
-                  <Input id="logo" type="file" accept="image/*" onChange={handleLogoChange} class="hidden" />
-                  <Label
-                    for="logo"
-                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 cursor-pointer"
-                  >
-                    <FiUpload class="w-4 h-4 ml-2" />
-                    انتخاب فایل
+            <Show when={initialData}>
+              {i => <>
+                <div class="space-y-2">
+                  <Label for="logo" class="block text-right">
+                    لوگوی شرکت
                   </Label>
+                  <UploadLogo companyId={i()().company_id} initial={i()().company_logo_path}/>
                 </div>
-              </div>
-            </div>
+              </>}
+            </Show>
 
             <div class="space-y-2">
               <Label for="name" class="block text-right">
