@@ -8,6 +8,8 @@ import { callModal } from "../modal/Modal";
 import { useQueryClient } from "@tanstack/solid-query";
 import { userMg } from "~/utility/signals";
 import { ICompany } from "~/utility/interface";
+import { cn } from "~/lib/utils";
+import Spinner from "./Spinner";
 
 interface props {
   company: Accessor<ICompany>
@@ -15,6 +17,7 @@ interface props {
 const UploadLogo = ({company}:props) => {
 
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null);
+  const [uploading , setUploading] = createSignal(false)
   const qc = useQueryClient()
 
   const resetPreview = () => {
@@ -37,6 +40,7 @@ const UploadLogo = ({company}:props) => {
 const uploadFile = async (file: File) => {
   const formData = new FormData()
   formData.append('file', file)
+  setUploading(true)
 
   api.post(`/company/UploadCompanyLogo/${company().company_id}`, formData, {
     headers: {
@@ -51,6 +55,9 @@ const uploadFile = async (file: File) => {
     callModal.fail(e.msg)
     resetPreview()
   })
+  .finally(() => {
+    setUploading(false)
+  })
 }
 
   return (
@@ -60,8 +67,9 @@ const uploadFile = async (file: File) => {
           <img
             src={ logoPreview() || "/placeholder.png"}
             alt="پیش نمایش لوگو"
-            class="w-full h-full object-contain"
+            class={cn("w-full h-full object-contain", uploading() && "opacity-30")}
           />
+          {uploading() && <div class="bg-black w-full h-full top-0 absolute left-0 opacity-50 rounded flex justify-center"><Spinner reverse/></div> }
           <Button
             type="button"
             variant="outline"
