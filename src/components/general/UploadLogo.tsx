@@ -25,6 +25,16 @@ const UploadLogo = ({company}:props) => {
     setLogoPreview(`${import.meta.env.VITE_API}/logos/${company().company_id}/${company().company_logo_name}?date=${Date.now()}`)
   }
 
+  const remove = () => {
+    callModal.prompt("حذف شود؟")
+    .yes(async () => {
+        setUploading(true)
+        await api.delete(`/company/DeleteCompanyLogo/${company().company_id}`)
+        .catch(err => callModal.fail(err))
+        setUploading(false)
+      })
+  }
+
   createEffect(() => {
     resetPreview()
   })
@@ -76,9 +86,7 @@ const uploadFile = async (file: File) => {
             variant="outline"
             size="sm"
             class="absolute -top-2 -right-2 bg-red-400 hover:bg-red-500 w-5 h-5 flex justify-center items-center p-0 !text-white font-bold"
-            onClick={() => {
-              setLogoPreview(null);
-            }}
+            onClick={remove}
           >
             ×
           </Button>
