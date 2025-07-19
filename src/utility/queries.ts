@@ -23,7 +23,7 @@ export const queryUserInfo = () => {
 
 export const queryCompanies = () => {
   return useQuery(() => ({
-    queryKey: ["compaines", userMg.get()?.user.email],
+    queryKey: ["compaines"],
     queryFn: () => api.get<ICompany[]>("company/UserAllCompanies")
   }))
 }

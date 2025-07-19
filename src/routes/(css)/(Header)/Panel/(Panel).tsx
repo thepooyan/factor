@@ -1,6 +1,6 @@
 import { UseQueryResult } from "@tanstack/solid-query"
 import { AxiosResponse } from "axios"
-import { onMount, Show } from "solid-js"
+import { createEffect, onMount, Show } from "solid-js"
 import Company from "~/components/Pages/Company"
 import { ICompany } from "~/utility/interface"
 import { queryCompanies } from "~/utility/queries"
@@ -11,6 +11,10 @@ const Panel = () => {
   let query:UseQueryResult<AxiosResponse<ICompany[]>>
   onMount(() => {
     query = queryCompanies()
+  })
+
+  createEffect(() => {
+    console.log(query)
   })
 
   const folan = () => {
