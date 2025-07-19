@@ -3,6 +3,7 @@ import { api } from "./api";
 import { ICompany, Iprofile } from "./interface";
 import { selectedCompany, userMg } from "./signals";
 import { AI_customer, AI_Factor, AI_FactorView, AI_ShareToken } from "./apiInterface";
+import { makeQuery } from "./tanstackHelper";
 
 export const queryConfig:QueryClientConfig = {
   defaultOptions: {
@@ -21,12 +22,22 @@ export const queryUserInfo = () => {
   }))
 }
 
-export const queryCompanies = () => {
-  return useQuery(() => ({
-    queryKey: ["compaines"],
-    queryFn: () => api.get<ICompany[]>("company/UserAllCompanies")
-  }))
-}
+// export const queryCompanies = (() => {
+//   const key = ["companies"] as const
+//   const fn = () =>
+//     useQuery(() => ({
+//       queryKey: key,
+//       queryFn: () => api.get<ICompany[]>("company/UserAllCompanies")
+//     }))
+//
+//   // attach key to the function
+//   fn.key = key
+//   return fn
+// })()
+export const queryCompanies = makeQuery(() => {
+  return api.get<ICompany[]>("company/UserAllCompanies")
+}, ["companies"])
+
 
 
 export const queryCustomers = () => {
