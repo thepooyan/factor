@@ -22,7 +22,7 @@ const UploadLogo = ({company}:props) => {
 
   const resetPreview = () => {
     if (company().company_logo_name === null) return setLogoPreview(null)
-    setLogoPreview(`${import.meta.env.VITE_API}/logos/${company().company_id}/${company().company_logo_name}`)
+    setLogoPreview(`${import.meta.env.VITE_API}/logos/${company().company_id}/${company().company_logo_name}?date=${Date.now()}`)
   }
 
   createEffect(() => {
@@ -50,6 +50,7 @@ const uploadFile = async (file: File) => {
   .then(() => {
     callModal.success("لوگو جدید با موفقیت ثبت شد!")
     qc.invalidateQueries({queryKey: ["companies", userMg.get()?.user.email]})
+    resetPreview()
   })
   .catch(e => {
     callModal.fail(e.msg)
