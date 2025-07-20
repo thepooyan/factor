@@ -10,8 +10,8 @@ import { selectedCompany } from "~/utility/signals"
 import { AI_customer } from "~/utility/apiInterface"
 import { useForm } from "~/utility/hooks"
 import { callModal } from "../modal/Modal"
-import { queryCustomers, queryKeys } from "~/utility/queries"
-import { useQueryClient, UseQueryResult } from "@tanstack/solid-query"
+import { queryCustomers, useInvalidate } from "~/utility/queries"
+import { UseQueryResult } from "@tanstack/solid-query"
 import Spinner from "../general/Spinner"
 import { AxiosResponse } from "axios"
 
@@ -19,7 +19,7 @@ const Customers = () => {
   
   const [c, setC] = createSignal<AI_customer[]>([])
   const [pending, setPending] = createSignal(false)
-  const qc = useQueryClient()
+  const invalidate = useInvalidate()
 
   let query: UseQueryResult<AxiosResponse<AI_customer[]>>;
   onMount(() => {
@@ -58,7 +58,7 @@ const Customers = () => {
     .then(() => {
         callModal.success()
         formRef.reset()
-        qc.invalidateQueries({queryKey: [queryKeys.customers]})
+        invalidate(q => q.customers)
       })
     .catch(() => callModal.fail())
   }

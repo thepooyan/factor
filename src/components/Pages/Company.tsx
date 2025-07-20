@@ -10,8 +10,7 @@ import { useForm } from "~/utility/hooks"
 import { ICompany } from "~/utility/interface"
 import { api } from "~/utility/api"
 import { callModal } from "../modal/Modal"
-import { queryCompanies, queryKeys } from "~/utility/queries"
-import { useQueryClient } from "@tanstack/solid-query"
+import { queryCompanies, useInvalidate } from "~/utility/queries"
 import { useNavigate } from "@solidjs/router"
 import UploadLogo from "../general/UploadLogo"
 
@@ -29,8 +28,7 @@ const Company = ({isNew, initialData}:props) => {
 
   const {register, submit} = useForm(form)
   const navigate = useNavigate()
-
-  const qc = useQueryClient()
+  const invalidate = useInvalidate()
 
 
   const handleSubmit = (e: ICompany) => {
@@ -46,7 +44,7 @@ const Company = ({isNew, initialData}:props) => {
         callModal.fail(msg)
       })
     .finally(() => {
-        qc.invalidateQueries({queryKey:[queryKeys.companies]})
+        invalidate(q => q.companies)
         if (!initialData) {
           navigate("/Panel")
         }
@@ -61,7 +59,7 @@ const Company = ({isNew, initialData}:props) => {
         .catch(e => callModal.fail(e))
         .then(() => {
           callModal.success();
-          qc.invalidateQueries({queryKey: [queryKeys.companies]})
+          invalidate(q => q.companies)
           })
       })
 

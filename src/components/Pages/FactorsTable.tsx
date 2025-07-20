@@ -12,18 +12,17 @@ import { FiEye , FiShare2, FiTrash } from "solid-icons/fi";
 import { api } from "~/utility/api";
 import { selectedCompany } from "~/utility/signals";
 import { callModal } from "../modal/Modal";
-import { useQueryClient } from "@tanstack/solid-query";
 import { ISODateToFa } from "~/utility/utility";
 import ShareModal from "../ShareModal";
 import { A } from "@solidjs/router";
-import { queryKeys } from "~/utility/queries";
+import { useInvalidate } from "~/utility/queries";
 
 interface props {
   factors: Accessor<AI_Factor[]>;
 }
 const FactorsTable = ({ factors }: props) => {
 
-  const qc = useQueryClient()
+  const invalidate = useInvalidate()
   const deleteMe = async (id: number) => {
     callModal.prompt("حذف شود؟")
     .yes(async () => {
@@ -32,7 +31,7 @@ const FactorsTable = ({ factors }: props) => {
         "company_id": selectedCompany()?.company_id || 0
       }
       await api.delete("/factor/DeleteFactor", {data}).catch(() => callModal.fail())
-      qc.invalidateQueries({queryKey:[queryKeys.factors]})
+      invalidate(q => q.factors)
     })
   }
 
