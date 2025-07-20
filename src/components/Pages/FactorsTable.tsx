@@ -31,7 +31,7 @@ const FactorsTable = ({ factors }: props) => {
         "company_id": selectedCompany()?.company_id || 0
       }
       await api.delete("/factor/DeleteFactor", {data}).catch(() => callModal.fail())
-      invalidate(q => q.factors)
+      invalidate(q => q.factors, selectedCompany()?.company_id)
     })
   }
 

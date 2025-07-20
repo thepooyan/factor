@@ -29,7 +29,7 @@ const CustomersTable = ({ customers }: props) => {
         "company_id": selectedCompany()?.company_id || 0
       }
       await api.delete("/customer/DeleteCustomer", {data}).catch(() => callModal.fail())
-      invalidate(q => q.customers)
+      invalidate(q => q.customers, selectedCompany()?.company_id)
     })
   }
 

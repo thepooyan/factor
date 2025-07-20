@@ -58,7 +58,7 @@ const Customers = () => {
     .then(() => {
         callModal.success()
         formRef.reset()
-        invalidate(q => q.customers)
+        invalidate(q => q.customers, selectedCompany()?.company_id)
       })
     .catch(() => callModal.fail())
   }

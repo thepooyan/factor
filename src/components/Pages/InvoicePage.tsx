@@ -1,4 +1,4 @@
-import { setTaxRate, taxRate } from "~/utility/signals"
+import { selectedCompany, setTaxRate, taxRate } from "~/utility/signals"
 import Input from "../general/Input"
 import ProductManage, { productItems } from "../ProductManage"
 import moment from 'jalali-moment'
@@ -64,7 +64,7 @@ export default function InvoicePage({companyId}:props) {
     .then(() => {
         callModal.success()
         navigate("/Panel/FactorList")
-        invalidate(q => q.factors)
+        invalidate(q => q.factors, selectedCompany()?.company_id)
       })
     .catch(() => callModal.fail("متاسفانه ارسال اطلاعات موفقیت آمیز نبود. لطفا دوباره تلاش کنید."))
   }
