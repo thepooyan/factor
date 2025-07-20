@@ -37,6 +37,7 @@ api.interceptors.response.use(
       } catch(_) {
         callModal(() => (<>مدت زمان لوگین شما به پایان رسیده. لطفا مجددا وارد شوید <Button as="A" href="/Login">لوگین</Button></>))
         userMg.logout()
+        window.location.replace("/login")
         return Promise.reject({msg: "لطفا مجددا وارد شوید"})
       }
     }
