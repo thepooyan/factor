@@ -1,12 +1,12 @@
 import { useParams } from "@solidjs/router"
 import { UseQueryResult } from "@tanstack/solid-query"
 import { AxiosResponse } from "axios"
-import { createEffect, createSignal, Match, onMount, Switch } from "solid-js"
+import { createEffect, createSignal, lazy, Match, onMount, Suspense, Switch } from "solid-js"
 import Spinner from "~/components/general/Spinner"
-import ViewFactor from "~/components/ViewFactor"
 import { AI_FactorView } from "~/utility/apiInterface"
 import { queryFactorView } from "~/utility/queries"
 import { selectedCompany } from "~/utility/signals"
+const Heavy = lazy(() => import("~/components/ViewFactor"))
 
 const id = () => {
   const params = useParams()
@@ -31,7 +31,7 @@ const id = () => {
     <>
       <Switch>
         <Match when={data() === null}><Spinner/></Match>
-        <Match when={data()}>{a => <ViewFactor invoiceData={a()}/>}</Match>
+        <Match when={data()}>{a => <Suspense fallback={<Spinner/>}><Heavy invoiceData={a()}/></Suspense>}</Match>
       </Switch>
     </>
   )
