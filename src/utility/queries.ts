@@ -1,8 +1,33 @@
-import { useQuery, QueryClientConfig } from "@tanstack/solid-query";
+import { useQuery, QueryClientConfig, useQueryClient } from "@tanstack/solid-query";
 import { api } from "./api";
 import { ICompany, Iprofile } from "./interface";
 import { selectedCompany, userMg } from "./signals";
 import { AI_customer, AI_Factor, AI_FactorView, AI_ShareToken } from "./apiInterface";
+
+enum queryKeys {
+  userInfo,
+  companies,
+  customers,
+  factors,
+  factorLink,
+  factorView,
+  factorViewPublic
+}
+
+export const key = (arg: (keys: typeof queryKeys)=>queryKeys) => {
+  let trg = queryKeys[arg(queryKeys)]
+  return {queryKey: [trg]}
+}
+
+export const useInvalidate = () => {
+  const qc = useQueryClient()
+
+  const helper = (arg: (keys: typeof queryKeys)=>queryKeys ) => {
+    let trg = queryKeys[arg(queryKeys)]
+    qc.invalidateQueries({queryKey: [trg]})
+  }
+  return helper
+}
 
 export const queryConfig:QueryClientConfig = {
   defaultOptions: {
@@ -23,7 +48,7 @@ export const queryUserInfo = () => {
 
 export const queryCompanies = () => {
   return useQuery(() => ({
-    queryKey: ["comp"],
+    ...key(q => q.companies),
     queryFn: () => api.get<ICompany[]>("company/UserAllCompanies"),
   }))
 }
