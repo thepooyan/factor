@@ -3,6 +3,7 @@ import { api } from "./api";
 import { ICompany, Iprofile } from "./interface";
 import { selectedCompany } from "./signals";
 import { AI_customer, AI_Factor, AI_FactorView, AI_ShareToken } from "./apiInterface";
+import axios from "axios";
 
 enum queryKeys {
   userInfo,
@@ -59,7 +60,8 @@ export const queryConfig:QueryClientConfig = {
     queries: {
       gcTime: 1000 * 60 * 5, // 5 min
       staleTime: Infinity,
-      experimental_prefetchInRender: true
+      experimental_prefetchInRender: true,
+      retry: false
     }
   },
 }
