@@ -4,13 +4,14 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { createEffect, createSignal, onMount, Show } from "solid-js";
+import { createEffect, createSignal, lazy, onMount, Show } from "solid-js";
 import { AI_Factor } from "~/utility/apiInterface";
 import FactorsTable from "./FactorsTable";
 import { queryFactorList } from "~/utility/queries";
 import Spinner from "../general/Spinner";
 import { UseQueryResult } from "@tanstack/solid-query";
 import { AxiosResponse } from "axios";
+const Heavy = lazy(() => import("~/components/ViewFactor"))
 
 const FactorList = () => {
 
@@ -20,6 +21,7 @@ const FactorList = () => {
   let query: UseQueryResult<AxiosResponse<AI_Factor[]>>
   onMount(() => {
     query = queryFactorList()
+    Heavy.preload()
   })
 
   createEffect(() => {
