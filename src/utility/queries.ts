@@ -22,21 +22,23 @@ export const queryUserInfo = () => {
   }))
 }
 
-// export const queryCompanies = (() => {
-//   const key = ["companies"] as const
-//   const fn = () =>
-//     useQuery(() => ({
-//       queryKey: key,
-//       queryFn: () => api.get<ICompany[]>("company/UserAllCompanies")
-//     }))
-//
-//   // attach key to the function
-//   fn.key = key
-//   return fn
-// })()
-export const queryCompanies = makeQuery(() => {
-  return api.get<ICompany[]>("company/UserAllCompanies")
-}, ["companies"])
+export const queryCompanies = (() => {
+  const key = ["companies"] as const
+  const fn = () =>
+    useQuery(() => ({
+      queryKey: key,
+      queryFn: () => api.get<ICompany[]>("company/UserAllCompanies"),
+      enabled: false
+    }))
+
+  // attach key to the function
+  fn.key = key
+  return fn
+})()
+
+// export const queryCompanies = makeQuery(() => {
+//   return api.get<ICompany[]>("company/UserAllCompanies")
+// }, ["companies"])
 
 
 

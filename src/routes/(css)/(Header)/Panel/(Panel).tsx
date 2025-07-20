@@ -1,20 +1,16 @@
-import { UseQueryResult } from "@tanstack/solid-query"
-import { AxiosResponse } from "axios"
 import { createEffect, onMount, Show } from "solid-js"
 import Company from "~/components/Pages/Company"
-import { ICompany } from "~/utility/interface"
 import { queryCompanies } from "~/utility/queries"
 import { selectedCompany } from "~/utility/signals"
 
 const Panel = () => {
 
-  let query:UseQueryResult<AxiosResponse<ICompany[]>>
-  onMount(() => {
-    query = queryCompanies()
-  })
+  let query = queryCompanies()
+
 
   createEffect(() => {
-    console.log(query)
+    if (query.data === undefined && query.refetch !== undefined)
+      query.refetch()
   })
 
   const folan = () => {
@@ -24,9 +20,11 @@ const Panel = () => {
   }
 
   return (
-    <Show when={folan()}>
-      {a => <Company initialData={a}/>}
-    </Show>
+    <>
+      <Show when={folan()}>
+        {a => <Company initialData={a}/>}
+      </Show>
+    </>
   )
 }
 
