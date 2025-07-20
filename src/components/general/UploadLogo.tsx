@@ -5,13 +5,12 @@ import Input from "./Input";
 import { Label } from "../ui/label";
 import { api } from "~/utility/api";
 import { callModal } from "../modal/Modal";
-
-import { userMg } from "~/utility/signals";
 import { ICompany } from "~/utility/interface";
 import { cn } from "~/lib/utils";
 import Spinner from "./Spinner";
 import { queryCompanies } from "~/utility/queries";
 import { useInvalidate } from "~/utility/tanstackHelper";
+import { useQueryClient } from "@tanstack/solid-query";
 
 interface props {
   company: Accessor<ICompany>
@@ -21,6 +20,7 @@ const UploadLogo = ({company}:props) => {
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null);
   const [uploading , setUploading] = createSignal(false)
   const invalidate = useInvalidate()
+  const qc = useQueryClient()
 
   const resetPreview = () => {
     if (company().company_logo_name === null) return setLogoPreview(null)
@@ -34,7 +34,7 @@ const UploadLogo = ({company}:props) => {
         await api.delete(`/company/DeleteCompanyLogo/${company().company_id}`)
         .catch(err => callModal.fail(err))
         setUploading(false)
-        invalidate(queryCompanies.key)
+        qc.invalidateQueries({queryKey:["comp"]})
       })
   }
 
@@ -62,7 +62,7 @@ const uploadFile = async (file: File) => {
   })
   .then(() => {
     callModal.success("لوگو جدید با موفقیت ثبت شد!")
-    invalidate(queryCompanies.key)
+    qc.invalidateQueries({queryKey: ["comp"]})
     resetPreview()
   })
   .catch(e => {
