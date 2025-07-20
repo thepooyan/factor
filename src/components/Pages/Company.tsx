@@ -10,7 +10,6 @@ import { useForm } from "~/utility/hooks"
 import { ICompany } from "~/utility/interface"
 import { api } from "~/utility/api"
 import { callModal } from "../modal/Modal"
-import { userMg } from "~/utility/signals"
 import { queryCompanies } from "~/utility/queries"
 import { useQueryClient } from "@tanstack/solid-query"
 import { useNavigate } from "@solidjs/router"
@@ -47,7 +46,7 @@ const Company = ({isNew, initialData}:props) => {
         callModal.fail(msg)
       })
     .finally(() => {
-        qc.invalidateQueries({queryKey:["companies"]})
+        qc.invalidateQueries({queryKey:["comp"]})
         if (!initialData) {
           navigate("/Panel")
         }
@@ -62,7 +61,7 @@ const Company = ({isNew, initialData}:props) => {
         .catch(e => callModal.fail(e))
         .then(() => {
           callModal.success();
-          qc.invalidateQueries({queryKey: ["companies", userMg.get()?.user.email]})
+          qc.invalidateQueries({queryKey: ["comp"]})
           })
       })
 
