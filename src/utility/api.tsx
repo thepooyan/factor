@@ -2,6 +2,7 @@ import axios from "axios";
 import { userMg } from "./signals";
 import { Itoken } from "./interface";
 import { callModal } from "~/components/modal/Modal";
+import { Button } from "~/components/ui/button";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API,
@@ -34,7 +35,7 @@ api.interceptors.response.use(
         error.config._retry = true
         return api(error.config)
       } catch(_) {
-        callModal.fail("مدت زمان لوگین شما به پایان رسیده. لطفا مجددا وارد شوید")
+        callModal(() => (<>مدت زمان لوگین شما به پایان رسیده. لطفا مجددا وارد شوید <Button as="A" href="/Login">لوگین</Button></>))
         userMg.logout()
         return Promise.reject({msg: "لطفا مجددا وارد شوید"})
       }
