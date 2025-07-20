@@ -14,18 +14,43 @@ enum queryKeys {
   factorViewPublic
 }
 
-export const key = (arg: (keys: typeof queryKeys)=>queryKeys, ...tag: (string | number | undefined)[] ) => {
-  let trg = queryKeys[arg(queryKeys)]
-  return {queryKey: [trg, ...tag]}
+type QueryValue = queryKeys | (string | number | undefined)[]
+
+const queryKeysWithSignal = {
+  get companyCustomer() {
+    return [queryKeys.customers, selectedCompany()?.company_id]
+  },
+  get companyFactors() {
+    return [queryKeys.factors, selectedCompany()?.company_id]
+  }
+}
+
+const queries = {
+  ...queryKeys,
+  ...queryKeysWithSignal
+}
+
+export const key = (
+  arg: (keys: typeof queries) => QueryValue,
+  ...tag: (string | number | undefined)[]
+) => {
+  const value = arg(queries)
+  const queryKey = Array.isArray(value) ? value : [value, ...tag]
+  return { queryKey }
 }
 
 export const useInvalidate = () => {
   const qc = useQueryClient()
 
-  const helper = (arg: (keys: typeof queryKeys)=>queryKeys, ...tag: (string | number | undefined)[] ) => {
-    let trg = queryKeys[arg(queryKeys)]
-    qc.invalidateQueries({queryKey: [trg, ...tag]})
+  const helper = (
+    arg: (keys: typeof queries) => QueryValue,
+    ...tag: (string | number | undefined)[]
+  ) => {
+    const value = arg(queries)
+    const queryKey = Array.isArray(value) ? value : [value, ...tag]
+    qc.invalidateQueries({ queryKey })
   }
+
   return helper
 }
 
@@ -55,7 +80,7 @@ export const queryCompanies = () => {
 
 export const queryCustomers = () => {
   return useQuery(() => ({
-    ...key(q => q.customers, selectedCompany()?.company_id),
+    ...key(q => q.companyCustomer),
     queryFn: () => {
       let id = selectedCompany()?.company_id
       return api.post<AI_customer[]>("/customer/AllCustomersOfCompany", {company_id: id})
@@ -65,7 +90,7 @@ export const queryCustomers = () => {
 
 export const queryFactorList = () => {
   return useQuery(() => ({
-    ...key(q => q.factors, selectedCompany()?.company_id),
+    ...key(q => q.companyFactors),
     queryFn: () => {
       let id = selectedCompany()?.company_id
       return api.post<AI_Factor[]>("/factor/CompanyAllFactors", {company_id: id})
