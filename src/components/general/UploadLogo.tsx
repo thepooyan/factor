@@ -8,8 +8,6 @@ import { callModal } from "../modal/Modal";
 import { ICompany } from "~/utility/interface";
 import { cn } from "~/lib/utils";
 import Spinner from "./Spinner";
-import { queryCompanies } from "~/utility/queries";
-import { useInvalidate } from "~/utility/tanstackHelper";
 import { useQueryClient } from "@tanstack/solid-query";
 
 interface props {
@@ -19,7 +17,6 @@ const UploadLogo = ({company}:props) => {
 
   const [logoPreview, setLogoPreview] = createSignal<string | null>(null);
   const [uploading , setUploading] = createSignal(false)
-  const invalidate = useInvalidate()
   const qc = useQueryClient()
 
   const resetPreview = () => {
