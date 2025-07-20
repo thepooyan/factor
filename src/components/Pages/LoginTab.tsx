@@ -14,14 +14,14 @@ import { passwordValidate } from "~/utility/validation/Abbr";
 import { api } from "~/utility/api";
 import { callModal } from "../modal/Modal";
 import Spinner from "../general/Spinner";
-import { userMg } from "~/utility/signals";
+import { useUser } from "~/utility/signals";
 import { Iuser } from "~/utility/interface";
 import { useNavigate } from "@solidjs/router";
 
 const LoginTab = () => {
   const [showPassword, setShowPassword] = createSignal(false);
   const [submitting, setSubmitting] = createSignal(false)
-  const navigate = useNavigate()
+  const {login} = useUser()
 
   let form!:HTMLDivElement, email!: HTMLInputElement, pass!: HTMLInputElement
 
@@ -42,8 +42,7 @@ const LoginTab = () => {
 
     api.post<Iuser>("/login",  formData)
     .then(res => {
-        userMg.login(res.data)
-        navigate("/")
+        login(res.data)
       })
     .catch(({ msg }) => {
         callModal.fail(msg)

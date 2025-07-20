@@ -2,15 +2,17 @@ import { Button } from "~/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
 import { FiUser, FiLogOut as LogOut, FiSettings as Settings } from "solid-icons/fi"
 import { Iuser } from "~/utility/interface"
-import { userMg } from "~/utility/signals"
+import { useUser } from "~/utility/signals"
 import { createSignal } from "solid-js"
 
 export default function UserMenu({user}:{user:Iuser}) {
 
   const [open, setOpen] = createSignal(false)
 
+  const {logout} = useUser()
+
   const handleLogout = () => {
-    userMg.logout()
+    logout()
     setOpen(false)
   }
 

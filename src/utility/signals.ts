@@ -1,6 +1,7 @@
 import { createEffect, createSignal } from "solid-js";
 import { ICompany, Itoken, Iuser } from "./interface";
 import Cookie from "js-cookie"
+import { useNavigate } from "@solidjs/router";
 
 const [userSignal, setUserSignal] = createSignal<Iuser | null>(null);
 
@@ -20,6 +21,24 @@ export const userMg = {
     let updatedUser = {...curretUser, token: t}; 
     userMg.login(updatedUser);
   }
+}
+
+export const useUser = () => {
+  const nv = useNavigate()
+
+  const login = (user:Iuser) => {
+    userMg.login(user)
+    nv("/Panel")
+  }
+
+  const logout = () => {
+    userMg.logout()
+    nv("/")
+    localStorage.removeItem("selectedCompany")
+    setSelectedCompany()
+  }
+
+  return {login , logout}
 }
 
 export const [selectedCompany, setSelectedCompany] = createSignal<ICompany | undefined>();
