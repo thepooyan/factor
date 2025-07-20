@@ -1,6 +1,6 @@
 import moment from "jalali-moment";
 import { ICompany } from "./interface";
-import { setSelectedCompany } from "./signals";
+import { selectedCompany, setSelectedCompany } from "./signals";
 
 export class objectStorage<T extends object> {
   private key: string
@@ -232,3 +232,5 @@ export function formatToPersianShortDate(isoDate: string) {
 
   return `${year}/${month}/${day}`
 }
+
+export const logoName2url = (name: string, id:number) => `${import.meta.env.VITE_API}/logos/${id}/${name}?date=${Date.now()}`

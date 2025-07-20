@@ -38,7 +38,7 @@ export interface AI_FactorView {
       company_address: string | null;
       company_phone: string | null;
       company_fax: string | null;
-      company_logo_path: string  | null;
+      company_logo_name: string  | null;
       description: string | null;
       user_id: number;
       post_code: string | null;

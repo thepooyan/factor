@@ -9,6 +9,7 @@ import { ICompany } from "~/utility/interface";
 import { cn } from "~/lib/utils";
 import Spinner from "./Spinner";
 import { useInvalidate } from "~/utility/queries";
+import { logoName2url } from "~/utility/utility";
 
 interface props {
   company: Accessor<ICompany>
@@ -21,7 +22,7 @@ const UploadLogo = ({company}:props) => {
 
   const resetPreview = () => {
     if (company().company_logo_name === null) return setLogoPreview(null)
-    setLogoPreview(`${import.meta.env.VITE_API}/logos/${company().company_id}/${company().company_logo_name}?date=${Date.now()}`)
+    setLogoPreview(logoName2url(company().company_logo_name, company().company_id))
   }
 
   const remove = () => {

@@ -13,7 +13,7 @@ import { PrinterIcon as Print, Check, X } from "lucide-solid"
 import { createSignal, Show } from "solid-js"
 import { Button } from "./ui/button"
 import Separator from "./ui/Separator"
-import { formatToPersianShortDate } from "~/utility/utility"
+import { formatToPersianShortDate, logoName2url } from "~/utility/utility"
 
 interface p {
   invoiceData: AI_FactorView
@@ -64,9 +64,9 @@ const ViewFactor = ({invoiceData}:p) => {
           <CardHeader class="pb-4">
             <div class="flex justify-between items-start">
               <div class="flex items-center gap-4">
-                <Show when={invoiceData.company_infos.company_infos.company_logo_path}>
+                <Show when={invoiceData.company_infos.company_infos.company_logo_name}>
                   {l => <img
-                    src={l()}
+                    src={logoName2url(l(), invoiceData.company_infos.company_infos.company_id)}
                     alt="لوگو شرکت"
                     class="w-20 h-12 object-contain"
                   />}
