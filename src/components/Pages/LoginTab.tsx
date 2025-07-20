@@ -16,7 +16,6 @@ import { callModal } from "../modal/Modal";
 import Spinner from "../general/Spinner";
 import { useUser } from "~/utility/signals";
 import { Iuser } from "~/utility/interface";
-import { useNavigate } from "@solidjs/router";
 
 const LoginTab = () => {
   const [showPassword, setShowPassword] = createSignal(false);
