@@ -20,6 +20,7 @@ const id = () => {
     if (!company) throw new Error("شرکت انتخاب شده یافت نشد")
 
     query = queryFactorView(id, company.company_id)
+    Heavy.preload()
   })
 
   createEffect(() => {
