@@ -17,10 +17,10 @@ enum queryKeys {
 type QueryValue = queryKeys | (string | number | undefined)[]
 
 const queryKeysWithSignal = {
-  get companyCustomer() {
+  companyCustomer() {
     return [queryKeys.customers, selectedCompany()?.company_id]
   },
-  get companyFactors() {
+  companyFactors() {
     return [queryKeys.factors, selectedCompany()?.company_id]
   }
 }
@@ -80,7 +80,7 @@ export const queryCompanies = () => {
 
 export const queryCustomers = () => {
   return useQuery(() => ({
-    ...key(q => q.companyCustomer),
+    ...key(q => q.companyCustomer()),
     queryFn: () => {
       let id = selectedCompany()?.company_id
       return api.post<AI_customer[]>("/customer/AllCustomersOfCompany", {company_id: id})
@@ -90,7 +90,7 @@ export const queryCustomers = () => {
 
 export const queryFactorList = () => {
   return useQuery(() => ({
-    ...key(q => q.companyFactors),
+    ...key(q => q.companyFactors()),
     queryFn: () => {
       let id = selectedCompany()?.company_id
       return api.post<AI_Factor[]>("/factor/CompanyAllFactors", {company_id: id})

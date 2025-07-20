@@ -64,7 +64,7 @@ export default function InvoicePage({companyId}:props) {
     .then(() => {
         callModal.success()
         navigate("/Panel/FactorList")
-        invalidate(q => q.companyFactors)
+        invalidate(q => q.companyFactors())
       })
     .catch(() => callModal.fail("متاسفانه ارسال اطلاعات موفقیت آمیز نبود. لطفا دوباره تلاش کنید."))
   }
