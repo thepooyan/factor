@@ -47,7 +47,7 @@ const Company = ({isNew, initialData}:props) => {
         callModal.fail(msg)
       })
     .finally(() => {
-        qc.invalidateQueries({queryKey:["compaines"]})
+        qc.invalidateQueries({queryKey:["companies"]})
         if (!initialData) {
           navigate("/Panel")
         }
@@ -62,7 +62,7 @@ const Company = ({isNew, initialData}:props) => {
         .catch(e => callModal.fail(e))
         .then(() => {
           callModal.success();
-          qc.invalidateQueries({queryKey: ["compaines", userMg.get()?.user.email]})
+          qc.invalidateQueries({queryKey: ["companies", userMg.get()?.user.email]})
           })
       })
 

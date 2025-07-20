@@ -9,7 +9,7 @@ export const queryConfig:QueryClientConfig = {
   defaultOptions: {
     queries: {
       gcTime: 1000 * 60 * 5, // 5 min
-      staleTime: Infinity,
+      staleTime: 0,
       experimental_prefetchInRender: true
     }
   },

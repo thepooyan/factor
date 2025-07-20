@@ -5,7 +5,7 @@ import Input from "./Input";
 import { Label } from "../ui/label";
 import { api } from "~/utility/api";
 import { callModal } from "../modal/Modal";
-import { useQueryClient } from "@tanstack/solid-query";
+
 import { userMg } from "~/utility/signals";
 import { ICompany } from "~/utility/interface";
 import { cn } from "~/lib/utils";
@@ -62,7 +62,7 @@ const uploadFile = async (file: File) => {
   })
   .then(() => {
     callModal.success("لوگو جدید با موفقیت ثبت شد!")
-    qc.invalidateQueries({queryKey: ["companies"]})
+    invalidate(queryCompanies.key)
     resetPreview()
   })
   .catch(e => {

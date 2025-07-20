@@ -1,4 +1,4 @@
-import { createEffect, onMount, Show } from "solid-js"
+import { createEffect, Show } from "solid-js"
 import Company from "~/components/Pages/Company"
 import { queryCompanies } from "~/utility/queries"
 import { selectedCompany } from "~/utility/signals"
