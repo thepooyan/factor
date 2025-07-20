@@ -14,6 +14,7 @@ import { api } from "~/utility/api";
 import { selectedCompany } from "~/utility/signals";
 import { callModal } from "../modal/Modal";
 import { useQueryClient } from "@tanstack/solid-query";
+import { queryKeys } from "~/utility/queries";
 
 interface props {
   customers: Accessor<AI_customer[]>;
@@ -29,7 +30,7 @@ const CustomersTable = ({ customers }: props) => {
         "company_id": selectedCompany()?.company_id || 0
       }
       await api.delete("/customer/DeleteCustomer", {data}).catch(() => callModal.fail())
-      qc.invalidateQueries({queryKey:["customers"]})
+      qc.invalidateQueries({queryKey:[queryKeys.customers]})
     })
   }
 

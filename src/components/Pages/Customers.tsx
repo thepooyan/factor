@@ -10,7 +10,7 @@ import { selectedCompany } from "~/utility/signals"
 import { AI_customer } from "~/utility/apiInterface"
 import { useForm } from "~/utility/hooks"
 import { callModal } from "../modal/Modal"
-import { queryCustomers } from "~/utility/queries"
+import { queryCustomers, queryKeys } from "~/utility/queries"
 import { useQueryClient, UseQueryResult } from "@tanstack/solid-query"
 import Spinner from "../general/Spinner"
 import { AxiosResponse } from "axios"
@@ -58,7 +58,7 @@ const Customers = () => {
     .then(() => {
         callModal.success()
         formRef.reset()
-        qc.invalidateQueries({queryKey: ["customers"]})
+        qc.invalidateQueries({queryKey: [queryKeys.customers]})
       })
     .catch(() => callModal.fail())
   }

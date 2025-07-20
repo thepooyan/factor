@@ -16,6 +16,7 @@ import { useQueryClient } from "@tanstack/solid-query";
 import { ISODateToFa } from "~/utility/utility";
 import ShareModal from "../ShareModal";
 import { A } from "@solidjs/router";
+import { queryKeys } from "~/utility/queries";
 
 interface props {
   factors: Accessor<AI_Factor[]>;
@@ -31,7 +32,7 @@ const FactorsTable = ({ factors }: props) => {
         "company_id": selectedCompany()?.company_id || 0
       }
       await api.delete("/factor/DeleteFactor", {data}).catch(() => callModal.fail())
-      qc.invalidateQueries({queryKey:["factors"]})
+      qc.invalidateQueries({queryKey:[queryKeys.factors]})
     })
   }
 

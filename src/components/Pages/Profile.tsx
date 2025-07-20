@@ -8,8 +8,7 @@ import { api } from "~/utility/api"
 import { Iprofile } from "~/utility/interface"
 import { useForm } from "~/utility/hooks"
 import { callModal } from "../modal/Modal"
-import { queryUserInfo } from "~/utility/queries"
-import { userMg } from "~/utility/signals"
+import { queryKeys, queryUserInfo } from "~/utility/queries"
 import { useQueryClient, UseQueryResult } from "@tanstack/solid-query"
 import { AxiosResponse } from "axios"
 
@@ -29,7 +28,7 @@ const Profile = () => {
         callModal.fail(msg)
       })
     .finally(() => {
-        qc.invalidateQueries({queryKey:["userInfo", userMg.get()?.user.email]})
+        qc.invalidateQueries({queryKey:[queryKeys.userInfo]})
       })
   }
 

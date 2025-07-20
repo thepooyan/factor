@@ -12,6 +12,7 @@ import { convertToDTO } from "~/utility/apiInterface"
 import { useNavigate } from "@solidjs/router"
 import { faDateToISO } from "~/utility/utility"
 import { useQueryClient } from "@tanstack/solid-query"
+import { queryKeys } from "~/utility/queries"
 
 
 interface props {
@@ -64,7 +65,7 @@ export default function InvoicePage({companyId}:props) {
     .then(() => {
         callModal.success()
         navigate("/Panel/FactorList")
-        qc.invalidateQueries({queryKey: ["factors"]})
+        qc.invalidateQueries({queryKey: [queryKeys.factors]})
       })
     .catch(() => callModal.fail("متاسفانه ارسال اطلاعات موفقیت آمیز نبود. لطفا دوباره تلاش کنید."))
   }
