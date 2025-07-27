@@ -26,10 +26,6 @@ const ProductManage = () => {
   ]
   // let formRef!: HTMLFormElement;
 
-  const Vinput = (props: any) => {
-    return <Input data-validate="required" noErrorEmit errorClass="!border-red" {...props} class="text-center"/>
-  }
-
   const totalPrice = () => {
     return productItems.map(d => calcTotalPrice(d)).reduce((c,p) => c+p, 0)
   }
