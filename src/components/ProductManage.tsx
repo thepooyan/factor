@@ -12,8 +12,6 @@ interface item {
   name: string, 
   quantity: number, 
   unitPrice: number, 
-  discount: number, 
-  totalPrice: number
 }
 
 export let [productItems, setProductItems] = createSignal<item[]>([]);
@@ -24,7 +22,6 @@ const ProductManage = () => {
     "نام کالا",
     "تعداد",
     "قیمت واحد (ریال)",
-    "تخفیف (%)",
     "قیمت کل (ریال)",
     "عملیات",
   ]
@@ -58,6 +55,10 @@ const ProductManage = () => {
     setProductItems(prev => prev.filter((_,f) => f !== i))
   }
 
+  const addRow = () => {
+    setProductItems(prev => [...prev, {name:"", quantity: 0, unitPrice: 0}])
+  }
+
   return (
     <>
 
@@ -67,10 +68,9 @@ const ProductManage = () => {
       </Tr>
       {productItems().map((d,i) => <Tr>
         <Td>{i+1}</Td>
-        <Td>{d.name}</Td>
-        <Td>{d.quantity}</Td>
-        <Td>{formatNumber(d.unitPrice)}</Td>
-        <Td>{d.discount}</Td>
+        <Td><Vinput value={d.name}/></Td>
+        <Td><Vinput value={d.quantity}/></Td>
+        <Td><Vinput value={formatNumber(d.unitPrice)}/></Td>
         <Td>{formatNumber(calcTotalPrice(d))}</Td>
         <Td><Button variant="destructive" onclick={() => deleteMe(i)}>حذف</Button></Td>
       </Tr>)}
@@ -90,10 +90,8 @@ const ProductManage = () => {
         <Td>
           <Vinput name="discount" type="number" value={0} />
         </Td>
-        <Td className="col-span-2">
-          <Button type="submit">افزودن</Button>
-        </Td>
       </Tr>
+      <Button onclick={addRow}>افزودن</Button>
     </div>
       <div class="mt-7 grid grid-cols-2 gap-2">
         <p>
@@ -126,15 +124,14 @@ const Td = (props:any) => {
 const Tr = (props:any) => {
   return <Dynamic
     component={props.as ? props.as : "div"}
-    class={clsx("grid grid-cols-[1fr_5fr_2fr_5fr_2fr_3fr_2fr] items-stretch ", props.className)}
+    class={clsx("grid grid-cols-[1fr_5fr_2fr_5fr_2fr_2fr] items-stretch ", props.className)}
     {...props}
   >{props.children}
   </Dynamic>
 }
 
 const calcTotalPrice = (e: item) => {
-  let p = e.unitPrice * e.quantity
-  return p - p * e.discount / 100
+  return e.unitPrice * e.quantity
 }
 
 export default ProductManage
