@@ -91,7 +91,7 @@ const ProductManage = () => {
           <Vinput name="discount" type="number" value={0} />
         </Td>
       </Tr>
-      <Button onclick={addRow}>افزودن</Button>
+      <Button onclick={addRow} class="m-5 my-2">افزودن</Button>
     </div>
       <div class="mt-7 grid grid-cols-2 gap-2">
         <p>
