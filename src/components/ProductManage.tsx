@@ -1,12 +1,10 @@
 import clsx from "clsx";
-import { createSignal, onMount } from "solid-js";
 import Input from "./general/Input";
 import { Button } from "./ui/button";
 import { Dynamic } from "solid-js/web";
-import { useForm } from "~/utility/hooks";
-import { setValidationEvents, validateSection } from "~/utility/validation/validator";
 import { taxRate } from "~/utility/signals";
 import { formatNumber } from "~/utility/utility";
+import { createStore } from "solid-js/store";
 
 interface item {
   name: string, 
@@ -15,7 +13,7 @@ interface item {
 }
 
 const emptyProduct:item = {name: "", quantity: 0, unitPrice: 0}
-export let [productItems, setProductItems] = createSignal<item[]>([emptyProduct]);
+export let [productItems, setProductItems] = createStore<item[]>([emptyProduct]);
 
 const ProductManage = () => {
   const head = [
@@ -26,14 +24,14 @@ const ProductManage = () => {
     "قیمت کل (ریال)",
     "عملیات",
   ]
-  let formRef!: HTMLFormElement;
+  // let formRef!: HTMLFormElement;
 
   const Vinput = (props: any) => {
     return <Input data-validate="required" noErrorEmit errorClass="!border-red" {...props} class="text-center"/>
   }
 
   const totalPrice = () => {
-    return productItems().map(d => calcTotalPrice(d)).reduce((c,p) => c+p, 0)
+    return productItems.map(d => calcTotalPrice(d)).reduce((c,p) => c+p, 0)
   }
 
   const calcTax = () => {
@@ -56,13 +54,20 @@ const ProductManage = () => {
       <Tr className=" bg-zinc-200 font-bold" >
         {head.map(h => <Td>{h}</Td>)}
       </Tr>
-      {productItems().map((d,i) => <Tr>
+      {productItems.map((d,i) => <Tr>
         <Td>{i+1}</Td>
-        <Td><Vinput value={d.name}/></Td>
-        <Td><Vinput value={d.quantity}/></Td>
-        <Td><Vinput value={formatNumber(d.unitPrice)}/></Td>
-        <Td>{formatNumber(calcTotalPrice(d))}</Td>
-        <Td><Button variant="destructive" onclick={() => deleteMe(i)}>حذف</Button></Td>
+        <Td>
+          <Input value={d.name} onchange={e =>{} }/>
+        </Td>
+        <Td>
+          <Vinput value={d.quantity}/></Td>
+        <Td>
+          <Vinput value={formatNumber(d.unitPrice)}/></Td>
+        <Td>
+          {formatNumber(calcTotalPrice(d))}</Td>
+        <Td>
+          <Button variant="destructive" onclick={() => deleteMe(i)}>حذف</Button>
+        </Td>
       </Tr>)}
       <Button onclick={addRow} class="m-5 my-2">افزودن</Button>
     </div>
