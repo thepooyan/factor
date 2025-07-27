@@ -44,6 +44,12 @@ export const useUser = () => {
   return {login , logout}
 }
 
+export const manualLogout = () => {
+  userMg.logout()
+  localStorage.removeItem("selectedCompany")
+  window.location.replace("/login")
+}
+
 export const [selectedCompany, setSelectedCompany] = createSignal<ICompany | undefined>();
 
 createEffect(() => {

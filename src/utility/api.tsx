@@ -1,5 +1,5 @@
 import axios from "axios";
-import { userMg } from "./signals";
+import { manualLogout, userMg } from "./signals";
 import { Itoken } from "./interface";
 import { callModal } from "~/components/modal/Modal";
 import { Button } from "~/components/ui/button";
@@ -36,9 +36,7 @@ api.interceptors.response.use(
         return api(error.config)
       } catch(_) {
         callModal(() => (<>مدت زمان لوگین شما به پایان رسیده. لطفا مجددا وارد شوید <Button as="A" href="/Login">لوگین</Button></>))
-        userMg.logout()
-        localStorage.removeItem("selectedCompany")
-        window.location.replace("/login")
+        manualLogout()
         return Promise.reject({msg: "لطفا مجددا وارد شوید"})
       }
     }
