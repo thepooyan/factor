@@ -141,7 +141,7 @@ export default function InvoicePage({companyId}:props) {
         <ProductManage/>
       </div>
 
-      <div class="col-span-2 flex justify-center">
+      <div class="col-span-full flex justify-center">
         <Button onclick={done}>ثبت </Button>
       </div>
 
