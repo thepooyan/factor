@@ -13,7 +13,7 @@ interface item {
 }
 
 const emptyProduct:item = {name: "", quantity: 0, unitPrice: 0}
-export let [productItems, setProductItems] = createStore<item[]>([emptyProduct]);
+export let [productItems, setProductItems] = createStore<item[]>([{...emptyProduct}]);
 
 const ProductManage = () => {
   const head = [
@@ -40,11 +40,12 @@ const ProductManage = () => {
   }
 
   const deleteMe = (i: number) => {
+    if (productItems.length === 1) return
     setProductItems(prev => prev.filter((_,f) => f !== i))
   }
 
   const addRow = () => {
-    setProductItems(prev => [...prev, emptyProduct])
+    setProductItems(prev => [...prev, {...emptyProduct}])
   }
 
   return (
@@ -57,12 +58,14 @@ const ProductManage = () => {
       {productItems.map((d,i) => <Tr>
         <Td>{i+1}</Td>
         <Td>
-          <Input value={d.name} onchange={e =>{} }/>
+          <Input value={d.name} onchange={e => setProductItems(i, "name", e.currentTarget.value) }/>
         </Td>
         <Td>
-          <Vinput value={d.quantity}/></Td>
+          <Input type="number" value={d.quantity} onchange={e => setProductItems(i, "quantity", parseInt(e.currentTarget.value) ) }/>
+        </Td>
         <Td>
-          <Vinput value={formatNumber(d.unitPrice)}/></Td>
+          <Input type="number" value={formatNumber(d.unitPrice)} onchange={e => setProductItems(i, "unitPrice", parseInt(e.currentTarget.value) ) }/>
+        </Td>
         <Td>
           {formatNumber(calcTotalPrice(d))}</Td>
         <Td>
