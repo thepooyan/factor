@@ -72,7 +72,7 @@ export default function InvoicePage({companyId}:props) {
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
     <h1 class="text-xl text-center font-bold mb-5">فاکتور فروش</h1>
 
-    <div class="grid grid-cols-2 gap-5">
+    <div class="grid grid-cols-3 gap-5">
 
       <div class="space-y-2">
         <label>تاریخ:</label>
@@ -94,7 +94,7 @@ export default function InvoicePage({companyId}:props) {
         <Input value={taxRate()} onchange={e => setTaxRate(parseInt(e.target.value))} type="number"/>
       </div>
 
-      <h2 class="col-span-2 text-lg font-bold text-center">مشخصات خریدار</h2>
+      <h2 class="col-span-3 text-lg font-bold text-center">مشخصات خریدار</h2>
 
       <div class="space-y-2">
         <label>نام شخص حقیقی/حقوقی:</label>
@@ -126,9 +126,9 @@ export default function InvoicePage({companyId}:props) {
         <Input placeholder="021-11223344" {...register("recieverFax")}/>
       </div>
 
-      <h2 class="col-span-2 text-lg font-bold text-center">مشخصات کالا/خدمات</h2>
+      <h2 class="col-span-3 text-lg font-bold text-center">مشخصات کالا/خدمات</h2>
 
-      <div class="col-span-2">
+      <div class="col-span-3">
         <ProductManage/>
       </div>
 
