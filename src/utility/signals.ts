@@ -2,6 +2,7 @@ import { createEffect, createSignal } from "solid-js";
 import { ICompany, Itoken, Iuser } from "./interface";
 import Cookie from "js-cookie"
 import { useNavigate } from "@solidjs/router";
+import { useQueryClient } from "@tanstack/solid-query";
 
 const [userSignal, setUserSignal] = createSignal<Iuser | null>(null);
 
@@ -25,6 +26,7 @@ export const userMg = {
 
 export const useUser = () => {
   const nv = useNavigate()
+  const qc = useQueryClient()
 
   const login = (user:Iuser) => {
     userMg.login(user)
@@ -35,6 +37,7 @@ export const useUser = () => {
     userMg.logout()
     nv("/")
     localStorage.removeItem("selectedCompany")
+    qc.removeQueries()
     setSelectedCompany()
   }
 
