@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { createEffect, createSignal, onMount } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import Input from "./general/Input";
 import { Button } from "./ui/button";
 import { Dynamic } from "solid-js/web";
@@ -7,7 +7,6 @@ import { useForm } from "~/utility/hooks";
 import { setValidationEvents, validateSection } from "~/utility/validation/validator";
 import { taxRate } from "~/utility/signals";
 import { formatNumber } from "~/utility/utility";
-import { queryCustomers } from "~/utility/queries";
 
 interface item {
   name: string, 
