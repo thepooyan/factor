@@ -10,7 +10,7 @@ import { createStore } from "solid-js/store"
 import { callModal } from "../modal/Modal"
 import { convertToDTO } from "~/utility/apiInterface"
 import { useNavigate } from "@solidjs/router"
-import { faDateToISO } from "~/utility/utility"
+import { faDateToISO, retriveSelectedCompany } from "~/utility/utility"
 import { useInvalidate } from "~/utility/queries"
 
 
