@@ -3,15 +3,15 @@ import Input from "../general/Input"
 import ProductManage, { productItems } from "../ProductManage"
 import moment from 'jalali-moment'
 import { Button } from "../ui/button"
-import { onMount } from "solid-js"
+import { createEffect, createSignal, For, onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { InewFactor, InewFactorNumber } from "~/utility/interface"
 import { createStore } from "solid-js/store"
 import { callModal } from "../modal/Modal"
-import { convertToDTO } from "~/utility/apiInterface"
+import { AI_customer, convertToDTO } from "~/utility/apiInterface"
 import { useNavigate } from "@solidjs/router"
 import { faDateToISO, retriveSelectedCompany } from "~/utility/utility"
-import { useInvalidate } from "~/utility/queries"
+import { queryCustomers, useInvalidate } from "~/utility/queries"
 
 
 interface props {
@@ -47,6 +47,15 @@ export default function InvoicePage({companyId}:props) {
   onMount(async() => {
     let res = await api.post<InewFactorNumber>("/factor/NewFactorNumber", {company_id: companyId}) 
     setStore("factorNumber", res.data.factor_new_number)
+  })
+
+  const [customers, setCustomers] = createSignal<AI_customer[]>([])
+  onMount(() => {
+    retriveSelectedCompany()
+    let c = queryCustomers()
+    createEffect(() => {
+      setCustomers(c.data?.data || [])
+    })
   })
 
   const done = async () => {
