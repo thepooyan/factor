@@ -14,7 +14,8 @@ interface item {
   unitPrice: number, 
 }
 
-export let [productItems, setProductItems] = createSignal<item[]>([]);
+const emptyProduct:item = {name: "", quantity: 0, unitPrice: 0}
+export let [productItems, setProductItems] = createSignal<item[]>([emptyProduct]);
 
 const ProductManage = () => {
   const head = [
@@ -25,21 +26,10 @@ const ProductManage = () => {
     "قیمت کل (ریال)",
     "عملیات",
   ]
-  const {register, submit} = useForm<item>()
   let formRef!: HTMLFormElement;
 
-  const submitHandler = (e: item) => {
-    let result = validateSection(formRef)
-    if (!result) return
-    setProductItems(prev => [...prev, {...e, id:prev.length+1, totalPrice: calcTotalPrice(e)}])
-  }
-
-  onMount(() => {
-    setValidationEvents(formRef)
-  })
-  
   const Vinput = (props: any) => {
-    return <Input {...register(props.name)} data-validate="required" noErrorEmit errorClass="!border-red" {...props} class="text-center"/>
+    return <Input data-validate="required" noErrorEmit errorClass="!border-red" {...props} class="text-center"/>
   }
 
   const totalPrice = () => {
@@ -56,7 +46,7 @@ const ProductManage = () => {
   }
 
   const addRow = () => {
-    setProductItems(prev => [...prev, {name:"", quantity: 0, unitPrice: 0}])
+    setProductItems(prev => [...prev, emptyProduct])
   }
 
   return (
@@ -74,23 +64,6 @@ const ProductManage = () => {
         <Td>{formatNumber(calcTotalPrice(d))}</Td>
         <Td><Button variant="destructive" onclick={() => deleteMe(i)}>حذف</Button></Td>
       </Tr>)}
-      <Tr as="form" onsubmit={submit(submitHandler)} ref={formRef}>
-        <Td>
-          {productItems().length+1}
-        </Td>
-        <Td >
-          <Vinput name="name" placeholder="نام کالا"/>
-        </Td>
-        <Td>
-          <Vinput name="quantity" type="number" placeholder="تعداد"/>
-        </Td>
-        <Td>
-          <Vinput name="unitPrice" type="number" placeholder="قیمت"/>
-        </Td>
-        <Td>
-          <Vinput name="discount" type="number" value={0} />
-        </Td>
-      </Tr>
       <Button onclick={addRow} class="m-5 my-2">افزودن</Button>
     </div>
       <div class="mt-7 grid grid-cols-2 gap-2">
