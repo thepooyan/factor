@@ -40,7 +40,7 @@ const ProductManage = () => {
   }
 
   const deleteMe = (i: number) => {
-    if (productItems.length === 1) return
+    if (productItems.length === 1) return setProductItems([{...emptyProduct}])
     setProductItems(prev => prev.filter((_,f) => f !== i))
   }
 
@@ -64,7 +64,7 @@ const ProductManage = () => {
           <Input type="number" value={d.quantity} onchange={e => setProductItems(i, "quantity", parseInt(e.currentTarget.value) ) }/>
         </Td>
         <Td>
-          <Input type="number" value={formatNumber(d.unitPrice)} onchange={e => setProductItems(i, "unitPrice", parseInt(e.currentTarget.value) ) }/>
+          <Input type="number" value={(d.unitPrice)} onchange={e => setProductItems(i, "unitPrice", parseInt(e.currentTarget.value) ) }/>
         </Td>
         <Td>
           {formatNumber(calcTotalPrice(d))}</Td>
