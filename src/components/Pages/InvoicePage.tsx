@@ -81,7 +81,7 @@ export default function InvoicePage({companyId}:props) {
         invalidate(q => q.companyFactors())
       })
     .catch(e => {
-      callModal.fail(e.msg || "متاسفانه ارسال اطلاعات موفقیت آمیز نبود. لطفا دوباره تلاش کنید.")
+      callModal.fail(e.msg)
       }) 
   }
 

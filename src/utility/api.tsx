@@ -1,4 +1,5 @@
 import axios from "axios";
+import {marked} from "marked"
 import { manualLogout, userMg } from "./signals";
 import { Itoken } from "./interface";
 import { callModal } from "~/components/modal/Modal";
@@ -41,7 +42,9 @@ api.interceptors.response.use(
       }
     }
 
-    return Promise.reject({msg, error})
+    let sl = await marked(msg)
+    let folan = () => <div innerHTML={sl}></div>
+    return Promise.reject({msg: folan, error})
   }
 )
 
