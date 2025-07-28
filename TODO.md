@@ -3,11 +3,12 @@
 - add pageination for all factors
 
 
+make mohandes's design for factor
 add customer suggestion
 fix print
 handle factor missing fields
-add logo upload
 add payment plan
+factor share link rotate
 
 
 # invoice
