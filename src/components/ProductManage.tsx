@@ -22,6 +22,7 @@ const ProductManage = () => {
     "نام کالا",
     "تعداد",
     "قیمت واحد (ریال)",
+    "تخفیف (%)",
     "قیمت کل (ریال)",
     "عملیات",
   ]
@@ -64,6 +65,9 @@ const ProductManage = () => {
           <Input type="number" value={(d.unitPrice)} onchange={e => setProductItems(i, "unitPrice", parseInt(e.currentTarget.value) ) }/>
         </Td>
         <Td>
+          <Input type="number" value={(d.discount)} onchange={e => setProductItems(i, "discount", parseInt(e.currentTarget.value) ) }/>
+        </Td>
+        <Td>
           {formatNumber(calcTotalPrice(d))}</Td>
         <Td>
           <Button variant="destructive" onclick={() => deleteMe(i)}>حذف</Button>
@@ -102,14 +106,15 @@ const Td = (props:any) => {
 const Tr = (props:any) => {
   return <Dynamic
     component={props.as ? props.as : "div"}
-    class={clsx("grid grid-cols-[1fr_5fr_2fr_5fr_2fr_2fr] items-stretch ", props.className)}
+    class={clsx("grid grid-cols-[1fr_5fr_2fr_5fr_2fr_3fr_2fr] items-stretch ", props.className)}
     {...props}
   >{props.children}
   </Dynamic>
 }
 
 const calcTotalPrice = (e: item) => {
-  return e.unitPrice * e.quantity
+  let p = e.unitPrice * e.quantity
+  return p - p * (e.discount / 100)
 }
 
 export default ProductManage
