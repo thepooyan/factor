@@ -80,7 +80,9 @@ export default function InvoicePage({companyId}:props) {
         navigate("/Panel/FactorList")
         invalidate(q => q.companyFactors())
       })
-    .catch(() => callModal.fail("متاسفانه ارسال اطلاعات موفقیت آمیز نبود. لطفا دوباره تلاش کنید."))
+    .catch(e => {
+      callModal.fail(e.msg || "متاسفانه ارسال اطلاعات موفقیت آمیز نبود. لطفا دوباره تلاش کنید.")
+      }) 
   }
 
   return <main class="m-10 border-1 border-zinc-800 rounded p-5">
