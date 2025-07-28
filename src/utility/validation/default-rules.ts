@@ -181,6 +181,12 @@ const Rules: ValidationRules = {
     negateErrorMessage: "کاراکترهای زیر مجاز هستند: $",
     priority: 5,
   },
+  "neq": {
+    validator: (value, $) => $ ? value !== $ : false,
+    errorMessage: "مقدار نمیتواند $ باشد",
+    negateErrorMessage: "کاراکترهای زیر مجاز هستند: $",
+    priority: 5,
+  },
 };
 
 export default Rules;

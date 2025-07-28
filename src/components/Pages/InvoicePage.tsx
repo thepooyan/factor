@@ -3,7 +3,7 @@ import Input from "../general/Input"
 import ProductManage, { productItems } from "../ProductManage"
 import moment from 'jalali-moment'
 import { Button } from "../ui/button"
-import { createEffect, createSignal, For, onMount } from "solid-js"
+import { createEffect, createSignal, onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { InewFactor, InewFactorNumber } from "~/utility/interface"
 import { createStore, unwrap } from "solid-js/store"
@@ -12,6 +12,7 @@ import { AI_customer, convertToDTO } from "~/utility/apiInterface"
 import { useNavigate } from "@solidjs/router"
 import { faDateToISO, retriveSelectedCompany } from "~/utility/utility"
 import { queryCustomers, useInvalidate } from "~/utility/queries"
+import { validateSection } from "~/utility/validation/validator"
 
 
 interface props {
@@ -50,6 +51,9 @@ export default function InvoicePage({companyId}:props) {
   })
 
   const [customers, setCustomers] = createSignal<AI_customer[]>([])
+
+  let formRef!:HTMLDivElement
+
   onMount(() => {
     retriveSelectedCompany()
     let c = queryCustomers()
@@ -66,7 +70,8 @@ export default function InvoicePage({companyId}:props) {
       companyId: companyId,
       products: unwrap(productItems) 
     }
-    if (a.products.length === 0) return callModal.fail("تعداد کالا نمیتواند صفر باشد")
+
+    if (!validateSection(formRef)) return callModal.fail("لطفا اطلاعات مربوط به کالا را خالی نگذارید")
     
     callModal.wait()
     api.post("/factor/NewFactor", convertToDTO(a))
@@ -137,7 +142,7 @@ export default function InvoicePage({companyId}:props) {
 
       <h2 class="col-span-3 text-lg font-bold text-center">مشخصات کالا/خدمات</h2>
 
-      <div class="col-span-3">
+      <div class="col-span-3" ref={formRef}>
         <ProductManage/>
       </div>
 

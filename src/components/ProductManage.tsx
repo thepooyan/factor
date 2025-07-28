@@ -56,16 +56,19 @@ const ProductManage = () => {
       {productItems.map((d,i) => <Tr>
         <Td>{i+1}</Td>
         <Td>
-          <Input value={d.name} onchange={e => setProductItems(i, "name", e.currentTarget.value) }/>
+          <Input value={d.name} onchange={e => setProductItems(i, "name", e.currentTarget.value)}
+            validate="required" errorClass="!bg-red-100" noErrorEmit/>
         </Td>
         <Td>
-          <Input type="number" value={d.quantity} onchange={e => setProductItems(i, "quantity", parseInt(e.currentTarget.value) ) }/>
+          <Input type="number" value={d.quantity} onchange={e => setProductItems(i, "quantity", parseInt(e.currentTarget.value))}
+            validate="neq-[0]" errorClass="!bg-red-100" noErrorEmit/>
         </Td>
         <Td>
-          <Input type="number" value={(d.unitPrice)} onchange={e => setProductItems(i, "unitPrice", parseInt(e.currentTarget.value) ) }/>
+          <Input type="number" value={(d.unitPrice)} onchange={e => setProductItems(i, "unitPrice", parseInt(e.currentTarget.value))}
+            validate="neq-[0]" errorClass="!bg-red-100" noErrorEmit/>
         </Td>
         <Td>
-          <Input type="number" value={(d.discount)} onchange={e => setProductItems(i, "discount", parseInt(e.currentTarget.value) ) }/>
+          <Input type="number" value={(d.discount)} onchange={e => setProductItems(i, "discount", parseInt(e.currentTarget.value))}/>
         </Td>
         <Td>
           {formatNumber(calcTotalPrice(d))}</Td>
