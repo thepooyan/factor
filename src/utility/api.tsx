@@ -42,6 +42,11 @@ api.interceptors.response.use(
       }
     }
 
+    if (msg === "Not authenticated") {
+      manualLogout()
+      return Promise.reject({msg: "لطفا مجددا وارد شوید"})
+    }
+
     let sl = await marked(msg)
     let folan = () => <div innerHTML={sl}></div>
     return Promise.reject({msg: folan, error})
