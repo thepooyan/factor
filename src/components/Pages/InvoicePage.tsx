@@ -6,7 +6,7 @@ import { Button } from "../ui/button"
 import { createEffect, createSignal, For, onMount } from "solid-js"
 import { api } from "~/utility/api"
 import { InewFactor, InewFactorNumber } from "~/utility/interface"
-import { createStore } from "solid-js/store"
+import { createStore, unwrap } from "solid-js/store"
 import { callModal } from "../modal/Modal"
 import { AI_customer, convertToDTO } from "~/utility/apiInterface"
 import { useNavigate } from "@solidjs/router"
@@ -64,7 +64,7 @@ export default function InvoicePage({companyId}:props) {
       date: faDateToISO(store.date),
       taxRate:taxRate().toString(),
       companyId: companyId,
-      products: [...productItems()] 
+      products: unwrap(productItems) 
     }
     if (a.products.length === 0) return callModal.fail("تعداد کالا نمیتواند صفر باشد")
     

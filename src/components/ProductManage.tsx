@@ -10,9 +10,10 @@ interface item {
   name: string, 
   quantity: number, 
   unitPrice: number, 
+  discount: number
 }
 
-const emptyProduct:item = {name: "", quantity: 0, unitPrice: 0}
+const emptyProduct:item = {name: "", quantity: 0, unitPrice: 0, discount: 0}
 export let [productItems, setProductItems] = createStore<item[]>([{...emptyProduct}]);
 
 const ProductManage = () => {
