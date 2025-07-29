@@ -1,26 +1,18 @@
 import { AI_FactorView } from "~/utility/apiInterface"
 import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "~/components/ui/dialog"
 import { PrinterIcon as Print, Check, X } from "lucide-solid"
 import { createSignal, Show } from "solid-js"
 import { Button } from "./ui/button"
 import Separator from "./ui/Separator"
 import { formatToPersianShortDate, logoName2url } from "~/utility/utility"
+import { FiDownload } from "solid-icons/fi"
 
 interface p {
   invoiceData: AI_FactorView
   showButtons?: boolean
 }
 const ViewFactor = ({invoiceData, showButtons = false}:p) => {
-  const [showAcceptDialog, setShowAcceptDialog] = createSignal(false)
   const [isAccepted, setIsAccepted] = createSignal<boolean | null>(null)
   let printRef!: HTMLDivElement
 
@@ -28,12 +20,11 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
   }
 
   const handleAccept = () => {
-    setShowAcceptDialog(true)
+
   }
 
   const confirmAccept = (accepted: boolean) => {
     setIsAccepted(accepted)
-    setShowAcceptDialog(false)
   }
 
   const calculateItemTotal = (item: any) => {
@@ -187,6 +178,25 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
               </div>
             </div>
 
+            <Show when={showButtons}>
+              <div class="flex gap-4 justify-center print:hidden mt-10">
+                <Button onClick={handlePrint}>
+                  <Print class="w-4 h-4" />
+                  چاپ فاکتور
+                </Button>
+                <Button onClick={handlePrint}>
+                  <FiDownload/>
+                  دانلود
+                </Button>
+                {/*
+                <Button onClick={handleAccept} class="flex items-center gap-2">
+                  <Check class="w-4 h-4" />
+                  تایید پیش فاکتور
+                </Button>
+                */}
+              </div>
+            </Show>
+
             {/* Status Display */}
             {isAccepted() !== null && (
               <div class="mt-6 p-4 rounded-lg bg-gray-100">
@@ -208,20 +218,6 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
           </CardContent>
         </Card>
 
-        <Show when={showButtons}>
-          <div class="flex gap-4 justify-center print:hidden">
-            <Button onClick={handlePrint} variant="outline" class="flex items-center gap-2 bg-transparent">
-              <Print class="w-4 h-4" />
-              چاپ فاکتور
-            </Button>
-            {/*
-            <Button onClick={handleAccept} class="flex items-center gap-2">
-              <Check class="w-4 h-4" />
-              تایید پیش فاکتور
-            </Button>
-            */}
-          </div>
-        </Show>
       </div>
     </div>
   )
