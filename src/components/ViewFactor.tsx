@@ -55,8 +55,8 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
   }
 
   return (
-    <div class="min-h-screen bg-gray-50 p-4" dir="rtl">
-      <div class="max-w-4xl mx-auto">
+    <div class="min-h-screen bg-gray-50 p-4 pring:p-0 " dir="rtl">
+      <div class=" max-w-4xl mx-auto print:w-full">
         <Card class="mb-6" ref={printRef}>
           <CardHeader class="pb-4">
             <div class="flex justify-between items-start">
