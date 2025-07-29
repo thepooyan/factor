@@ -44,7 +44,7 @@ export const sampleData: AI_FactorView = {
       company_address: "تهران، خیابان شریعتی، پلاک ۱۵۰",
       company_phone: "02188445566",
       company_fax: "021-55773923",
-      company_logo_name: "fanavaran-logo.png",
+      company_logo_name: "sample-logo.png",
       description: "تولیدکننده نرم‌افزارهای سازمانی",
       user_id: 12,
       post_code: "1587754411",

@@ -13,6 +13,7 @@ view factor => tax has too many decimals
 view factor => city is not sent?
 factor share link rotate
 refresh token too short?
+add sample logo "sample-logo.png"
 
 
 # invoice
