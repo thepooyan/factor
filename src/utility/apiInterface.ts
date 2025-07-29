@@ -5,14 +5,13 @@ export interface AI_FactorView {
     company_id: number;
     customer_id: number;
     factor_number: string | null;
-    factor_items: [
+    factor_items: 
       {
         name: string;
         quantity: number;
         unitPrice: number;
         discount: number | null;
-      },
-    ];
+      }[],
     tax: string;
     factor_date: string;
     user_id: number;
