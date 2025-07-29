@@ -21,9 +21,6 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
     window.print()
   }
 
-  const handleDownload = () => {
-  }
-
   const handleAccept = () => {
 
   }
@@ -56,7 +53,7 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
 
   return (
     <div class="min-h-screen bg-gray-50 p-4 pring:p-0 " dir="rtl">
-      <div class=" max-w-4xl mx-auto print:w-full">
+      <div class=" max-w-4xl mx-auto  ">
         <Card class="mb-6" ref={printRef}>
           <CardHeader class="pb-4">
             <div class="flex justify-between items-start">
@@ -188,10 +185,6 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
                 <Button onClick={handlePrint} variant="secondary">
                   <Print/>
                   چاپ فاکتور
-                </Button>
-                <Button onClick={handleDownload}>
-                  <FiDownload/>
-                  دانلود
                 </Button>
                 {/*
                 <Button onClick={handleAccept} class="flex items-center gap-2">
