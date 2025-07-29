@@ -180,8 +180,8 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
 
             <Show when={showButtons}>
               <div class="flex gap-4 justify-center print:hidden mt-10">
-                <Button onClick={handlePrint}>
-                  <Print class="w-4 h-4" />
+                <Button onClick={handlePrint} variant="secondary">
+                  <Print/>
                   چاپ فاکتور
                 </Button>
                 <Button onClick={handlePrint}>
