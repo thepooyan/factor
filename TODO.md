@@ -1,13 +1,16 @@
-# mmd
-- add username to signup?
-- add pageination for all factors
 
+# priority
 
-make mohandes's design for factor
-add customer suggestion
-fix print
-handle factor missing fields
-add payment plan
+1. fix print
+2. add payment plan
+5. make mohandes's design for factor
+
+# bugs
+view factor => don't show empty fields
+
+# mohandes
+view factor => tax has too many decimals
+view factor => city is not sent?
 factor share link rotate
 
 
