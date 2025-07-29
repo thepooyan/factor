@@ -8,12 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { retriveSelectedCompany } from "~/utility/utility";
 
 const SelectCustomer = () => {
   const [customers, setCustomers] = createSignal<AI_customer[]>([]);
 
 
   onMount(() => {
+    retriveSelectedCompany()
     let c = queryCustomers();
     createEffect(() => {
       setCustomers(c.data?.data || []);
