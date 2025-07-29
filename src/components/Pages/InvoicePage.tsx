@@ -13,6 +13,8 @@ import { useNavigate } from "@solidjs/router"
 import { faDateToISO, retriveSelectedCompany } from "~/utility/utility"
 import { queryCustomers, useInvalidate } from "~/utility/queries"
 import { validateSection } from "~/utility/validation/validator"
+import { SelectCompany } from "../SelectCompany"
+import SelectCustomer from "../SelectCustomer"
 
 
 interface props {
@@ -111,6 +113,8 @@ export default function InvoicePage({companyId}:props) {
       </div>
 
       <h2 class="col-span-3 text-lg font-bold text-center">مشخصات خریدار</h2>
+
+      <SelectCustomer/>
 
       <div class="space-y-2">
         <label>نام شخص حقیقی/حقوقی:</label>

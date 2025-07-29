@@ -95,8 +95,8 @@ export interface AI_Factor {
 }
 
 export interface AI_customer {
-  customer_id?: number;
-  company_id?: number;
+  customer_id: number;
+  company_id: number;
   first_name?: string;
   gender?: string;
   phone_number?: string;
