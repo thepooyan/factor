@@ -66,7 +66,7 @@ const SignupTab = () => {
           <div class="space-y-2">
             <Label for="name">نام و نام خانوادگی</Label>
             <div class="relative">
-              <Input id="name" placeholder="نام و نام خانوادگی" class="pl-10" ref={name} data-validate="required" />
+              <Input id="name" placeholder="نام و نام خانوادگی" class="pl-10" ref={name} validate="required" />
               <FiUser class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>
           </div>
@@ -78,7 +78,7 @@ const SignupTab = () => {
                 type="email"
                 placeholder="example@email.com"
                 class="pl-10"
-                data-validate="email required"
+                validate="email required"
                 ref={email}
               />
               <span class="validation-error text-red"></span>
@@ -93,7 +93,7 @@ const SignupTab = () => {
                 placeholder="********"
                 type={showPassword() ? "text" : "password"}
                 class="pl-10 "
-                data-validate={passwordValidate}
+                validate={passwordValidate}
                 ref={pass}
               />
               <Button
@@ -126,7 +126,7 @@ const SignupTab = () => {
                 type={showPassword() ? "text" : "password"}
                 class="pl-10"
                 ref={passR}
-                data-validate={passwordValidate}
+                validate={passwordValidate}
               />
               <FiLock class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             </div>

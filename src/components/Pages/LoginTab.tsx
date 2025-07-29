@@ -73,7 +73,7 @@ const LoginTab = () => {
                 type="email"
                 placeholder="example@email.com"
                 class="pl-10"
-                data-validate="email required"
+                validate="email required"
                 ref={email}
               />
               <FiMail class="absolute left-3 top-5.4 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -92,7 +92,7 @@ const LoginTab = () => {
                 id="password-login"
                 type={showPassword() ? "text" : "password"}
                 class="pl-20 "
-                data-validate={passwordValidate}
+                validate={passwordValidate}
                 ref={pass}
               />
               <Button
