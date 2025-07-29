@@ -19,6 +19,17 @@ import SelectCustomer from "../SelectCustomer"
 interface props {
   companyId: string
 }
+export type invoiceStore = {
+  date: string;
+  factorNumber: string;
+  transferNumber: string;
+  recieverName: string;
+  recieverNatinalID: string;
+  recieverPostalCode: string;
+  recieverAddress: string;
+  recieverPhone: string;
+  recieverFax: string;
+}
 export default function InvoicePage({companyId}:props) {
 
   const date = moment().locale("fa").format("YYYY/M/D")
@@ -103,7 +114,7 @@ export default function InvoicePage({companyId}:props) {
 
       <h2 class="col-span-3 text-lg font-bold text-center">مشخصات خریدار</h2>
 
-      <SelectCustomer/>
+      <SelectCustomer setStore={setStore}/>
 
       <div class="space-y-2">
         <label>نام شخص حقیقی/حقوقی:</label>

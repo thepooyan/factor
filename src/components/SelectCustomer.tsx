@@ -9,8 +9,13 @@ import {
   SelectValue,
 } from "./ui/select";
 import { retriveSelectedCompany } from "~/utility/utility";
+import { invoiceStore } from "./Pages/InvoicePage";
+import { produce, SetStoreFunction } from "solid-js/store";
 
-const SelectCustomer = () => {
+interface props {
+  setStore: SetStoreFunction<invoiceStore>
+}
+const SelectCustomer = ({setStore}:props) => {
   const [customers, setCustomers] = createSignal<AI_customer[]>([]);
 
 
@@ -23,7 +28,18 @@ const SelectCustomer = () => {
   });
 
   const runChange = (e: number | null) => {
-    console.log(e)
+    if (e === null) return
+    let target = customers().find(c => c.customer_id === e)
+    if (!target) return
+
+    setStore(produce(e => {
+      e.recieverName = String(target.first_name)
+      e.recieverFax = String(target.fax_number)
+      e.recieverPhone = String(target.phone_number)
+      e.recieverAddress = String(target.address)
+      e.recieverNatinalID = String(target.identification_number)
+      e.recieverPostalCode = String(target.post_code)
+    }))
   }
 
   return (
