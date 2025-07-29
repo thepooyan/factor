@@ -17,8 +17,9 @@ import { formatToPersianShortDate, logoName2url } from "~/utility/utility"
 
 interface p {
   invoiceData: AI_FactorView
+  showButtons?: boolean
 }
-const ViewFactor = ({invoiceData}:p) => {
+const ViewFactor = ({invoiceData, showButtons = false}:p) => {
   const [showAcceptDialog, setShowAcceptDialog] = createSignal(false)
   const [isAccepted, setIsAccepted] = createSignal<boolean | null>(null)
   let printRef!: HTMLDivElement
@@ -207,34 +208,21 @@ const ViewFactor = ({invoiceData}:p) => {
           </CardContent>
         </Card>
 
-        {/* Action Buttons */}
-        <div class="flex gap-4 justify-center print:hidden">
-          <Button onClick={handlePrint} variant="outline" class="flex items-center gap-2 bg-transparent">
-            <Print class="w-4 h-4" />
-            چاپ فاکتور
-          </Button>
-          <Button onClick={handleAccept} class="flex items-center gap-2">
-            <Check class="w-4 h-4" />
-            تایید فاکتور
-          </Button>
-        </div>
-      </div>
-
-      {/* Accept/Reject Dialog */}
-      <Dialog open={showAcceptDialog()} onOpenChange={setShowAcceptDialog}>
-        <DialogContent class="sm:max-w-md" dir="rtl">
-          <DialogHeader>
-            <DialogTitle>تایید فاکتور</DialogTitle>
-            <DialogDescription>آیا این فاکتور را تایید می‌کنید؟</DialogDescription>
-          </DialogHeader>
-          <DialogFooter class="flex gap-2">
-            <Button onClick={() => confirmAccept(false)} variant="outline">
-              خیر، رد کن
+        <Show when={showButtons}>
+          <div class="flex gap-4 justify-center print:hidden">
+            <Button onClick={handlePrint} variant="outline" class="flex items-center gap-2 bg-transparent">
+              <Print class="w-4 h-4" />
+              چاپ فاکتور
             </Button>
-            <Button onClick={() => confirmAccept(true)}>بله، تایید کن</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+            {/*
+            <Button onClick={handleAccept} class="flex items-center gap-2">
+              <Check class="w-4 h-4" />
+              تایید پیش فاکتور
+            </Button>
+            */}
+          </div>
+        </Show>
+      </div>
     </div>
   )
 }
