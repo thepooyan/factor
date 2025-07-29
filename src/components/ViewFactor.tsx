@@ -19,6 +19,9 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
   const handlePrint = () => {
   }
 
+  const handleDownload = () => {
+  }
+
   const handleAccept = () => {
 
   }
@@ -184,7 +187,7 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
                   <Print/>
                   چاپ فاکتور
                 </Button>
-                <Button onClick={handlePrint}>
+                <Button onClick={handleDownload}>
                   <FiDownload/>
                   دانلود
                 </Button>

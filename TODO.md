@@ -4,6 +4,7 @@
 1. fix print
 2. add payment plan
 5. make mohandes's design for factor
+6. add accept/reject pre factor
 
 # bugs
 view factor => don't show empty fields
