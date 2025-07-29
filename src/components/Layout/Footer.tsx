@@ -3,7 +3,7 @@ import { FaRegularFileLines as FileText } from 'solid-icons/fa'
 
 const Footer = () => {
   return (
-      <footer class="border-t py-12 md:py-16">
+      <footer class="border-t py-12 md:py-16 print:hidden">
         <div class="container m-auto p-5">
           <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div class="col-span-2 md:col-span-1">

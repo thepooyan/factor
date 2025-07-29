@@ -7,7 +7,9 @@ import UserMenu from "../UserMenu";
 
 const Header = () => {
   return (
-    <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-5 py-1">
+    <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-5 py-1
+      print:hidden
+      ">
       <div class="container m-auto flex h-16 items-center justify-between">
         <A href="/" class="flex items-center gap-2">
           <FileText class="h-6 w-6" />
