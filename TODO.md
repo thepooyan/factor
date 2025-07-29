@@ -12,6 +12,7 @@ view factor => don't show empty fields
 view factor => tax has too many decimals
 view factor => city is not sent?
 factor share link rotate
+refresh token too short?
 
 
 # invoice
