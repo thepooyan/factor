@@ -11,11 +11,9 @@ view factor => don't show empty fields
 can't change company info
 
 # mohandes
-view factor => tax has too many decimals
-new customer
 factor share link rotate
 refresh token too short?
-add sample logo "sample-logo.png"
+fix pic url change
 
 
 # invoice

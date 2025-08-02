@@ -7,7 +7,6 @@ import { createSignal, Show } from "solid-js"
 import { Button } from "./ui/button"
 import Separator from "./ui/Separator"
 import { formatToPersianShortDate, logoName2url } from "~/utility/utility"
-import { FiDownload } from "solid-icons/fi"
 
 interface p {
   invoiceData: AI_FactorView
@@ -89,18 +88,26 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
               <div>
                 <h3 class="font-semibold mb-2 text-lg text-center mb-5">اطلاعات شرکت</h3>
                 <div class="space-y-1 text-sm grid grid-cols-2 text-center">
-                  <p>
-                    <span class="font-medium">آدرس:</span> {invoiceData.company_infos.company_infos.company_address}
-                  </p>
-                  <p>
-                    <span class="font-medium">تلفن:</span> {invoiceData.company_infos.company_infos.company_phone}
-                  </p>
-                  <p>
-                    <span class="font-medium">فکس:</span> {invoiceData.company_infos.company_infos.company_fax}
-                  </p>
-                  <p>
-                    <span class="font-medium">کد پستی:</span> {invoiceData.company_infos.company_infos.post_code}
-                  </p>
+                  <Show when={invoiceData.company_infos.company_infos.company_address}>
+                    {a => <p>
+                      <span class="font-medium">آدرس:</span> {a()}
+                    </p>}
+                  </Show>
+                  <Show when={invoiceData.company_infos.company_infos.company_phone}>
+                    {a => <p>
+                      <span class="font-medium">تلفن:</span> {a()}
+                    </p>}
+                  </Show>
+                  <Show when={invoiceData.company_infos.company_infos.company_fax}>
+                    {a => <p>
+                      <span class="font-medium">فکس:</span> {a()}
+                    </p>}
+                  </Show>
+                  <Show when={invoiceData.company_infos.company_infos.post_code}>
+                    {a => <p>
+                      <span class="font-medium">کد پستی:</span> {a()}
+                    </p>}
+                  </Show>
                 </div>
               </div>
 
