@@ -53,6 +53,7 @@ const Customers = () => {
     let toSend = {
       ...d,
       company_id: selectedCompany()?.company_id,
+      is_visible: true
     }
     api.post("/customer/NewCustomer", toSend)
     .then(() => {
