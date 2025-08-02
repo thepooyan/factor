@@ -158,7 +158,7 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
 
             {/* Items Table */}
             <div class="mb-6">
-              <h3 class="font-semibold mb-4 text-lg">اقلام فاکتور:</h3>
+              <h3 class="font-semibold mb-4 text-lg ">اقلام فاکتور:</h3>
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -184,7 +184,7 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
             </div>
 
             {/* Totals */}
-            <div class="flex justify-end">
+            <div class="flex justify-end mt-10 text-sm">
               <div class="w-80 space-y-2">
                 <div class="flex justify-between">
                   <span>جمع کل:</span>
@@ -195,7 +195,7 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
                   <span>{formatCurrency(calculateTax())}</span>
                 </div>
                 <Separator />
-                <div class="flex justify-between font-bold text-lg">
+                <div class="flex justify-between font-bold ">
                   <span>مبلغ نهایی:</span>
                   <span>{formatCurrency(calculateTotal())}</span>
                 </div>
