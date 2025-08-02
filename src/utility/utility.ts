@@ -1,6 +1,7 @@
 import moment from "jalali-moment";
 import { ICompany } from "./interface";
 import { selectedCompany, setSelectedCompany } from "./signals";
+import { AI_FactorView } from "./apiInterface";
 
 export class objectStorage<T extends object> {
   private key: string
@@ -234,3 +235,8 @@ export function formatToPersianShortDate(isoDate: string) {
 }
 
 export const logoName2url = (name: string, id:number) => `${import.meta.env.VITE_API}/logos/${id}/${name}?date=${Date.now()}`
+
+export const hasCompany = (invoice:AI_FactorView) => {
+  let c = invoice.company_infos.company_infos
+  return !(!c.company_address && !c.post_code && !c.company_fax && !c.company_phone)
+}

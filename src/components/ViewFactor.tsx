@@ -6,7 +6,7 @@ import { PrinterIcon as Print, Check, X } from "lucide-solid"
 import { createSignal, Show } from "solid-js"
 import { Button } from "./ui/button"
 import Separator from "./ui/Separator"
-import { formatToPersianShortDate, logoName2url } from "~/utility/utility"
+import { formatToPersianShortDate, hasCompany, logoName2url } from "~/utility/utility"
 
 interface p {
   invoiceData: AI_FactorView
@@ -84,7 +84,8 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
 
           <CardContent>
             {/* Company and Customer Info */}
-            <div class="grid md:grid-cols-[1fr_1px_1fr] gap-3 mb-6 content-center justify-center  ">
+            <div class="mb-6">
+              <Show when={hasCompany(invoiceData)}>
               <div>
                 <h3 class="font-semibold mb-2 text-lg text-center mb-5">اطلاعات شرکت</h3>
                 <div class="space-y-1 text-sm grid grid-cols-2 text-center">
@@ -110,7 +111,7 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
                   </Show>
                 </div>
               </div>
-
+              </Show>
               <Separator vertical/>
 
               <div>
