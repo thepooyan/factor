@@ -117,27 +117,41 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
               <div>
                 <h3 class="font-semibold mb-2 text-lg text-center mb-5">اطلاعات مشتری</h3>
                 <div class="space-y-1 text-sm grid grid-cols-2 text-center">
-                  <p>
-                    <span class="font-medium">نام:</span> {invoiceData.customer_infos.first_name}
-                  </p>
-                  <p>
-                    <span class="font-medium">تلفن:</span> {invoiceData.customer_infos.phone_number}
-                  </p>
-                  <p>
-                    <span class="font-medium">فکس:</span> {invoiceData.customer_infos.fax_number}
-                  </p>
-                  <p>
-                    <span class="font-medium">آدرس:</span> {invoiceData.customer_infos.address}
-                  </p>
-                  <p>
-                    <span class="font-medium">شهر:</span> {invoiceData.customer_infos.city}
-                  </p>
-                  <p>
-                    <span class="font-medium">کد پستی:</span> {invoiceData.customer_infos.post_code}
-                  </p>
-                  <p>
-                    <span class="font-medium">کد ملی:</span> {invoiceData.customer_infos.identification_number}
-                  </p>
+                  <Show when={invoiceData.customer_infos.first_name}>
+                    {a => <p>
+                      <span class="font-medium">نام:</span> {a()}
+                    </p>}
+                  </Show>
+                  <Show when={invoiceData.customer_infos.phone_number}>
+                    {a => <p>
+                      <span class="font-medium">تلفن:</span> {a()}
+                    </p>}
+                  </Show>
+                  <Show when={invoiceData.customer_infos.fax_number}>
+                    {a => <p>
+                      <span class="font-medium">فکس:</span> {a()}
+                    </p>}
+                  </Show>
+                  <Show when={invoiceData.customer_infos.address}>
+                    {a => <p>
+                      <span class="font-medium">آدرس:</span> {a()}
+                    </p>}
+                  </Show>
+                  <Show when={invoiceData.customer_infos.city}>
+                    {a => <p>
+                      <span class="font-medium">شهر:</span> {a()}
+                    </p>}
+                  </Show>
+                  <Show when={invoiceData.customer_infos.post_code}>
+                    {a => <p>
+                      <span class="font-medium">کد پستی:</span> {a()}
+                    </p>}
+                  </Show>
+                  <Show when={invoiceData.customer_infos.identification_number}>
+                    {a => <p>
+                      <span class="font-medium">کد ملی:</span> {a()}
+                    </p>}
+                  </Show>
                 </div>
               </div>
             </div>
