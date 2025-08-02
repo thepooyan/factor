@@ -12,8 +12,7 @@ can't change company info
 
 # mohandes
 view factor => tax has too many decimals
-view factor => city is not sent?
-customer shows up after being added in invoice
+new customer
 factor share link rotate
 refresh token too short?
 add sample logo "sample-logo.png"

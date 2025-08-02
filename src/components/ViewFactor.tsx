@@ -169,7 +169,7 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
                   <span>{formatCurrency(calculateSubtotal())}</span>
                 </div>
                 <div class="flex justify-between">
-                  <span>مالیات ({invoiceData.factor_infos.tax}%):</span>
+                  <span>مالیات ({parseInt(invoiceData.factor_infos.tax)}%):</span>
                   <span>{formatCurrency(calculateTax())}</span>
                 </div>
                 <Separator />
