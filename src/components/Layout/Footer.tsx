@@ -1,5 +1,6 @@
 import { A } from "@solidjs/router"
 import { FaRegularFileLines as FileText } from 'solid-icons/fa'
+import Enamad from "./Enamad"
 
 const Footer = () => {
   return (
@@ -120,31 +121,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div>
-              <h3 class="font-medium mb-4">پشتیبانی</h3>
-              <ul class="space-y-2">
-                <li>
-                  <A href="#" class="text-muted-foreground hover:text-foreground">
-                    راهنما
-                  </A>
-                </li>
-                <li>
-                  <A href="#" class="text-muted-foreground hover:text-foreground">
-                    سوالات متداول
-                  </A>
-                </li>
-                <li>
-                  <A href="#" class="text-muted-foreground hover:text-foreground">
-                    تیکت پشتیبانی
-                  </A>
-                </li>
-                <li>
-                  <A href="#" class="text-muted-foreground hover:text-foreground">
-                    ویدیوهای آموزشی
-                  </A>
-                </li>
-              </ul>
-            </div>
+            <Enamad/>
           </div>
 
           <div class="border-t mt-12 pt-8 text-center text-muted-foreground">
