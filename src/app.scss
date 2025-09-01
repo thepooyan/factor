@@ -1,4 +1,5 @@
 @use "./styles/scrollBar.scss";
+@use "./styles/fonts.scss";
 
 @mixin vazir($w: 200) {
   font-family: "Vazirmatn", sans-serif;
@@ -8,7 +9,7 @@
 }
 
 html {
-  font-size: 24px;
+  /* font-size: 24px; */
 }
 
 body {
