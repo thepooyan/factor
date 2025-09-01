@@ -1,4 +1,13 @@
 
+1. ghabel factor
+2. dargah
+
+premium {
+    more fields for factor
+    ghaleb remium
+    ghaleb shakhsi
+}
+
 # priority
 
 1. fix print
