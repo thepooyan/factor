@@ -39,7 +39,6 @@ const TemplateCard = (props:p) => {
             <h3 class="text-xl font-bold text-card-foreground  transition-colors">
               {props.template.name}
             </h3>
-            <Badge class="text-xs">{template.category}</Badge>
           </div>
           <p class="text-muted-foreground text-sm mb-4 text-pretty">
             {props.template.description}
