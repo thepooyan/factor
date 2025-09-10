@@ -12,7 +12,7 @@ interface p {
   invoiceData: AI_FactorView
   showButtons?: boolean
 }
-const ViewFactor = ({invoiceData, showButtons = false}:p) => {
+const Minimal = ({invoiceData, showButtons = false}:p) => {
   const [isAccepted, setIsAccepted] = createSignal<boolean | null>(null)
   let printRef!: HTMLDivElement
 
@@ -243,4 +243,4 @@ const ViewFactor = ({invoiceData, showButtons = false}:p) => {
   )
 }
 
-export default ViewFactor
+export default Minimal

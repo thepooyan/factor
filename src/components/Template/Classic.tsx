@@ -6,7 +6,7 @@ import "~/styles/print.scss"
 interface p {
   data: AI_FactorView
 }
-const Simple = ({data}:p) => {
+const Classic = ({data}:p) => {
   let cp = data.company_infos.company_infos
   let f = data.factor_infos
   let cu = data.customer_infos
@@ -84,4 +84,4 @@ const Row = ({name, count, price, index, wholePrice}:f) => <div class="grid grid
 
 const Cell = ({children}:{children: JSXElement}) => <div class="border-2 border-black text-center py-2">{children}</div>
 
-export default Simple
+export default Classic
