@@ -17,8 +17,10 @@ const ViewFactor = ({data, Template = Minimal, showButtons = false}:p) => {
   }
 
   return (
-    <div class=" max-w-4xl m-auto py-10">
-      <Template data={data}/>
+    <div class=" max-w-4xl m-auto py-10 flex flex-col gap-5">
+      <div class="bg-white p-5 rounded-xl shadow-sm hover:shadow-md print:shad transition-all ">
+        <Template data={data}/>
+      </div>
       <Show when={showButtons}>
         <div class="flex gap-4 justify-center print:hidden">
           <Button onClick={handlePrint} variant="secondary">

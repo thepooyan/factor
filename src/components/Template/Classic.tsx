@@ -11,8 +11,7 @@ const Classic = ({data}:p) => {
   let f = data.factor_infos
   let cu = data.customer_infos
   return (
-    <div class="max-w-5xl m-auto mt-10 pb-20">
-
+    <div>
       <div class="grid grid-cols-3 justify-center items-center justify-items-center ">
         <Show when={cp.company_logo_name}>
           {l => <img src={logoName2url(l(), cp.company_id)}/>}

@@ -34,7 +34,7 @@ const Minimal = ({data}:p) => {
 
   return (
     <>
-        <Card class="mb-6">
+        <Card class="border-none shadow-none" >
           <CardHeader class="pb-4">
             <div class="flex justify-between items-start">
               <div class="flex items-center gap-4">
