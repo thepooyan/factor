@@ -32,7 +32,7 @@ const id = () => {
 
   return (
     <div>
-      <Button variant="secondary" class="mr-auto w-max ml-16 flex" as="A" href="/Panel/FactorList">
+      <Button variant="secondary" class="mr-auto w-max ml-16 flex mb-3" as="A" href="/Panel/FactorList">
         بازگشت
         <ArrowLeft/>
       </Button>
