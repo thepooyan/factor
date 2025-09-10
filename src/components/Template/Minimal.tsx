@@ -2,8 +2,7 @@ import "~/styles/print.scss"
 import { AI_FactorView } from "~/utility/apiInterface"
 import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table"
-import { PrinterIcon as Print, Check, X } from "lucide-solid"
-import { createSignal, Show } from "solid-js"
+import { Show } from "solid-js"
 import Separator from "~/components/ui/Separator"
 import { formatToPersianShortDate, hasCompany, logoName2url } from "~/utility/utility"
 
@@ -11,15 +10,6 @@ interface p {
   data: AI_FactorView
 }
 const Minimal = ({data}:p) => {
-  const [isAccepted, setIsAccepted] = createSignal<boolean | null>(null)
-  let printRef!: HTMLDivElement
-
-  const handleAccept = () => {
-  }
-
-  const confirmAccept = (accepted: boolean) => {
-    setIsAccepted(accepted)
-  }
 
   const calculateItemTotal = (item: any) => {
     const subtotal = item.quantity * item.unitPrice
@@ -46,7 +36,7 @@ const Minimal = ({data}:p) => {
   return (
     <div class="min-h-screen bg-gray-50 p-4 pring:p-0 " dir="rtl">
       <div class=" max-w-4xl mx-auto  ">
-        <Card class="mb-6" ref={printRef}>
+        <Card class="mb-6">
           <CardHeader class="pb-4">
             <div class="flex justify-between items-start">
               <div class="flex items-center gap-4">
@@ -194,25 +184,6 @@ const Minimal = ({data}:p) => {
                 </div>
               </div>
             </div>
-
-            {/* Status Display */}
-            {isAccepted() !== null && (
-              <div class="mt-6 p-4 rounded-lg bg-gray-100">
-                <div class="flex items-center gap-2">
-                  {isAccepted() ? (
-                    <>
-                      <Check class="w-5 h-5 text-green-600" />
-                      <span class="text-green-600 font-medium">فاکتور تایید شد</span>
-                    </>
-                  ) : (
-                    <>
-                      <X class="w-5 h-5 text-red-600" />
-                      <span class="text-red-600 font-medium">فاکتور رد شد</span>
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
           </CardContent>
         </Card>
 

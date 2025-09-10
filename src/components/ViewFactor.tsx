@@ -16,7 +16,7 @@ const ViewFactor = ({data, Template = Minimal, showButtons = false}:p) => {
   }
 
   return (
-    <div>
+    <div class="bg-red">
       <Template data={data}/>
       <Show when={showButtons}>
         <div class="flex gap-4 justify-center print:hidden mt-10">
