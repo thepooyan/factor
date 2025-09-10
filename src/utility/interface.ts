@@ -1,3 +1,13 @@
+export interface Template {
+  id: string
+  name: string
+  nameEn: string
+  description: string
+  category: string
+  image: string
+  isPopular?: boolean
+}
+
 export interface InewFactor {
   date: string
   companyId: string;

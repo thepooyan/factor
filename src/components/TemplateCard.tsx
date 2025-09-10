@@ -1,0 +1,67 @@
+import { Template } from "~/utility/interface";
+import { Card, CardContent } from "./ui/card";
+import { Badge, Eye, FileText } from "lucide-solid";
+import { Button } from "./ui/button";
+
+interface p {
+  template: Template;
+  onClick?: () => any;
+}
+const TemplateCard = ({ template, onClick }: p) => {
+  return (
+    <Card
+      class="group hover:shadow-lg transition-all duration-300 cursor-pointer border-2 hover:border-accent/50 w-75"
+      onClick={onClick}
+    >
+      <CardContent class="p-0">
+        {/* Template Preview Image */}
+        <div class="relative overflow-hidden rounded-t-lg">
+          <img
+            src={`/templates/${template.nameEn}.png`}
+            alt={template.name}
+            class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          {template.isPopular && (
+            <Badge class="absolute top-3 right-3 bg-accent text-accent-foreground">
+              محبوب
+            </Badge>
+          )}
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+        </div>
+
+        {/* Template Info */}
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-xl font-bold text-card-foreground  transition-colors">
+              {template.name}
+            </h3>
+            <Badge class="text-xs">{template.category}</Badge>
+          </div>
+          <p class="text-muted-foreground text-sm mb-4 text-pretty">
+            {template.description}
+          </p>
+          <div class="flex flex-col gap-2">
+            <Button
+              onClick={onClick}
+            >
+              <FileText class="w-4 h-4 ml-2" />
+              انتخاب قالب
+            </Button>
+            <Button
+              onClick={onClick}
+              variant="secondary"
+              as="A"
+              target="_blank"
+              href={`/Invoice/${template.nameEn}/Demo`}
+            >
+              <Eye class="w-4 h-4 ml-2" />
+              مشاهده نمونه
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default TemplateCard;

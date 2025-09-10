@@ -12,6 +12,8 @@ import {
 import { createSignal, For } from "solid-js";
 import { Invoice_template_labels } from "~/utility/settings";
 import { selectedCompany } from "~/utility/signals";
+import { templates } from "~/data/dummy";
+import TemplateCard from "../TemplateCard";
 
 const InvocieSelect = () => {
 
@@ -38,19 +40,8 @@ const InvocieSelect = () => {
           </CardHeader>
           <form>
             <CardContent class="space-y-6">
-              <div class="space-y-2">
-              <Select
-                  value={value()}
-                  onChange={setValue}
-                  options={["ساده", "پیشرفته"]}
-                  placeholder="انتخاب قالب"
-                  itemComponent={(props) => <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>}
-              >
-                  <SelectTrigger aria-label="Invoice template">
-                      <SelectValue<string>>{(state) => state.selectedOption()}</SelectValue>
-                  </SelectTrigger>
-                  <SelectContent />
-              </Select>
+              <div class="flex gap-2 justify-between">
+                {templates.map(t => <TemplateCard template={t}/>)}
               </div>
               <RadioGroup defaultValue="فاکتور">
                 <For each={["فاکتور", "پیش فاکتور"]}>

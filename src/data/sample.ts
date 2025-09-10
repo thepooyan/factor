@@ -7,7 +7,7 @@ export const sampleData: AI_FactorView = {
     factor_number: "F-1403-001",
     factor_items: [
       {
-        name: "خودکار آبی",
+        name: "کالا نمونه ۲",
         quantity: 10,
         unitPrice: 5000,
         discount: 10,
@@ -23,13 +23,13 @@ export const sampleData: AI_FactorView = {
     factor_date: "1403/05/10",
     user_id: 12,
     factor_id: 550,
-    factor_customer_name: "علی رضایی",
+    factor_customer_name: "نام مشتری",
   },
   customer_infos: {
     user_id: 12,
     company_id: 1,
     customer_id: 101,
-    first_name: "محمد عقیق",
+    first_name: "نام و نام خانوادگی",
     phone_number: "09121234567",
     fax_number: "021-22334321",
     address: "خیابان آزادی، پلاک ۱۲",
