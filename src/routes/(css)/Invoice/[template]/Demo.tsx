@@ -8,7 +8,7 @@ const Demo = () => {
   let Component = getTemplateComponent(params.template)
 
   return (
-    <div>
+    <div class="bg-gray-200">
       <ViewFactor Template={Component} data={sampleData}/>
     </div>
   );
