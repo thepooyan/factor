@@ -17,7 +17,7 @@ const ViewFactor = ({data, Template = Minimal, showButtons = false}:p) => {
   }
 
   return (
-    <div class=" max-w-4xl m-auto py-10 flex flex-col gap-5">
+    <div class=" max-w-4xl m-auto py-10 flex flex-col gap-5 w-full">
       <div class="bg-white p-5 rounded-xl shadow-sm hover:shadow-md print:shad transition-all ">
         <Template data={data}/>
       </div>

@@ -21,7 +21,7 @@ export function PanelPage({children}:ParentProps) {
 
   return (
     <div class="mx-auto max-w-7xl p-5" >
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-[250px_1fr]">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-[350px_1fr]">
         <div>
           <SelectCompany/>
           <Show when={selectedCompany()}>
