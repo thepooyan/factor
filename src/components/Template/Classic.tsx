@@ -1,6 +1,6 @@
 import { JSXElement, Show } from "solid-js"
 import { AI_FactorView } from "~/utility/apiInterface"
-import { logoName2url } from "~/utility/utility"
+import { formatToPersianShortDate, logoName2url } from "~/utility/utility"
 import "~/styles/print.scss"
 
 interface p {
@@ -14,12 +14,12 @@ const Classic = ({data}:p) => {
     <div>
       <div class="grid grid-cols-3 justify-center items-center justify-items-center ">
         <Show when={cp.company_logo_name}>
-          {l => <img src={logoName2url(l(), cp.company_id)}/>}
+          {l => <img src={logoName2url(l(), cp.company_id)} class="max-w-20" />}
         </Show>
         <h1 class="text-2xl font-bold">{cp.company_name}</h1>
         <div class="space-y-2">
           <p>
-            تاریخ فاکتور: {f.factor_date}
+            تاریخ فاکتور: {formatToPersianShortDate(f.factor_date)}
           </p>
           <p>
             شماره فاکتور: {f.factor_number}
