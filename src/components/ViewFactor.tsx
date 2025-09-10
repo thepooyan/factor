@@ -1,3 +1,4 @@
+import "~/styles/print.scss"
 import { Component, Show } from "solid-js"
 import { AI_FactorView } from "~/utility/apiInterface"
 import { Button } from "./ui/button"
@@ -19,7 +20,7 @@ const ViewFactor = ({data, Template = Minimal, showButtons = false}:p) => {
     <div class=" max-w-4xl m-auto py-10">
       <Template data={data}/>
       <Show when={showButtons}>
-        <div class="flex gap-4 justify-center print:hidden mt-10">
+        <div class="flex gap-4 justify-center print:hidden">
           <Button onClick={handlePrint} variant="secondary">
             <PrinterIcon/>
             چاپ فاکتور

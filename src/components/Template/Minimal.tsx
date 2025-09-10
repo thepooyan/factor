@@ -1,4 +1,3 @@
-import "~/styles/print.scss"
 import { AI_FactorView } from "~/utility/apiInterface"
 import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table"
