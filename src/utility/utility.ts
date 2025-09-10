@@ -216,7 +216,7 @@ export function ISODateToFa(isoDate: string) {
   return moment(isoDate).locale("fa").format("YYYY/MM/DD")
 }
 
-export const generateShareLink = (token: string) => `${import.meta.env.VITE_APPLICATION}/Invoice/View/${token}`
+export const generateShareLink = (token: string, template = "Minimal") => `${import.meta.env.VITE_APPLICATION}/Invoice/${template}/View/${token}`
 
 export function formatToPersianShortDate(isoDate: string) {
   const date = new Date(isoDate)
