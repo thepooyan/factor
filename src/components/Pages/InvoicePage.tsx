@@ -14,6 +14,7 @@ import { faDateToISO } from "~/utility/utility"
 import { useInvalidate } from "~/utility/queries"
 import { validateSection } from "~/utility/validation/validator"
 import SelectCustomer from "../SelectCustomer"
+import { useGetTemplate } from "~/utility/hooks"
 
 
 interface props {
@@ -32,6 +33,7 @@ export type invoiceStore = {
 }
 export default function InvoicePage({companyId}:props) {
 
+  const template = useGetTemplate()
   const date = moment().locale("fa").format("YYYY/M/D")
   const navigate = useNavigate()
   const invalidate = useInvalidate()

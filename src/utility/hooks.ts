@@ -1,4 +1,6 @@
+import { useParams } from "@solidjs/router";
 import { Accessor } from "solid-js";
+import { getTemplateComponent } from "./templateFactory";
 
 export const useForm = <T>(signal?: Accessor<T | undefined | null>) => {
 
@@ -36,3 +38,8 @@ export const useForm = <T>(signal?: Accessor<T | undefined | null>) => {
   };
   return { register, submit }
 };
+
+export const useGetTemplate = () => {
+  const p = useParams()
+  return getTemplateComponent(p.template)
+}
