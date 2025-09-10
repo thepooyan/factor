@@ -26,7 +26,7 @@ const token = () => {
   return (
     <Switch>
       <Match when={data() === null || data()?.isPending}><Ghab>لطفا صبر کنید... <Spinner/></Ghab></Match>
-      <Match when={data()?.data?.data}>{a => <ViewFactor showButtons invoiceData={a()}/>}</Match>
+      <Match when={data()?.data?.data}>{a => <ViewFactor showButtons data={a()}/>}</Match>
       <Match when={data()?.error}><Ghab>فاکتور مورد نظر یافت نشد</Ghab></Match>
     </Switch>
   )
