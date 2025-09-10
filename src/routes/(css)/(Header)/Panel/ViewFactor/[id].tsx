@@ -32,7 +32,7 @@ const id = () => {
     <>
       <Switch>
         <Match when={data() === null}><Spinner/></Match>
-        <Match when={data()}>{a => <Suspense fallback={<Spinner/>}><Heavy invoiceData={a()}/></Suspense>}</Match>
+        <Match when={data()}>{a => <Suspense fallback={<Spinner/>}><Heavy data={a()}/></Suspense>}</Match>
       </Switch>
     </>
   )
