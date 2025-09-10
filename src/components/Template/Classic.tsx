@@ -56,9 +56,15 @@ const Classic = ({data}:p) => {
       </div>
 
       <div class="grid grid-cols-2 justify-items-center gap-3 mt-9">
-        <p>آدرس: {cp.company_address}</p>
-        <p>تلفن: <span class="ltr inline-block">{cp.company_phone}</span></p>
-        <p>فکس: <span class="ltr inline-block">{cp.company_fax}</span></p>
+        <Show when={cp.company_address}>
+          <p>آدرس: {cp.company_address}</p>
+        </Show>
+        <Show when={cp.company_phone}>
+          <p>تلفن: <span class="ltr inline-block">{cp.company_phone}</span></p>
+        </Show>
+        <Show when={cp.company_fax}>
+          <p>فکس: <span class="ltr inline-block">{cp.company_fax}</span></p>
+        </Show>
       </div>
       
     </div>
