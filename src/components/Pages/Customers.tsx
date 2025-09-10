@@ -34,7 +34,8 @@ const Customers = () => {
   })
 
   const emptyCustomer: AI_customer = {
-    company_id: selectedCompany()?.company_id,
+    company_id: selectedCompany()?.company_id || 0,
+    customer_id: 0,
     first_name: "",
     phone_number: "",
     fax_number: "",
