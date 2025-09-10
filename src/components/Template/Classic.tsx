@@ -18,9 +18,9 @@ const Classic = ({data}:p) => {
         </Show>
         <h1 class="text-2xl font-bold">{cp.company_name}</h1>
         <div class="space-y-2">
-          <p>
-            تاریخ فاکتور: {formatToPersianShortDate(f.factor_date)}
-          </p>
+            <p>
+              تاریخ فاکتور: {formatToPersianShortDate(f.factor_date)}
+            </p>
           <p>
             شماره فاکتور: {f.factor_number}
           </p>
@@ -33,12 +33,16 @@ const Classic = ({data}:p) => {
         <p>
           نام مشتری: {f.factor_customer_name}
         </p>
-        <p>
-          شماره تماس: {cu.phone_number}
-        </p>
-        <p class="grid-col-span-2">
-          آدرس: {cu.address}
-        </p>
+        <Show when={cu.phone_number}>
+          <p>
+            شماره تماس: {cu.phone_number}
+          </p>
+        </Show>
+        <Show when={cu.address}>
+          <p class="grid-col-span-2">
+            آدرس: {cu.address}
+          </p>
+        </Show>
       </div>
 
       <Devider>محصولات</Devider>
