@@ -1,6 +1,5 @@
 import { Button } from "~/components/ui/button";
 import { RadioGroup, RadioGroupItem, RadioGroupItemLabel } from "~/components/ui/radio-group"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import {
   Card,
   CardContent,
@@ -10,7 +9,6 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { createSignal, For } from "solid-js";
-import { Invoice_template_labels } from "~/utility/settings";
 import { selectedCompany } from "~/utility/signals";
 import { templates } from "~/data/dummy";
 import TemplateCard from "../TemplateCard";
@@ -21,11 +19,10 @@ const InvocieSelect = () => {
 
   const link = () => {
     let selection = value()
+    if (!selection) return ""
     let company = selectedCompany()
-    if (!selection || !company) return ""
-    let template = Invoice_template_labels.get(selection)
-    if (!template) throw new Error("قالب انتخاب شده تعریف نشده")
-    return `/Invoice/${template}/New/${company.company_id}`
+    if (!company) throw new Error("شرکتی انتخاب نشده")
+    return `/Invoice/${value()}/New/${company.company_id}`
   }
 
   return (
@@ -41,7 +38,7 @@ const InvocieSelect = () => {
           <form>
             <CardContent class="space-y-6">
               <div class="flex gap-2 justify-between">
-                {templates.map(t => <TemplateCard template={t}/>)}
+                {templates.map(t => <TemplateCard template={t} onClick={() => setValue(t.nameEn)} isSelected={value() === t.nameEn}/>)}
               </div>
               <RadioGroup defaultValue="فاکتور">
                 <For each={["فاکتور", "پیش فاکتور"]}>

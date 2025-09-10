@@ -2,26 +2,30 @@ import { Template } from "~/utility/interface";
 import { Card, CardContent } from "./ui/card";
 import { Badge, Eye, FileText } from "lucide-solid";
 import { Button } from "./ui/button";
+import { cn } from "~/lib/utils";
 
 interface p {
   template: Template;
   onClick?: () => any;
+  isSelected: boolean
 }
-const TemplateCard = ({ template, onClick }: p) => {
+const TemplateCard = (props:p) => {
   return (
     <Card
-      class="group hover:shadow-lg transition-all duration-300 cursor-pointer border-2 hover:border-accent/50 w-75"
-      onClick={onClick}
+      class={cn("group hover:shadow-lg transition-color duration-300 cursor-pointer border-2 hover:border-accent/50 w-75",
+        props.isSelected && "  !border-black"
+      )}
+      onClick={props.onClick}
     >
       <CardContent class="p-0">
         {/* Template Preview Image */}
         <div class="relative overflow-hidden rounded-t-lg">
           <img
-            src={`/templates/${template.nameEn}.png`}
-            alt={template.name}
+            src={`/templates/${props.template.nameEn}.png`}
+            alt={props.template.name}
             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
           />
-          {template.isPopular && (
+          {props.template.isPopular && (
             <Badge class="absolute top-3 right-3 bg-accent text-accent-foreground">
               محبوب
             </Badge>
@@ -33,26 +37,26 @@ const TemplateCard = ({ template, onClick }: p) => {
         <div class="p-6">
           <div class="flex items-center justify-between mb-2">
             <h3 class="text-xl font-bold text-card-foreground  transition-colors">
-              {template.name}
+              {props.template.name}
             </h3>
             <Badge class="text-xs">{template.category}</Badge>
           </div>
           <p class="text-muted-foreground text-sm mb-4 text-pretty">
-            {template.description}
+            {props.template.description}
           </p>
           <div class="flex flex-col gap-2">
             <Button
-              onClick={onClick}
+              onClick={props.onClick}
             >
               <FileText class="w-4 h-4 ml-2" />
               انتخاب قالب
             </Button>
             <Button
-              onClick={onClick}
+              onClick={props.onClick}
               variant="secondary"
               as="A"
               target="_blank"
-              href={`/Invoice/${template.nameEn}/Demo`}
+              href={`/Invoice/${props.template.nameEn}/Demo`}
             >
               <Eye class="w-4 h-4 ml-2" />
               مشاهده نمونه
