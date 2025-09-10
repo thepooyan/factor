@@ -34,8 +34,7 @@ const Minimal = ({data}:p) => {
   }
 
   return (
-    <div class="min-h-screen bg-gray-50 p-4 pring:p-0 " dir="rtl">
-      <div class=" max-w-4xl mx-auto  ">
+    <>
         <Card class="mb-6">
           <CardHeader class="pb-4">
             <div class="flex justify-between items-start">
@@ -186,9 +185,7 @@ const Minimal = ({data}:p) => {
             </div>
           </CardContent>
         </Card>
-
-      </div>
-    </div>
+    </>
   )
 }
 
