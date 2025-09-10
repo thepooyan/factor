@@ -26,11 +26,13 @@ const token = () => {
   })
 
   return (
-    <Switch>
-      <Match when={data() === null || data()?.isPending}><Ghab>لطفا صبر کنید... <Spinner/></Ghab></Match>
-      <Match when={data()?.data?.data}>{a => <ViewFactor showButtons data={a()} Template={Temp}/>}</Match>
-      <Match when={data()?.error}><Ghab>فاکتور مورد نظر یافت نشد</Ghab></Match>
-    </Switch>
+    <div class="py-5">
+      <Switch>
+        <Match when={data() === null || data()?.isPending}><Ghab>لطفا صبر کنید... <Spinner/></Ghab></Match>
+        <Match when={data()?.data?.data}>{a => <ViewFactor showButtons data={a()} Template={Temp}/>}</Match>
+        <Match when={data()?.error}><Ghab>فاکتور مورد نظر یافت نشد</Ghab></Match>
+      </Switch>
+    </div>
   )
 }
 
