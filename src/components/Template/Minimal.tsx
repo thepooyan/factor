@@ -4,24 +4,17 @@ import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table"
 import { PrinterIcon as Print, Check, X } from "lucide-solid"
 import { createSignal, Show } from "solid-js"
-import { Button } from "./ui/button"
-import Separator from "./ui/Separator"
+import Separator from "~/components/ui/Separator"
 import { formatToPersianShortDate, hasCompany, logoName2url } from "~/utility/utility"
 
 interface p {
-  invoiceData: AI_FactorView
-  showButtons?: boolean
+  data: AI_FactorView
 }
-const Minimal = ({invoiceData, showButtons = false}:p) => {
+const Minimal = ({data}:p) => {
   const [isAccepted, setIsAccepted] = createSignal<boolean | null>(null)
   let printRef!: HTMLDivElement
 
-  const handlePrint = () => {
-    window.print()
-  }
-
   const handleAccept = () => {
-
   }
 
   const confirmAccept = (accepted: boolean) => {
@@ -35,11 +28,11 @@ const Minimal = ({invoiceData, showButtons = false}:p) => {
   }
 
   const calculateSubtotal = () => {
-    return invoiceData.factor_infos.factor_items.reduce((sum, item) => sum + calculateItemTotal(item), 0)
+    return data.factor_infos.factor_items.reduce((sum, item) => sum + calculateItemTotal(item), 0)
   }
 
   const calculateTax = () => {
-    return (calculateSubtotal() * Number.parseFloat(invoiceData.factor_infos.tax)) / 100
+    return (calculateSubtotal() * Number.parseFloat(data.factor_infos.tax)) / 100
   }
 
   const calculateTotal = () => {
@@ -57,24 +50,24 @@ const Minimal = ({invoiceData, showButtons = false}:p) => {
           <CardHeader class="pb-4">
             <div class="flex justify-between items-start">
               <div class="flex items-center gap-4">
-                <Show when={invoiceData.company_infos.company_infos.company_logo_name}>
+                <Show when={data.company_infos.company_infos.company_logo_name}>
                   {l => <img
-                    src={logoName2url(l(), invoiceData.company_infos.company_infos.company_id)}
+                    src={logoName2url(l(), data.company_infos.company_infos.company_id)}
                     alt="لوگو شرکت"
                     class="w-20 h-12 object-contain"
                   />}
                 </Show>
                 <div>
-                  <h2 class="text-2xl font-bold">{invoiceData.company_infos.company_infos.company_name}</h2>
-                  <p class="text-gray-600">{invoiceData.company_infos.company_infos.description}</p>
+                  <h2 class="text-2xl font-bold">{data.company_infos.company_infos.company_name}</h2>
+                  <p class="text-gray-600">{data.company_infos.company_infos.description}</p>
                 </div>
               </div>
               <div class="text-left space-y-1">
                 <p>
-                  <span>تاریخ:</span> {formatToPersianShortDate(invoiceData.factor_infos.factor_date)}
+                  <span>تاریخ:</span> {formatToPersianShortDate(data.factor_infos.factor_date)}
                 </p>
                 <p>
-                  <span>شماره فاکتور:</span> {invoiceData.factor_infos.factor_number}
+                  <span>شماره فاکتور:</span> {data.factor_infos.factor_number}
                 </p>
               </div>
             </div>
@@ -85,26 +78,26 @@ const Minimal = ({invoiceData, showButtons = false}:p) => {
           <CardContent>
             {/* Company and Customer Info */}
             <div class="mb-6">
-              <Show when={hasCompany(invoiceData)}>
+              <Show when={hasCompany(data)}>
               <div>
                 <h3 class="font-semibold mb-2 text-lg text-center mb-5">اطلاعات شرکت</h3>
                 <div class="space-y-1 text-sm grid grid-cols-2 text-center">
-                  <Show when={invoiceData.company_infos.company_infos.company_address}>
+                  <Show when={data.company_infos.company_infos.company_address}>
                     {a => <p>
                       <span class="font-medium">آدرس:</span> {a()}
                     </p>}
                   </Show>
-                  <Show when={invoiceData.company_infos.company_infos.company_phone}>
+                  <Show when={data.company_infos.company_infos.company_phone}>
                     {a => <p>
                       <span class="font-medium">تلفن:</span> {a()}
                     </p>}
                   </Show>
-                  <Show when={invoiceData.company_infos.company_infos.company_fax}>
+                  <Show when={data.company_infos.company_infos.company_fax}>
                     {a => <p>
                       <span class="font-medium">فکس:</span> {a()}
                     </p>}
                   </Show>
-                  <Show when={invoiceData.company_infos.company_infos.post_code}>
+                  <Show when={data.company_infos.company_infos.post_code}>
                     {a => <p>
                       <span class="font-medium">کد پستی:</span> {a()}
                     </p>}
@@ -117,37 +110,37 @@ const Minimal = ({invoiceData, showButtons = false}:p) => {
               <div>
                 <h3 class="font-semibold mb-2 text-lg text-center mb-5">اطلاعات مشتری</h3>
                 <div class="space-y-1 text-sm grid grid-cols-2 text-center">
-                  <Show when={invoiceData.customer_infos.first_name}>
+                  <Show when={data.customer_infos.first_name}>
                     {a => <p>
                       <span class="font-medium">نام:</span> {a()}
                     </p>}
                   </Show>
-                  <Show when={invoiceData.customer_infos.phone_number}>
+                  <Show when={data.customer_infos.phone_number}>
                     {a => <p>
                       <span class="font-medium">تلفن:</span> {a()}
                     </p>}
                   </Show>
-                  <Show when={invoiceData.customer_infos.fax_number}>
+                  <Show when={data.customer_infos.fax_number}>
                     {a => <p>
                       <span class="font-medium">فکس:</span> {a()}
                     </p>}
                   </Show>
-                  <Show when={invoiceData.customer_infos.address}>
+                  <Show when={data.customer_infos.address}>
                     {a => <p>
                       <span class="font-medium">آدرس:</span> {a()}
                     </p>}
                   </Show>
-                  <Show when={invoiceData.customer_infos.city}>
+                  <Show when={data.customer_infos.city}>
                     {a => <p>
                       <span class="font-medium">شهر:</span> {a()}
                     </p>}
                   </Show>
-                  <Show when={invoiceData.customer_infos.post_code}>
+                  <Show when={data.customer_infos.post_code}>
                     {a => <p>
                       <span class="font-medium">کد پستی:</span> {a()}
                     </p>}
                   </Show>
-                  <Show when={invoiceData.customer_infos.identification_number}>
+                  <Show when={data.customer_infos.identification_number}>
                     {a => <p>
                       <span class="font-medium">کد ملی:</span> {a()}
                     </p>}
@@ -170,7 +163,7 @@ const Minimal = ({invoiceData, showButtons = false}:p) => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {invoiceData.factor_infos.factor_items.map((item) => (
+                  {data.factor_infos.factor_items.map((item) => (
                     <TableRow>
                       <TableCell class="font-medium">{item.name}</TableCell>
                       <TableCell>{item.quantity}</TableCell>
@@ -191,7 +184,7 @@ const Minimal = ({invoiceData, showButtons = false}:p) => {
                   <span>{formatCurrency(calculateSubtotal())}</span>
                 </div>
                 <div class="flex justify-between">
-                  <span>مالیات ({parseInt(invoiceData.factor_infos.tax)}%):</span>
+                  <span>مالیات ({parseInt(data.factor_infos.tax)}%):</span>
                   <span>{formatCurrency(calculateTax())}</span>
                 </div>
                 <Separator />
@@ -201,21 +194,6 @@ const Minimal = ({invoiceData, showButtons = false}:p) => {
                 </div>
               </div>
             </div>
-
-            <Show when={showButtons}>
-              <div class="flex gap-4 justify-center print:hidden mt-10">
-                <Button onClick={handlePrint} variant="secondary">
-                  <Print/>
-                  چاپ فاکتور
-                </Button>
-                {/*
-                <Button onClick={handleAccept} class="flex items-center gap-2">
-                  <Check class="w-4 h-4" />
-                  تایید پیش فاکتور
-                </Button>
-                */}
-              </div>
-            </Show>
 
             {/* Status Display */}
             {isAccepted() !== null && (
