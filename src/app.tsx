@@ -34,8 +34,19 @@ export default function App() {
         <Router
           root={(props) => (
             <>
-              <ErrorBoundary fallback="Error!">
-                <Suspense fallback={<SpinnerPage/>}>{props.children}</Suspense>
+              <ErrorBoundary fallback={(err, reset) => 
+                  <div style={{ color: 'red', border: '1px solid red', padding: '10px' }}>
+                      <h2>❌ خطا در رندرینگ کامپوننت</h2>
+                      <p><strong>پیام خطا:</strong> {err.message}</p>
+                      
+                      {/* می‌توانید دکمه‌ای برای تلاش مجدد قرار دهید */}
+                      <button onClick={reset} style={{ margin: '10px' }}>
+                          تلاش مجدد
+                      </button>
+                  </div>
+              }>
+                  {/* کامپوننت‌های فرزند که ممکن است خطا دهند */}
+              <Suspense fallback={<SpinnerPage/>}>{props.children}</Suspense>
               </ErrorBoundary>
             </>
           )}
