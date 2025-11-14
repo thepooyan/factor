@@ -162,7 +162,7 @@ export const convertToDTO = (old: InewFactor): AI_NewFactor => ({
     tax: parseInt(old.taxRate),
     tax_is_percent: true,
     factor_date: old.date,
-    template_setting_id: 0
+    template_setting_id: 2
   },
   factor_template: {
     template_name: old.template_name
