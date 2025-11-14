@@ -108,7 +108,7 @@ export interface AI_customer {
 }
 
 interface AI_NewFactor {
-  customer_info: {
+  customer_infos: {
     company_id?: number;
     first_name?: string;
     last_name?: string;
@@ -126,7 +126,7 @@ interface AI_NewFactor {
     is_visible?: boolean;
     is_active?: boolean;
   };
-  factor_info: {
+  factor_infos: {
     company_id?: number;
     customer_id?: number;
     factor_number?: string;
@@ -138,11 +138,15 @@ interface AI_NewFactor {
     discount?: number;
     discount_is_percent?: boolean;
     factor_date?: string;
-  };
+    template_setting_id?: number,
+  },
+  factor_template: {
+    template_name: string
+  }
 }
 
 export const convertToDTO = (old: InewFactor): AI_NewFactor => ({
-  customer_info: {
+  customer_infos: {
     company_id: parseInt(old.companyId),
     first_name: old.recieverName,
     phone_number: old.recieverPhone,
@@ -151,12 +155,16 @@ export const convertToDTO = (old: InewFactor): AI_NewFactor => ({
     post_code: old.recieverPostalCode,
     identification_number: old.recieverNatinalID,
   },
-  factor_info: {
+  factor_infos: {
     company_id: parseInt(old.companyId),
     factor_number: old.factorNumber,
     factor_items: old.products,
     tax: parseInt(old.taxRate),
     tax_is_percent: true,
     factor_date: old.date,
+    template_setting_id: 0
   },
+  factor_template: {
+    template_name: old.template_name
+  }
 });

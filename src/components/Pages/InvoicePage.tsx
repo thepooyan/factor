@@ -33,7 +33,7 @@ export type invoiceStore = {
 }
 export default function InvoicePage({companyId}:props) {
 
-  const template = useGetTemplate()
+  const [_, template_name] = useGetTemplate()
   const date = moment().locale("fa").format("YYYY/M/D")
   const navigate = useNavigate()
   const invalidate = useInvalidate()
@@ -72,6 +72,7 @@ export default function InvoicePage({companyId}:props) {
       date: faDateToISO(store.date),
       taxRate:taxRate().toString(),
       companyId: companyId,
+      template_name: template_name,
       products: unwrap(productItems) 
     }
 
