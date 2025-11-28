@@ -9,6 +9,7 @@ export interface Template {
 }
 
 export interface InewFactor {
+  template_name: string
   date: string
   companyId: string;
   factorNumber: string;

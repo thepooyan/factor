@@ -1,5 +1,5 @@
 import { useParams } from "@solidjs/router";
-import { Accessor } from "solid-js";
+import { Accessor, JSX, JSXElement } from "solid-js";
 import { getTemplateComponent } from "./templateFactory";
 
 export const useForm = <T>(signal?: Accessor<T | undefined | null>) => {
@@ -39,7 +39,7 @@ export const useForm = <T>(signal?: Accessor<T | undefined | null>) => {
   return { register, submit }
 };
 
-export const useGetTemplate = () => {
+export const useGetTemplate = ():[(p:any)=>JSX.Element, string] => {
   const p = useParams()
-  return getTemplateComponent(p.template)
+  return [getTemplateComponent(p.template), p.template]
 }
