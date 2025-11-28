@@ -3,7 +3,7 @@ import { Show } from 'solid-js';
 import { CartModal } from './CartModal';
 
 
-export function CartComponent() {
+export function CartComponent() { 
     const { cartItemCount, toggleCart, isCartOpen } = useCart();
 
     return (
