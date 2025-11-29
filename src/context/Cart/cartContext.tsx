@@ -76,7 +76,12 @@ const [isCartOpen, setIsCartOpen] = createSignal(false);
     // از Setter سیگنال استفاده می‌کنیم تا آرایه جدید رو برگردونیم
     setCartItems(prev => [...prev, item]);
   };
-
+const removeItemFromCart = (itemId: string) => {
+        setCartItems(prev => {
+            // فیلتر کردن و نگه داشتن آیتم‌هایی که ID آن‌ها با itemId یکسان نیست
+            return prev.filter(item => item.id !== itemId);
+        });
+    };
 
   // ۲. توابع کمکی
   const toggleCart = () => setIsCartOpen(prev => !prev );
@@ -88,6 +93,7 @@ const store = {
     cartItems, 
     cartItemCount, 
     addItemToCart,
+    removeItemFromCart,
     isCartOpen, 
     toggleCart,
   };
@@ -102,3 +108,4 @@ const store = {
 export function useCart() {
   return useContext(CartContext);
 }
+

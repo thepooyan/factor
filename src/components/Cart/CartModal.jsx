@@ -1,14 +1,12 @@
 // src/components/CartModal.jsx
 
-import { useCart } from '~/context/Cart/cartContext';
+import { useCart } from '~/context/Cart/CartContext';
 import {  createSignal, onMount, Show } from 'solid-js';
 import { A } from '@solidjs/router';
-
-
-
+import { IoCloseSharp , IoCloseCircleOutline} from 'solid-icons/io'
 
 export function CartModal() {
-  const { isCartOpen, toggleCart, cartItems } = useCart();
+  const { isCartOpen, toggleCart, cartItems, removeItemFromCart } = useCart();
   console.log(isCartOpen() , '-------------')
 
     const [isDesktop, setIsDesktop] = createSignal(true);
@@ -30,10 +28,29 @@ export function CartModal() {
           <button 
             onClick={(e) => {
                 toggleCart();
+                e.stopPropagation()
               }} 
-            class="absolute top-2 right-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+            class="
+              absolute 
+              top-3 right-2 
+              text-red-500 
+              cursor-pointer 
+              rounded-full
+              hover:text-red-600 
+              hover:shadow-md 
+              hover:bg-red-100/50
+              hover:shadow-red-300/50 
+              transition duration-150
+              "
           >
-                        ❌
+            <IoCloseSharp 
+              class="
+                h-5 w-5
+                hover:h-6 
+                hover:w-6
+                transition-all 
+                duration-150
+              "/>
           </button>
 
           <h2 class="text-lg font-bold pb-2 text-center">سبد خرید ({cartItems().length})</h2>
@@ -51,34 +68,69 @@ export function CartModal() {
               <For each={cartItems()}>
                 {(item) => (
                   <A
-                    href= {item.href}
+                    href={item.href}
+                    class="block hover:bg-gray-50 no-underline text-inherit"
                   >
-                    <div class="flex items-center space-x-3 border-b pb-2 pt-2">
-                        <div class="shrink-0 w-10 h-10 bg-gray-100 rounded overflow-hidden">
-                            <img 
-                                src={item.img}
-                                alt={item.name} 
-                                class="w-full h-full object-cover" 
-                            />
-                        </div>
-                        <div class="grow flex flex-col text-sm"> 
-                            <span class="font-medium">{item.name}</span> 
-                            <span class="text-gray-600 ">{item.price} تومان</span> 
-                        </div>
+                    <div 
+                      class="flex items-center space-x-3 space-x-reverse border-b pb-2 pt-2"
+                    >
+                        
+                      {/* ۱. عکس محصول */}
+                      <div class="shrink-0 w-10 h-10 bg-gray-100 rounded overflow-hidden">
+                          <img 
+                              src={item.img}
+                              alt={item.name} 
+                              class="w-full h-full object-cover" 
+                          />
+                      </div>
+                      
+                      {/* ۲. محتوای متنی  */}
+                      <div 
+                        class="grow flex flex-col text-right text-sm" 
+                      > 
+                          <span class="font-medium text-black">{item.name}</span> 
+                          <span class="text-gray-600 ">{item.price} تومان</span>
+                      </div>
+                      
+                      {/* ۳. دکمه حذف  */}
+                      <button 
+                        onClick={(e) => {
+                          e.stopImmediatePropagation()
+                            e.preventDefault();
+                            // 💡 تابع حذف آیتم:
+                            removeItemFromCart(item.id); 
+                            console.log(`حذف آیتم با ID: ${item.id}`); 
+                        }} 
+                        class="
+                          shrink-0 
+                          rounded-full 
+                          p-1
+                          bg-transparent 
+                          text-red-500 
+                          hover:text-red-600 
+                          hover:shadow-md 
+                          hover:bg-red-100/50
+                          hover:shadow-red-300/50 
+                          transition duration-150
+                        "
+                      >
+                        <IoCloseCircleOutline class='h-5 w-5'/> {/* آیکون کوچکتر */}
+                      </button>
+                      
                     </div>              
                   </A>
                 )}
-              </For>          
+              </For>
             </Show> 
           </div>
         </div>
-        <div 
+        {/* <div 
           class="fixed inset-0 z-0 cursor-auto" 
           onClick={(e) => {
             e.stopPropagation(); 
             toggleCart();
           }}        
-        ></div>
+        ></div> */}
       </Show>
   );
 }
