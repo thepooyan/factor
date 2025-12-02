@@ -16,13 +16,40 @@ export function CartModal() {
         mediaQuery.addEventListener('change', (e) => setIsDesktop(e.matches));
     });
 
+    // 1. سیگنال کنترل انیمیشن
+  const [isVisible, setIsVisible] = createSignal(false);
+  
+  // 2. فعال‌سازی انیمیشن پس از رندر شدن
+  onMount(() => {
+    // تأخیر کوچک برای اعمال حالت اولیه (مخفی) قبل از حالت نهایی (نمایان)
+    setTimeout(() => setIsVisible(true), 100); 
+  });
 
   return (
       <Show when={isCartOpen()}>
         <div
           onClick={(e) => e.stopPropagation()}
-          class='text-black absolute top-full left-0 mt-2 p-2 bg-white border border-gray-300 shadow-lg rounded-2xl w-80  z-10 cursor-auto 
-          transition-all duration-300 ease-out transform scale-100 opacity-100
+          style={{ 
+            top: isVisible() ? '4.5rem' : '-38rem', opacity: isVisible() ? '1' : '0' ,
+            top: !isVisible() ? '-38rem' : '4.5rem', opacity: isVisible() ? '1' : '0' 
+
+          }}
+          class='
+            text-black bg-white shadow-2xl z-20 cursor-auto 
+            border border-gray-500 
+            p-2 m-auto
+            transition-all duration-300 ease-out
+            fixed inset-x-0 top-18
+            rounded-2xl 
+            max-w-90
+            
+            lg:absolute 
+            lg:w-80
+            lg:rounded-2xl 
+            lg:left-0 
+            lg:right-auto 
+            lg:top-16
+            lg:max-h-none
           '
         >
           <button 
@@ -58,7 +85,7 @@ export function CartModal() {
             class='border-t rounded-2xl p-2 bg-transparent absolute w-110/115'
           ></div>
           <div 
-            class=" p-2  overflow-y-auto max-h-80 space-y-3 "
+            class=" p-2  overflow-y-auto max-h-[70vh] space-y-3 "
             style="direction: rtl; text-align: right;"
           >
             <Show 
@@ -97,7 +124,6 @@ export function CartModal() {
                         onClick={(e) => {
                           e.stopImmediatePropagation()
                             e.preventDefault();
-                            // 💡 تابع حذف آیتم:
                             removeItemFromCart(item.id); 
                             console.log(`حذف آیتم با ID: ${item.id}`); 
                         }} 
@@ -114,7 +140,7 @@ export function CartModal() {
                           transition duration-150
                         "
                       >
-                        <IoCloseCircleOutline class='h-5 w-5'/> {/* آیکون کوچکتر */}
+                        <IoCloseCircleOutline class='h-5 w-5'/> 
                       </button>
                       
                     </div>              
@@ -124,13 +150,6 @@ export function CartModal() {
             </Show> 
           </div>
         </div>
-        {/* <div 
-          class="fixed inset-0 z-0 cursor-auto" 
-          onClick={(e) => {
-            e.stopPropagation(); 
-            toggleCart();
-          }}        
-        ></div> */}
       </Show>
   );
 }
