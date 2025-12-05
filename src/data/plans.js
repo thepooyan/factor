@@ -2,7 +2,7 @@
 export const features_comparison = [
     {
       "feature_id": 1,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -14,7 +14,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 2,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -26,7 +26,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 3,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -38,7 +38,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 4,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -50,7 +50,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 5,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -62,7 +62,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 6,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -74,7 +74,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 7,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -86,7 +86,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 8,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -98,7 +98,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 9,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -110,7 +110,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 10,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -122,7 +122,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 11,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -134,7 +134,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 12,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -146,7 +146,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 13,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -158,7 +158,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 14,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -170,7 +170,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 15,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -182,7 +182,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 16,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -194,7 +194,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 17,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -206,7 +206,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 18,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -218,7 +218,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 19,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -230,7 +230,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 20,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -242,7 +242,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 21,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -254,7 +254,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 22,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -266,7 +266,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 23,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -278,7 +278,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 24,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -290,7 +290,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 25,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -302,7 +302,7 @@ export const features_comparison = [
     },
     {
       "feature_id": 26,
-      "price": 0,
+      "price": 10,
       "description" : "توضیحات",
       "logo" : "logo_url",
       "is_active": true,
@@ -325,7 +325,7 @@ export const plan_prices= [
       "plan_id": 1,
       "plan_name": "Level 1",
       "time_in_months": 10000,
-      "price": 0,
+      "price": 10,
       "is_active": true
     },
     {

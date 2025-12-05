@@ -3,15 +3,28 @@ import formatPriceJS from '~/utility/formatting';
 import { BsCartPlus } from 'solid-icons/bs'
 
 export function PlanCard(props) {
-    const {plan_id , plan_name , time_in_months , price , is_active } = props.plan;
-    if (
-        !is_active || price === 0 || time_in_months === 0 || plan_name.trim() === '' || plan_id == null ||
-        plan_id == undefined || plan_name == null || plan_name == undefined || plan_name === 'Level 1'
-) {
-        return null; // عدم نمایش پلن‌های غیرفعال
-    }
+    const validPlans = props.plans.filter(plan => {
+        console.log('sss',plan);
+        if (
+            !plan ||
+            !plan.is_active ||
+            plan.price === 0 ||
+            plan.plan_id == null || 
+            plan.plan_id == 1 || 
+            plan.plan_name == null || 
+            plan.plan_name.trim() === ''
+        ) {
+            return false; 
+        }
+        return true; 
+
+    });
+
 
     return (
+                    <For each={validPlans}>
+                {(plan) => (
+
         <div 
             class={`
                 bg-white
@@ -22,6 +35,7 @@ export function PlanCard(props) {
             `}
             style={{direction: 'rtl'}}
         >
+
             {/* 🏷️ تگ محبوب‌ترین */}
             {/* {isPopular && (
                 <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
@@ -33,17 +47,17 @@ export function PlanCard(props) {
                 border-b-1 border-blue-500 
             ">
                 پلن <br/>
-                {plan_name}
+                {plan.plan_name}
             </h3>
             <h4 class="text-2xl text-center text-gray-800 pt-4 
             border-b-2 border-blue-500
             ">
-                {time_in_months} ماهه
+                {plan.time_in_months} ماهه
             </h4>
             
             {/* 💰 قیمت */}
             <div class="my-4 text-center ">
-                <span class="text-xl font-black text-gray-900">{formatPriceJS(price)}</span>
+                <span class="text-xl font-black text-gray-900">{formatPriceJS(plan.price)}</span>
                 <br/>
                 <span class="text-lg text-gray-500 mr-2">تومان</span>
                 {/* {discount > 0 && (
@@ -82,5 +96,8 @@ export function PlanCard(props) {
                 </For>
             </ul> */}
         </div>
+                        )}
+            </For>
+
     );
 }

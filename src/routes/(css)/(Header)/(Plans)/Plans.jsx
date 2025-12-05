@@ -16,11 +16,7 @@ export default function ProductsPage() {
                 <PlansComparisonTable features={features_comparison} plans={plan_prices} />
                 {/* 🔑 ساختار اصلی پلن‌ها: نمایش در یک ردیف در دسکتاپ */}
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8 justify-center">
-                    <For each={plan_prices}>
-                        {(plan) => (
-                            <PlanCard plan={plan} />
-                        )}
-                    </For>
+                    <PlanCard plans={plan_prices} />
                 </div>
             </section>
             
@@ -37,11 +33,7 @@ export default function ProductsPage() {
                 </p>
 
                 <div class="max-w-4xl mx-auto space-y-4">
-                    <For each={features_comparison}>
-                        {(feature) => (
-                            <FeatureToggle feature={feature} />
-                        )}
-                    </For>
+                    <FeatureToggle features={features_comparison} />
                 </div>
             </section>
         </div>
