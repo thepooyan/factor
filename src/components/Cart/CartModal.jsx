@@ -7,7 +7,6 @@ import { IoCloseSharp , IoCloseCircleOutline} from 'solid-icons/io'
 
 export function CartModal() {
   const { isCartOpen, toggleCart, cartItems, removeItemFromCart } = useCart();
-  console.log(isCartOpen() , '-------------')
 
     const [isDesktop, setIsDesktop] = createSignal(true);
     onMount(() => {
@@ -125,7 +124,6 @@ export function CartModal() {
                           e.stopImmediatePropagation()
                             e.preventDefault();
                             removeItemFromCart(item.id); 
-                            console.log(`حذف آیتم با ID: ${item.id}`); 
                         }} 
                         class="
                           shrink-0 

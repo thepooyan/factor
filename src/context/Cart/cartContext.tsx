@@ -86,7 +86,6 @@ const removeItemFromCart = (itemId: string) => {
   // ۲. توابع کمکی
   const toggleCart = () => setIsCartOpen(prev => !prev );
   createEffect(() => {
-    console.log("🛒 وضعیت سبد خرید (isCartOpen) به این تغییر کرد:", isCartOpen());
   });
   
 const store = {
