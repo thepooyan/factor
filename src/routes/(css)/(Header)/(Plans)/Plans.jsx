@@ -3,9 +3,26 @@ import { PlanCard } from '~/components/Plans/PlanCard';
 import { FeatureToggle } from '~/components/Plans/FeatureToggle';
 import { features_comparison , plan_prices } from '~/data/plans'; // 🔑 ایمپورت داده‌ها
 import { PlansComparisonTable } from '~/components/Plans/PlansComparisonTable';
+import { api } from "~/utility/api"
+import { createResource } from 'solid-js';
+
+
+
+const fetchFeatures = async () => {
+    const response = await api.get('/buy-features/get-AllFeatures'); 
+    return response.data;
+};
+
+const fetchPlans = async () => {
+    const response = await api.get('/buy-plans/get-AllPlans'); 
+    return response.data;
+};
 
 export default function ProductsPage() {
-    return (
+    // const [features] = createResource(fetchFeatures); 
+    // const [plans] = createResource(fetchPlans);
+
+    return (        
         <div class="container mx-auto p-8" style={{fontFamily: 'IRANSans, Tahoma'}}>
             
             {/* # ۱. نمایش پلن‌های زمانی (زیر هم در کامپیوتر) */}
