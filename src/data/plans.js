@@ -317,9 +317,6 @@ export const features_comparison = [
 
 
 
-
-
-
 export const plan_prices= [
     {
       "plan_id": 1,
