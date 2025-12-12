@@ -18,7 +18,16 @@ export function PlanCard(props) {
         return true; 
 
     });
-
+    const handleAddToCart = () => {
+            // 🔑 فراخوانی فانکشن سراسری addToCart
+            addToCart({
+                id: plan.plan_id,
+                name: plan.plan_name,
+                price: plan.price,
+                type: 'Plan' // برای تشخیص نوع آیتم
+            });
+            alert(`پلن ${plan.plan_name} به سبد خرید اضافه شد!`); // یک فیدبک ساده
+        };
 
     return (
         <For each={validPlans}>
@@ -30,6 +39,8 @@ export function PlanCard(props) {
                         rounded-xl shadow-xl 
                         transition-transform duration-300 transform 
                         text-right font-medium 
+                        md:min-w-50
+                        lg:min-w-40
                     `}
                     style={{direction: 'rtl'}}
                 >
@@ -72,6 +83,7 @@ export function PlanCard(props) {
                             hover:from-blue-600 hover:to-blue-800
                             transition duration-200
                         `}
+                        // onClick={handleAddToCart}
                     >
                         <BsCartPlus class='m-a' />
                     </button>

@@ -68,7 +68,7 @@ const CartContext = createContext<any>({}); // مقدار اولیه رو خال
 
 export const CartProvider: ParentComponent = (props) => {
 
-const [cartItems, setCartItems] = createSignal<Interface.CartItems_if[]>(initialCartItems); 
+const [cartItems, setCartItems] = createSignal<Interface.CartItems_if[]>([]); 
 const [isCartOpen, setIsCartOpen] = createSignal(false);  
   const cartItemCount = createMemo(() => cartItems().length);
   // ۳. تابعی برای اضافه کردن محصول به سبد
@@ -76,6 +76,26 @@ const [isCartOpen, setIsCartOpen] = createSignal(false);
     // از Setter سیگنال استفاده می‌کنیم تا آرایه جدید رو برگردونیم
     setCartItems(prev => [...prev, item]);
   };
+  const addToCart = (newItem: Interface.CartItems_if) => {
+    setCartItems(currentItems => {
+        // ۱. بررسی می‌کنیم آیتم قبلاً در سبد هست یا نه
+        const existingItemIndex = currentItems.findIndex(item => item.id === newItem.id);
+
+        if (existingItemIndex > -1) {
+            // ۲. اگر هست، فقط تعداد (quantity) رو زیاد می‌کنیم
+            const newArray = [...currentItems];
+            // newArray[existingItemIndex] = {
+            //     ...newArray[existingItemIndex],
+                // quantity: newArray[existingItemIndex].quantity + 1 
+            // };
+            console.log('Item already in cart')
+            return newArray;
+        } else {
+            // ۳. اگر نیست، آیتم جدید رو اضافه می‌کنیم
+            return [...currentItems, { ...newItem }];
+        }
+    });
+};
 const removeItemFromCart = (itemId: string) => {
         setCartItems(prev => {
             // فیلتر کردن و نگه داشتن آیتم‌هایی که ID آن‌ها با itemId یکسان نیست

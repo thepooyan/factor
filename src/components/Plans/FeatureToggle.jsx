@@ -1,5 +1,7 @@
 import { For } from 'solid-js';
 import { BsCartPlus } from 'solid-icons/bs'; 
+import formatPriceJS from '~/utility/formatting';
+
 
 export function FeatureToggle(props) {
     
@@ -35,7 +37,7 @@ export function FeatureToggle(props) {
                             <p class="text-sm text-gray-500 mt-1">{feature.description || 'توضیحات موجود نیست.'}</p>
                         </div>
                         <div class="flex items-center ml-4">
-                            <span class="text-xl font-bold text-indigo-600 shrink-0">{feature.price}</span>
+                            <span class="text-xl font-bold text-indigo-600 shrink-0">{formatPriceJS(feature.price)}</span>
                             <span class="text-sm text-gray-500 mr-1 shrink-0">تومان</span>
                             <button
                                 class="mr-4 px-4 py-2 text-white rounded-md 

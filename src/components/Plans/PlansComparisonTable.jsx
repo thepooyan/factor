@@ -3,27 +3,34 @@ import { FiCheck, FiX } from 'solid-icons/fi'; // برای آیکون‌های �
 
 // تابعی برای استخراج نام تمام قابلیت‌های یکتا از همه پلن‌ها
 const getUniqueFeatures = (features) => {
+
+    if (!Array.isArray(features)) {
+        return []; // هنوز دیتا نیومده
+    }
+
     const featureSet = new Set();
     features.forEach(feature => {
-        // فرض می‌کنیم در data/plans.js پلن‌ها یک آرایه features دارند
-            featureSet.add(feature.feature_name);
+        featureSet.add(feature.feature_name);
     });
+
     return Array.from(featureSet);
 };
-
 const getUniquePlanName = (plans) => {
+    if (!Array.isArray(plans)) {
+        return []; // هنوز دیتا نیومده
+    }
     const plansSet = new Set();
     plans.forEach(plan => {
-        // فرض می‌کنیم در data/plans.js پلن‌ها یک آرایه features دارند
             plansSet.add(plan.plan_name);
         });
         return Array.from(plansSet);
-};
+}; 
 
 export function PlansComparisonTable(props) {
     // 🔑 استخراج لیست قابلیت‌ها برای ساخت سطرها
     const featuresList = getUniqueFeatures(props.features);
     const plansList = getUniquePlanName(props.plans);
+    console.log(plansList)
 
     return (
         <div class="overflow-x-auto m-auto mb-12 shadow-lg rounded-xl border border-gray-200 bg-white max-w-[70vw]">
