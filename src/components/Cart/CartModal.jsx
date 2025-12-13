@@ -140,7 +140,6 @@ export function CartModal() {
                       >
                         <IoCloseCircleOutline class='h-5 w-5'/> 
                       </button>
-                      
                     </div>              
                   </A>
                 )}

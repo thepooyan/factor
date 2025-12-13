@@ -15,8 +15,6 @@ export function FeatureToggle(props) {
         ) {
             return false; 
         }
-
-        
         if (
             !feature.is_active || 
             feature.price === 0
@@ -31,16 +29,18 @@ export function FeatureToggle(props) {
         <div class="space-y-4">
             <For each={validFeatures}>
                 {(feature) => (
-                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg border-b border-gray-200" style={{direction: 'rtl'}}>
+                    <div class="sm:flex text-center sm:text-right p-2 justify-between items-center bg-gray-200 rounded-lg border border-gray-300" style={{direction: 'rtl'}}>
                         <div class="flex-grow">
-                            <h4 class="text-lg font-bold text-gray-800">{feature.feature_name} </h4>
+                            <h4 class="text-lg font-bold text-gray-800 sm:p-0 p-2">{feature.feature_name} </h4>
                             <p class="text-sm text-gray-500 mt-1">{feature.description || 'توضیحات موجود نیست.'}</p>
                         </div>
-                        <div class="flex items-center ml-4">
+                        <div class="sm:flex items-center sm:p-0 py-4 text-center">
                             <span class="text-xl font-bold text-indigo-600 shrink-0">{formatPriceJS(feature.price)}</span>
-                            <span class="text-sm text-gray-500 mr-1 shrink-0">تومان</span>
+                            <span class="text-sm text-gray-500 mr-1 shrink-0 ">تومان</span>
+                        </div>
+                        <div >
                             <button
-                                class="mr-4 px-4 py-2 text-white rounded-md 
+                                class="sm:mr-4 px-4 py-2 text-white rounded-md 
                                         bg-gradient-to-r from-blue-500 to-blue-700 
                                         hover:from-blue-600 hover:to-blue-800
                                         transition duration-200

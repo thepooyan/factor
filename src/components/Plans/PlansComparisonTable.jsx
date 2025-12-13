@@ -30,7 +30,6 @@ export function PlansComparisonTable(props) {
     // 🔑 استخراج لیست قابلیت‌ها برای ساخت سطرها
     const featuresList = getUniqueFeatures(props.features);
     const plansList = getUniquePlanName(props.plans);
-    console.log(plansList)
 
     return (
         <div class="overflow-x-auto m-auto mb-12 shadow-lg rounded-xl border border-gray-200 bg-white max-w-[70vw]">
@@ -79,7 +78,7 @@ export function PlansComparisonTable(props) {
                                 {/* 🔑 مقایسه وضعیت قابلیت در هر پلن */}
                                 <For each={plansList}>
                                     {(planName) => {
-                                        const isAvailable = feature[planName];
+                                        const isAvailable = feature['for_plans'][planName];
                                         
                                         return (
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-center">

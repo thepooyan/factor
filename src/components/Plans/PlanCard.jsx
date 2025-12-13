@@ -1,6 +1,9 @@
 import { FiCheckCircle, FiXCircle } from 'solid-icons/fi';
 import formatPriceJS from '~/utility/formatting';
 import { BsCartPlus } from 'solid-icons/bs'
+import { addToCart } from '~/context/Cart/cartContext';
+import * as Interface from "~/interface/Interface"
+
 
 export function PlanCard(props) {
     const validPlans = props.plans.filter(plan => {
@@ -19,28 +22,38 @@ export function PlanCard(props) {
 
     });
     const handleAddToCart = () => {
-            // 🔑 فراخوانی فانکشن سراسری addToCart
-            addToCart({
-                id: plan.plan_id,
+            // 🔑 ساخت آبجکت CartItems_if برای ارسال
+            const itemToAdd = {
+                id: plan.id, 
                 name: plan.plan_name,
                 price: plan.price,
-                type: 'Plan' // برای تشخیص نوع آیتم
-            });
-            alert(`پلن ${plan.plan_name} به سبد خرید اضافه شد!`); // یک فیدبک ساده
+                img: plan.image_url, 
+                href: '/checkout' 
+            };
+            console.log("Adding to cart:", itemToAdd);
+            addToCart(itemToAdd);
         };
-
+        
     return (
         <For each={validPlans}>
             {(plan) => (
                 <div 
                     class={`
+                        text-center
                         bg-white
-                        max-w-60 px-6 py-3 m-auto
+                        max-w-60 sm:px-6 sm:py-3 p-3 m-auto
                         rounded-xl shadow-xl 
                         transition-transform duration-300 transform 
                         text-right font-medium 
+                        w-25
                         md:min-w-50
-                        lg:min-w-40
+                        lg:min-w-35
+                        ${
+                            plan.plan_name === 'Premium'  ? '  shadow-yellow-200 border-2 border-yellow-300' :
+                            // plan.isPopular ? 'text-blue-600' :
+                            'text-gray-700'
+                        } 
+
                     `}
                     style={{direction: 'rtl'}}
                 >
@@ -52,41 +65,66 @@ export function PlanCard(props) {
                         </div>
                     )} */}
                     
-                    <h3 class="text-2xl text-center font-extrabold text-gray-800 
+                    <h3 class={`
                         border-b-1 border-blue-500 
-                    ">
-                        پلن <br/>
-                        {plan.plan_name}
+                        text-md text-center font-extrabold text-gray-800 
+                        ${
+                            plan.plan_name === 'Premium'  ? '  border-yellow-500' : 'border-blue-500'
+                        }
+                    `}
+                    >
+                        <div>
+                            پلن
+                        </div>
+                        <span class={`
+                                ${
+                                    plan.plan_name === 'Premium'  ? ' text-yellow-600 shadow-lg shadow-yellow-200 ' : 'text-gray-800'
+                                }
+                            `}>
+                            {plan.plan_name}
+
+                        </span>
                     </h3>
-                    <h4 class="text-2xl text-center text-gray-800 pt-4 
-                    border-b-2 border-blue-500
-                    ">
+                    <h4 class={`
+                        text-center text-gray-800 pt-4 
+                        border-b-2 border-blue-500
+                        ${
+                            plan.plan_name === 'Premium'  ? '  border-yellow-500' : 'border-blue-500'}
+                        `}
+                    >
                         {plan.time_in_months} ماهه
                     </h4>
                     
                     {/* 💰 قیمت */}
-                    <div class="my-4 text-center ">
-                        <span class="text-xl font-black text-gray-900">{formatPriceJS(plan.price)}</span>
+                    <div class="text-md my-4 text-center ">
+                        <span class=" font-black text-gray-900">{formatPriceJS(plan.price)}</span>
                         <br/>
-                        <span class="text-lg text-gray-500 mr-2">تومان</span>
+                        <span class="text-sm text-gray-500">تومان</span>
                         {/* {discount > 0 && (
                             <span class="block text-sm text-red-500 line-through mt-1">
                                 تخفیف {discount}%
                             </span>
                         )} */}
                     </div>
+                    <div class="flex justify-center items-center">
+                        <button 
+                            onClick={handleAddToCart}
+                            class={`
+                                w-1/2 py-2 rounded-lg text-white font-bold text-lg 
+                                bg-gradient-to-r from-blue-500 to-blue-700 
+                                hover:from-blue-600 hover:to-blue-800
+                                transition duration-200
+                                ${
+                                    plan.plan_name === 'Premium'  ? 'bg-gradient-to-r from-yellow-300 to-yellow-500 hover:from-yellow-600 hover:to-yellow-800' :
+                                    'text-gray-700'
+                                } 
 
-                    <button 
-                        class={`
-                            w-full py-3 rounded-lg text-white font-bold text-lg 
-                            bg-gradient-to-r from-blue-500 to-blue-700 
-                            hover:from-blue-600 hover:to-blue-800
-                            transition duration-200
-                        `}
-                        // onClick={handleAddToCart}
-                    >
-                        <BsCartPlus class='m-a' />
-                    </button>
+                            `}
+                            
+                        >
+                            <BsCartPlus class='m-auto' />
+                        </button>
+                    </div>
 
                     {/* 📝 قابلیت‌ها */}
                     {/* <ul class="mt-6 space-y-3">

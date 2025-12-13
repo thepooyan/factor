@@ -63,59 +63,56 @@ const initialCartItems = [
     },
 ];
 
-const CartContext = createContext<any>({}); // مقدار اولیه رو خالی تعریف می‌کنیم
+const CartContext = createContext<any>({}); 
 
 
 export const CartProvider: ParentComponent = (props) => {
 
-const [cartItems, setCartItems] = createSignal<Interface.CartItems_if[]>([]); 
-const [isCartOpen, setIsCartOpen] = createSignal(false);  
-  const cartItemCount = createMemo(() => cartItems().length);
-  // ۳. تابعی برای اضافه کردن محصول به سبد
-  const addItemToCart = (item: Interface.CartItems_if) => {
-    // از Setter سیگنال استفاده می‌کنیم تا آرایه جدید رو برگردونیم
-    setCartItems(prev => [...prev, item]);
-  };
-  const addToCart = (newItem: Interface.CartItems_if) => {
-    setCartItems(currentItems => {
-        // ۱. بررسی می‌کنیم آیتم قبلاً در سبد هست یا نه
-        const existingItemIndex = currentItems.findIndex(item => item.id === newItem.id);
+    const [cartItems, setCartItems] = createSignal<Interface.CartItems_if[]>([]); 
+    const [isCartOpen, setIsCartOpen] = createSignal(false);  
+    const cartItemCount = createMemo(() => cartItems().length);
+    // ۳. تابعی برای اضافه کردن محصول به سبد
+    const addItemToCart = (item: Interface.CartItems_if) => {
+        // از Setter سیگنال استفاده می‌کنیم تا آرایه جدید رو برگردونیم
+        setCartItems(prev => [...prev, item]);
+    };
+    const addToCart = (newItem: Interface.CartItems_if) => {
+        setCartItems(currentItems => {
+            // ۱. بررسی می‌کنیم آیتم قبلاً در سبد هست یا نه
+            const existingItemIndex = currentItems.findIndex(item => item.id === newItem.id);
 
-        if (existingItemIndex > -1) {
-            // ۲. اگر هست، فقط تعداد (quantity) رو زیاد می‌کنیم
-            const newArray = [...currentItems];
-            // newArray[existingItemIndex] = {
-            //     ...newArray[existingItemIndex],
-                // quantity: newArray[existingItemIndex].quantity + 1 
-            // };
-            console.log('Item already in cart')
-            return newArray;
-        } else {
-            // ۳. اگر نیست، آیتم جدید رو اضافه می‌کنیم
-            return [...currentItems, { ...newItem }];
-        }
-    });
-};
-const removeItemFromCart = (itemId: string) => {
-        setCartItems(prev => {
-            // فیلتر کردن و نگه داشتن آیتم‌هایی که ID آن‌ها با itemId یکسان نیست
-            return prev.filter(item => item.id !== itemId);
+            if (existingItemIndex > -1) {
+                // ۲. اگر هست:
+                console.log(`پلن ${newItem.name} قبلاً در سبد موجود است.`)
+                // اینجا می‌توانید یک Modal نمایش دهید یا فقط آرایه فعلی را برگردانید:
+                return currentItems; // آرایه فعلی را بدون تغییر برگردان
+            } else {
+                // ۳. اگر نیست، آیتم جدید رو اضافه می‌کنیم
+                console.log(`پلن ${newItem.name} به سبد اضافه شد.`)
+                // اینجا باید Quantity رو ۱ قرار بدید، چون در اینترفیس شما نیست، آن را اضافه می‌کنیم.
+                // *اگرچه بهتر است quantity به اینترفیس اضافه شود.*
+                return [...currentItems, { ...newItem, quantity: 1 }]; 
+            }
         });
     };
+    const removeItemFromCart = (itemId: string) => {
+            setCartItems(prev => {
+                // فیلتر کردن و نگه داشتن آیتم‌هایی که ID آن‌ها با itemId یکسان نیست
+                return prev.filter(item => item.id !== itemId);
+            });
+        };
 
-  // ۲. توابع کمکی
-  const toggleCart = () => setIsCartOpen(prev => !prev );
-  createEffect(() => {
-  });
-  
-const store = {
-    cartItems, 
-    cartItemCount, 
-    addItemToCart,
-    removeItemFromCart,
-    isCartOpen, 
-    toggleCart,
-  };
+    // ۲. توابع کمکی
+    const toggleCart = () => setIsCartOpen(prev => !prev );
+    
+    const store = {
+        cartItems, 
+        cartItemCount, 
+        addItemToCart,
+        removeItemFromCart,
+        isCartOpen, 
+        toggleCart,
+    };
 
   return (
     <CartContext.Provider value={store}>
