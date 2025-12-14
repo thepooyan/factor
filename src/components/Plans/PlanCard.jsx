@@ -1,7 +1,7 @@
 import { FiCheckCircle, FiXCircle } from 'solid-icons/fi';
 import formatPriceJS from '~/utility/formatting';
 import { BsCartPlus } from 'solid-icons/bs'
-import { useCart } from '~/context/Cart/CartContext';
+import { useCart } from '~/context/Cart/cartContext';
 
 
 export function PlanCard(props) {
@@ -24,7 +24,6 @@ export function PlanCard(props) {
     });
 
     const handleAddToCart = (plan) => {
-        console.log("DEBUG: handleAddToCart EXECUTED for plan:", plan.plan_name); 
 
         // 🔑 ساخت آبجکت CartItems_if برای ارسال
             const itemToAdd = {
@@ -34,7 +33,6 @@ export function PlanCard(props) {
                 img: plan.image_url, 
                 href: '/checkout' 
             };
-        console.log("DEBUG: Item ready to be added:", itemToAdd);
 
             addToCart(itemToAdd);
         };

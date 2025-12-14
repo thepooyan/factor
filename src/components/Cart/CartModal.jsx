@@ -1,12 +1,12 @@
 // src/components/CartModal.jsx
 
-import { useCart } from '~/context/Cart/CartContext';
+import { useCart } from '~/context/Cart/cartContext';
 import {  createSignal, onMount, Show } from 'solid-js';
 import { A } from '@solidjs/router';
 import { IoCloseSharp , IoCloseCircleOutline} from 'solid-icons/io'
-
+import formatPriceJS from '~/utility/formatting';
 export function CartModal() {
-  const { isCartOpen, toggleCart, cartItems, removeItemFromCart } = useCart();
+  const { isCartOpen, toggleCart, cartItems, cartItemCount, removeItemFromCart } = useCart();
 
     const [isDesktop, setIsDesktop] = createSignal(true);
     onMount(() => {
@@ -23,7 +23,6 @@ export function CartModal() {
     // تأخیر کوچک برای اعمال حالت اولیه (مخفی) قبل از حالت نهایی (نمایان)
     setTimeout(() => setIsVisible(true), 100); 
   });
-
   return (
       <Show when={isCartOpen()}>
         <div
@@ -79,7 +78,7 @@ export function CartModal() {
               "/>
           </button>
 
-          <h2 class="text-lg font-bold pb-2 text-center">سبد خرید ({cartItems().length})</h2>
+          <h2 class="text-lg font-bold pb-2 text-center">سبد خرید ({cartItemCount()})</h2>
           <div
             class='border-t rounded-2xl p-2 bg-transparent absolute w-110/115'
           ></div>
@@ -88,7 +87,7 @@ export function CartModal() {
             style="direction: rtl; text-align: right;"
           >
             <Show 
-                when={cartItems().length > 0}
+                when={cartItemCount() > 0}
                 fallback={<p class="text-center text-gray-500">سبد خرید خالی است.</p>}
             >
               <For each={cartItems()}>
@@ -115,7 +114,7 @@ export function CartModal() {
                         class="grow flex flex-col text-right text-sm" 
                       > 
                           <span class="font-medium text-black">{item.name}</span> 
-                          <span class="text-gray-600 ">{item.price} تومان</span>
+                          <span class="text-gray-600 ">{formatPriceJS(item.price)} تومان</span>
                       </div>
                       
                       {/* ۳. دکمه حذف  */}

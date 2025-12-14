@@ -5,7 +5,6 @@ import { userMg } from "~/utility/signals";
 import { Show } from "solid-js";
 import UserMenu from "../UserMenu";
 import { CartComponent } from "~/components/Cart/CartComponent";
-import { CartProvider } from "~/context/Cart/CartContext";
 
 const Header = () => {
   return (
@@ -37,9 +36,7 @@ const Header = () => {
             سوالات متداول
           </A>
         </nav>
-        <CartProvider>
           <CartComponent/>
-        </CartProvider>
         <Show when={userMg.get()}>
           {u => <UserMenu user={u()}/>}
         </Show>

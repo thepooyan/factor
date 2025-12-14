@@ -11,8 +11,14 @@ const CartContext = createContext<any>({});
 export const CartProvider: ParentComponent = (props) => {
 
     const [cartItems, setCartItems] = createSignal<Interface.CartItems_if[]>([]); 
+
     const [isCartOpen, setIsCartOpen] = createSignal(false);  
-    const cartItemCount = createMemo(() => cartItems().length);
+
+    const cartItemCount = createMemo(() => {
+        // این لاگ برای عیب‌یابی است و نشان می‌دهد که memo در حال اجرا است
+        console.log("DIAGNOSTIC: MEMO Recalculated. New Count:", cartItems().length); 
+        return cartItems().length;
+    });
 
     const addToCart = (newItem: Interface.CartItems_if) => {
         setCartItems(currentItems => {
@@ -22,11 +28,12 @@ export const CartProvider: ParentComponent = (props) => {
             if (existingItemIndex > -1) {
                 return currentItems; // آرایه فعلی را بدون تغییر برگردان
             } else {
-                return [...currentItems, { ...newItem, quantity: 1 }]; 
+                return [...currentItems, { ...newItem }]; 
             }
         });
         console.log("Current Cart Items:", cartItems());
     };
+
     const removeItemFromCart = (itemId: string) => {
             setCartItems(prev => {
                 // فیلتر کردن و نگه داشتن آیتم‌هایی که ID آن‌ها با itemId یکسان نیست

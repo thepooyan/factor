@@ -3,7 +3,6 @@ import { FeatureToggle } from '~/components/Plans/FeatureToggle';
 import { PlansComparisonTable } from '~/components/Plans/PlansComparisonTable';
 import { api } from "~/utility/api"
 import { createResource } from 'solid-js';
-import { CartProvider } from '~/context/Cart/CartContext';
 
 const fetchFeatures = async () => {
     try {
@@ -44,9 +43,7 @@ export default function ProductsPage() {
             </section>
                 <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:px-30 gap-8 justify-center">
                     <Show when={plans()}>
-                        <CartProvider>
                             <PlanCard plans={plans()} />
-                        </CartProvider>
                     </Show>
                 </div>
             

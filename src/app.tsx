@@ -11,6 +11,7 @@ import Modal from "./components/modal/Modal";
 import { userMg } from "./utility/signals";
 import { queryConfig } from "./utility/queries";
 import SpinnerPage from "./components/general/SpinnerPage";
+import { CartProvider } from "./context/Cart/cartContext"; 
 
 
 export default function App() {
@@ -46,7 +47,9 @@ export default function App() {
                   </div>
               }>
                   {/* کامپوننت‌های فرزند که ممکن است خطا دهند */}
-              <Suspense fallback={<SpinnerPage/>}>{props.children}</Suspense>
+                  <CartProvider>
+                    <Suspense fallback={<SpinnerPage/>}>{props.children}</Suspense>
+                  </CartProvider>
               </ErrorBoundary>
             </>
           )}
