@@ -1,11 +1,9 @@
-import { For } from 'solid-js';
 import { PlanCard } from '~/components/Plans/PlanCard';
 import { FeatureToggle } from '~/components/Plans/FeatureToggle';
-import { features_comparison , plan_prices } from '~/data/plans'; // 🔑 ایمپورت داده‌ها
 import { PlansComparisonTable } from '~/components/Plans/PlansComparisonTable';
 import { api } from "~/utility/api"
 import { createResource } from 'solid-js';
-
+import { CartProvider } from '~/context/Cart/CartContext';
 
 const fetchFeatures = async () => {
     try {
@@ -44,9 +42,11 @@ export default function ProductsPage() {
                 <PlansComparisonTable features={features()} plans={plans()} />
                 {/* 🔑 ساختار اصلی پلن‌ها: نمایش در یک ردیف در دسکتاپ */}
             </section>
-                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center">
+                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:px-30 gap-8 justify-center">
                     <Show when={plans()}>
-                        <PlanCard plans={plans()} />
+                        <CartProvider>
+                            <PlanCard plans={plans()} />
+                        </CartProvider>
                     </Show>
                 </div>
             

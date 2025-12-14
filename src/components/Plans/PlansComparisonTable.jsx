@@ -36,7 +36,7 @@ export function PlansComparisonTable(props) {
             <table class="min-w-full divide-y divide-gray-200" style={{direction: 'rtl'}}>
                 
                 {/* <thead>: ردیف اول شامل نام پلن‌ها */}
-                <thead class="bg-gray-50 z-10">
+                <thead class="bg-gray-50">
                     <tr>
                         <th 
                             scope="col" 

@@ -1,11 +1,12 @@
 import { FiCheckCircle, FiXCircle } from 'solid-icons/fi';
 import formatPriceJS from '~/utility/formatting';
 import { BsCartPlus } from 'solid-icons/bs'
-import { addToCart } from '~/context/Cart/cartContext';
-import * as Interface from "~/interface/Interface"
+import { useCart } from '~/context/Cart/CartContext';
 
 
 export function PlanCard(props) {
+    const { addToCart = () => console.error("ERROR: addToCart is undefined. Is PlanCard component wrapped inside CartProvider?") } = useCart();
+
     const validPlans = props.plans.filter(plan => {
         if (
             !plan ||
@@ -21,23 +22,29 @@ export function PlanCard(props) {
         return true; 
 
     });
-    const handleAddToCart = () => {
-            // 🔑 ساخت آبجکت CartItems_if برای ارسال
+
+    const handleAddToCart = (plan) => {
+        console.log("DEBUG: handleAddToCart EXECUTED for plan:", plan.plan_name); 
+
+        // 🔑 ساخت آبجکت CartItems_if برای ارسال
             const itemToAdd = {
-                id: plan.id, 
+                id: plan.plan_id, 
                 name: plan.plan_name,
                 price: plan.price,
                 img: plan.image_url, 
                 href: '/checkout' 
             };
-            console.log("Adding to cart:", itemToAdd);
+        console.log("DEBUG: Item ready to be added:", itemToAdd);
+
             addToCart(itemToAdd);
         };
         
     return (
-        <For each={validPlans}>
+        
+        <For each={validPlans} >
             {(plan) => (
                 <div 
+                    
                     class={`
                         text-center
                         bg-white
@@ -78,7 +85,7 @@ export function PlanCard(props) {
                         </div>
                         <span class={`
                                 ${
-                                    plan.plan_name === 'Premium'  ? ' text-yellow-600 shadow-lg shadow-yellow-200 ' : 'text-gray-800'
+                                    plan.plan_name === 'Premium'  ? ' text-yellow-600 ' : 'text-gray-800'
                                 }
                             `}>
                             {plan.plan_name}
@@ -108,21 +115,22 @@ export function PlanCard(props) {
                     </div>
                     <div class="flex justify-center items-center">
                         <button 
-                            onClick={handleAddToCart}
+                            onClick={() => handleAddToCart(plan)}
+
                             class={`
-                                w-1/2 py-2 rounded-lg text-white font-bold text-lg 
-                                bg-gradient-to-r from-blue-500 to-blue-700 
+                                w-1/2 py-2 rounded-lg text-white font-bold text-lg relative z-9999 cursor-pointer
+                                 
                                 hover:from-blue-600 hover:to-blue-800
                                 transition duration-200
                                 ${
                                     plan.plan_name === 'Premium'  ? 'bg-gradient-to-r from-yellow-300 to-yellow-500 hover:from-yellow-600 hover:to-yellow-800' :
-                                    'text-gray-700'
+                                    'text-gray-700 bg-gradient-to-r from-blue-500 to-blue-700'
                                 } 
 
                             `}
                             
                         >
-                            <BsCartPlus class='m-auto' />
+                            <BsCartPlus class='m-auto pointer-events-none' />
                         </button>
                     </div>
 
