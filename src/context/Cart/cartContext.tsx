@@ -16,7 +16,6 @@ export const CartProvider: ParentComponent = (props) => {
 
     const cartItemCount = createMemo(() => {
         // این لاگ برای عیب‌یابی است و نشان می‌دهد که memo در حال اجرا است
-        console.log("DIAGNOSTIC: MEMO Recalculated. New Count:", cartItems().length); 
         return cartItems().length;
     });
 
@@ -31,7 +30,6 @@ export const CartProvider: ParentComponent = (props) => {
                 return [...currentItems, { ...newItem }]; 
             }
         });
-        console.log("Current Cart Items:", cartItems());
     };
 
     const removeItemFromCart = (itemId: string) => {

@@ -46,13 +46,15 @@ export function PlanCard(props) {
                     class={`
                         text-center
                         bg-white
-                        max-w-60 sm:px-6 sm:py-3 p-3 m-auto
+                        sm:px-6 sm:py-3 p-3 m-auto
                         rounded-xl shadow-xl 
                         transition-transform duration-300 transform 
                         text-right font-medium 
-                        w-25
-                        md:min-w-50
-                        lg:min-w-35
+                        w-11/10 max-w-45
+                        sm:max-w-100
+                        sm:w-45 
+                        md:w-50 
+                        lg:w-35 
                         ${
                             plan.plan_name === 'Premium'  ? '  shadow-yellow-200 border-2 border-yellow-300' :
                             // plan.isPopular ? 'text-blue-600' :
