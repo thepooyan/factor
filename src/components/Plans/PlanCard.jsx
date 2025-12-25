@@ -2,10 +2,11 @@ import { FiCheckCircle, FiXCircle } from 'solid-icons/fi';
 import formatPriceJS from '~/utility/formatting';
 import { BsCartPlus } from 'solid-icons/bs'
 import { useCart } from '~/context/Cart/cartContext';
-
+import { useToast } from '~/context/Cart/ToastContext';
 
 export function PlanCard(props) {
-    const { addToCart = () => console.error("ERROR: addToCart is undefined. Is PlanCard component wrapped inside CartProvider?") } = useCart();
+    const { addToCart } = useCart();
+    const { addToast } = useToast();
 
     const validPlans = props.plans.filter(plan => {
         if (
@@ -34,7 +35,13 @@ export function PlanCard(props) {
                 href: '/checkout' 
             };
 
-            addToCart(itemToAdd);
+            const wasAdded = addToCart(itemToAdd);
+
+            if (wasAdded) {
+                addToast(`${plan.plan_name} با موفقیت به سبد خرید اضافه شد`, "success");
+            } else {
+                addToast(`پلن ${plan.plan_name} قبلاً در سبد خرید شما وجود دارد`, "warning");
+            }
         };
         
     return (

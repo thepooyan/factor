@@ -19,18 +19,18 @@ export const CartProvider: ParentComponent = (props) => {
         return cartItems().length;
     });
 
-    const addToCart = (newItem: Interface.CartItems_if) => {
-        setCartItems(currentItems => {
-            // ۱. بررسی می‌کنیم آیتم قبلاً در سبد هست یا نه
-            const existingItemIndex = currentItems.findIndex(item => item.id === newItem.id);
-
-            if (existingItemIndex > -1) {
-                return currentItems; // آرایه فعلی را بدون تغییر برگردان
-            } else {
-                return [...currentItems, { ...newItem }]; 
-            }
-        });
-    };
+            const addToCart = (newItem : Interface.CartItems_if) => {
+                let isDuplicate = false;
+                setCartItems(currentItems => {
+                    const exists = currentItems.find(item => item.id === newItem.id);
+                    if (exists) {
+                        isDuplicate = true;
+                        return currentItems;
+                    }
+                    return [...currentItems, newItem];
+                });
+                return !isDuplicate; // اگه اضافه شد true، اگه تکراری بود false
+            };
 
     const removeItemFromCart = (itemId: string) => {
             setCartItems(prev => {

@@ -12,7 +12,7 @@ import { userMg } from "./utility/signals";
 import { queryConfig } from "./utility/queries";
 import SpinnerPage from "./components/general/SpinnerPage";
 import { CartProvider } from "./context/Cart/cartContext"; 
-
+import { ToastProvider } from "./context/Cart/ToastContext";
 
 export default function App() {
   
@@ -47,9 +47,12 @@ export default function App() {
                   </div>
               }>
                   {/* کامپوننت‌های فرزند که ممکن است خطا دهند */}
-                  <CartProvider>
-                    <Suspense fallback={<SpinnerPage/>}>{props.children}</Suspense>
-                  </CartProvider>
+                  <ToastProvider>
+
+                    <CartProvider>
+                      <Suspense fallback={<SpinnerPage/>}>{props.children}</Suspense>
+                    </CartProvider>
+                  </ToastProvider>
               </ErrorBoundary>
             </>
           )}
