@@ -32,7 +32,7 @@ export default function ProductsPage() {
   const [features] = createResource(fetchFeatures);
   const [plans] = createResource(fetchPlans);
   return (
-    <div class="container mx-auto  " style={{ fontFamily: "IRANSans, Tahoma" }}>
+    <div class="container mx-auto py-8 " style={{ fontFamily: "IRANSans, Tahoma" }}>
       {/* # ۱. نمایش پلن‌های زمانی (زیر هم در کامپیوتر) */}
       <section class="mb-16">
         <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
