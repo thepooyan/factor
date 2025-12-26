@@ -124,7 +124,11 @@ export function FeatureToggle(props) {
                   >
                     <button
                       onClick={() => setIsOpen(!isOpen())}
-                      class="w-full p-3 bg-white hover:bg-gray-50 flex flex-col sm:flex-row items-center justify-between"
+                      class={`w-full p-3 bg-white hover:bg-gray-50 flex flex-col sm:flex-row items-center justify-between
+                        ${
+                            isIncluded() ? " cursor-default" : ""
+                          }
+                        `}
                     >
                       <div class="flex flex-col items-center sm:items-start text-center sm:text-right">
                         <h4 class="font-bold text-gray-900 text-lg flex items-center">
