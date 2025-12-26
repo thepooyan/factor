@@ -1,6 +1,6 @@
 import { createSignal, createContext, useContext, ParentComponent, For, onMount, createMemo } from "solid-js";
 
-type ToastType = 'warning' | 'success' | 'error';
+type ToastType = 'warning' | 'deleted' | 'success' | 'error';
 
 interface ToastItem {
     id: number;
@@ -29,6 +29,7 @@ const Toast: ParentComponent<{
 
     const themes: Record<ToastType, { bg: string, text: string, border: string, stroke: string, progress: string }> = {
         'warning': { bg: "bg-yellow-50", text: "text-amber-900", border: "border-amber-100", stroke: "stroke-amber-100", progress: "stroke-amber-500" },
+        'deleted': { bg: "bg-red-50", text: "text-red-900", border: "border-red-100", stroke: "stroke-red-100", progress: "stroke-red-500" },
         'success': { bg: "bg-green-50", text: "text-emerald-900", border: "border-emerald-100", stroke: "stroke-emerald-100", progress: "stroke-emerald-500" },
         'error': { bg: "bg-white", text: "text-rose-900", border: "border-rose-100", stroke: "stroke-rose-100", progress: "stroke-rose-500" },
     };

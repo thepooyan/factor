@@ -1,64 +1,74 @@
-// src/context/CartContext.jsx
+import { createSignal, createContext, useContext, ParentComponent, createMemo } from "solid-js";
+import * as Interface from "~/interface/Interface";
 
-import { createSignal, createContext, useContext, ParentComponent, createEffect , createMemo} from "solid-js";
-import * as Interface from "~/interface/Interface"
+// تعریف Interface برای کانتکست جهت امنیت تایپ‌ها
+interface CartContextType {
+    cartItems: () => Interface.CartItems_if[];
+    cartItemCount: () => number;
+    isCartOpen: () => boolean;
+    isCartEmpty: () => boolean;
+    addToCart: (newItem: Interface.CartItems_if) => boolean;
+    removeItemFromCart: (itemId: string) => void;
+    isItemInCart: (itemId: string) => boolean;
+    toggleCart: () => void;
+}
 
-
-
-const CartContext = createContext<any>({}); 
-
+const CartContext = createContext<CartContextType>();
 
 export const CartProvider: ParentComponent = (props) => {
+    const [cartItems, setCartItems] = createSignal<Interface.CartItems_if[]>([]);
+    const [isCartOpen, setIsCartOpen] = createSignal(false);
 
-    const [cartItems, setCartItems] = createSignal<Interface.CartItems_if[]>([]); 
+    // استفاده از Memo برای محاسبات مشتق شده
+    const cartItemCount = createMemo(() => cartItems().length);
 
-    const [isCartOpen, setIsCartOpen] = createSignal(false);  
+    // تابع کمکی برای چک کردن وجود آیتم در سبد
+    const isItemInCart = (itemId: string) => {
+        return cartItems().some(item => String(item.id) === String(itemId));
+    };
 
-    const cartItemCount = createMemo(() => {
-        // این لاگ برای عیب‌یابی است و نشان می‌دهد که memo در حال اجرا است
-        return cartItems().length;
-    });
-
-            const addToCart = (newItem : Interface.CartItems_if) => {
-                let isDuplicate = false;
-                setCartItems(currentItems => {
-                    const exists = currentItems.find(item => item.id === newItem.id);
-                    if (exists) {
-                        isDuplicate = true;
-                        return currentItems;
-                    }
-                    return [...currentItems, newItem];
-                });
-                return !isDuplicate; // اگه اضافه شد true، اگه تکراری بود false
-            };
+    const addToCart = (newItem: Interface.CartItems_if): boolean => {
+        let isDuplicate = false;
+        setCartItems(currentItems => {
+            const exists = currentItems.find(item => String(item.id) === String(newItem.id));
+            if (exists) {
+                isDuplicate = true;
+                return currentItems;
+            }
+            return [...currentItems, { ...newItem, quantity: 1 }];
+        });
+        return !isDuplicate;
+    };
 
     const removeItemFromCart = (itemId: string) => {
-            setCartItems(prev => {
-                // فیلتر کردن و نگه داشتن آیتم‌هایی که ID آن‌ها با itemId یکسان نیست
-                return prev.filter(item => item.id !== itemId);
-            });
-        };
+        setCartItems(prev => prev.filter(item => String(item.id) !== String(itemId)));
+    };
 
-    // ۲. توابع کمکی
-    const toggleCart = () => setIsCartOpen(prev => !prev );
-    
-    const store = {
-        cartItems, 
-        cartItemCount, 
+    const toggleCart = () => setIsCartOpen(prev => !prev);
+
+    // پکیج نهایی: توابع رو مستقیم پاس میدیم تا به صورت () فراخوانی بشن
+    const store: CartContextType = {
+        cartItems: cartItems, // ارجاع مستقیم به سیگنال
+        cartItemCount: cartItemCount, // ارجاع مستقیم به ممو
+        isCartOpen: isCartOpen, // ارجاع مستقیم به سیگنال
+        isCartEmpty: () => cartItems().length === 0,
         addToCart,
         removeItemFromCart,
-        isCartOpen, 
+        isItemInCart,
         toggleCart,
     };
 
-  return (
-    <CartContext.Provider value={store}>
-      {props.children}
-    </CartContext.Provider>
-  );
-}
+    return (
+        <CartContext.Provider value={store}>
+            {props.children}
+        </CartContext.Provider>
+    );
+};
 
 export function useCart() {
-  return useContext(CartContext);
+    const context = useContext(CartContext);
+    if (!context) {
+        throw new Error("useCart must be used within a CartProvider");
+    }
+    return context;
 }
-
