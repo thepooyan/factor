@@ -157,14 +157,13 @@ export function PlanCard(props) {
                 class={`
                                 w-1/2 py-2 rounded-lg text-white font-bold text-lg relative z-9999 cursor-pointer
                                  
-                                hover:from-blue-600 hover:to-blue-800
                                 transition duration-200
                                         ${
                                           isInCart()
                                             ? "bg-red-600 hover:bg-red-700"
                                             : plan.plan_name === "Premium"
-                                            ? "bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500"
-                                            : "bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600"
+                                            ? "bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-800"
+                                            : "bg-gradient-to-r from-blue-500 to-blue-700 from-blue-600 hover:to-blue-800"
                                         }
                                         ${
                                           isDisabled()
