@@ -1,4 +1,4 @@
-import { For, createSignal, Show } from "solid-js";
+import { For, createSignal, Show, createMemo } from "solid-js";
 import { BsCartPlus, BsCartX } from "solid-icons/bs";
 import formatPriceJS from "~/utility/formatting";
 import { useCart } from "~/context/Cart/cartContext";
@@ -22,33 +22,65 @@ const ChevronDown = (props) => (
 );
 
 export function FeatureToggle(props) {
-  const { addToCart, removeItemFromCart, isItemInCart, cartItems } = useCart();
+  const cart = useCart();
   const { addToast } = useToast();
 
-  // چک کردن فعال بودن قابلیت در پلن اصلی
-  const isFeatureInActivePlan = (featureName) => {
-    const items = cartItems; 
-    if (!Array.isArray(items)) return false;
-    const activePlan = items.find(item => !String(item.id).startsWith('addon-')); 
-    if (!activePlan || !activePlan.features) return false;
-    return activePlan.features.some(f => f.name === featureName && f.available);
+  // استخراج قابلیت‌هایی که بر اساس پلن انتخابی باید غیرفعال شوند
+  const includedFeaturesInCart = createMemo(() => {
+    const items = cart.cartItems(); 
+    if (!items || !Array.isArray(items)) return [];
+    
+    // پیدا کردن نام پلن‌هایی که در سبد خرید هستند
+    const activePlanNames = items
+      .filter(item => !String(item.id).startsWith('addon-'))
+      .map(plan => plan.name); // فرض بر این است که نام پلن دقیقاً با کلیدهای for_plans یکی است
+    if (activePlanNames.length === 0) return [];
+
+    const allFeatures = props.features || [];
+    const disabledFeatureIDs = [];
+
+    // چک کردن تک تک قابلیت‌ها
+    allFeatures.forEach(feature => {
+      // اگر هر کدام از پلن‌های توی سبد، در این قابلیت true بودند
+      const isIncludedInAnyPlan = activePlanNames.some(planName => 
+        feature.for_plans && feature.for_plans[planName] === true
+      );
+      if (isIncludedInAnyPlan) {
+        disabledFeatureIDs.push(feature.feature_id);
+      }
+    });
+    
+    return disabledFeatureIDs;
+  });
+
+  // تابع کمکی برای چک کردن وجود قابلیت در سبد
+  const isFeatureIncluded = (featureName) => {
+    return includedFeaturesInCart().includes(featureName);
   };
 
-  // چک کردن اینکه آیا هیچ کدوم از ادآن‌های این فیچر در سبد هست یا نه
   const isAnyAddonOfFeatureInCart = (feature) => {
-    return feature.addons.some(addon => isItemInCart(`addon-${addon.addon_id}`));
+    return feature.addons.some(addon => cart.isItemInCart(`addon-${addon.addon_id}`));
   };
 
-  const validFeatures = () => {
-    return (props.features || []).filter((f) => 
+  // مرتب‌سازی لیست قابلیت‌ها
+  const sortedFeatures = () => {
+    const features = (props.features || []).filter((f) =>
       f.feature_id != null && f.is_active && f.addons?.[0]?.price > 0
     );
+
+    return features.sort((a, b) => {
+      const aInPlan = isFeatureIncluded(a.feature_name);
+      const bInPlan = isFeatureIncluded(b.feature_name);
+      if (aInPlan && !bInPlan) return 1;
+      if (!aInPlan && bInPlan) return -1;
+      return 0;
+    });
   };
 
   const handleCartAction = (featureName, addon) => {
     const id = `addon-${addon.addon_id}`;
-    if (isItemInCart(id)) {
-      removeItemFromCart(id);
+    if (cart.isItemInCart(id)) {
+      cart.removeItemFromCart(id);
       addToast(`${featureName} از سبد حذف شد.`, "warning");
     } else {
       const item = {
@@ -58,72 +90,64 @@ export function FeatureToggle(props) {
         img: "",
         href: "/checkout",
       };
-      if (addToCart(item)) {
+      if (cart.addToCart(item)) {
         addToast(`${featureName} به سبد اضافه شد.`, "success");
       }
     }
   };
 
   return (
-    <div class=" mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 items-start  "> 
-      {/* تقسیم ویژگی‌ها به دو ستون مجزا برای جلوگیری از پرش آیتم‌ها به ستون دیگر */}
+    <div class="mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 items-start" style={{ direction: "rtl" }}>
       <For each={[0, 1]}>
         {(columnIndex) => (
           <div class="flex flex-col gap-4">
-            <For each={validFeatures().filter((_, i) => i % 2 === columnIndex)}>
+            <For each={sortedFeatures().filter((_, i) => i % 2 === columnIndex)}>
               {(feature) => {
                 const [isOpen, setIsOpen] = createSignal(false);
-                const isIncludedInPlan = () => isFeatureInActivePlan(feature.feature_name);
+                const isIncluded = () => isFeatureIncluded(feature.feature_id);
                 const hasAnyAddon = () => isAnyAddonOfFeatureInCart(feature);
 
                 return (
-                  <div class={`bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden transition-all h-fit ${isIncludedInPlan() ? 'ring-2 ring-green-400' : ''}`}>
-                    <button 
-                      onClick={() => setIsOpen(!isOpen())} 
+                  <div class={`bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden transition-all h-fit ${isIncluded() ? 'opacity-75 grayscale-[0.5]' : ''}`}>
+                    <button
+                      onClick={() => setIsOpen(!isOpen())}
                       class="w-full p-3 bg-white hover:bg-gray-50 flex flex-col sm:flex-row items-center justify-between"
                     >
                       <div class="flex flex-col items-center sm:items-start text-center sm:text-right">
                         <h4 class="font-bold text-gray-900 text-lg flex items-center">
                           {feature.feature_name}
-                          <Show when={isIncludedInPlan()}>
-                            <span class="mr-2 text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full">فعال در پلن</span>
+                          <Show when={isIncluded()}>
+                            <span class="absolute bottom-0 left-0 text-[10px] text-center bg-green-100 text-green-700 m-1 px-1 rounded-xl font-medium">موجود در پلن انتخابی</span>
                           </Show>
-
                         </h4>
-                        <p class="text-gray-500 text-xs mt-1">
-                          {feature.description}
-                        </p>
-                        <div class="text-sm font-bold text-indigo-600 mt-1">
-                          از {formatPriceJS(feature.addons[0].price)} تومان
-                        </div>
+                        <p class="text-gray-500 text-xs mt-1">{feature.description}</p>
+                        <Show when={!isIncluded()}>
+                          <div class="text-sm font-bold text-indigo-600 mt-1">
+                            از {formatPriceJS(feature.addons[0].price)} تومان
+                          </div>
+                        </Show>
                       </div>
-
+                      
+                        <Show when={!isIncluded()}>
                       <div class="mt-3 sm:mt-0 bg-blue-50 p-2 rounded-full text-blue-600">
                         <ChevronDown isOpen={isOpen()} />
                       </div>
-                    </button>
+                        </Show>
 
-                    {/* 🟨 لیست قیمت‌ها */}
-                    <div
-                    class={`transition-all duration-300 overflow-hidden ${
-                      isOpen() 
-                      ? "max-h-[1000px] opacity-100" 
-                      : "max-h-0 opacity-0"
-                    }`}
-                    >
+                    </button>
+                        <Show when={!isIncluded()}>
+
+                    <div class={`transition-all duration-300 overflow-hidden ${isOpen() ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
                       <div class="p-4 pt-0 space-y-2 bg-gray-50/30">
                         <For each={feature.addons.filter((a) => a.is_active)}>
                           {(addon) => {
                             const id = `addon-${addon.addon_id}`;
-                            const isInCart = () => isItemInCart(id);
-                            // منطق غیرفعال‌سازی: اگر در پلن هست، کلاً غیرفعال. اگر یکی دیگه از همین فیچر تو سبد هست و این یکی نیست، غیرفعال.
-                            const isDisabled = () => isIncludedInPlan() || (hasAnyAddon() && !isInCart());
+                            const isInCart = () => cart.isItemInCart(id);
+                            const isDisabled = () => isIncluded() || (hasAnyAddon() && !isInCart());
 
                             return (
                               <div class={`p-2 bg-white rounded-xl border flex items-center justify-between transition-all ${isDisabled() ? 'opacity-40 grayscale pointer-events-none' : 'hover:border-blue-200'}`}>
-                                <span class="text-sm font-bold text-gray-700">
-                                  {addon.duration_months} ماهه
-                                  </span>
+                                <span class="text-sm font-bold text-gray-700">{addon.duration_months} ماهه</span>
                                 <div class="flex items-center gap-3">
                                   <div class="text-left">
                                     <div class="text-md font-bold text-indigo-700">
@@ -145,6 +169,8 @@ export function FeatureToggle(props) {
                         </For>
                       </div>
                     </div>
+                        </Show>
+
                   </div>
                 );
               }}
