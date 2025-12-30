@@ -36,7 +36,7 @@ export function CartModal() {
             text-black bg-white shadow-2xl z-20 cursor-auto 
             border border-gray-500 
             p-2 m-auto
-            transition-all duration-300 ease-out
+            transition-all duration-100 ease-out
             fixed inset-x-0 top-18
             rounded-2xl 
             max-w-90
@@ -70,9 +70,9 @@ export function CartModal() {
           >
             <IoCloseSharp 
               class="
+                m-[3px]
                 h-5 w-5
-                hover:h-6 
-                hover:w-6
+                hover:scale-125
                 transition-all 
                 duration-150
               "/>
